@@ -120,13 +120,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                           </div>
                           <div class="col-md-6">                       
                           <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              
                                   <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion">
+                                  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                               </div>  
                               <br><br>                      
                               <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                              
                                   <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                                  <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                               </div> 
                               <br>
                               <label>Fecha de nacimiento:</label>
