@@ -97,7 +97,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-                           <input id="descripcionm" type="text" class="form-control" name="descripcionm" placeholder="Descripcion">
+                           <input id="descripcionm" type="text" class="form-control" name="descripcionm" placeholder="Hola puerkita">
                            </div>
                            </br>
                               
