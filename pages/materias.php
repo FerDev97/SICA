@@ -97,17 +97,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-                           <input id="descripcionm" type="text" class="form-control" name="descripcionm" placeholder="Hola puerkita">
+                           <input id="descripcionm" type="text" class="form-control" name="descripcionm" placeholder="Descripcion">
                            </div>
                            </br>
+                           
+                           
                               
                           
                               
-                            <div class="form-group ">
-                              <label style="font-size:19px;" class="form-animate-text"  for="comment">Descripcion:</label>
-                              <textarea class="form-control" rows="3" id="descripcionM"></textarea>
-                              </div> 
-                            <!-- Div del span -->
+                            
                           </div>
                           <div class="col-md-6">                        
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
