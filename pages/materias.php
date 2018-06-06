@@ -2,7 +2,6 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-echo "Hola push";
 
 ?>
 <html lang="en">
@@ -85,21 +84,25 @@ echo "Hola push";
                         <form class="cmxform" id="formcliente" method="post" action="">
 
                           <div class="col-md-6">
-                          <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <input type="text" class="form-text mask-codigo" id="codigoM" name="codigoM" required>
-                              <span class="bar"></span>
-                              <label>Codigo:</label>
-                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <input type="text" class="form-text" id="nombreempleado" name="nombreempleado" required>
-                              <span class="bar"></span>
-                              <label>Nombre:</label>
-                            </div>   
-                            <!-- <div class="form-group form-animate-text" style="margin-top:40px !important;">  
-                            <label for="descripcion">Descripcion</label>                          
-                              <span class="bar"></span>
-                              <textarea name="descripcion" id="descripcion" cols="25" rows="5"></textarea>
-                            </div>  -->
+                        
+                           <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
+                           </div>
+                           </br>
+                           <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
+                           </div>
+                           </br>
+                           <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                           <input id="descripcionm" type="text" class="form-control" name="descripcionm" placeholder="Descripcion">
+                           </div>
+                           </br>
+                              
+                          
+                              
                             <div class="form-group ">
                               <label style="font-size:19px;" class="form-animate-text"  for="comment">Descripcion:</label>
                               <textarea class="form-control" rows="3" id="descripcionM"></textarea>
