@@ -38,7 +38,8 @@ echo "Hola push";
             document.getElementById('duiempleado').value=="" ||
             document.getElementById('nitempleado').value=="" ||
             document.getElementById('cargoempleado').value==""){
-            alert("Complete los campos");
+            alert("Complete los campos prueba");
+            
           }else{
             document.getElementById("bandera").value="add";
             document.turismo.submit();
