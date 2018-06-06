@@ -30,14 +30,34 @@
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa fa-book"></span> Materia
+                        <span class="fa fa-graduation-cap"></span> Opciones
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
                         <li><a href="materias.php">Nuevo</a></li>
                         <li><a href="listaempleado.php">Modificar/Eliminar</a></li>
                       </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-book"></span> Materia
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="empleado.php">Nuevo</a></li>
+                        <li><a href="listaempleado.php">Modificar/Eliminar</a></li>
+                      </ul>
 
+                    </li>
+                     <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-list-alt"></span> Notas
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="bus.php">Nuevo</a></li>
+                        <li><a href="listabus.php">Modificar/Eliminar</a></li>
+                      </ul>
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
@@ -50,27 +70,6 @@
                         <li><a href="listalugar.php">Modificar/Eliminar</a></li>
                       </ul>
                     </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-graduation-cap"></span> Opciones
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="bus.php">Nuevo</a></li>
-                        <li><a href="listabus.php">Modificar/Eliminar</a></li>
-                      </ul>
-                    </li>
-                     <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-list-alt"></span> Notas
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="bus.php">Nuevo</a></li>
-                        <li><a href="listabus.php">Modificar/Eliminar</a></li>
-                      </ul>
-                    </li>
-
                     <!-- <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa-diamond fa"></span> Combos
