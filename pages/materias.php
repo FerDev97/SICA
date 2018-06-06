@@ -84,36 +84,34 @@ error_reporting(E_ALL & ~E_NOTICE);
                         <form class="cmxform" id="formcliente" method="post" action="">
 
                           <div class="col-md-6">
+                          </br>
+                           </br>
                         
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                            <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
                            </div>
                            </br>
+                           </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
                            <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
                            </div>
                            </br>
+                           </br>
                            <div class="input-group">
                            <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
-            <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripcion"></textarea> 
+                           <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
                            </div>
-                           </br>
                            
-                           
-                              
-                          
-                              
-                            
                           </div>
-                          <div class="col-md-6">                        
+                          <div class="col-md-6">                 
                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                               <span class="bar"></span>
                               <label>Docente:</label>
                               <br>
                               <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2" style="width: 300px; font-size: 20px" name="idagenciaempleado">
+                              <select id="estado"  id="idagenciaempleado" class="select2 show-tick" style="width: 300px; font-size: 20px" name="idagenciaempleado">
                               <option value="">Seleccione</option>
                               <option value="">Melvin Alfonso Rivas</option>
                               <option value="">Helen Alexandra Rodriguez</option>
@@ -137,6 +135,8 @@ error_reporting(E_ALL & ~E_NOTICE);
                               </select>
                             </div>
                           </div>
+                          </br>
+                           </br>
 
                           <div class="col-md-12">
                               <div class="col-md-3">
