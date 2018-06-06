@@ -4,21 +4,21 @@
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
-/* html {
+ /* html {
 	height: 100%;
 	/*Image only BG fallback*/
 	
 	/*background = gradient + image pattern combo*/
-	background: 
+	/* background: 
 		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
-} */
+}  */ 
 
 body {
 	font-family: montserrat, arial, verdana;
 }
 /*form styles*/
 #msform {
-	width: 400px;
+	width: 900px;
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
@@ -26,10 +26,10 @@ body {
 #msform fieldset {
 	background: white;
 	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.4);
 	padding: 20px 30px;
-	box-sizing: border-box;
+	box-sizing: inherit;
 	width: 80%;
 	margin: 0 10%;
 	
@@ -55,7 +55,7 @@ body {
 /*buttons*/
 #msform .action-button {
 	width: 100px;
-	background: #27AE60;
+	background: #6D7FF7;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -65,7 +65,7 @@ body {
 	margin: 10px 5px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #6D7FF7;
 }
 /*headings*/
 .fs-title {
@@ -82,7 +82,7 @@ body {
 }
 /*progressbar*/
 #progressbar {
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 	overflow: hidden;
 	/*CSS counters to number the steps*/
 	counter-reset: step;
@@ -126,7 +126,7 @@ body {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #27AE60;
+	background: #6D7FF7;
 	color: white;
 }
 
