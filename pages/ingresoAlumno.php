@@ -21,6 +21,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/wizard.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
@@ -58,7 +59,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
           <!-- start: Content -->
             <div id="content">
-                <div class="panel box-shadow-none content-header">
+            <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12" >
 
@@ -69,101 +70,43 @@ error_reporting(E_ALL & ~E_NOTICE);
                     </div>
                   </div>
                 </div>
-                <div class="form-element">
-                
-                <form id="turismo" name="turismo" action="" method="post">
-                <input type="hidden" name="bandera" id="bandera">
-                <div class="col-md-12">
-                  <div class="col-md-12 panel panel-info">
-                    <div class="col-md-12 panel-heading">
-                      <h4>Informaci&oacute;n Materia</h4>
-                    </div>
-
-                    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
-                      <div class="col-md-12">
-                        <form class="cmxform" id="formcliente" method="post" action="">
-
-                          <div class="col-md-6">
-                          </br>
-                           </br>
-                        
-                           <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
-                           </div>
-                           </br>
-                           </br>
-                           <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
-                           </div>
-                           </br>
-                           </br>
-                           <div class="input-group">
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
-                           <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
-                           </div>
-                           
-                          </div>
-                          <div class="col-md-6">                 
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Docente:</label>
-                              <br>
-                              <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2 show-tick" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
-                              
-                              </select>
-                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Opcion:</label>
-                              <br>
-                              <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">1° Bachillerato General</option>
-                              <option value="">2° Bachillerato General</option>
-                              <option value="">1° Bachillerato Contador</option>
-                              <option value="">2° Bachillerato Contador</option>
-                              <option value="">3° Bachillerato Contador</option>
-                              </select>
-                            </div>
-                          </div>
-                          </br>
-                           </br>
-
-                          <div class="col-md-12">
-                              <div class="col-md-3">
-                              <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
-                                <div class="flip">
-                                  <div class="side">
-                                    Guardar <span class="fa fa-trash"></span>
-                                  </div>
-                                  <div class="side back">
-                                    continuar?
-                                  </div>
-                                </div>
-                                <span class="icon"></span>
-                              </button>
-                          </div>
-                        </div>
-                      </form>
-
-                    </div>
-                  </div>
-                </div>
-                </form>
-              </div>
-
-              </div>
-              </div>
-              </div>
+               <!-- multistep form -->
+<form id="msform">
+  <!-- progressbar -->
+  <ul id="progressbar">
+    <li class="active">Account Setup</li>
+    <li>Social Profiles</li>
+    <li>Personal Details</li>
+  </ul>
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">Create your account</h2>
+    <h3 class="fs-subtitle">This is step 1</h3>
+    <input type="text" name="email" placeholder="Email" />
+    <input type="password" name="pass" placeholder="Password" />
+    <input type="password" name="cpass" placeholder="Confirm Password" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Social Profiles</h2>
+    <h3 class="fs-subtitle">Your presence on the social network</h3>
+    <input type="text" name="twitter" placeholder="Twitter" />
+    <input type="text" name="facebook" placeholder="Facebook" />
+    <input type="text" name="gplus" placeholder="Google Plus" />
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Personal Details</h2>
+    <h3 class="fs-subtitle">We will never sell it</h3>
+    <input type="text" name="fname" placeholder="First Name" />
+    <input type="text" name="lname" placeholder="Last Name" />
+    <input type="text" name="phone" placeholder="Phone" />
+    <textarea name="address" placeholder="Address"></textarea>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+  </fieldset>
+</form> 
             </div>
           <!-- end: content -->
 
@@ -171,7 +114,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       </div>
 
       <!-- start: Mobile -->
-        <?php 
+    <?php 
         include "menuMovil.php";
         ?>
        <!-- end: Mobile -->
@@ -192,7 +135,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/plugins/select2.full.min.js"></script>
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
-
+<script src="../asset/js/wizard.js"></script>
 
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
