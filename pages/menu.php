@@ -23,8 +23,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="agencia.php">Nueva</a></li>
-                        <li><a href="listaagencias.php">Modificar/Eliminar</a></li>
+                        <li><a href="fdocentes.php">Nuevo</a></li>
+                        <li><a href="fdocentes.php">Modificar/Eliminar</a></li>
                       </ul>
 
                     </li>

@@ -2,13 +2,12 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-
 ?>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turismo</title>
+  <title>Docentes</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -63,9 +62,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Materias</h3>
+                         <h3 class="animated fadeInLeft">Docentes</h3>
                         <p class="animated fadeInDown">
-                          Materia <span class="fa-angle-right fa"></span>Datos de la materia.
+                          Docentes <span class="fa-angle-right fa"></span>Datos de la materia.
                         </p>
                     </div>
                   </div>
@@ -77,7 +76,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Informaci&oacute;n Materia</h4>
+                      <h4>Formulario Docente</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -85,60 +84,74 @@ error_reporting(E_ALL & ~E_NOTICE);
                         <form class="cmxform" id="formcliente" method="post" action="">
 
                           <div class="col-md-6">
-                          <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <input type="text" class="form-text mask-codigo" id="codigoM" name="codigoM" required>
-                              <span class="bar"></span>
-                              <label>Codigo:</label>
-                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <input type="text" class="form-text" id="nombreempleado" name="nombreempleado" required>
-                              <span class="bar"></span>
-                              <label>Nombre:</label>
-                            </div>   
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo">
+                              </div> 
+                              <br>
+                              <br> 
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
+                              </div>  
                             <!-- <div class="form-group form-animate-text" style="margin-top:40px !important;">  
                             <label for="descripcion">Descripcion</label>                          
                               <span class="bar"></span>
                               <textarea name="descripcion" id="descripcion" cols="25" rows="5"></textarea>
                             </div>  -->
-                            <div class="form-group ">
-                              <label style="font-size:19px;" class="form-animate-text"  for="comment">Descripcion:</label>
-                              <textarea class="form-control" rows="3" id="descripcionM"></textarea>
-                              </div> 
+                            <br>
+                            <br>
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                  <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion">
+                              </div>  
+                              <br><br>
+                              <label>Fecha de nacimiento:</label>
+                              <div class="form-group">
+                              <div class='input-group date' id='datetimepicker1'>
+                                <input type='date' class="form-control" />
+                                      <span class="input-group-addon">
+                                       <span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
+                                  </div>
+                              </div>
+                           
+                              <label>Sexo:</label><br>
+                              <label class="radio-inline"><input type="radio" name="optradiosexo">Masculino</label>
+                              <label class="radio-inline"><input type="radio" name="optradiosexo">Femenino</label>
+                              <br><br>
+                              <label>Estado:</label><br>
+                              <label class="radio-inline"><input type="radio" name="optradioactivo">Activo</label>
+                              <label class="radio-inline"><input type="radio" name="optradioactivo">Inactivo</label>
+                              <br><br>
+
+                   
+
+
+
+                            
                             <!-- Div del span -->
                           </div>
-                          <div class="col-md-6">                        
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Docente:</label>
+                          <div class="col-md-6">                       
+                  
+                              <div class="input-group" style="margin-top:70px !important;">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <input id="apellidp" type="text" class="form-control" name="apellido" placeholder="Apellido">
+                              </div> 
                               <br>
                               <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                              </div> 
+                              <br><br>
                               
-                              </select>
-                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Opcion:</label>
-                              <br>
-                              <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">1° Bachillerato General</option>
-                              <option value="">2° Bachillerato General</option>
-                              <option value="">1° Bachillerato Contador</option>
-                              <option value="">2° Bachillerato Contador</option>
-                              <option value="">3° Bachillerato Contador</option>
-                              </select>
-                            </div>
+                             
                           </div>
 
                           <div class="col-md-12">
                               <div class="col-md-3">
+                              <br><b></b>
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
                                   <div class="side">
