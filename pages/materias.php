@@ -194,6 +194,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
 
 
+
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
 <script type="text/javascript">
