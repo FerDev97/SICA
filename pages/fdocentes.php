@@ -2,13 +2,12 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-
 ?>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turismo</title>
+  <title>Docentes</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -63,9 +62,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Materias</h3>
+                         <h3 class="animated fadeInLeft">Docentes</h3>
                         <p class="animated fadeInDown">
-                          Materia <span class="fa-angle-right fa"></span>Datos de la materia.
+                          Docentes <span class="fa-angle-right fa"></span>Datos de la materia.
                         </p>
                     </div>
                   </div>
@@ -77,7 +76,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Informaci&oacute;n Materia</h4>
+                      <h4>Formulario Docente</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -85,62 +84,74 @@ error_reporting(E_ALL & ~E_NOTICE);
                         <form class="cmxform" id="formcliente" method="post" action="">
 
                           <div class="col-md-6">
-                          </br>
-                           </br>
-                        
-                           <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
-                           </div>
-                           </br>
-                           </br>
-                           <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
-                           </div>
-                           </br>
-                           </br>
-                           <div class="input-group">
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
-                           <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
-                           </div>
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo">
+                              </div> 
+                              <br>
+                              <br> 
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
+                              </div>  
+                            <!-- <div class="form-group form-animate-text" style="margin-top:40px !important;">  
+                            <label for="descripcion">Descripcion</label>                          
+                              <span class="bar"></span>
+                              <textarea name="descripcion" id="descripcion" cols="25" rows="5"></textarea>
+                            </div>  -->
+                            <br>
+                            <br>
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                  <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion">
+                              </div>  
+                              <br><br>
+                              <label>Fecha de nacimiento:</label>
+                              <div class="form-group">
+                              <div class='input-group date' id='datetimepicker1'>
+                                <input type='date' class="form-control" />
+                                      <span class="input-group-addon">
+                                       <span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
+                                  </div>
+                              </div>
                            
+                              <label>Sexo:</label><br>
+                              <label class="radio-inline"><input type="radio" name="optradiosexo">Masculino</label>
+                              <label class="radio-inline"><input type="radio" name="optradiosexo">Femenino</label>
+                              <br><br>
+                              <label>Estado:</label><br>
+                              <label class="radio-inline"><input type="radio" name="optradioactivo">Activo</label>
+                              <label class="radio-inline"><input type="radio" name="optradioactivo">Inactivo</label>
+                              <br><br>
+
+                   
+
+
+
+                            
+                            <!-- Div del span -->
                           </div>
-                          <div class="col-md-6">                 
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Docente:</label>
+                          <div class="col-md-6">                       
+                  
+                              <div class="input-group" style="margin-top:70px !important;">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <input id="apellidp" type="text" class="form-control" name="apellido" placeholder="Apellido">
+                              </div> 
                               <br>
                               <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2 show-tick" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                              </div> 
+                              <br><br>
                               
-                              </select>
-                            </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Opcion:</label>
-                              <br>
-                              <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">1° Bachillerato General</option>
-                              <option value="">2° Bachillerato General</option>
-                              <option value="">1° Bachillerato Contador</option>
-                              <option value="">2° Bachillerato Contador</option>
-                              <option value="">3° Bachillerato Contador</option>
-                              </select>
-                            </div>
+                             
                           </div>
-                          </br>
-                           </br>
 
                           <div class="col-md-12">
                               <div class="col-md-3">
+                              <br><b></b>
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
                                   <div class="side">
@@ -172,9 +183,143 @@ error_reporting(E_ALL & ~E_NOTICE);
       </div>
 
       <!-- start: Mobile -->
-        <?php 
-        include "menuMovil.php";
-        ?>
+      <div id="mimin-mobile" class="reverse">
+        <div class="mimin-mobile-menu-list">
+            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+                <ul class="nav nav-list">
+                    <li class="active ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-home fa"></span>Dashboard
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
+                          <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-diamond fa"></span>Layout
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="topnav.html">Top Navigation</a></li>
+                        <li><a href="boxed.html">Boxed</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-area-chart fa"></span>Charts
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="chartjs.html">ChartJs</a></li>
+                        <li><a href="morris.html">Morris</a></li>
+                        <li><a href="flot.html">Flot</a></li>
+                        <li><a href="sparkline.html">SparkLine</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-pencil-square"></span>Ui Elements
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="color.html">Color</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="typography.html">Typography</a></li>
+                        <li><a href="icons.html">Icons</a></li>
+                        <li><a href="buttons.html">Buttons</a></li>
+                        <li><a href="media.html">Media</a></li>
+                        <li><a href="panels.html">Panels & Tabs</a></li>
+                        <li><a href="notifications.html">Notifications & Tooltip</a></li>
+                        <li><a href="badges.html">Badges & Label</a></li>
+                        <li><a href="progress.html">Progress</a></li>
+                        <li><a href="sliders.html">Sliders</a></li>
+                        <li><a href="timeline.html">Timeline</a></li>
+                        <li><a href="modal.html">Modals</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                       <span class="fa fa-check-square-o"></span>Forms
+                       <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="formelement.html">Form Element</a></li>
+                        <li><a href="#">Wizard</a></li>
+                        <li><a href="#">File Upload</a></li>
+                        <li><a href="#">Text Editor</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-table"></span>Tables
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="datatables.html">Data Tables</a></li>
+                        <li><a href="handsontable.html">handsontable</a></li>
+                        <li><a href="tablestatic.html">Static</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a href="calendar.html">
+                         <span class="fa fa-calendar-o"></span>Calendar
+                      </a>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-envelope-o"></span>Mail
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="mail-box.html">Inbox</a></li>
+                        <li><a href="compose-mail.html">Compose Mail</a></li>
+                        <li><a href="view-mail.html">View Mail</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-file-code-o"></span>Pages
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="forgotpass.html">Forgot Password</a></li>
+                        <li><a href="login.html">SignIn</a></li>
+                        <li><a href="reg.html">SignUp</a></li>
+                        <li><a href="article-v1.html">Article v1</a></li>
+                        <li><a href="search-v1.html">Search Result v1</a></li>
+                        <li><a href="productgrid.html">Product Grid</a></li>
+                        <li><a href="profile-v1.html">Profile v1</a></li>
+                        <li><a href="invoice-v1.html">Invoice v1</a></li>
+                      </ul>
+                    </li>
+                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa "></span> MultiLevel  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="view-mail.html">Level 1</a></li>
+                        <li><a href="view-mail.html">Level 1</a></li>
+                        <li class="ripple">
+                          <a class="sub-tree-toggle nav-header">
+                            <span class="fa fa-envelope-o"></span> Level 1
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                          </a>
+                          <ul class="nav nav-list sub-tree">
+                            <li><a href="mail-box.html">Level 2</a></li>
+                            <li><a href="compose-mail.html">Level 2</a></li>
+                            <li><a href="view-mail.html">Level 2</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a href="credits.html">Credits</a></li>
+                  </ul>
+            </div>
+        </div>
+      </div>
+      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars"></span>
+      </button>
        <!-- end: Mobile -->
 
 <!-- start: Javascript -->
@@ -193,7 +338,6 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/plugins/select2.full.min.js"></script>
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
-
 
 
 <!-- custom -->
