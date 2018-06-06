@@ -64,7 +64,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                          <h3 class="animated fadeInLeft">Docentes</h3>
                         <p class="animated fadeInDown">
-                          Docentes <span class="fa-angle-right fa"></span>Datos de la materia.
+                          Docentes <span class="fa-angle-right fa"></span>Datos de la Docentes.
                         </p>
                     </div>
                   </div>
@@ -94,18 +94,41 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                   <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
                               </div>  
+                              <br>
+                              <br>
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido">
+                              </div> 
+                             
                             <!-- <div class="form-group form-animate-text" style="margin-top:40px !important;">  
                             <label for="descripcion">Descripcion</label>                          
                               <span class="bar"></span>
                               <textarea name="descripcion" id="descripcion" cols="25" rows="5"></textarea>
                             </div>  -->
-                            <br>
-                            <br>
-                            <div class="input-group">
+                           <br><br>
+                            
+                              
+                           
+                              <label>Sexo:</label><br>
+                              <label class="radio-inline"><input type="radio" name="optradiosexo">Masculino</label>
+                              <label class="radio-inline"><input type="radio" name="optradiosexo">Femenino</label>
+                              <br><br>
+                              
+
+                            <!-- Div del span -->
+                          </div>
+                          <div class="col-md-6">                       
+                          <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                   <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion">
                               </div>  
-                              <br><br>
+                              <br><br>                      
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                              </div> 
+                              <br>
                               <label>Fecha de nacimiento:</label>
                               <div class="form-group">
                               <div class='input-group date' id='datetimepicker1'>
@@ -115,38 +138,10 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   </span>
                                   </div>
                               </div>
-                           
-                              <label>Sexo:</label><br>
-                              <label class="radio-inline"><input type="radio" name="optradiosexo">Masculino</label>
-                              <label class="radio-inline"><input type="radio" name="optradiosexo">Femenino</label>
-                              <br><br>
                               <label>Estado:</label><br>
                               <label class="radio-inline"><input type="radio" name="optradioactivo">Activo</label>
                               <label class="radio-inline"><input type="radio" name="optradioactivo">Inactivo</label>
                               <br><br>
-
-                   
-
-
-
-                            
-                            <!-- Div del span -->
-                          </div>
-                          <div class="col-md-6">                       
-                  
-                              <div class="input-group" style="margin-top:70px !important;">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="apellidp" type="text" class="form-control" name="apellido" placeholder="Apellido">
-                              </div> 
-                              <br>
-                              <br>
-                              <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
-                              </div> 
-                              <br><br>
-                              
-                             
                           </div>
 
                           <div class="col-md-12">
