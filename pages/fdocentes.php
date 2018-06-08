@@ -120,7 +120,6 @@ error_reporting(E_ALL & ~E_NOTICE);
                           </div>
                           <div class="col-md-6">                       
                           <div class="input-group">
-                              
                                   <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                               </div>  
