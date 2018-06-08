@@ -140,6 +140,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   </span>
                                   </div>
                               </div>
+                              <br>
                               <label>Estado:</label><br>
                               <label class="radio-inline"><input type="radio" name="optradioactivo">Activo</label>
                               <label class="radio-inline"><input type="radio" name="optradioactivo">Inactivo</label>

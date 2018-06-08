@@ -7,19 +7,20 @@
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
-                      
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-users"></span> Administradores
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                          <li><a href="ingresoAlumno.php">Nuevo alumno.</a></li>
-                          <li><a href="listacliente.php">Modificar/Eliminar</a></li>
+                        <li><a href="fdocentes.php">Nuevo</a></li>
+                        <li><a href="fdocentes.php">Modificar/Eliminar</a></li>
                       </ul>
+
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa-user fa"></span> Docente
+                        <span class="fa-user fa"></span> Docentes
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
@@ -40,18 +41,28 @@
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa fa-book"></span> Materia
+                        <span class="fa fa-book"></span> Materias
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="empleado.php">Nuevo</a></li>
+                        <li><a href="materias.php">Nuevo</a></li>
                         <li><a href="listaempleado.php">Modificar/Eliminar</a></li>
                       </ul>
 
                     </li>
+                    <li class="active ripple">
+                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                      
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="ingresoAlumno.php">Nuevo alumno.</a></li>
+                          <li><a href="listacliente.php">Modificar/Eliminar</a></li>
+                      </ul>
+                    </li>
                      <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa fa-list-alt"></span> Notas
+                        <span class="fa fa-list-alt"></span> Control de Notas
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
@@ -61,7 +72,7 @@
                     </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa fa-users "></span> Usuarios
+                        <span class="fa fa-lock "></span> Seguridad
 
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
