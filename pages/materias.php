@@ -80,6 +80,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
                       <h4>Informaci&oacute;n Materia</h4>
+                      <h4>Informaci&oacute;n MateriaAbi</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
