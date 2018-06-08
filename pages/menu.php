@@ -7,14 +7,28 @@
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
+                    <li class="active ripple">
+                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                      
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
+                          <li><a href="listacliente.php">Realizar inscripcion</a></li>
+                          <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
+                          <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                          <li><a href="listacliente.php">Estadisticas</a></li>
+                          
+                      </ul>
+                    </li>
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa fa-users"></span> Administradores
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="fdocentes.php">Nuevo</a></li>
-                        <li><a href="fdocentes.php">Modificar/Eliminar</a></li>
+                        <li><a href="fadministrador.php">Agregar Nuevo</a></li>
+                        <li><a href="fdocentes.php">Lista de Administradores</a></li>
                       </ul>
 
                     </li>
@@ -24,8 +38,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="fdocentes.php">Nuevo</a></li>
-                        <li><a href="fdocentes.php">Modificar/Eliminar</a></li>
+                        <li><a href="fdocentes.php">Agregar Nuevo</a></li>
+                        <li><a href="fdocentes.php">Lista de docentes</a></li>
                       </ul>
 
                     </li>
@@ -35,8 +49,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="materias.php">Nuevo</a></li>
-                        <li><a href="listaempleado.php">Modificar/Eliminar</a></li>
+                        <li><a href="fopciones.php">Agregar Nuevo</a></li>
+                        <li><a href="listaempleado.php">Lista de Opciones</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -46,28 +60,21 @@
                       </a>
                       <ul class="nav nav-list tree">
                         <li><a href="materias.php">Nuevo</a></li>
-                        <li><a href="listaempleado.php">Modificar/Eliminar</a></li>
+                        <li><a href="listaempleado.php">Lista de materias</a></li>
                       </ul>
 
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
-                      
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="ingresoAlumno.php">Nuevo alumno.</a></li>
-                          <li><a href="listacliente.php">Modificar/Eliminar</a></li>
-                      </ul>
-                    </li>
+                    
                      <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa fa-list-alt"></span> Control de Notas
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="bus.php">Nuevo</a></li>
-                        <li><a href="listabus.php">Modificar/Eliminar</a></li>
+                        <li><a href="bus.php">Notas</a></li>
+                        <li><a href="listabus.php">Estadisticas</a></li>
+                        <li><a href="listabus.php">Boleta de notas</a></li>
+                        <li><a href="listabus.php">Cierre de Sistema</a></li>
                       </ul>
                     </li>
                     <li class="ripple">
@@ -77,8 +84,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="lugar.php">Nuevo</a></li>
-                        <li><a href="listalugar.php">Modificar/Eliminar</a></li>
+                        <li><a href="lugar.php">Backup</a></li>
+                        <li><a href="listalugar.php">Usuarios</a></li>
                       </ul>
                     </li>
                     <!-- <li class="ripple">
