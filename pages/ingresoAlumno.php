@@ -63,9 +63,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Materias</h3>
+                         <h3 class="animated fadeInLeft">Inscripcion</h3>
                         <p class="animated fadeInDown">
-                          Materia <span class="fa-angle-right fa"></span>Datos de la materia.
+                          Ficha de inscripcion.
                         </p>
                     </div>
                   </div>
@@ -74,17 +74,75 @@ error_reporting(E_ALL & ~E_NOTICE);
 <form id="msform">
   <!-- progressbar -->
   <ul id="progressbar">
-    <li class="active">Account Setup</li>
-    <li>Social Profiles</li>
-    <li>Personal Details</li>
+    <li class="active">Datos Personales</li>
+    <li>Datos del responsable.</li>
+    <li>Informacion adicional.</li>
   </ul>
   <!-- fieldsets -->
   <fieldset>
-    <h2 class="fs-title">Create your account</h2>
-    <h3 class="fs-subtitle">This is step 1</h3>
-    <input type="text" name="email" placeholder="Email" />
-    <input type="password" name="pass" placeholder="Password" />
-    <input type="password" name="cpass" placeholder="Confirm Password" />
+    <h2 class="fs-title">Datos personales.</h2>
+    <h3 class="fs-subtitle">Informacion personal del alumno.</h3>
+    <!-- Inicia col md 12 panel -->
+    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+      <!-- Inicia el col md 6 izquierda -->
+    <div class="col-md-6">
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo.">
+     </div>
+ 
+
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Nombre.">
+     </div>
+
+      <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Apellido.">
+     </div>
+
+      <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
+     </div>
+ 
+
+    </div>
+    <!-- Finaliza col md 6 -->
+    <!-- Finaliza col md 6 (derecha) -->
+     <div class="col-md-6">
+     <div class="input-group " style="padding-bottom:20px;">
+    
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="NIE.">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     </div>
+ 
+
+     <div class="input-group " style="padding-bottom:20px;">
+    
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Nombre.">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     </div>
+
+      <div class="input-group " style="padding-bottom:20px;">
+    
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Apellido.">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     </div>
+
+      <div class="input-group " style="padding-bottom:20px;">
+    
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     </div>
+ 
+
+    </div>
+    <!-- Finaliza col md 6 -->
+    </div>
+    <!-- Finaliza col md 12 panel body -->
+    
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
   <fieldset>
