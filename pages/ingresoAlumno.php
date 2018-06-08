@@ -96,6 +96,7 @@ error_reporting(E_ALL & ~E_NOTICE);
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
+  
   <fieldset>
     <h2 class="fs-title">Personal Details</h2>
     <h3 class="fs-subtitle">We will never sell it</h3>
