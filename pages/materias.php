@@ -80,7 +80,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
                       <h4>Informaci&oacute;n Materia</h4>
-                      <h4>Informaci&oacute;n MateriaAbi</h4>
+                      
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -108,47 +108,70 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
                            </div>
                            
-                          </div>
-                          <div class="col-md-6">                 
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Docente:</label>
-                              <br>
-                              <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2 show-tick" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
+                           </div>
+                           
+                            <div class="col-md-6">
+                            <div class="form-group form-animate-text" style="margin-top:36px !important;margin-bottom:30px !important;">
+                            <span class="label label-default" style="width: 500px; font-size: 20px">Horario <i class="glyphicon glyphicon-dashboard"></i></span>
+                            
+                            
+                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 225px; font-size: 15px" name="iddia">
+                              <option value="">Seleccione Dia</option>
+                              <option value="">Lunes     -  Viernes</option>
+                              <option value="">Miercoles -  Viernes</option>
+                              <option value="">Martes    -  Jueves</option>
                               
                               </select>
+                              <select id="hora"  id="idhora" class="select2 show-tick" style="width: 225px; font-size: 15px" name="idhora">
+                              <option value="">Seleccione Horas</option>
+                              <option value="">08:00 am - 10:00 am</option>
+                              <option value="">10:00 am - 12:00 md</option>
+                              <option value="">1:00 pm  -  3:00 pm</option>
+                              <option value="">3:00 pm  -  5:00 pm</option>
+                              </select>
                             </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                              <span class="bar"></span>
-                              <label>Opcion:</label>
-                              <br>
-                              <br>
-                              <select class="js-example-basic-single" name="state" style="width: 300px;">
+                                            
+                            <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
+                              <select id="docente"  id="iddocente" class="select2 show-tick" style="width: 568px; font-size: 15px" name="iddocente">
+                              <option value="">Seleccione Docente</option>
                               <option value="">Melvin Alfonso Rivas</option>
                               <option value="">Helen Alexandra Rodriguez</option>
                               <option value="">Monica Abigail Rosales</option>
                               <option value="">Hna. Maria Luisa Cubias</option>
-</select>
+                              </select>
+                            </div>
+                            <div class="form-group form-animate-text" style="">
+                              <select id="opcion"  id="idopcion" class="select2 show-tick" style="width: 568px; font-size: 15px" name="idopcion">
+                              <option value="">Seleccione Opcion</option>
+                              <option value="">Melvin Alfonso Rivas</option>
+                              <option value="">Helen Alexandra Rodriguez</option>
+                              <option value="">Monica Abigail Rosales</option>
+                              <option value="">Hna. Maria Luisa Cubias</option>
+                              </select>
                             </div>
                           </div>
-                          </br>
-                           </br>
-
                           <div class="col-md-12">
                               <div class="col-md-3">
-                              <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
+                              <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()" style="margin-top:36px !important">
                                 <div class="flip">
-                                  <div class="side">
-                                    Guardar <span class="fa fa-trash"></span>
+                                 <div class="side">
+                                    Guardar <span class="fa fa-check"></span>
                                   </div>
                                   <div class="side back">
-                                    continuar?
+                                    continuar
+                                  </div>
+                                </div>
+                                <span class="icon"></span>
+                              </button>
+                          </div>
+                          <div class="col-md-3">
+                              <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()" style="margin-top:36px !important">
+                                <div class="flip">
+                                 <div class="side">
+                                    Cancelar <span class="fa fa-close"></span>
+                                  </div>
+                                  <div class="side back">
+                                    continuar
                                   </div>
                                 </div>
                                 <span class="icon"></span>
