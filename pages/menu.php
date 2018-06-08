@@ -34,8 +34,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="bus.php">Nuevo</a></li>
-                        <li><a href="listabus.php">Modificar/Eliminar</a></li>
+                        <li><a href="materias.php">Nuevo</a></li>
+                        <li><a href="listaempleado.php">Modificar/Eliminar</a></li>
                       </ul>
                     </li>
                     <li class="ripple">

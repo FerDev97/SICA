@@ -22,6 +22,8 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
@@ -126,14 +128,12 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <label>Opcion:</label>
                               <br>
                               <br>
-                              <select id="estado"  id="idagenciaempleado" class="select2" style="width: 300px; font-size: 20px" name="idagenciaempleado">
-                              <option value="">Seleccione</option>
-                              <option value="">1° Bachillerato General</option>
-                              <option value="">2° Bachillerato General</option>
-                              <option value="">1° Bachillerato Contador</option>
-                              <option value="">2° Bachillerato Contador</option>
-                              <option value="">3° Bachillerato Contador</option>
-                              </select>
+                              <select class="js-example-basic-single" name="state" style="width: 300px;">
+                              <option value="">Melvin Alfonso Rivas</option>
+                              <option value="">Helen Alexandra Rodriguez</option>
+                              <option value="">Monica Abigail Rosales</option>
+                              <option value="">Hna. Maria Luisa Cubias</option>
+</select>
                             </div>
                           </div>
                           </br>
@@ -198,6 +198,9 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
+<script>$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});</script>
 <script type="text/javascript">
   $(document).ready(function(){
 

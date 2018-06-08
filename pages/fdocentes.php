@@ -125,9 +125,10 @@ error_reporting(E_ALL & ~E_NOTICE);
                               </div>  
                               <br><br>                      
                               <div class="input-group">
-                                 <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
-                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                               
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                                  <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+
                               </div> 
                               <br>
                               <label>Fecha de nacimiento:</label>
