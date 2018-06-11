@@ -21,6 +21,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
@@ -45,6 +46,20 @@ error_reporting(E_ALL & ~E_NOTICE);
           }
 
         }
+        function sweet(){
+         swal({
+
+  type: 'warning',
+  title: 'Your work has been saved',
+  showConfirmButton: true,
+  confirmButtonText:'Kevin',
+  showCancelButton: true,
+  cancelButtonText:'Gay',
+  position:'top',
+  timer: 3500
+})
+        }
+        
       </script>
 </head>
 
@@ -66,6 +81,8 @@ error_reporting(E_ALL & ~E_NOTICE);
                         <p class="animated fadeInDown">
                           Administrador <span class="fa-angle-right fa"></span>Datos de la Administrador.
                         </p>
+                        <button onclick="sweet();">Dame click</button>
+                         
                     </div>
                   </div>
                 </div>
@@ -100,6 +117,8 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                   <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido">
                               </div> 
+                           
+                              
                              
                             <!-- <div class="form-group form-animate-text" style="margin-top:40px !important;">  
                             <label for="descripcion">Descripcion</label>                          
@@ -161,6 +180,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 </div>
                                 <span class="icon"></span>
                               </button>
+                              
                           </div>
                         </div>
                       </form>
@@ -324,6 +344,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
