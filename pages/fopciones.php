@@ -107,14 +107,14 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
                            <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
                            </div>
-                           
-                          </div>
-                          
-                            
+                          </div>  
                           </div>
                          
-
+                        <div>
+                        <div class="col-md-12 panel-body" style="padding-top:30px;padding-left:0px;">
                           <div class="col-md-12">
+
+                            <div class="col-md-12" style="border-top:10px;">
                               <div class="col-md-3">
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
@@ -128,6 +128,10 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 <span class="icon"></span>
                               </button>
                           </div>
+                          
+      </div>
+      </div>
+                          
                         </div>
                         </div>
                       </form>
