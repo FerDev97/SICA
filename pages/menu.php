@@ -7,64 +7,63 @@
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                <li class="active ripple">
+                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                  
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                      <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
+                      <li><a href="listacliente.php">Realizar inscripcion</a></li>
+                      <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
+                      <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                      <li><a href="listacliente.php">Estadisticas</a></li>
                       
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
-                          <li><a href="listacliente.php">Realizar inscripcion</a></li>
-                          <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
-                          <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
-                          <li><a href="listacliente.php">Estadisticas</a></li>
-                          
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-users"></span> Administradores
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="fadministrador.php">Agregar Nuevo</a></li>
-                        <li><a href="fdocentes.php">Lista de Administradores</a></li>
-                      </ul>
+                  </ul>
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa fa-users"></span> Administradores
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fadministrador.php">Agregar Nuevo</a></li>
+                  </ul>
 
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-user fa"></span> Docentes
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="fdocentes.php">Agregar Nuevo</a></li>
-                        <li><a href="fdocentes.php">Lista de docentes</a></li>
-                      </ul>
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa-user fa"></span> Docentes
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fdocentes.php">Agregar Nuevo</a></li>
+                    <li><a href="fdocentes.php">Lista de docentes</a></li>
+                  </ul>
 
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-graduation-cap"></span> Opciones
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="fopciones.php">Agregar Nuevo</a></li>
-                        <li><a href="listaempleado.php">Lista de Opciones</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-book"></span> Materias
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="materias.php">Nuevo</a></li>
-                        <li><a href="listaempleado.php">Lista de materias</a></li>
-                      </ul>
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa fa-graduation-cap"></span> Opciones
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fopciones.php">Agregar Nuevo</a></li>
+                    <li><a href="listaempleado.php">Lista de Opciones</a></li>
+                  </ul>
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa fa-book"></span> Materias
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="materias.php">Nuevo</a></li>
+                    <li><a href="listaempleado.php">Lista de materias</a></li>
+                  </ul>
 
-                    </li>
-                    
+                </li>-->
+                
                      <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa fa-list-alt"></span> Control de Notas
