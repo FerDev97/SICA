@@ -90,7 +90,6 @@ error_reporting(E_ALL & ~E_NOTICE);
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo.">
      </div>
- 
 
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
@@ -107,6 +106,13 @@ error_reporting(E_ALL & ~E_NOTICE);
      <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
      </div>
  
+
+
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>¡Cuidado!</strong> Es muy importante que leas este mensaje de alertaa.
+</div>
+
 
     </div>
     <!-- Finaliza col md 6 -->
