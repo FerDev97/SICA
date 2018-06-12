@@ -47,16 +47,23 @@ error_reporting(E_ALL & ~E_NOTICE);
 
         }
         function sweet(){
-         swal({
-
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
   type: 'warning',
-  title: 'Your work has been saved',
-  showConfirmButton: true,
-  confirmButtonText:'Kevin',
   showCancelButton: true,
-  cancelButtonText:'Gay',
-  position:'top',
-  timer: 3500
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
 })
         }
         
@@ -181,7 +188,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 <span class="icon"></span>
                               </button>
                               
+                              
                           </div>
+                          <div>
+                            <br><b></b>
+                          <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
+                                <div class="flip">
+                                  <div class="side">
+                                    Cancelar <span class="fa fa-trash"></span>
+                                  </div>
+                                  <div class="side back">
+                                    continuar?
+                                  </div>
+                                </div>
+                                <span class="icon"></span>
+                              </button></div>
                         </div>
                       </form>
 
