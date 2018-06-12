@@ -58,12 +58,11 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                    <li><a href="materias.php">Nuevo</a></li>
+                    <li><a href="materias.php">Agregar Nuevo</a></li>
                     <li><a href="listaempleado.php">Lista de materias</a></li>
                   </ul>
 
-                </li>-->
-                
+                </li>
                      <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa fa-list-alt"></span> Control de Notas
