@@ -226,7 +226,8 @@ error_reporting(E_ALL & ~E_NOTICE);
     </div>
     <!-- Finaliza col md 12 panel body -->
     
-    <input type="button" name="next" class="next action-button" value="Siguiente" />
+    <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" value="Siguiente" />
+    <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
     <h2 class="fs-title">DATOS PERSONALES DEL PADRE DE FAMILIA.</h2>

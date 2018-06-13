@@ -150,7 +150,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                                     <div class="col-md-12">
                               <div class="col-md-3">
                               <br><b></b>
-                              <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
+                              <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
                                   <div class="side">
                                     Guardar <span class="fa fa-trash"></span>
@@ -160,13 +160,14 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   </div>
                                 </div>
                                 <span class="icon"></span>
-                              </button>
+                              </button> -->
+                              <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
                               
                               
                           </div>
                           <div>
                             <br><b></b>
-                          <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
+                          <!-- <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
                                 <div class="flip">
                                   <div class="side">
                                     Cancelar <span class="fa fa-trash"></span>
@@ -176,7 +177,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   </div>
                                 </div>
                                 <span class="icon"></span>
-                              </button></div>
+                              </button> -->
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              </div>
                         </div>
                         </div>
                       </form>
