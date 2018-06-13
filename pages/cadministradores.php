@@ -39,18 +39,13 @@
                 <span class="bottom"></span>
               </div>
                 <a href="index.html" class="navbar-brand"> 
-                 <b>MIMIN</b>
+                 <b>SICA</b>
                 </a>
 
-              <ul class="nav navbar-nav search-nav">
-                <li>
-                   
-                  </div>
-                </li>
-              </ul>
+          
 
               <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span>Akihiko Avaron</span></li>
+                <li class="user-name"><span>Fernando Josue</span></li>
                   <li class="dropdown avatar-dropdown">
                    <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                    <ul class="dropdown-menu user-dropdown">
@@ -66,7 +61,7 @@
                     </li>
                   </ul>
                 </li>
-                <li ><a href="#" class="opener-right-menu"><span class="fa fa-coffee"></span></a></li>
+                
               </ul>
             </div>
           </div>
@@ -87,9 +82,9 @@
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Listado de materias</h3>
+                        <h3 class="animated fadeInLeft">Listado de Administradores</h3>
                         <p class="animated fadeInDown">
-                          Materias <span class="fa-angle-right fa"></span> Complejo Educativo "La Santa Familia"
+                          Administradores <span class="fa-angle-right fa"></span> Complejo Educativo "La Santa Familia"
                         </p>
                     </div>
                   </div>
