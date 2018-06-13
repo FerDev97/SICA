@@ -111,11 +111,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                           </div>
                          
                         <div>
-                        <div class="col-md-12 panel-body" style="padding-top:30px;padding-left:0px;">
-                          <div class="col-md-12">
-
-                            <div class="col-md-12" style="border-top:10px;">
+                        <div class="col-md-12">
                               <div class="col-md-3">
+                              <br><b></b>
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
                                   <div class="side">
@@ -127,9 +125,23 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 </div>
                                 <span class="icon"></span>
                               </button>
+                              
+                              
                           </div>
-                          
-      </div>
+                          <div>
+                            <br><b></b>
+                          <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
+                                <div class="flip">
+                                  <div class="side">
+                                    Cancelar <span class="fa fa-trash"></span>
+                                  </div>
+                                  <div class="side back">
+                                    continuar?
+                                  </div>
+                                </div>
+                                <span class="icon"></span>
+                              </button></div>
+                        </div>
       </div>
                           
                         </div>

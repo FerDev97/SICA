@@ -155,7 +155,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()" style="margin-top:36px !important">
                                 <div class="flip">
                                  <div class="side">
-                                    Guardar <span class="fa fa-check"></span>
+                                    Guardar
                                   </div>
                                   <div class="side back">
                                     continuar
@@ -168,7 +168,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()" style="margin-top:36px !important">
                                 <div class="flip">
                                  <div class="side">
-                                    Cancelar <span class="fa fa-close"></span>
+                                    Cancelar 
                                   </div>
                                   <div class="side back">
                                     continuar
