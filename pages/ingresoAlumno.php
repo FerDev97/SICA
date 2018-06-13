@@ -86,32 +86,78 @@ error_reporting(E_ALL & ~E_NOTICE);
     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
       <!-- Inicia el col md 6 izquierda -->
     <div class="col-md-6">
-     <div class="input-group " style="padding-bottom:20px;">
+    <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo.">
      </div>
-
      <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Nombre.">
      </div>
 
+      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
+      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 264px; font-size: 15px" name="iddia">
+      <option value="">Seleccione Departamento</option>
+      <option value="">San Salvador</option>
+      <option value="">San Vicente</option>
+      <option value="">San Miguel</option>
+      <option value="">Santa Ana</option>
+      <option value="">Chalatenango</option>
+      <option value="">Cabañas</option>
+      <option value="">Sonsonate</option>
+      <option value="">La Union</option>
+      <option value="">La Libertad</option>
+      <option value="">La Paz</option>
+      <option value="">Morazán</option>
+      <option value="">Usulutan</option>
+      <option value="">Santa Ana</option>
+      <option value="">Ahuachapán</option>
+      <option value="">Cuscatlán</option>
+      </select>
+      </div>
+      <div class="input-group"style="padding-bottom:20px;">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccion"></textarea>
+      </div>
+      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
+      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 240px; font-size: 15px" name="iddia">
+      <option value="">Medio de Transporte</option>
+      <option value="">Autobus</option>
+      <option value="">A pie</option>
+      <option value="">Trans.Propio</option>
+      <option value="">Otro</option>
+      </select>
+      </div>
+      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
+      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 242px; font-size: 15px" name="iddia">
+      <option value="">Seleccione Opcion</option>
+      <option value="">1° Año Bachillerato General</option>
+      <option value="">2° Año Bachillerato General</option>
+      <option value="">1° Año Bachillerato Contador</option>
+      <option value="">2° Año Bachillerato Contador</option>
+      <option value="">3° Año Bachillerato Contador</option>
+      </select>
+      </div>
       <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Apellido.">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
+     <input id="codigom" type="number" class="form-control" name="codigom" placeholder="En que año estudio el grado anterior">
      </div>
-
-      <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+     <input id="codigom" type="number" class="form-control" name="codigom" placeholder="Enfermedades que padece">
      </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+     <input id="codigom" type="number" class="form-control" name="codigom" placeholder="Es alergico a">
+     </div>
+      
  
 
 
-<div class="alert alert-warning alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>¡Cuidado!</strong> Es muy importante que leas este mensaje de alertaa.
-</div>
+
 
 
     </div>
@@ -119,29 +165,60 @@ error_reporting(E_ALL & ~E_NOTICE);
     <!-- Finaliza col md 6 (derecha) -->
      <div class="col-md-6">
      <div class="input-group " style="padding-bottom:20px;">
-    
      <input id="codigom" type="text" class="form-control" name="codigom" placeholder="NIE.">
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
- 
-
-     <div class="input-group " style="padding-bottom:20px;">
-    
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Nombre.">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     </div>
-
-      <div class="input-group " style="padding-bottom:20px;">
-    
+     <div class="input-group " style="padding-bottom:25px;">
      <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Apellido.">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      </div>
 
-      <div class="input-group " style="padding-bottom:20px;">
-    
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <div class="input-group " style="padding-bottom:30px;">
+     <input id="fecha" type="date" class="form-control" name="fecha" >
+     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
      </div>
+     
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Distancia en metros desde casa hasta el C.E.">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+     </div>
+     </br>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="optradio">Si</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="optradio">No</label>
+     </div>
+     </br>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="optradio">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">No</label>
+     </div>
+     </br>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
+     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="optradio">Rural</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">Urbana</label>
+     </div>
+     </br>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="optradio">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">No</label>
+     </div>
+     </br>
+     <div>
+     <i  class="glyphicon glyphicon-asterisk"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sacramentos</span>
+     <label class="checkbox-inline"style="margin-right:20px;margin-left:10px;font-size: 15px"><input type="checkbox" value="">Bautismo</label>
+     <label class="checkbox-inline"style="font-size: 15px"><input type="checkbox" value="">Confirmacion</label>
+     <label class="checkbox-inline"style="margin-right:20px;margin-left:67px;font-size: 15px"><input type="checkbox" value="">Primera Comunión</label>
+     </div>
+     </br>
+
+
+     
+
+      
  
 
     </div>
@@ -157,6 +234,7 @@ error_reporting(E_ALL & ~E_NOTICE);
     <input type="text" name="twitter" placeholder="Twitter" />
     <input type="text" name="facebook" placeholder="Facebook" />
     <input type="text" name="gplus" placeholder="Google Plus" />
+    </br>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
@@ -167,7 +245,7 @@ error_reporting(E_ALL & ~E_NOTICE);
     <input type="text" name="fname" placeholder="First Name" />
     <input type="text" name="lname" placeholder="Last Name" />
     <input type="text" name="phone" placeholder="Phone" />
-    <textarea name="address" placeholder="Address"></textarea>
+    </br>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="submit" name="submit" class="submit action-button" value="Submit" />
   </fieldset>
