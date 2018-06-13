@@ -147,7 +147,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br><br>
                           </div>
 
-                          <div class="col-md-12">
+                                                    <div class="col-md-12">
                               <div class="col-md-3">
                               <br><b></b>
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
@@ -161,7 +161,23 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 </div>
                                 <span class="icon"></span>
                               </button>
+                              
+                              
                           </div>
+                          <div>
+                            <br><b></b>
+                          <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
+                                <div class="flip">
+                                  <div class="side">
+                                    Cancelar <span class="fa fa-trash"></span>
+                                  </div>
+                                  <div class="side back">
+                                    continuar?
+                                  </div>
+                                </div>
+                                <span class="icon"></span>
+                              </button></div>
+                        </div>
                         </div>
                       </form>
 
