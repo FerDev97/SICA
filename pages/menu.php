@@ -27,7 +27,7 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                    <li><a href="fadministrador.php">Agregar Nuevo</a></li>
+                    <li><a href="cadministradores.php">Lista Administradores</a></li>
                   </ul>
 
                 </li>
@@ -59,7 +59,7 @@
                   </a>
                   <ul class="nav nav-list tree">
                     <li><a href="materias.php">Agregar Nuevo</a></li>
-                    <li><a href="listaempleado.php">Lista de materias</a></li>
+                    <li><a href="cmaterias.php">Lista de materias</a></li>
                   </ul>
 
                 </li>
