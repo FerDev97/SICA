@@ -152,7 +152,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           </div>
                           <div class="col-md-12">
                               <div class="col-md-3">
-                              <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()" style="margin-top:36px !important">
+                              <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()" style="margin-top:36px !important">
                                 <div class="flip">
                                  <div class="side">
                                     Guardar
@@ -162,10 +162,12 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   </div>
                                 </div>
                                 <span class="icon"></span>
-                              </button>
-                          </div>
+                              </button> -->
+                              <br><br>
+                               <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:25px;" value="Guardar" />                          </div>
                           <div class="col-md-3">
-                              <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()" style="margin-top:36px !important">
+                          <br><br>
+                              <!-- <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()" style="margin-top:36px !important">
                                 <div class="flip">
                                  <div class="side">
                                     Cancelar 
@@ -175,7 +177,8 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   </div>
                                 </div>
                                 <span class="icon"></span>
-                              </button>
+                              </button> -->
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:25px;" value="Cancelar" />
                           </div>
                         </div>
                       </form>
