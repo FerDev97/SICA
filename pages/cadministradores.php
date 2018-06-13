@@ -98,12 +98,12 @@
                          
                               
                                 
-                                <span class="col-md-2"></span>
+                               
 
-                                <div class="col-md-2">
+                                <div class="col-md-6">
                                   
 
-                                  <a class="btn btn-outline btn-default"style=" margin-right:55px;margin-left:42px;font-size: 15px" >
+                                  <a class="btn btn-outline btn-default"style=" margin-right:30px;margin-left:0px;font-size: 15px; align:right;" >
                                       <i class="fa fa-print fa-lg"></i><br>Reporte 
                                     </a>
                                     <a class="btn btn-outline btn-default" style="font-size: 15px">
@@ -137,6 +137,7 @@
                               <td style="text-align:center;">
                                   <button type="button" class="btn btn-info btn-sm btn-round " data-toggle="modal" data-target=".bs-example-modal-lg">Ver detalle</button>
                                   <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-exclamation-sign"></span></button>
                                 </td>
                             </tr>
                             <tr>
@@ -147,6 +148,8 @@
                                 <td style="text-align:center;">
                                     <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
                                     <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                    
+                                    <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-exclamation-sign"></span></button>
                                   </td>
                               </tr>
                               <tr>
@@ -157,6 +160,7 @@
                               <td style="text-align:center;">
                                   <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
                                   <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-check"></span></span></button>
                                 </td>
                             </tr>
                             

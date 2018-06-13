@@ -173,7 +173,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br><br>
                           </div>
 
-                          <div class="col-md-12">
+                          <div class="col-md-8">
                               <div class="col-md-3">
                               <br><b></b>
                               <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
@@ -189,8 +189,8 @@ error_reporting(E_ALL & ~E_NOTICE);
                               </button>
                               
                               
-                          </div>
-                          <div>
+                              </div>
+                          <div class="col-md-3">
                             <br><b></b>
                           <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
                                 <div class="flip">
