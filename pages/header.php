@@ -7,18 +7,16 @@
                 <span class="middle"></span>
                 <span class="bottom"></span>
               </div>
+              <b><img src="../asset/img/logo.png" style="width:60px;height=60px"></b>
                 <a href="index.html" class="navbar-brand">
-                 <b>SICA</b>
                 </a>
-
-
               <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span>Fernando Josue</span></li>
+                <li class="user-name"><span>Fernando Hernandez </span></li>
                   <li class="dropdown avatar-dropdown">
                    <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                    <ul class="dropdown-menu user-dropdown">
                      <li><a href="#"><span class="fa fa-user"></span> Mi Perfil</a></li>
-                     <li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>
+                     <li><a href="#"><span class="fa fa-calendar"></span> Calendarior</a></li>
                      <li role="separator" class="divider"></li>
                      <li class="more">
                       <ul>
@@ -29,7 +27,6 @@
                     </li>
                   </ul>
                 </li>
-
               </ul>
             </div>
           </div>
