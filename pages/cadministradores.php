@@ -103,10 +103,10 @@
                                 <div class="col-md-2">
                                   
 
-                                  <a class="btn btn-outline btn-default"style="margin-right:80px;margin-left:10px; font-size: 15px" >
+                                  <a class="btn btn-outline btn-default"style=" margin-right:55px;margin-left:42px;font-size: 15px" >
                                       <i class="fa fa-print fa-lg"></i><br>Reporte 
                                     </a>
-                                    <a class="btn btn-outline btn-default" style="margin-right:0px;margin-left:0px; font-size: 15px">
+                                    <a class="btn btn-outline btn-default" style="font-size: 15px">
                                       <i class="fa fa-user-plus"></i><br>Nuevo 
                                     </a>
                                     
