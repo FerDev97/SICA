@@ -7,7 +7,7 @@
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Materias|SICA</title>
+  <title>Administradores|SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -96,29 +96,18 @@
                     <div class="panel-heading col-md-12">
                        
                          
-                             <h5 class="col-md-4">Opcion: 
-                                  <select class="select2-A">  
-                                    <option value="1">Bachillerato general</option>
-                                    <option value="2">Bachillerato contador</option>
-                                    <option value="3">Bachillerato en turismo</option>
-                                    <option value="4">Bachillerato en salud</option>
-                                  </select>
-                                </h5> 
-                                <h5 class="col-md-4">Seccion: 
-                                    <select class="select2-A">  
-                                      <option value="1">A</option>
-                                      <option value="2">B</option>
-                                      <option value="3">C</option>
-                                      <option value="4">D</option>
-                                    </select>
-                                </h5>
+                              
+                                
                                 <span class="col-md-2"></span>
 
                                 <div class="col-md-2">
                                   
 
-                                  <a class="btn btn-outline btn-default" >
+                                  <a class="btn btn-outline btn-default"style="margin-right:80px;margin-left:10px; font-size: 15px" >
                                       <i class="fa fa-print fa-lg"></i><br>Reporte 
+                                    </a>
+                                    <a class="btn btn-outline btn-default" style="margin-right:0px;margin-left:0px; font-size: 15px">
+                                      <i class="fa fa-user-plus"></i><br>Nuevo 
                                     </a>
                                     
                                   
@@ -134,16 +123,16 @@
                         <tr>
                           <th>CODIGO</th>
                           <th>NOMBRE</th>
-                          <th>CODIGO_DOCENTE</th>
+                          <th>DIRECCIÓN</th>
                           <th>ESTADO</th>
                           <th>ACCIONES</th>                         
                         </tr>
                       </thead>
                       <tbody>
                           <tr>
-                              <td>MAT1GA</td>
-                              <td>Matematica</td>
-                              <td>030</td>
+                              <td>RR15067</td>
+                              <td>Jessica</td>
+                              <td>San Vicente,Municipio San Esteban Catarina,Ba Concepción</td>
                               <td bgcolor="#dff8e7">Activa</td>
                               <td style="text-align:center;">
                                   <button type="button" class="btn btn-info btn-sm btn-round " data-toggle="modal" data-target=".bs-example-modal-lg">Ver detalle</button>
@@ -151,9 +140,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>CIEN1GA</td>
-                                <td>Ciencias</td>
-                                <td>020</td>
+                                <td>HA15019</td>
+                                <td>Fernando</td>
+                                <td>San Vicente,Barrio el Santuario,pasaje Zelaya,casa n°2</td>
                                 <td bgcolor="#dff8e7">Activa</td>
                                 <td style="text-align:center;">
                                     <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
@@ -161,116 +150,18 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td>LENG1GA</td>
-                                  <td>Lenguaje</td>
-                                  <td>040</td>
-                                  <td bgcolor="#dff8e7">Activa</td>
-                                  <td style="text-align:center;">
-                                      <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                      <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                    </td>
-                              </tr>
-                              <tr>
-                                  <td>HAB1GA</td>
-                                  <td>Habilitacion laboral</td>
-                                  <td>050</td>
-                                  <td bgcolor="#dff8e7">Activa</td>
-                                  <td style="text-align:center;">
-                                      <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                      <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td>SOS1GA</td>
-                                <td>Sociales</td>
-                                <td>070</td>
-                                <td bgcolor="#dff8e7">Activa</td>
-                                <td style="text-align:center;">
-                                    <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  </td>
-                          </tr>
-                          
-                          <tr>
-                              <td>ING1GA</td>
-                              <td>Ingles</td>
-                              <td>090</td>
-                              <td bgcolor="#dff8e7">Activa</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                </td>
-                          </tr>
-                          <tr>
-                            <td>REG1GA</td>
-                            <td>Religion</td>
-                            <td>080</td>
-                            <td bgcolor="#dff8e7">Activa</td>
-                            <td style="text-align:center;">
-                                <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>ART1GA</td>
-                              <td>Artistica</td>
-                              <td>010</td>
+                           <td>RR15067</td>
+                              <td>Kevin</td>
+                              <td>San Vicente,Municipio San Sebastian</td>
                               <td bgcolor="">Inactiva</td>
                               <td style="text-align:center;">
                                   <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
                                   <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>FIS1GA</td>
-                                <td>Educacion Fisica</td>
-                                <td>020</td>
-                                <td bgcolor="#dff8e7">Activa</td>
-                                <td style="text-align:center;">
-                                    <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>INF1GA</td>
-                                  <td>Educacion Informatica</td>
-                                  <td>030</td>
-                                  <td bgcolor="#dff8e7">Activa</td>
-                                  <td style="text-align:center;">
-                                      <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                      <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>MUS1GA</td>
-                                    <td>Musica</td>
-                                    <td>110</td>
-                                    <td bgcolor="">Inactiva</td>
-                                    <td style="text-align:center;">
-                                        <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                      </td>
-                                </tr>
-                                <tr>
-                                    <td>SEM1GA</td>
-                                    <td>Seminario</td>
-                                    <td>120</td>
-                                    <td bgcolor="#dff8e7">Activa</td>
-                                    <td style="text-align:center;">
-                                        <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                      </td>
-                                </tr>
-                                <tr>
-                                    <td>ORI1GA</td>
-                                    <td>Orientacion para la vida</td>
-                                    <td>140</td>
-                                    <td bgcolor="#dff8e7">Activa</td>
-                                    <td style="text-align:center;">
-                                        <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                      </td>
-                                </tr>
+                            
+                                
+                                
                       </tbody>
                         </table>
                       </div>
