@@ -226,17 +226,17 @@ error_reporting(E_ALL & ~E_NOTICE);
     </div>
     <!-- Finaliza col md 12 panel body -->
     
-    <input type="button" name="next" class="next action-button" value="Next" />
+    <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>
   <fieldset>
-    <h2 class="fs-title">Social Profiles</h2>
-    <h3 class="fs-subtitle">Your presence on the social network</h3>
+    <h2 class="fs-title">DATOS PERSONALES DEL PADRE DE FAMILIA.</h2>
+    <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su numero de telefónico por favor actualizarlo.</h3>
     <input type="text" name="twitter" placeholder="Twitter" />
     <input type="text" name="facebook" placeholder="Facebook" />
     <input type="text" name="gplus" placeholder="Google Plus" />
     </br>
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="button" name="next" class="next action-button" value="Next" />
+    <input type="button" name="previous" class="previous action-button" value="Anterior" />
+    <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>
   
   <fieldset>
