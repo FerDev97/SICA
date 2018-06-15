@@ -120,6 +120,7 @@ iframe {
   font-size: 15px;
   line-height: 1.4;
   color: #4272d7;
+  
 }
 
 .hov1:hover {
@@ -147,7 +148,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #e9faff;
+  background: #8ca4ff;
 }
 
 .wrap-login100 {
