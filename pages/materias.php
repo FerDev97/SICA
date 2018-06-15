@@ -164,7 +164,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 <span class="icon"></span>
                               </button> -->
                               <br><br>
-                               <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:25px;" value="Guardar" />                          </div>
+                               <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />                          </div>
                           <div class="col-md-3">
                           <br><br>
                               <!-- <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()" style="margin-top:36px !important">
@@ -178,7 +178,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 </div>
                                 <span class="icon"></span>
                               </button> -->
-                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:25px;" value="Cancelar" />
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                           </div>
                         </div>
                       </form>
