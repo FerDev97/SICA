@@ -30,42 +30,8 @@
 
 <body id="mimin" class="dashboard">
       <!-- comienzo: Header -->
-        <nav class="navbar navbar-default header navbar-fixed-top">
-          <div class="col-md-12 nav-wrapper">
-            <div class="navbar-header" style="width:100%;">
-              <div class="opener-left-menu is-open">
-                <span class="top"></span>
-                <span class="middle"></span>
-                <span class="bottom"></span>
-              </div>
-                <a href="index.html" class="navbar-brand"> 
-                 <b>SICA</b>
-                </a>
-
-          
-
-              <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span>Fernando Josue</span></li>
-                  <li class="dropdown avatar-dropdown">
-                   <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
-                   <ul class="dropdown-menu user-dropdown">
-                     <li><a href="#"><span class="fa fa-user"></span> My Profile</a></li>
-                     <li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>
-                     <li role="separator" class="divider"></li>
-                     <li class="more">
-                      <ul>
-                        <li><a href=""><span class="fa fa-cogs"></span></a></li>
-                        <li><a href=""><span class="fa fa-lock"></span></a></li>
-                        <li><a href=""><span class="fa fa-power-off "></span></a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                
-              </ul>
-            </div>
-          </div>
-        </nav>
+      <?php
+        include "header.php";?>
       <!-- fin: Header -->
 
       <div class="container-fluid mimin-wrapper">
@@ -98,12 +64,12 @@
                          
                               
                                 
-                                <span class="col-md-2"></span>
+                               
 
-                                <div class="col-md-2">
+                                <div class="col-md-6">
                                   
 
-                                  <a class="btn btn-outline btn-default"style=" margin-right:55px;margin-left:42px;font-size: 15px" >
+                                  <a class="btn btn-outline btn-default"style=" margin-right:30px;margin-left:0px;font-size: 15px; align:right;" >
                                       <i class="fa fa-print fa-lg"></i><br>Reporte 
                                     </a>
                                     <a class="btn btn-outline btn-default" style="font-size: 15px">
@@ -131,35 +97,47 @@
                       <tbody>
                           <tr>
                               <td>RR15067</td>
-                              <td>Jessica</td>
+                              <td>Jessica Abigail Rosales Rodriguez</td>
                               <td>San Vicente,Municipio San Esteban Catarina,Ba Concepción</td>
                               <td bgcolor="#dff8e7">Activa</td>
                               <td style="text-align:center;">
                                   <button type="button" class="btn btn-info btn-sm btn-round " data-toggle="modal" data-target=".bs-example-modal-lg">Ver detalle</button>
                                   <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-exclamation-sign"></span></button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>HA15019</td>
-                                <td>Fernando</td>
+                                <td>Fernando Josue Hernandez Arevalo</td>
                                 <td>San Vicente,Barrio el Santuario,pasaje Zelaya,casa n°2</td>
                                 <td bgcolor="#dff8e7">Activa</td>
                                 <td style="text-align:center;">
                                     <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button> 
+                                    <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-exclamation-sign"></span></button>
                                   </td>
                               </tr>
                               <tr>
                            <td>RR15067</td>
-                              <td>Kevin</td>
+                              <td>Kevin Alexander Jovel Arevalo</td>
                               <td>San Vicente,Municipio San Sebastian</td>
                               <td bgcolor="">Inactiva</td>
                               <td style="text-align:center;">
                                   <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
                                   <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-check"></span></span></button>
                                 </td>
                             </tr>
-                            
+                            <td>RR15067</td>
+                              <td>Walter Alexander Fernandez Caramo</td>
+                              <td>San Cayetano,Istepeque, San Vicente</td>
+                              <td bgcolor="">Inactiva</td>
+                              <td style="text-align:center;">
+                                  <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
+                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
+                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-check"></span></span></button>
+                                </td>
+                            </tr>
                                 
                                 
                       </tbody>

@@ -82,8 +82,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="lugar.php">Backup</a></li>
-                        <li><a href="listalugar.php">Usuarios</a></li>
+                        <li><a href="lugar.php">Gestionar Seguridad</a></li>
+                        
                       </ul>
                     </li>
                     <!-- <li class="ripple">
