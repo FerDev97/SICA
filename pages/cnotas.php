@@ -29,8 +29,18 @@
       <script type="text/javascript">
 
           function activar(){
+
             document.getElementById('oculto').style.display = 'block';
+            document.getElementById('botonOculto').style.display = 'block';
+            document.getElementById('botonActivo').style.display = 'none';
             document.getElementById('nota').disabled = false;
+          }
+          function desactivar(){
+            
+            document.getElementById('oculto').style.display = 'none';
+            document.getElementById('botonOculto').style.display = 'none';
+            document.getElementById('botonActivo').style.display = 'block';
+            document.getElementById('nota').disabled = true;
           }
       </script>
 </head>
@@ -135,10 +145,17 @@
                                     </select>
                                 </h5>
                                 
-                                <div  class="col-md-2" > 
+                                <div  class="col-md-2"id="botonActivo" > 
                                   
                                 <a class="btn btn-outline btn-default" onclick="activar()">
                                       <i class="fa fa-edit fa-lg"></i><br>Asignar notas
+                                    </a>
+                                 
+                                </div>
+                                <div  class="col-md-2" style='display:none;' id="botonOculto"> 
+                                  
+                                <a class="btn btn-outline btn-default" onclick="desactivar()">
+                                      <i class="fa fa-list fa-lg"></i><br>Solo lectura
                                     </a>
                                  
                                 </div>
