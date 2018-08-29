@@ -103,13 +103,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br> 
                               <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccion"></textarea>
+      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccion" name="direccion"></textarea>
       </div>
                               
                               <label>Fecha de nacimiento:</label>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                  <input id="apellido" type="date" class="form-control" name="fechanacimiento">
+                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento">
                               </div> 
                               <div class="form-group">
                               <div class='input-group date' id='datetimepicker1'>
