@@ -99,30 +99,32 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                   <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido">
-                              </div> 
-                             
-                            <!-- <div class="form-group form-animate-text" style="margin-top:40px !important;">  
-                            <label for="descripcion">Descripcion</label>                          
-                              <span class="bar"></span>
-                              <textarea name="descripcion" id="descripcion" cols="25" rows="5"></textarea>
-                            </div>  -->
-                           <br><br>
-                            
+                              </div>
+                              <br> 
+                              <div class="input-group"style="padding-bottom:20px;">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccion"></textarea>
+      </div>
                               
-                           
-                              <label>Sexo:</label><br>
-                              <label class="radio-inline"><input type="radio" name="optradiosexo">Masculino</label>
-                              <label class="radio-inline"><input type="radio" name="optradiosexo">Femenino</label>
-                              <br><br>
+                              <label>Fecha de nacimiento:</label>
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                  <input id="apellido" type="date" class="form-control" name="fechanacimiento">
+                              </div> 
+                              <div class="form-group">
+                              <div class='input-group date' id='datetimepicker1'>
+                              </div>
+                              </div>
                               
 
                             <!-- Div del span -->
                           </div>
                           <div class="col-md-6">                       
-                          <div class="input-group">
-                                  <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion">
-                                  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                              </div>  
+                          
+                              <div class="input-group">
+                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico">
+                                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                              </div>   
                               <br><br>                      
                               <div class="input-group">
                               
@@ -131,20 +133,31 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                               </div> 
                               <br>
-                              <label>Fecha de nacimiento:</label>
-                              <div class="form-group">
-                              <div class='input-group date' id='datetimepicker1'>
-                                <input type='date' class="form-control" />
-                                      <span class="input-group-addon">
-                                       <span class="glyphicon glyphicon-calendar"></span>
-                                  </span>
-                                  </div>
-                              </div>
                               <br>
-                              <label>Estado:</label><br>
-                              <label class="radio-inline"><input type="radio" name="optradioactivo">Activo</label>
-                              <label class="radio-inline"><input type="radio" name="optradioactivo">Inactivo</label>
-                              <br><br>
+                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
+      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 495px; font-size: 15px" name="iddia">
+      <option value="">Seleccione</option>
+      
+      </select>
+      </div>
+      <br>
+      <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-check-circle"></i><span class="label label-default" style="width: 20px; font-size: 15px">Estado</span>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="optradio">Activo</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">Inactivo</label>
+     </div>
+     <br>
+     <br>
+      <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-child"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sexo</span>
+     <label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" name="optradio">Femenino</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">Masculino</label>
+     </div>
+     
+                              
+                             
+                              
                           </div>
                           
 
