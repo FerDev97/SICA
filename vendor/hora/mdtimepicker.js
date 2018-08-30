@@ -79,8 +79,8 @@
 				},
 				buttonsHolder : {
 					wrapper: $('<div class="mdtp__buttons">'),
-					btnOk : $('<span class="mdtp__button ok">Ok</span>'),
-					btnCancel: $('<span class="mdtp__button cancel">Cancel</span>')
+					btnOk : $('<span class="mdtp__button ok">Aceptar</span>'),
+					btnCancel: $('<span class="mdtp__button cancel">Cancelar</span>')
 				}
 			}
 		};

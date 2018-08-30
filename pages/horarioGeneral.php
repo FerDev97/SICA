@@ -27,6 +27,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+      
 </head>
 
 <body id="mimin" class="dashboard">
@@ -59,6 +60,8 @@
                   <div class="panel">
                     
                   <div class="col-md-12"> <!--Aqui empieza el tap-->
+                    
+                      
                         <div class="col-md-12">
                             <div class="col-md-12 tabs-area">
                             <div class="liner"></div>
@@ -116,14 +119,14 @@
                         <div class="tab-pane fade in active" id="tabs-demo6-area4">
                             <h3 class="head text-center">Agregar un horario</h3>
                 
-
-                            
+                            <form  method="POST" id="agregar">
+                            <input type="hidden" name="bandera" id="bandera" value="add">
                               <div class="row" >
                                   <div class="col-md-1"></div>
                                 <button type="button" class="btn btn-info btn-sm btn-round" id="todos">Todos</button>
                                 
                                
-                                    <select id="dias" class="select2-A col-md-6" multiple="multiple" >
+                                    <select name="dias[]" id="dias" class="select2-A col-md-6" multiple="multiple" >
                                         <option value="1">Lunes</option>
                                         <option value="2">Martes</option>
                                         <option value="3">Miercoles</option>
@@ -152,14 +155,16 @@
                             
 
                             <p class="text-center">
-                            <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
+                            <button name="next" id="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;">Guardar </button>
                             </p>
+                          </form>
                         </div>
                         
                         <div class="clearfix"></div>
                         </div>
                         </div>
-                        </div>      
+                        </div>
+                            
                      </div><!--TAP fin-->
 
                 </div>
@@ -827,9 +832,49 @@
       $('#dias').change();
 
       
-     });
+     });//fin de click todos
+     
+     $("#guardar").on('click',function(){
+        alert("clickea");
+       var dias = $('#dias').val();
+       if (dias == "") {
+            alert('Debe Seleccionar dias ');
+            $("input").focus();
+            return false;
+        }
 
-  });
+        var horainicio = $('#timepicker').val();
+        if (horainicio == "") {
+              alert('Debe Seleccionar una hora de inicio ');
+              $("input").focus();
+              return false;
+        }
+        var horafin = $('#timepicker2').val();
+        if (horafin == "") {
+              alert('Debe Seleccionar una hora de fin ');
+              $("input").focus();
+              return false;
+        }
+       
+
+        var datos = $('#agregar').serialize();
+        alert("llega al serialize");
+         $.ajax({
+            type: "POST",
+            url: "../pages/horarioConsultas.php",
+            data: datos,
+            success: function(respuesta) {
+                alert(respuesta); //Mensaje 
+               
+            },
+            error: function(respuesta){
+              alert("Error: "+respuesta); //Mensaje
+            }
+        }); //fin ajax
+        return false;
+     });//fin del click guardar
+
+  });//fin del ready
 
    $(".select2-A").select2({
       placeholder: "Seleccione un dia o varios! ",
