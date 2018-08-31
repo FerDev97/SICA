@@ -159,7 +159,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
       <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo">
-      <option value="">Seleccione Cargo</option></select>
+      <option value="">Seleccione Cargo</option>
       <?php
                       include '../config/conexion.php';
 
@@ -173,6 +173,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                            }
                       }
                        ?>
+                       </select>
                               
       <button align='center' type='button' style="margin-right:20px;margin-left:22px; font-size: 15px" class='btn btn-default' onclick=confirmar(" . $proveedor . ",1);><i class='fa fa-plus'></i></button>
       </div>
