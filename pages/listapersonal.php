@@ -8,7 +8,7 @@
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turismo</title>
+  <title>Personal</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -39,7 +39,7 @@
           if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
             document.getElementById('bandera').value='desaparecer';
             document.getElementById('baccion').value=id;
-            alert(id);
+            
             document.turismo.submit();
           }else
           {
@@ -64,9 +64,9 @@
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista Empleados</h3>
+                        <h3 class="animated fadeInLeft">Lista Personal</h3>
                         <p class="animated fadeInDown">
-                          Table <span class="fa-angle-right fa"></span> Data Tables
+                          Tabla <span class="fa-angle-right fa"></span> Tabla de Datos
                         </p>
                     </div>
                   </div>
@@ -85,10 +85,11 @@
                       <thead>
                         <tr>
                           <th></th>
+                          <th>Codigo</th>
                           <th>Nombre</th>
                           <th>Apellido</th>
-                          <th>DUI</th>
-                          <th>Agencia</th>
+                          <th>Telefono</th>
+                          <th>Cargo</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -96,13 +97,13 @@
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select idempleado,empleado.nombre,apellido,dui,empleado.idagencia,agencia.nombre as nombreagencia from empleado,agencia where empleado.idagencia=agencia.idagencia order by nombre");
+$result = $conexion->query("select eid_personal,tpersonal.ccodigo as codigo,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.ctelefono as telefono,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo order by cargo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->idempleado . ")';>
+            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_personal. ")';>
             <div>
               <span>Editar</span>
             </div>
@@ -112,13 +113,14 @@ if ($result) {
         //echo "<tr>";
         //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
+        echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->dui . "</td>";
-        echo "<td>" . $fila->nombreagencia . "</td>";
+        echo "<td>" . $fila->telefono . "</td>";
+        echo "<td>" . $fila->cargo . "</td>";
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idempleado . ")'>
+            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->eid_personal . ")'>
             <div>
               <span>Borrar</span>
             </div>
@@ -328,7 +330,7 @@ if ($bandera == "add") {
     }
 }
 if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
+    $consulta  = "DELETE FROM tpersonal where eid_personal='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
         msg("Exito");
@@ -346,7 +348,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+    echo "document.location.href='listapersonal.php';";
     echo "</script>";
 }
 ?>
