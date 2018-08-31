@@ -2,7 +2,14 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-
+$accion=$_REQUEST['accion'];
+if($accion=="guardarG")
+{
+    guardarGrado();
+}else if($accion=="guardarS")
+{
+    guardarSeccion();
+}
 ?>
 <html lang="en">
 <head>
@@ -28,26 +35,39 @@ error_reporting(E_ALL & ~E_NOTICE);
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <script type="text/javascript">
-        function verificar(){
-          if(document.getElementById('nombreempleado').value=="" ||
-            document.getElementById('apellidoempleado').value=="" ||
-            document.getElementById('duiempleado').value=="" ||
-            document.getElementById('nitempleado').value=="" ||
-            document.getElementById('cargoempleado').value==""){
-            alert("Complete los campos prueba");
-            
-          }else{
-            document.getElementById("bandera").value="add";
-            document.turismo.submit();
-          }
 
+      <script type="text/javascript">
+         function verificar(){
+          if(document.getElementById('nivelcuenta').value=="" || document.getElementById('codigocuenta').value=="" || document.getElementById('nombrecuenta').value=="" || document.getElementById('tipocuenta').value=="SELECCIONE" || document.getElementById('saldocuenta').value=="SELECCIONE"){
+            alert("Complete los campos");
+          }else{
+            if (document.getElementById("aux").value=="modificar") {
+            comprobarR(document.getElementById('codigocuenta').value);
+            document.getElementById('bandera').value="modificar";
+            document.turismo.submit();
+            }else
+            {
+              comprobarR(document.getElementById('codigocuenta').value);
+            document.getElementById('bandera').value="add";
+           document.turismo.submit();
+            }
+            }
         }
+        function guardarGrado(){
+          if(document.getElementById('gradom').value=="" ){
+            alert("Complete el campo para guardar");
+          }else{ 
+            location.href="fopciones.php?accion=guardarG&grado="+document.getElementById("gradom").value;
+            }
+        }
+        function guardarSeccion(){
+          if(document.getElementById('seccionm').value=="" ){
+            alert("Complete el campo para guardar");
+          }else{ 
+            location.href="fopciones.php?accion=guardarS&seccion="+document.getElementById("seccionm").value;
+            }
+        }
+        
       </script>
 </head>
 
@@ -80,39 +100,90 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
                       <!--<h4>Informaci&oacute;n Materia</h4>-->
-                    <h4>Formulario Opciones de Bachillerato</h4>
+                    <h4>Formulario Opci&oacute;nnes de Bachillerato</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
-                        <form class="cmxform" id="formcliente" method="post" action="">
-
-                          <div class="col-md-6">
+                      <div class="col-md-6">
                           </br>
                            </br>
                         
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
+                           <input id="codigom" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigom" placeholder="Codigo" readonly>
                            </div>
                            </br>
                            </br>
-                           <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
-                           </div>
+                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
+                          
+                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 470px; font-size: 15px" name="iddia">
+                              <option value="">Opcion</option>
+                              <option value="">Autobus</option>
+                              <option value="">A pie</option>
+                              <option value="">Trans.Propio</option>
+                              <option value="">Otro</option>
+                              
+                              </select>
+                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalForm">Nueva  Opcion</button>
+                              </div>
+                           
+                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-clipboard"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Grado: </span>
+                          
+                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 470px; font-size: 15px" name="iddia">
+                              <option value="">Grado</option>
+                          <?php
+                           include "../config/conexion.php";
+                           $result = $conexion->query("select * from tgrado order by eid_grado");
+                           if ($result) {
+                               while ($fila = $result->fetch_object()) {
+                                echo "<option value=".$fila->eid_grado.">".$fila->cgrado."</option>";
+                              }
+                           }
+                           ?>   
+                              </select>
+                              <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalGrado">Nuevo Grado</button>
+                              </div>
+
+                             <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
+                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 470px; font-size: 15px" name="iddia">
+                              <option value="">Seccion</option>
+                              <?php
+                           include "../config/conexion.php";
+                           $result = $conexion->query("select * from tsecciones order by eid_seccion");
+                           if ($result) {
+                               while ($fila = $result->fetch_object()) {
+                                echo "<option value=".$fila->eid_seccion.">".$fila->cseccion."</option>";
+                              }
+                           }
+                           ?>   
+                              </select>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalSeccion">Nueva Seccion</button>
+                            
                            </br>
                            </br>
-                           <div class="input-group">
+                           </br>
+                         
+                          <!-- <div class="input-group">
                            <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
                            <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
                            </div>
+                           </br>
+                           </br>-->
+                          
+                             <div class="input-group">
+                               <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
+                               <input id="nombrem" type="number" class="form-control" name="nombre" placeholder="Cupo Maximo">
+                           </div>
                           </div>  
                           </div>
-                         
+                     
                         <div>
                         <div class="col-md-12">
-                              <div class="col-md-3">
+                              <div class="col-md-4">
                               <br><b></b>
                               <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
@@ -126,8 +197,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 <span class="icon"></span>
                               </button> -->
                               <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
-                              
-                              
+                             
                           </div>
                           <div>
                             <br><b></b>
@@ -145,26 +215,179 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                               </div>
                         </div>
-      </div>
-                          
+                        </div>
                         </div>
                         </div>
                       </form>
-
-                    </div>
+                    </div> 
                   </div>
                 </div>
-                </form>
               </div>
-
-              </div>
-              </div>
-              </div>
+<!-- end: content -->
+<!-- Modal de Grado-->
+<div class="modal fade" id="modalGrado" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Forumulario de Nuevo Grado</h4>
             </div>
-          <!-- end: content -->
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el desvergue-->
+                  
+                  <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
+                  <form id="turismo" name="turismo" action="" method="post">
+                  <input id="gradom" type="number" style="width: 400px; font-size: 15px" class="form-control" name="gradom" placeholder="Nuevo Grado" >
+                  </div>
+                  <br>
+                   <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarGrado()" >
+                  Guardar</button>
+                  </div>
+                  </center>
+                 </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de Grado -->
+   <!-- Modal de Secciones-->
+ <div class="modal fade" id="modalSeccion" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Forumulario de Seccion</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el desvergue-->
+                  
+                  <div class="input-group" style="margin-left:75px">
+                  <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                  <input id="seccionm" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="seccionm" placeholder="Nueva Seccion" >
+                  </div>
+                  <br>
+                   <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarSeccion()">
+                  Guardar</button>
+                  </div>
+                  </center>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de Secciones -->
 
 
-      </div>
+<!-- Modal de opciones-->
+    <div class="modal fade" id="modalForm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Forumulario de Nueva Opcion de Bachillerato</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el desvergue-->
+                  <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                           <input id="codigom" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigom" placeholder="Codigo" readonly>
+                  </div>
+                  <br>
+                  <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                           <input id="codigom" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigom" placeholder="Nombre de Opcion">
+                  </div>
+                  <br>
+                  <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
+                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 230px; font-size: 15px" name="iddia">
+                              <option value="">Tipo</option>
+                              <option value="">Autobus</option>
+                              <option value="">A pie</option>
+                              <option value="">Trans.Propio</option>
+                              <option value="">Otro</option>
+                              </select>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modal">Nuevo Tipo</button>
+                    <br><br>
+                    
+                     <div class="input-group"style="padding-bottom:0px;">
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" placeholder="Descripcion" id="direccion"></textarea>
+                    </div> 
+                    <br>         
+                    <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalForm">
+                  Guardar</button>
+
+                  <button style="margin-left:15px" type="button" class="btn" data-dismiss="modal">Cerrar</button>
+                  </div>
+                  </center>
+                  <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                    
+                      <th>Codigo</th>
+                      <th>Nombre</th>
+                      <th>Tipo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      //include "tablaCuenta.php";
+                     ?>
+            </div>
+
+
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de opciones -->
+     
+ 
+
+
 
       <!-- start: Mobile -->
         <?php 
@@ -410,29 +633,49 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 include "../config/conexion.php";
 
-$bandera           = $_REQUEST["bandera"];
-$nombreempleado    = $_REQUEST["nombreempleado"];
-$apellidoempleado  = $_REQUEST["apellidoempleado"];
-$duiempleado       = $_REQUEST["duiempleado"];
-$nitempleado       = $_REQUEST["nitempleado"];
-$cargoempleado     = $_REQUEST["cargoempleado"];
-$idagenciaempleado = $_REQUEST["idagenciaempleado"];
+$bandera = $_REQUEST["bandera"];
+$baccion = $_REQUEST["baccion"];
+$grado   = $_REQUEST["grado"];
 
-if ($bandera == "add") {
-    $consulta  = "INSERT INTO empleado VALUES('null','" . $nombreempleado . "','" . $apellidoempleado . "','" . $duiempleado . "','" . $nitempleado . "','" . $cargoempleado . "','" . $idagenciaempleado . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
+
+function guardarGrado()
+{
+  include "../config/conexion.php";
+  $grado   = $_REQUEST["grado"];
+      $consulta  = "INSERT INTO tgrado VALUES('null','" . $grado . "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Exito grado");
+      } else {
+          msgOpc("No se Guardo el Dato");
+      }
+}
+function guardarSeccion()
+{
+  include "../config/conexion.php";
+  $seccion   = $_REQUEST["seccion"];
+      $consulta  = "INSERT INTO tsecciones VALUES('null','" . $seccion . "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Seccion Guardada con Exito");
+      } else {
+          msgOpc("No Se guardo el dato");
+      }
 }
 
-function msg($texto)
+function msgOpc($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+    echo "document.location.href='fopciones.php';";
+    echo "</script>";
+}
+
+function mensajes($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+
     echo "</script>";
 }
 ?>
