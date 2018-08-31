@@ -44,6 +44,17 @@
                 </li>
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
+                    <span class="fa-user fa"></span> Personal
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fpersonal.php">Agregar Nuevo</a></li>
+                    <li><a href="flistapersonal.php">Lista de Personal</a></li>
+                  </ul>
+
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
                     <span class="fa fa-graduation-cap"></span> Opciones
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>

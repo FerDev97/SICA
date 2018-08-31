@@ -105,7 +105,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
-                           <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
+                           <textarea rows="3" size="30" value="" id="descripcionm" name="descripcionm" class="form-control" placeholder="Descripción"></textarea> 
                            </div>
                            
                            </div>
@@ -115,14 +115,14 @@ error_reporting(E_ALL & ~E_NOTICE);
                             <span class="label label-default" style="width: 500px; font-size: 20px">Horario <i class="glyphicon glyphicon-dashboard"></i></span>
                             
                             
-                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 225px; font-size: 15px" name="iddia">
+                              <select id="dia"   class="select2 show-tick" style="width: 225px; font-size: 15px" name="iddia">
                               <option value="">Seleccione Dia</option>
                               <option value="">Lunes     -  Viernes</option>
                               <option value="">Miercoles -  Viernes</option>
                               <option value="">Martes    -  Jueves</option>
                               
                               </select>
-                              <select id="hora"  id="idhora" class="select2 show-tick" style="width: 225px; font-size: 15px" name="idhora">
+                              <select id="hora" class="select2 show-tick" style="width: 225px; font-size: 15px" name="idhora">
                               <option value="">Seleccione Horas</option>
                               <option value="">08:00 am - 10:00 am</option>
                               <option value="">10:00 am - 12:00 md</option>
@@ -132,16 +132,27 @@ error_reporting(E_ALL & ~E_NOTICE);
                             </div>
                                             
                             <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
-                              <select id="docente"  id="iddocente" class="select2 show-tick" style="width: 568px; font-size: 15px" name="iddocente">
+                              <select id="docente"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="iddocente">
                               <option value="">Seleccione Docente</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
+                               <?php
+                      include '../config/conexion.php';
+
+                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcaragos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                              
+                              
                               </select>
                             </div>
                             <div class="form-group form-animate-text" style="">
-                              <select id="opcion"  id="idopcion" class="select2 show-tick" style="width: 568px; font-size: 15px" name="idopcion">
+                              <select id="opcion"  class="select2 show-tick" style="width: 568px; font-size: 15px" name="idopcion">
                               <option value="">Seleccione Opcion</option>
                               <option value="">Melvin Alfonso Rivas</option>
                               <option value="">Helen Alexandra Rodriguez</option>
@@ -443,12 +454,13 @@ error_reporting(E_ALL & ~E_NOTICE);
 include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
-$nombreempleado    = $_REQUEST["nombreempleado"];
-$apellidoempleado  = $_REQUEST["apellidoempleado"];
-$duiempleado       = $_REQUEST["duiempleado"];
-$nitempleado       = $_REQUEST["nitempleado"];
-$cargoempleado     = $_REQUEST["cargoempleado"];
-$idagenciaempleado = $_REQUEST["idagenciaempleado"];
+$codigom    = $_REQUEST["codigom"];
+$nombrem  = $_REQUEST["nombrem"];
+$descripcionm       = $_REQUEST["descripcionm"];
+$dia       = $_REQUEST["dia"];
+$hora     = $_REQUEST["hora"];
+$docente = $_REQUEST["docente"];
+$opcion = $_REQUEST["opcion"];
 
 if ($bandera == "add") {
     $consulta  = "INSERT INTO empleado VALUES('null','" . $nombreempleado . "','" . $apellidoempleado . "','" . $duiempleado . "','" . $nitempleado . "','" . $cargoempleado . "','" . $idagenciaempleado . "')";
