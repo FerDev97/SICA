@@ -2,7 +2,6 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-
 ?>
 <html lang="en">
 <head>
@@ -116,19 +115,22 @@ error_reporting(E_ALL & ~E_NOTICE);
                             
                             
                               <select id="dia"   class="select2 show-tick" style="width: 225px; font-size: 15px" name="iddia">
-                              <option value="">Seleccione Dia</option>
-                              <option value="">Lunes     -  Viernes</option>
-                              <option value="">Miercoles -  Viernes</option>
-                              <option value="">Martes    -  Jueves</option>
+                              <option value="">Seleccione Horario</option>
+                               <?php
+                      include '../config/conexion.php';
+                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcargos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
                               
                               </select>
-                              <select id="hora" class="select2 show-tick" style="width: 225px; font-size: 15px" name="idhora">
-                              <option value="">Seleccione Horas</option>
-                              <option value="">08:00 am - 10:00 am</option>
-                              <option value="">10:00 am - 12:00 md</option>
-                              <option value="">1:00 pm  -  3:00 pm</option>
-                              <option value="">3:00 pm  -  5:00 pm</option>
-                              </select>
+                            
                             </div>
                                             
                             <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
@@ -136,8 +138,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <option value="">Seleccione Docente</option>
                                <?php
                       include '../config/conexion.php';
-
-                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcaragos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
+                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcargos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
