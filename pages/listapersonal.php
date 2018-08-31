@@ -34,7 +34,32 @@
           document.getElementById('baccion').value=id;
          document.turismo.submit();
         }
-         function confirmar(id)
+        function confirmar(id,op)
+        {
+          if (op==1) {
+            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
+            document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }else{
+            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }
+
+
+        }
+         function confirmar1(id)
         {
           if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
             document.getElementById('bandera').value='desaparecer';
@@ -84,11 +109,12 @@
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th></th>
+                          <th>Modificar</th>
                           <th>Codigo</th>
                           <th>Nombre</th>
                           <th>Apellido</th>
-                          <th>Telefono</th>
+                          <th>Estado</th>
+                          <th>Activar/Desactivar</th>
                           <th>Cargo</th>
                           <th></th>
                         </tr>
@@ -97,7 +123,7 @@
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select eid_personal,tpersonal.ccodigo as codigo,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.ctelefono as telefono,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo order by cargo");
+$result = $conexion->query("select eid_personal,tpersonal.ccodigo as codigo,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.iestado as estado,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo order by cargo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -116,7 +142,19 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->telefono . "</td>";
+       
+        if ($fila->estado==1) {
+          echo "<td>Activo</td>";
+           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
+          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",1);><i class='fa fa-remove'></i>
+             </button></td>";
+       }else
+       {
+          echo "<td>Inactivo</td>";
+           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
+          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",2);><i class='fa fa-check'></i>
+             </button></td>";
+       }
         echo "<td>" . $fila->cargo . "</td>";
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
@@ -329,6 +367,25 @@ if ($bandera == "add") {
         msg("No Exito");
     }
 }
+if ($bandera == "desactivar") {
+  $consulta = "UPDATE tpersonal SET iestado = '0' WHERE eid_personal = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+if ($bandera == "activar") {
+  $consulta = "UPDATE tpersonal SET iestado = '1' WHERE eid_personal = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+
 if ($bandera == "desaparecer") {
     $consulta  = "DELETE FROM tpersonal where eid_personal='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
