@@ -61,7 +61,12 @@ error_reporting(E_ALL & ~E_NOTICE);
             ||document.getElementById('cargo').value=="" || banderaRb || banderaRb1){
             alert("Complete los campos");
           }else{
+            if (document.getElementById('baccion').value!="") {
+              document.getElementById('bandera').value='modificar';
+              alert(document.getElementById('bandera').value);
+              }else{
             document.getElementById("bandera").value="add";
+          }
             document.turismo.submit();
           }
 
@@ -640,9 +645,9 @@ $sexo     = $_REQUEST["sexo"];
 if ($bandera == "add") {
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $codigo . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
     $resultado = $conexion->query($consulta);
-    msg($codigo);
+    
    
-    msg($conexion->error);
+    
     if ($resultado) {
         msg("Exito");
     } else {
