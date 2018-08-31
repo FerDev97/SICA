@@ -134,10 +134,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                             <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
                               <select id="docente"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="iddocente">
                               <option value="">Seleccione Docente</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
+                               <?php
+                      include '../config/conexion.php';
+
+                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcaragos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                              
+                              
                               </select>
                             </div>
                             <div class="form-group form-animate-text" style="">
