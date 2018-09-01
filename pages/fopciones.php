@@ -9,7 +9,14 @@ if($accion=="guardarG")
 }else if($accion=="guardarS")
 {
     guardarSeccion();
+}else if($accion=="guardarO")
+{
+    guardarOpcion();
+}else if($accion=="guardarOpc")
+{
+    guardarOpcionCompleta();
 }
+
 ?>
 <html lang="en">
 <head>
@@ -38,19 +45,10 @@ if($accion=="guardarG")
 
       <script type="text/javascript">
          function verificar(){
-          if(document.getElementById('nivelcuenta').value=="" || document.getElementById('codigocuenta').value=="" || document.getElementById('nombrecuenta').value=="" || document.getElementById('tipocuenta').value=="SELECCIONE" || document.getElementById('saldocuenta').value=="SELECCIONE"){
+          if(document.getElementById('opc').value=="Opcion" || document.getElementById('grado').value=="Grado" || document.getElementById('seccion').value=="Seccion" || document.getElementById('cupo').value==""){
             alert("Complete los campos");
           }else{
-            if (document.getElementById("aux").value=="modificar") {
-            comprobarR(document.getElementById('codigocuenta').value);
-            document.getElementById('bandera').value="modificar";
-            document.turismo.submit();
-            }else
-            {
-              comprobarR(document.getElementById('codigocuenta').value);
-            document.getElementById('bandera').value="add";
-           document.turismo.submit();
-            }
+            location.href="fopciones.php?accion=guardarOpc&opcion="+document.getElementById("opc").value+"&cupo="+document.getElementById("cupo").value+"&grado="+document.getElementById("grado").value+"&seccion="+document.getElementById("seccion").value;
             }
         }
         function guardarGrado(){
@@ -67,25 +65,29 @@ if($accion=="guardarG")
             location.href="fopciones.php?accion=guardarS&seccion="+document.getElementById("seccionm").value;
             }
         }
+        function guardarOpcion(){
+          if(document.getElementById('codigoo').value=="" || document.getElementById('nombrem').value=="" || document.getElementById('descripcion').value==""){
+            alert("Complete el campo para guardar");
+          }else if(document.getElementById('tipob').value=="Tipo"){ 
+            alert("Seleccion Tipo de Bachillerato");
+            }else{
+              location.href="fopciones.php?accion=guardarO&codigo="+document.getElementById("codigoo").value+"&nombre="+document.getElementById("nombrem").value+"&tipo="+document.getElementById("tipob").value+"&descripcion="+document.getElementById("descripcion").value;
+            }
+        }
         
       </script>
 </head>
 
 <body id="mimin" class="dashboard">
    <?php include "header.php"?>
-
       <div class="container-fluid mimin-wrapper">
-
           <?php include "menu.php";?>
-
-
           <!-- start: Content -->
             <div id="content">
                 <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12" >
-
-                         <h3 class="animated fadeInLeft">Opciones</h3>
+                    <h3 class="animated fadeInLeft">Opciones</h3>
                         <p class="animated fadeInDown">
                           Opciones <span class="fa-angle-right fa"></span>Datos de la Opcion.
                         </p>
@@ -93,7 +95,6 @@ if($accion=="guardarG")
                   </div>
                 </div>
                 <div class="form-element">
-                
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
                 <div class="col-md-12">
@@ -102,37 +103,36 @@ if($accion=="guardarG")
                       <!--<h4>Informaci&oacute;n Materia</h4>-->
                     <h4>Formulario Opci&oacute;nnes de Bachillerato</h4>
                     </div>
-
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
                       <div class="col-md-6">
                           </br>
                            </br>
-                        
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigom" placeholder="Codigo" readonly>
+                           <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
                            </div>
                            </br>
                            </br>
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
-                          
-                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 470px; font-size: 15px" name="iddia">
+                              <select  id="opc" class="select2 show-tick" style="width: 470px; font-size: 15px" name="opc">
                               <option value="">Opcion</option>
-                              <option value="">Autobus</option>
-                              <option value="">A pie</option>
-                              <option value="">Trans.Propio</option>
-                              <option value="">Otro</option>
-                              
+                              <?php
+                           include "../config/conexion.php";
+                           $result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+                           if ($result) {
+                               while ($fila = $result->fetch_object()) {
+                                echo "<option value=".$fila->eid_bachillerato.">".$fila->cnombe."</option>";
+                              }
+                           }
+                           ?> 
                               </select>
-                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalForm">Nueva  Opcion</button>
+                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">Nueva  Opcion</button>
                               </div>
-                           
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-clipboard"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Grado: </span>
-                          
-                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 470px; font-size: 15px" name="iddia">
+                              <select id="grado" class="select2 show-tick" style="width: 470px; font-size: 15px" name="grado">
                               <option value="">Grado</option>
                           <?php
                            include "../config/conexion.php";
@@ -144,12 +144,12 @@ if($accion=="guardarG")
                            }
                            ?>   
                               </select>
-                              <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalGrado">Nuevo Grado</button>
+                              <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">Nuevo Grado</button>
                               </div>
 
                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
-                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 470px; font-size: 15px" name="iddia">
+                              <select id="seccion" class="select2 show-tick" style="width: 470px; font-size: 15px" name="seccion">
                               <option value="">Seccion</option>
                               <?php
                            include "../config/conexion.php";
@@ -161,7 +161,7 @@ if($accion=="guardarG")
                            }
                            ?>   
                               </select>
-                              <button   style="margin-left:16px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalSeccion">Nueva Seccion</button>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">Nueva Seccion</button>
                             
                            </br>
                            </br>
@@ -173,45 +173,21 @@ if($accion=="guardarG")
                            </div>
                            </br>
                            </br>-->
-                          
                              <div class="input-group">
                                <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
-                               <input id="nombrem" type="number" class="form-control" name="nombre" placeholder="Cupo Maximo">
+                               <input id="cupo" type="number" class="form-control" name="cupo" placeholder="Cupo Maximo">
                            </div>
                           </div>  
                           </div>
-                     
                         <div>
                         <div class="col-md-12">
                               <div class="col-md-4">
                               <br><b></b>
-                              <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
-                                <div class="flip">
-                                  <div class="side">
-                                    Guardar <span class="fa fa-trash"></span>
-                                  </div>
-                                  <div class="side back">
-                                    continuar?
-                                  </div>
-                                </div>
-                                <span class="icon"></span>
-                              </button> -->
-                              <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
                              
+                              <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" onclick="verificar()" style="font-size:20px;" value="Guardar" />
                           </div>
                           <div>
                             <br><b></b>
-                          <!-- <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()">
-                                <div class="flip">
-                                  <div class="side">
-                                    Cancelar <span class="fa fa-trash"></span>
-                                  </div>
-                                  <div class="side back">
-                                    continuar?
-                                  </div>
-                                </div>
-                                <span class="icon"></span>
-                              </button> -->
                               <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                               </div>
                         </div>
@@ -239,8 +215,7 @@ if($accion=="guardarG")
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
-                  <!--aqui va el desvergue-->
-                  
+                  <!--aqui va el codigo-->
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
                   <form id="turismo" name="turismo" action="" method="post">
@@ -279,7 +254,7 @@ if($accion=="guardarG")
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
-                  <!--aqui va el desvergue-->
+                  <!--aqui va el codigo-->
                   
                   <div class="input-group" style="margin-left:75px">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
@@ -319,42 +294,50 @@ if($accion=="guardarG")
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
-                  <!--aqui va el desvergue-->
+                  <!--aqui va el codigo-->
                   <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigom" placeholder="Codigo" readonly>
+                           <input id="codigoo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigoo" placeholder="Codigo">
                   </div>
                   <br>
                   <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="codigom" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigom" placeholder="Nombre de Opcion">
+                           <input id="nombrem" type="text" style="width: 300px; font-size: 15px" class="form-control" name="nombrem" placeholder="Nombre de Opcion">
                   </div>
                   <br>
                   <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
-                              <select id="dia"  id="iddia" class="select2 show-tick" style="width: 230px; font-size: 15px" name="iddia">
+                              <select id="tipob" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipo">
                               <option value="">Tipo</option>
-                              <option value="">Autobus</option>
-                              <option value="">A pie</option>
-                              <option value="">Trans.Propio</option>
-                              <option value="">Otro</option>
+                              <?php
+                           include "../config/conexion.php";
+                           $result = $conexion->query("select * from ttipobachillerato order by eid_tipo");
+                           if ($result) {
+                               while ($fila = $result->fetch_object()) {
+                                echo "<option value=".$fila->eid_tipo.">".$fila->ctipo."</option>";
+                              }
+                           }
+                           ?>  
                               </select>
-                              <button   style="margin-left:16px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modal">Nuevo Tipo</button>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalTipo">Nuevo Tipo</button>
                     <br><br>
                     
                      <div class="input-group"style="padding-bottom:0px;">
                           <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" placeholder="Descripcion" id="direccion"></textarea>
+                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descripcion" placeholder="Descripcion" id="descripcion"></textarea>
                     </div> 
                     <br>         
                     <center>
                    <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="verificar()" data-toggle="modal" data-target="#modalForm">
+                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarOpcion()">
                   Guardar</button>
 
                   <button style="margin-left:15px" type="button" class="btn" data-dismiss="modal">Cerrar</button>
                   </div>
                   </center>
+                  <br>
+                  <center><h4>Registro</h4></center>
+                  
                   <div class="modal-body">
                 <p class="statusMsg"></p>
                   <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -367,9 +350,21 @@ if($accion=="guardarG")
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                      //include "tablaCuenta.php";
-                     ?>
+                  <?php
+                  include "../config/conexion.php";
+                  $result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+                  if ($result) {
+                    while ($fila = $result->fetch_object()) {
+                    echo "<tr>";
+                    echo "<td>" . $fila->ccodigo . "</td>";
+                    echo "<td>" . $fila->cnombe . "</td>";
+                    echo "<td>" . $fila->efk_tipo . "</td>";
+                    echo "</tr>";
+      }
+      }
+      ?>
+      </tbody>
+        </table>
             </div>
 
 
@@ -658,6 +653,36 @@ function guardarSeccion()
       $resultado = $conexion->query($consulta);
       if ($resultado) {
           msgOpc("Seccion Guardada con Exito");
+      } else {
+          msgOpc("No Se guardo el dato");
+      }
+}
+function guardarOpcion()
+{
+  include "../config/conexion.php";
+  $codigo   = $_REQUEST["codigo"];
+  $nombre   = $_REQUEST["nombre"];
+  $tipo   = $_REQUEST["tipo"];
+  $descripcion   = $_REQUEST["descripcion"];
+      $consulta  = "INSERT INTO tbachilleratos VALUES('null','" . $codigo . "','" .$nombre. "','" .$descripcion. "','" .$tipo. "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Opcion Guardada con Exito");
+      } else {
+          msgOpc("No Se guardo el dato");
+      }
+}
+function guardarOpcionCompleta()
+{
+  include "../config/conexion.php";
+  $cupo   = $_REQUEST["cupo"];
+  $opcion   = $_REQUEST["opcion"];
+  $grado   = $_REQUEST["grado"];
+  $seccion  = $_REQUEST["seccion"];
+      $consulta  = "INSERT INTO topciones VALUES('null','" . $cupo . "','" .$opcion. "','" .$grado. "','" .$seccion. "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Opcion Guardada con Exito");
       } else {
           msgOpc("No Se guardo el dato");
       }
