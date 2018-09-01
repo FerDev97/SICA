@@ -15,6 +15,9 @@ if($accion=="guardarG")
 }else if($accion=="guardarOpc")
 {
     guardarOpcionCompleta();
+}else if($accion=="guardarT")
+{
+    guardarTipo();
 }
 
 ?>
@@ -26,8 +29,6 @@ if($accion=="guardarG")
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
-
-
   <!-- plugins -->
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
@@ -72,6 +73,13 @@ if($accion=="guardarG")
             alert("Seleccion Tipo de Bachillerato");
             }else{
               location.href="fopciones.php?accion=guardarO&codigo="+document.getElementById("codigoo").value+"&nombre="+document.getElementById("nombrem").value+"&tipo="+document.getElementById("tipob").value+"&descripcion="+document.getElementById("descripcion").value;
+            }
+        }
+        function guardarTipo(){
+          if(document.getElementById('tipom').value==""){
+            alert("Complete el campo para guardar");
+          }else{
+              location.href="fopciones.php?accion=guardarT&tipo="+document.getElementById("tipom").value;
             }
         }
         
@@ -162,19 +170,11 @@ if($accion=="guardarG")
                            ?>   
                               </select>
                               <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">Nueva Seccion</button>
-                            
-                           </br>
-                           </br>
-                           </br>
-                         
-                          <!-- <div class="input-group">
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
-                           <textarea rows="3" size="30" value="" class="form-control" placeholder="Descripción"></textarea> 
-                           </div>
-                           </br>
-                           </br>-->
-                             <div class="input-group">
-                               <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
+                              </br>
+                              </br>
+                              </br>
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
                                <input id="cupo" type="number" class="form-control" name="cupo" placeholder="Cupo Maximo">
                            </div>
                           </div>  
@@ -277,6 +277,7 @@ if($accion=="guardarG")
 </div>
 
   <!-- Fin Modal de Secciones -->
+  
 
 
 <!-- Modal de opciones-->
@@ -319,7 +320,7 @@ if($accion=="guardarG")
                            }
                            ?>  
                               </select>
-                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalTipo">Nuevo Tipo</button>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipo">Nuevo Tipo</button>
                     <br><br>
                     
                      <div class="input-group"style="padding-bottom:0px;">
@@ -379,7 +380,44 @@ if($accion=="guardarG")
 </div>
 
   <!-- Fin Modal de opciones -->
-     
+   <!-- Modal de Tipo bachillerato-->
+ <div class="modal fade" id="modalTipo" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Forumulario de Tipo de Bachillerato</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el codigo-->
+                  
+                  <div class="input-group" style="margin-left:75px">
+                  <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" placeholder="Nuevo tipo de Bachillerato" >
+                  </div>
+                  <br>
+                   <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarTipo()">
+                  Guardar</button>
+                  </div>
+                  </center>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de Tipo Bachillerato -->   
  
 
 
@@ -657,6 +695,18 @@ function guardarSeccion()
           msgOpc("No Se guardo el dato");
       }
 }
+function guardarTipo()
+{
+  include "../config/conexion.php";
+  $tipo   = $_REQUEST["tipo"];
+      $consulta  = "INSERT INTO ttipobachillerato VALUES('null','" . $tipo . "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgTipo("Tipo Guardado con Exito");
+      } else {
+          msgTipo("No Se guardo el dato");
+      }
+}
 function guardarOpcion()
 {
   include "../config/conexion.php";
@@ -695,12 +745,19 @@ function msgOpc($texto)
     echo "document.location.href='fopciones.php';";
     echo "</script>";
 }
+function msgTipo($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='fopciones.php';";
+    echo "</script>";
+}
+
 
 function mensajes($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-
     echo "</script>";
 }
 ?>
