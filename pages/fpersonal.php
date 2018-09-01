@@ -32,15 +32,41 @@ error_reporting(E_ALL & ~E_NOTICE);
       <![endif]-->
       <script type="text/javascript">
         function verificar(){
-          if(document.getElementById('nombreempleado').value=="" ||
-            document.getElementById('apellidoempleado').value=="" ||
-            document.getElementById('duiempleado').value=="" ||
-            document.getElementById('nitempleado').value=="" ||
-            document.getElementById('cargoempleado').value==""){
-            alert("Complete los campos prueba");
-            
+        var rb=document.getElementsByName('estado');
+				var banderaRb=true;
+			for (var i =0; i < rb.length; i++) {
+				if(rb[i].checked)
+				{
+					banderaRb=false;
+					break;
+				}
+
+			}
+      var rb1=document.getElementsByName('sexo');
+				var banderaRb1=true;
+			for (var i =0; i < rb1.length; i++) {
+				if(rb1[i].checked)
+				{
+					banderaRb1=false;
+					break;
+				}
+
+			}
+          if(document.getElementById('codigo').value=="" ||
+            document.getElementById('nombre').value=="" ||
+            document.getElementById('apellido').value=="" ||
+            document.getElementById('direccion').value=="" ||
+            document.getElementById('fechanacimiento').value=="" ||document.getElementById('fechanacimiento').value==""
+            ||document.getElementById('correo').value==""||document.getElementById('telefono').value==""
+            ||document.getElementById('cargo').value=="" || banderaRb || banderaRb1){
+            alert("Complete los campos");
           }else{
+            if (document.getElementById('baccion').value!="") {
+              document.getElementById('bandera').value='modificar';
+              alert(document.getElementById('bandera').value);
+              }else{
             document.getElementById("bandera").value="add";
+          }
             document.turismo.submit();
           }
 
@@ -73,6 +99,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
+                <input type="hidden" id="baccion" name="baccion">
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
@@ -136,23 +163,38 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br>
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 495px; font-size: 15px" name="iddia">
-      <option value="">Seleccione</option>
-      
-      </select>
+      <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo">
+      <option value="">Seleccione Cargo</option>
+      <?php
+                      include '../config/conexion.php';
+
+                      $result = $conexion->query("select eid_cargo as id,ccargo as nombre FROM tcargos");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                       </select>
+                              
+      <button align='center' type='button' style="margin-right:20px;margin-left:22px; font-size: 15px" class='btn btn-default' onclick=confirmar(" . $proveedor . ",1);><i class='fa fa-plus'></i></button>
       </div>
+      
       <br>
       <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-check-circle"></i><span class="label label-default" style="width: 20px; font-size: 15px">Estado</span>
-     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="optradio">Activo</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">Inactivo</label>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1">Activo</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="2">Inactivo</label>
      </div>
      <br>
      <br>
       <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-child"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sexo</span>
-     <label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" name="optradio">Femenino</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">Masculino</label>
+     <label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1">Femenino</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="masculino" name="sexo" value="2">Masculino</label>
      </div>
      
                               
@@ -175,7 +217,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 </div>
                                 <span class="icon"></span>
                               </button> -->
-                              <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
+                              <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
                               
                               
                           </div>
@@ -588,16 +630,24 @@ error_reporting(E_ALL & ~E_NOTICE);
 include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
-$nombreempleado    = $_REQUEST["nombreempleado"];
-$apellidoempleado  = $_REQUEST["apellidoempleado"];
-$duiempleado       = $_REQUEST["duiempleado"];
-$nitempleado       = $_REQUEST["nitempleado"];
-$cargoempleado     = $_REQUEST["cargoempleado"];
-$idagenciaempleado = $_REQUEST["idagenciaempleado"];
+$baccion  = $_REQUEST["baccion"];
+$codigo    = $_REQUEST["codigo"];
+$nombre  = $_REQUEST["nombre"];
+$apellido  = $_REQUEST["apellido"];
+$direccion      = $_REQUEST["direccion"];
+$fechanacimiento       = $_REQUEST["fechanacimiento"];
+$correo     = $_REQUEST["correo"];
+$telefono = $_REQUEST["telefono"];
+$cargo     = $_REQUEST["cargo"];
+$estado     = $_REQUEST["estado"];
+$sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-    $consulta  = "INSERT INTO empleado VALUES('null','" . $nombreempleado . "','" . $apellidoempleado . "','" . $duiempleado . "','" . $nitempleado . "','" . $cargoempleado . "','" . $idagenciaempleado . "')";
+    $consulta  = "INSERT INTO tpersonal VALUES('null','" . $codigo . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
     $resultado = $conexion->query($consulta);
+    
+   
+    
     if ($resultado) {
         msg("Exito");
     } else {
@@ -609,7 +659,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+    
     echo "</script>";
 }
 ?>

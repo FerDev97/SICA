@@ -122,34 +122,48 @@
                             <form  method="POST" id="agregar">
                             <input type="hidden" name="bandera" id="bandera" value="add">
                               <div class="row" >
-                                  <div class="col-md-1"></div>
-                                <button type="button" class="btn btn-info btn-sm btn-round" id="todos">Todos</button>
-                                
-                               
-                                    <select name="dias[]" id="dias" class="select2-A col-md-6" multiple="multiple" >
-                                        <option value="1">Lunes</option>
-                                        <option value="2">Martes</option>
-                                        <option value="3">Miercoles</option>
-                                        <option value="4">Jueves</option>
-                                        <option value="5">Viernes</option>
-                                    </select>
-                               <div class="col-md-1"></div>
+                                  <div class="col-md-2"></div>
+                                   <div class="col-md-3">
+                                    <div class="input-group " style="padding-bottom:10px;">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                        <select id=""  class="form-control" name="" placeholder="Hora de inicio.">
+                                          <option value="1">Lunes</option>
+                                          <option value="2">Martes</option>
+                                          <option value="3">Miercoles</option>
+                                          <option value="4">Jueves</option>
+                                          <option value="5">Viernes</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-2"></div>
+                                  <div class="col-md-3">
+                                    <div class="input-group " style="padding-bottom:10px;">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                      <select id=""  class="form-control" name="" placeholder="Hora de inicio.">
+                                          <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
+                                          <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                                          <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
+                                          <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
+                                          
+                                        </select>
+                                    </div>
+                                  </div>
                                 
                               </div>
                               <div class="row" >
                                   <div class="col-md-2"></div>
                                   <div class="col-md-3">
-                                      <label for="horainicio">
-                                        Hora de inicio: 
-                                        <input name="horainicio" type="text" class="form-control" id="timepicker">
-                                      </label>
+                                    <div class="input-group " style="padding-bottom:10px;">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                      <input id="timepicker" type="text" class="form-control" name="horainicio" placeholder="Hora de inicio.">
+                                    </div>
                                   </div>
                                   <div class="col-md-2"></div>
                                   <div class="col-md-3">
-                                      <label for="horafin">
-                                        Hora de fin: 
-                                        <input name="horafin" type="text" class="form-control" id="timepicker2">
-                                      </label>
+                                    <div class="input-group " style="padding-bottom:10px;">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                      <input id="timepicker2" type="text" class="form-control" name="horafin" placeholder="Hora de fin.">
+                                    </div>
                                   </div>
                               </div>
                             
@@ -835,37 +849,51 @@
      });//fin de click todos
      
      $("#guardar").on('click',function(){
-        alert("clickea");
+       
        var dias = $('#dias').val();
-       if (dias == "") {
+       var horainicio = $('#timepicker').val();
+       var horafin = $('#timepicker2').val();
+
+       if (dias == "" || dias == null) {
             alert('Debe Seleccionar dias ');
             $("input").focus();
             return false;
         }
 
-        var horainicio = $('#timepicker').val();
-        if (horainicio == "") {
-              alert('Debe Seleccionar una hora de inicio ');
+ 
+        if (horainicio == "" || horainicio == null) {
+              alert('Debe Seleccionar una hora');
               $("input").focus();
               return false;
         }
-        var horafin = $('#timepicker2').val();
-        if (horafin == "") {
-              alert('Debe Seleccionar una hora de fin ');
-              $("input").focus();
-              return false;
-        }
-       
+        
 
+        if (horafin == "" || horafin == null) {
+              alert('Debe Seleccionar una hora ');
+              $("input").focus();
+              return false;
+        }
+
+        var horai= parseInt(horainicio);//hora entera
+        var horaf= parseInt(horafin);
+        var tipo = horainicio.split(" ");//tipo = ['3:00','AM']
+        var tipo2 = horafin.split(" ");
+        alert(tipo[1]);
+        var aux = convertir(horai,tipo[1]);
+        var aux2 = convertir(horaf,tipo2[1]);
+
+       
+       
         var datos = $('#agregar').serialize();
-        alert("llega al serialize");
+        
          $.ajax({
             type: "POST",
             url: "../pages/horarioConsultas.php",
             data: datos,
             success: function(respuesta) {
                 alert(respuesta); //Mensaje 
-               
+               $("#timepicker, #timepicker2").val("");             
+               $('#dias').val(null).trigger('change');          
             },
             error: function(respuesta){
               alert("Error: "+respuesta); //Mensaje
@@ -882,6 +910,52 @@
      
     });
 
+    function convertir(hora, tipo){
+
+        if(tipo == "PM"){
+            if(hora==1){
+                hora=13;
+            }
+            if(hora==2){
+                hora=14;
+            }
+            if(hora==3){
+                hora=15;
+            }
+            if(hora==4){
+                hora=16;
+            }
+            if(hora==5){
+                hora=17;
+            }
+            if(hora==6){
+                hora=18;
+            }
+            if(hora==7){
+                hora=19;
+            }
+            if(hora==8){
+                hora=20;
+            }
+            if(hora==9){
+                hora=21;
+            }
+            if(hora==10){
+                hora=22;
+            }
+            if(hora==11){
+                hora=23;
+            }
+            
+        }
+        if(tipo=="AM"){
+           if(hora==12){
+              hora = 0;
+           }
+        }
+
+      return hora;
+    }
    
 
 </script>
