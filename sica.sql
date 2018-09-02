@@ -305,10 +305,10 @@ DROP TABLE IF EXISTS `thorarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `thorarios` (
   `eid_horario` int(11) NOT NULL AUTO_INCREMENT,
-  `cdia` int(11) NOT NULL,
-  `chora` varchar(20) NOT NULL,
+  `cdia` varchar(50) NOT NULL,
+  `chora` varchar(50) NOT NULL,
   PRIMARY KEY (`eid_horario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,6 +317,7 @@ CREATE TABLE `thorarios` (
 
 LOCK TABLES `thorarios` WRITE;
 /*!40000 ALTER TABLE `thorarios` DISABLE KEYS */;
+INSERT INTO `thorarios` VALUES (2,'Lunes y Martes','7:00 AM - 10:00 AM'),(5,'Martes y Jueves','7:00 AM - 10:00 AM');
 /*!40000 ALTER TABLE `thorarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -644,4 +645,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-31 14:26:42
+-- Dump completed on 2018-09-02 11:55:40

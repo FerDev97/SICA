@@ -27,6 +27,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+  
       
 </head>
 
@@ -59,127 +60,83 @@
                 <div class="col-md-12">
                   <div class="panel">
                     
-                  <div class="col-md-12"> <!--Aqui empieza el tap-->
-                    
+                <div class="col-md-12">
+                  <div class="col-md-12 panel panel-info">
+                    <div class="col-md-12 panel-heading">
                       
-                        <div class="col-md-12">
-                            <div class="col-md-12 tabs-area">
-                            <div class="liner"></div>
-                            <ul class="nav nav-tabs nav-tabs-v5" id="tabs-demo6">
-                          
+                      <h4>Agregar Horario</h4>
+                      
+                    </div>
 
-                            <li>
-                                <a href="#tabs-demo6-area2" data-toggle="tab" title="horarios">
-                                <span class="round-tabs two">
-                                <i class="glyphicon glyphicon-th-list"></i>
-                                </span> 
-                            </a>
-                            </li>
+                    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                      <div class="col-md-12">
+                        <form id="insertar">
 
-                            <li>
-                            <a href="#tabs-demo6-area3" data-toggle="tab" title="modificar">
-                            <span class="round-tabs three">
-                                <i class="glyphicon glyphicon-wrench"></i>
-                            </span> </a>
-                            </li>
-
-                            <li class="active">
-                            <a href="#tabs-demo6-area4" data-toggle="tab" title="nuevo horario">
-                            <span class="round-tabs one">
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </span> 
-                            </a>
-                        </li>
-
-                       
-                        </ul>
-                        <div class="tab-content tab-content-v5">
-                        
-                        <div class="tab-pane fade" id="tabs-demo6-area2">
-                            <h3 class="head text-center">Ver horarios<sup>™</sup> Profile</h3>
+                          <div class="col-md-6">
+                              <br><br>
                             
-
-                             
-
-                            <p class="text-center">
-                            <a href="" class="btn btn-success btn-round green"> create your profile <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
-                            </p>
-
-                        </div>
-                        <div class="tab-pane fade" id="tabs-demo6-area3">
-                            <h3 class="head text-center">Modificar horarios</h3>
-                            <p class="narrow text-center">
-                            Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
-                            </p>
-
-                            <p class="text-center">
-                            <a href="" class="btn btn-success btn-round green"> start using Mimin <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
-                            </p>
-                        </div>
-                        <div class="tab-pane fade in active" id="tabs-demo6-area4">
-                            <h3 class="head text-center">Agregar un horario</h3>
-                
-                            <form  method="POST" id="agregar">
-                            <input type="hidden" name="bandera" id="bandera" value="add">
-                              <div class="row" >
-                                  <div class="col-md-2"></div>
-                                   <div class="col-md-3">
-                                    <div class="input-group " style="padding-bottom:10px;">
-                                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                        <select id=""  class="form-control" name="" placeholder="Hora de inicio.">
-                                          <option value="1">Lunes</option>
-                                          <option value="2">Martes</option>
-                                          <option value="3">Miercoles</option>
-                                          <option value="4">Jueves</option>
-                                          <option value="5">Viernes</option>
-                                        </select>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-2"></div>
-                                  <div class="col-md-3">
-                                    <div class="input-group " style="padding-bottom:10px;">
-                                      <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                      <select id=""  class="form-control" name="" placeholder="Hora de inicio.">
-                                          <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
-                                          <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
-                                          <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
-                                          <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
+                              
+                                <div class="input-group " style="padding-bottom:10px;">
+                                  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                  <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()">
+                                    <option value="0">Seleccione un dia</option>
+                                    <option value="Lunes">Lunes</option>
+                                    <option value="Martes">Martes</option>
+                                    <option value="Miercoles">Miercoles</option>
+                                    <option value="Jueves">Jueves</option>
+                                    <option value="Viernes">Viernes</option>
+                                  </select>
+                                </div>
+                              
+                              <br>
+                              <br>
+                              <div class="input-group " style="padding-bottom:10px;">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                <select id="bloque"  class="form-control" name="bloque" >
+                                  <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
+                                  <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                                  <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
+                                  <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
                                           
-                                        </select>
-                                    </div>
-                                  </div>
-                                
+                                </select>
                               </div>
-                              <div class="row" >
-                                  <div class="col-md-2"></div>
-                                  <div class="col-md-3">
-                                    <div class="input-group " style="padding-bottom:10px;">
-                                      <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                      <input id="timepicker" type="text" class="form-control" name="horainicio" placeholder="Hora de inicio.">
-                                    </div>
-                                  </div>
-                                  <div class="col-md-2"></div>
-                                  <div class="col-md-3">
-                                    <div class="input-group " style="padding-bottom:10px;">
-                                      <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                      <input id="timepicker2" type="text" class="form-control" name="horafin" placeholder="Hora de fin.">
-                                    </div>
-                                  </div>
-                              </div>
+                              
+                        </div>
+                           
+                        <div class="col-md-6">
+                          <br><br>
+                          <div class="input-group " style="padding-bottom:10px;">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <select id="dia2"  class="form-control" name="diaDos">
+                              <option value="0">Seleccione otro dia</option>                                                                          
+                              <option value="Martes">Martes</option>
+                              <option value="Miercoles">Miercoles</option>
+                              <option value="Jueves">Jueves</option>
+                              <option value="Viernes">Viernes</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2">
                             
+                              <br><br>
+                               <input type="button" name="guardar" id="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />                         
+                          </div>
+                          <div class="col-md-2"></div>
+                          <div class="col-md-2">
+                          <br><br>
+                              
+                              <input type="reset" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                          </div>
+    
+                        </div>
 
-                            <p class="text-center">
-                            <button name="next" id="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;">Guardar </button>
-                            </p>
-                          </form>
-                        </div>
-                        
-                        <div class="clearfix"></div>
-                        </div>
-                        </div>
-                        </div>
-                            
-                     </div><!--TAP fin-->
+                          
+                      </form>
+
+                    </div>
+                  </div>
+                </div><!--Fin del panel info-->
+                
+              </div><!--fin del col-md-12-->
 
                 </div>
               </div>  
@@ -831,78 +788,80 @@
 
   $(document).ready(function(){
     $('#datatables-example').DataTable();
-
-    $('#timepicker').mdtimepicker();
-    $('#timepicker2').mdtimepicker();
-
-    $("#todos").on('click',function(){
-      $('#dias').val();
-      $('#dias option[value="2"]').prop("selected","selected");//.attr() esta defasado
-      $('#dias option[value="3"]').prop("selected","selected");
-      $('#dias option[value="1"]').prop("selected","selected");
-      $('#dias option[value="4"]').prop("selected","selected");
-      $('#dias option[value="5"]').prop("selected","selected");
-      
-      $('#dias').change();
-
-      
-     });//fin de click todos
      
-     $("#guardar").on('click',function(){
-       
-       var dias = $('#dias').val();
-       var horainicio = $('#timepicker').val();
-       var horafin = $('#timepicker2').val();
+     $('#guardar').on('click',function(){
 
-       if (dias == "" || dias == null) {
-            alert('Debe Seleccionar dias ');
-            $("input").focus();
+        var dia1 = $('#dia1').val();
+        var dia2 = $('#dia2').val();
+        var bloque = $('#bloque').val();
+
+        if(dia1 == "0"){
+            alert("No selecciono un dia");
             return false;
         }
-
- 
-        if (horainicio == "" || horainicio == null) {
-              alert('Debe Seleccionar una hora');
-              $("input").focus();
-              return false;
-        }
         
+        var todo = $("#insertar").serialize();
 
-        if (horafin == "" || horafin == null) {
-              alert('Debe Seleccionar una hora ');
-              $("input").focus();
-              return false;
-        }
-
-        var horai= parseInt(horainicio);//hora entera
-        var horaf= parseInt(horafin);
-        var tipo = horainicio.split(" ");//tipo = ['3:00','AM']
-        var tipo2 = horafin.split(" ");
-        alert(tipo[1]);
-        var aux = convertir(horai,tipo[1]);
-        var aux2 = convertir(horaf,tipo2[1]);
-
-       
-       
-        var datos = $('#agregar').serialize();
-        
-         $.ajax({
-            type: "POST",
-            url: "../pages/horarioConsultas.php",
-            data: datos,
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarHorario.php',
+            data: todo,
             success: function(respuesta) {
-                alert(respuesta); //Mensaje 
-               $("#timepicker, #timepicker2").val("");             
-               $('#dias').val(null).trigger('change');          
+                alert(respuesta); 
+                
             },
             error: function(respuesta){
-              alert("Error: "+respuesta); //Mensaje
+              alert("Error en el servidor: "+respuesta); 
             }
-        }); //fin ajax
-        return false;
-     });//fin del click guardar
+        });
+
+      return false;
+
+     });//fin del click
 
   });//fin del ready
+
+    function verificar(){
+       
+      var dato = $("#dia1").val();
+       if(dato == "Lunes"){
+         $("#dia2").empty();
+         $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
+         $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+         $("#dia2").append("<option value='Jueves'>Jueves</option>");
+         $("#dia2").append("<option value='Viernes'>Viernes</option>");
+       }
+       if(dato == "Martes"){
+         $("#dia2").empty();
+         $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+         $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+         $("#dia2").append("<option value='Jueves'>Jueves</option>");
+         $("#dia2").append("<option value='Viernes'>Viernes</option>");
+       }
+       if(dato == "Miercoles"){
+         $("#dia2").empty();
+         $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+         $("#dia2").append("<option value='Martes'>Martes</option>");
+         $("#dia2").append("<option value='Jueves'>Jueves</option>");
+         $("#dia2").append("<option value='Viernes'>Viernes</option>");
+       }
+       if(dato == "Jueves"){
+         $("#dia2").empty();
+         $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+         $("#dia2").append("<option value='Martes'>Martes</option>");
+         $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+         $("#dia2").append("<option value='Viernes'>Viernes</option>");
+       }
+       if(dato == "Viernes"){
+         $("#dia2").empty();
+         $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+         $("#dia2").append("<option value='Martes'>Martes</option>");
+         $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+         $("#dia2").append("<option value='Jueves'>Jueves</option>");
+       }
+
+    }
+    
 
    $(".select2-A").select2({
       placeholder: "Seleccione un dia o varios! ",
@@ -910,52 +869,7 @@
      
     });
 
-    function convertir(hora, tipo){
-
-        if(tipo == "PM"){
-            if(hora==1){
-                hora=13;
-            }
-            if(hora==2){
-                hora=14;
-            }
-            if(hora==3){
-                hora=15;
-            }
-            if(hora==4){
-                hora=16;
-            }
-            if(hora==5){
-                hora=17;
-            }
-            if(hora==6){
-                hora=18;
-            }
-            if(hora==7){
-                hora=19;
-            }
-            if(hora==8){
-                hora=20;
-            }
-            if(hora==9){
-                hora=21;
-            }
-            if(hora==10){
-                hora=22;
-            }
-            if(hora==11){
-                hora=23;
-            }
-            
-        }
-        if(tipo=="AM"){
-           if(hora==12){
-              hora = 0;
-           }
-        }
-
-      return hora;
-    }
+    
    
 
 </script>

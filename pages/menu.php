@@ -71,6 +71,16 @@
                   <ul class="nav nav-list tree">
                     <li><a href="materias.php">Agregar Nuevo</a></li>
                     <li><a href="cmaterias.php">Lista de materias</a></li>
+                    <li class="ripple">
+                          <a class="sub-tree-toggle nav-header">
+                            <span class="fa fa-calendar"></span> Horarios
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                          </a>
+                          <ul class="nav nav-list sub-tree">
+                            <li><a href="horarioGeneral.php">Agregar horario</a></li>
+                            <li><a href="#">Lista de horarios</a></li>                 
+                          </ul>
+                    </li>
                   </ul>
 
                 </li>
