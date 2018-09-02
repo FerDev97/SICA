@@ -4,7 +4,7 @@ include "../config/conexion.php";
 $result = $conexion->query("select * from tpersonal where e_idpersonal=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
-        $idempleadoR       = $fila->idempleado;
+        $idpersonalR       = $fila->idempleado;
         $nombreempleadoR    = $fila->nombre;
         $apellidoempleadoR  = $fila->apellido;
         $duiempleadoR       = $fila->dui;
