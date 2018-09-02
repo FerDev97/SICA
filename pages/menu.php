@@ -49,7 +49,7 @@
                   </a>
                   <ul class="nav nav-list tree">
                     <li><a href="fpersonal.php">Agregar Nuevo</a></li>
-                    <li><a href="flistapersonal.php">Lista de Personal</a></li>
+                    <li><a href="listapersonal.php">Lista de Personal</a></li>
                   </ul>
 
                 </li>

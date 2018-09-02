@@ -1,3 +1,21 @@
+<?php
+$id = $_REQUEST["id"];
+include "../config/conexion.php";
+$result = $conexion->query("select * from tpersonal where e_idpersonal=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idpersonalR       = $fila->idempleado;
+        $nombreempleadoR    = $fila->nombre;
+        $apellidoempleadoR  = $fila->apellido;
+        $duiempleadoR       = $fila->dui;
+        $nitempleadoR       = $fila->nit;
+        $cargoempleadoR     = $fila->cargo;
+        $idagenciaempleadoR = $fila->idagencia;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
