@@ -1,16 +1,21 @@
 <?php
 $id = $_REQUEST["id"];
 include "../config/conexion.php";
-$result = $conexion->query("select * from tpersonal where e_idpersonal=" . $id);
+$result = $conexion->query("select * from tpersonal where eid_personal=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
-        $idpersonalR       = $fila->idempleado;
-        $nombreempleadoR    = $fila->nombre;
-        $apellidoempleadoR  = $fila->apellido;
-        $duiempleadoR       = $fila->dui;
-        $nitempleadoR       = $fila->nit;
-        $cargoempleadoR     = $fila->cargo;
-        $idagenciaempleadoR = $fila->idagencia;
+        $idpersonalR       = $fila->eid_personal;
+        $codigopersonalR   = $fila->ccodigo;
+        $nombrepersonalR   = $fila->cnombre;
+        $apellidopersonalR = $fila->capellido;
+        $telefonopersonalR = $fila->ctelefono;
+        $correopersonalR   = $fila->ccorreo;
+        $direccionpersonalR = $fila->cdireccion;
+        $fechanacimientopersonalR  = $fila->ffechanacimiento;
+        $estadopersonalR   = $fila->iestado;
+        $isexopersonalR    = $fila->isexo;
+        $cargopersonalR    = $fila->efk_idcargo;
+
     }
 }
 
@@ -79,12 +84,9 @@ error_reporting(E_ALL & ~E_NOTICE);
             ||document.getElementById('cargo').value=="" || banderaRb || banderaRb1){
             alert("Complete los campos");
           }else{
-            if (document.getElementById('baccion').value!="") {
-              document.getElementById('bandera').value='modificar';
-              alert(document.getElementById('bandera').value);
-              }else{
+            alert("entra");
+
             document.getElementById("bandera").value="add";
-          }
             document.turismo.submit();
           }
 
@@ -106,7 +108,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Personal</h3>
+                         <h3 class="animated fadeInLeft">Editar Informaci&oacute;n Personal</h3>
                         <p class="animated fadeInDown">
                           Personal <span class="fa-angle-right fa"></span>Datos del Personal.
                         </p>
@@ -117,7 +119,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
-                <input type="hidden" id="baccion" name="baccion">
+                <input type="hidden" name="baccion" id="baccion" value="<?php echo $idpersonalR; ?>">
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
@@ -131,30 +133,30 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo">
+                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" value="<?php echo $codigopersonalR; ?>">
                               </div> 
                               <br>
                               <br> 
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $nombrepersonalR; ?>">
                               </div>  
                               <br>
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido">
+                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" value="<?php echo $apellidopersonalR; ?>">
                               </div>
                               <br> 
                               <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccion" name="direccion"></textarea>
+      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direccion" name="direccion" value="<?php echo $direccionpersonalR; ?>"></textarea>
       </div>
                               
                               <label>Fecha de nacimiento:</label>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento">
+                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento" value="<?php echo $fechanacimientopersonalR; ?>">
                               </div> 
                               <div class="form-group">
                               <div class='input-group date' id='datetimepicker1'>
@@ -167,13 +169,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">                       
                           
                               <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico">
+                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" value="<?php echo $correopersonalR; ?>">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                               </div>   
                               <br><br>                      
                               <div class="input-group">
                               
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" value="<?php echo $telefonopersonalR; ?>">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
 
                               </div> 
@@ -181,7 +183,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br>
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo">
+      <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo" >
       <option value="">Seleccione Cargo</option>
       <?php
                       include '../config/conexion.php';
@@ -190,11 +192,16 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                         
+                          if ($fila->id == $cargopersonalR ) {
+                            echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
                         
-                           }
+                           }else {
+                            echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
+                        }
                       }
+                    }else {
+                      echo '<option value="">Error en la BD</opcion>';
+                  }
                        ?>
                        </select>
                               
@@ -222,6 +229,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           
 
                                                     <div class="col-md-12">
+                                                    <div class="col-md-3"></div>
                               <div class="col-md-3">
                               <br><b></b>
                               <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
@@ -661,7 +669,7 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-    $consulta  = "INSERT INTO tpersonal VALUES('null','" . $codigo . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
+    $consulta  = "UPDATE tpersonal set ccodigo='" . $codigo . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "','" . $estado . "','" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     
    
@@ -677,7 +685,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    
+    echo "document.location.href='listapersonal.php';";
     echo "</script>";
 }
 ?>
