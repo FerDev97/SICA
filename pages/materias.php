@@ -131,16 +131,10 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          if ($fila->bloque==1) {
-                             echo "<option value='".$fila->id."'>".$fila->dias." 8:00-10:00 AM</option>";
-                          } else if($fila->chora==2){
-                            echo "<option value='".$fila->id."'>".$fila->dias." 10:00-12:00 MD</option>";
-                          }else if($fila->chora==3){
-                            echo "<option value='".$fila->id."'>".$fila->dias." 1:00-3:00 PM</option>";
-                          }else if($fila->chora==4){
-                            echo "<option value='".$fila->id."'>".$fila->dias." 3:00-5:00 PM</option>";
-                          }
+                  
+                             echo "<option value='".$fila->id."'>".$fila->dias." ".$fila->bloque."</option>";
                           
+                            
                          
                          
                         
@@ -163,7 +157,6 @@ error_reporting(E_ALL & ~E_NOTICE);
                         while ($fila = $result->fetch_object()) {
                           echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
                          
-                        
                            }
                       }
                        ?>
