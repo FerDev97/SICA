@@ -116,7 +116,7 @@
                           <th>Estado</th>
                           <th>Activar/Desactivar</th>
                           <th>Cargo</th>
-                          <th></th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -156,15 +156,7 @@ if ($result) {
              </button></td>";
        }
         echo "<td>" . $fila->cargo . "</td>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->eid_personal . ")'>
-            <div>
-              <span>Borrar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
         echo "</tr>";
 
     }
@@ -397,7 +389,7 @@ if ($bandera == "desaparecer") {
 }
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
-    echo "document.location.href='editempleado.php?id=" . $baccion . "';";
+    echo "document.location.href='editpersonal.php?id=" . $baccion . "';";
     echo "</script>";
     # code...
 }

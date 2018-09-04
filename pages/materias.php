@@ -2,6 +2,8 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
+ include '../config/conexion.php';
+                      
 ?>
 <html lang="en">
 <head>
@@ -34,18 +36,23 @@ error_reporting(E_ALL & ~E_NOTICE);
       <![endif]-->
       <script type="text/javascript">
         function verificar(){
-          if(document.getElementById('nombreempleado').value=="" ||
-            document.getElementById('apellidoempleado').value=="" ||
-            document.getElementById('duiempleado').value=="" ||
-            document.getElementById('nitempleado').value=="" ||
-            document.getElementById('cargoempleado').value==""){
+          if(document.getElementById('codigom').value=="" ||
+            document.getElementById('nombrem').value=="" ||
+            document.getElementById('descripcionm').value=="" ||
+            document.getElementById('horario').value=="" ||
+            document.getElementById('docente').value==""||
+            document.getElementById('opcion').value==""){
             alert("Complete los campos prueba");
             
           }else{
+            alert(document.getElementById("lastindex"));
             document.getElementById("bandera").value="add";
             document.turismo.submit();
           }
 
+        }
+        function prueba(text) {
+          alert("Funcioan prro"+text)
         }
       </script>
 </head>
@@ -75,6 +82,8 @@ error_reporting(E_ALL & ~E_NOTICE);
                 
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
+                <input type="hidden" name="lastindex" id="lastindex" value="<?php echo ".$last." ?>">
+                
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
@@ -114,15 +123,25 @@ error_reporting(E_ALL & ~E_NOTICE);
                             <span class="label label-default" style="width: 500px; font-size: 20px">Horario <i class="glyphicon glyphicon-dashboard"></i></span>
                             
                             
-                              <select id="dia"   class="select2 show-tick" style="width: 225px; font-size: 15px" name="iddia">
+                              <select id="horario"   class="select2 show-tick" style="width: 455px; font-size: 15px" name="horario">
                               <option value="">Seleccione Horario</option>
                                <?php
                       include '../config/conexion.php';
-                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcargos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
+                      $result = $conexion->query("select eid_horario as id, cdia as dias, chora as bloque from thorarios");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          if ($fila->bloque==1) {
+                             echo "<option value='".$fila->id."'>".$fila->dias." 8:00-10:00 AM</option>";
+                          } else if($fila->chora==2){
+                            echo "<option value='".$fila->id."'>".$fila->dias." 10:00-12:00 MD</option>";
+                          }else if($fila->chora==3){
+                            echo "<option value='".$fila->id."'>".$fila->dias." 1:00-3:00 PM</option>";
+                          }else if($fila->chora==4){
+                            echo "<option value='".$fila->id."'>".$fila->dias." 3:00-5:00 PM</option>";
+                          }
+                          
+                         
                          
                         
                            }
@@ -134,7 +153,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                             </div>
                                             
                             <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
-                              <select id="docente"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="iddocente">
+                              <select id="docente"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="docente">
                               <option value="">Seleccione Docente</option>
                                <?php
                       include '../config/conexion.php';
@@ -148,48 +167,37 @@ error_reporting(E_ALL & ~E_NOTICE);
                            }
                       }
                        ?>
-                              
-                              
+                                       
                               </select>
                             </div>
-                            <div class="form-group form-animate-text" style="">
-                              <select id="opcion"  class="select2 show-tick" style="width: 568px; font-size: 15px" name="idopcion">
+                           <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
+                              <select id="opcion"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="opcion">
                               <option value="">Seleccione Opcion</option>
-                              <option value="">Melvin Alfonso Rivas</option>
-                              <option value="">Helen Alexandra Rodriguez</option>
-                              <option value="">Monica Abigail Rosales</option>
-                              <option value="">Hna. Maria Luisa Cubias</option>
+                               <?php
+                      include '../config/conexion.php';
+                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                                       
                               </select>
                             </div>
                           </div>
                           <div class="col-md-12">
+                            <div class="col-md-3">
+                            </div>
                               <div class="col-md-3">
-                              <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()" style="margin-top:36px !important">
-                                <div class="flip">
-                                 <div class="side">
-                                    Guardar
-                                  </div>
-                                  <div class="side back">
-                                    continuar
-                                  </div>
-                                </div>
-                                <span class="icon"></span>
-                              </button> -->
+                             
                               <br><br>
-                               <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />                          </div>
+                               <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" onclick="verificar();"/>                          </div>
                           <div class="col-md-3">
                           <br><br>
-                              <!-- <button class="btn-flip btn btn-gradient btn-danger" onclick="verificar()" style="margin-top:36px !important">
-                                <div class="flip">
-                                 <div class="side">
-                                    Cancelar 
-                                  </div>
-                                  <div class="side back">
-                                    continuar
-                                  </div>
-                                </div>
-                                <span class="icon"></span>
-                              </button> -->
                               <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                           </div>
                         </div>
@@ -454,30 +462,52 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 include "../config/conexion.php";
 
-$bandera           = $_REQUEST["bandera"];
+$bandera  = $_REQUEST["bandera"];
 $codigom    = $_REQUEST["codigom"];
 $nombrem  = $_REQUEST["nombrem"];
 $descripcionm       = $_REQUEST["descripcionm"];
-$dia       = $_REQUEST["dia"];
-$hora     = $_REQUEST["hora"];
+$horario       = $_REQUEST["horario"];
 $docente = $_REQUEST["docente"];
 $opcion = $_REQUEST["opcion"];
 
 if ($bandera == "add") {
-    $consulta  = "INSERT INTO empleado VALUES('null','" . $nombreempleado . "','" . $apellidoempleado . "','" . $duiempleado . "','" . $nitempleado . "','" . $cargoempleado . "','" . $idagenciaempleado . "')";
+   msg("Entra a a gregar");
+    $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+        //Bloque para agarrar el ID de la ultima materia ingresada.
+        $result = $conexion->query("select MAX(eid_materia) as max from tmaterias");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          $last=$fila->max;
+                         
+                        
+                           }
+                      }
+        //Finde bloque.
+        msg("Agrego materia.");
+        //Query para agregar a la tabla de muchos a muchos.
+        $consulta2  = "INSERT INTO tpersonal_materia VALUES('null','" . $docente . "','" . $last . "')";
+        $resultado2 = $conexion->query($consulta2);
+       if ($resultado2) {
+    
+        msg("Agrego pm.");
+        //Query para agregar a la tabla de muchos a muchos.
+        
+         } else {
+        echo("Error pm:".mysqli_error($conexion));
+          }
     } else {
-        msg("No Exito");
+        echo("Error materia:".mysqli_error($conexion));
     }
 }
 
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+    echo "prueba('$texto');";
+    //echo "document.location.href='materias.php';";
     echo "</script>";
 }
 ?>
