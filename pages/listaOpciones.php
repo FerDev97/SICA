@@ -8,7 +8,7 @@
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turismo</title>
+  <title>SICA-Opciones</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -64,9 +64,9 @@
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista Empleados</h3>
+                        <h3 class="animated fadeInLeft">Lista de Opciones de Bachillerato</h3>
                         <p class="animated fadeInDown">
-                          Table <span class="fa-angle-right fa"></span> Data Tables
+                          tablas <span class="fa-angle-right fa"></span>Tabla
                         </p>
                     </div>
                   </div>
@@ -84,11 +84,13 @@
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th></th>
+                          
+                          <th>Codigo</th>
+                          <th>Grado</th>
                           <th>Nombre</th>
-                          <th>Apellido</th>
-                          <th>DUI</th>
-                          <th>Agencia</th>
+                          <th>Tipo</th>
+                          <th>Seccion</th>
+                          <th></th>
                           <th></th>
                         </tr>
                       </thead>
@@ -96,28 +98,22 @@
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select idempleado,empleado.nombre,apellido,dui,empleado.idagencia,agencia.nombre as nombreagencia from empleado,agencia where empleado.idagencia=agencia.idagencia order by nombre");
+$result = $conexion->query("SELECT tbachilleratos.ccodigo,tbachilleratos.cnombe,ttipobachillerato.ctipo,tgrado.cgrado,tsecciones.cseccion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion ORDER BY eid_grado");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->idempleado . ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+       
         //echo "<tr>";
+        //select * idempleado,empleado.nombre,apellido,dui,empleado.idagencia,agencia.nombre as nombreagencia from empleado,agencia where empleado.idagencia=agencia.idagencia order by nombre
         //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
-        echo "<td>" . $fila->nombre . "</td>";
-        echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->dui . "</td>";
-        echo "<td>" . $fila->nombreagencia . "</td>";
+        echo "<td>" . $fila->ccodigo . "</td>";
+        echo "<td>" . $fila->cgrado . "</td>";
+        echo "<td>" . $fila->cnombe . "</td>";
+        echo "<td>" . $fila->ctipo . "</td>";
+        echo "<td>" . $fila->cseccion . "</td>";
         echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
+          <div class='col-md-1' style='margin-top:4px'>
             <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idempleado . ")'>
             <div>
               <span>Borrar</span>
@@ -125,6 +121,15 @@ if ($result) {
             </button>
             </div>
         </td>";
+        echo "<td>
+        <div class='col-md-1' style='margin-top:1px'>
+          <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->idempleado . ")';>
+          <div>
+            <span>Editar</span>
+          </div>
+          </button>
+          </div>
+      </td>";
         echo "</tr>";
 
     }

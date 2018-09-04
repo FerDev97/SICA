@@ -60,7 +60,7 @@
                   </a>
                   <ul class="nav nav-list tree">
                     <li><a href="fopciones.php">Agregar Nuevo</a></li>
-                    <li><a href="listaempleado.php">Lista de Opciones</a></li>
+                    <li><a href="listaOpciones.php">Lista de Opciones</a></li>
                   </ul>
                 </li>
                 <li class="ripple">

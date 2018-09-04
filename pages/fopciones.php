@@ -36,6 +36,7 @@ if($accion=="guardarG")
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -107,12 +108,13 @@ if($accion=="guardarG")
                 <input type="hidden" name="bandera" id="bandera">
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
-                    <div class="col-md-12 panel-heading">
+                    <div class="col-md-12 panel1-heading">
                       <!--<h4>Informaci&oacute;n Materia</h4>-->
-                    <h4>Formulario Opci&oacute;nnes de Bachillerato</h4>
+                    <h4>Formulario Opci&oacute;nes de Bachillerato</h4>
                     </div>
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
+
                       <div class="col-md-6">
                           </br>
                            </br>
@@ -136,7 +138,7 @@ if($accion=="guardarG")
                            }
                            ?> 
                               </select>
-                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">Nueva  Opcion</button>
+                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
                               </div>
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-clipboard"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Grado: </span>
@@ -152,7 +154,7 @@ if($accion=="guardarG")
                            }
                            ?>   
                               </select>
-                              <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">Nuevo Grado</button>
+                              <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">+</button>
                               </div>
 
                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
@@ -169,18 +171,17 @@ if($accion=="guardarG")
                            }
                            ?>   
                               </select>
-                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">Nueva Seccion</button>
+                              <button   style="margin-left:16px; border-radius: 50px 20px" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">+</button>
                               </br>
                               </br>
                               </br>
-                              <div class="input-group">
+                              <div class="input-group col-md-6">
                               <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
                                <input id="cupo" type="number" class="form-control" name="cupo" placeholder="Cupo Maximo">
                            </div>
-                          </div>  
-                          </div>
-                        <div>
-                        <div class="col-md-12">
+                           
+                          </div> 
+                          <div class="col-md-12">
                               <div class="col-md-4">
                               <br><b></b>
                              
@@ -190,10 +191,73 @@ if($accion=="guardarG")
                             <br><b></b>
                               <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                               </div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                        </div> 
+                          </div>
+                  <div class="col-md-6">
+                  <div class="col-md-12">
+                  <div class="panel1">
+                    <div class="panel-heading"><h3>Lista De Opciones</h3></div>
+                    <div class="panel-body">
+                      <div class="responsive-table">
+                      <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                        
+                          <th>Editar</th>
+                          <th>Codigo</th>
+                          <th>Opcion</th>
+                          <th>Tipo</th>
+                          <th>Alta/Baja</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>
+          <div class='col-md-2' style='margin-top:1px'>
+            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_bachillerato . ")';>
+            <div>
+              <span>Editar</span>
+            </div>
+            </button>
+            </div>
+        </td>";
+        //echo "<tr>";
+        //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
+        //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
+        echo "<td>" . $fila->ccodigo . "</td>";
+        echo "<td>" . $fila->cnombe . "</td>";
+        echo "<td>" . $fila->cdescripcion . "</td>";
+
+        echo "<td>
+          <div class='col-md-2' style='margin-top:1px'>
+            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idcatalogo . ")'>
+            <div>
+              <span>Alta</span>
+            </div>
+            </button>
+            </div>
+        </td>";
+        echo "</tr>";
+
+    }
+}
+?>
+                      </tbody>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+              
+                              
+                       </div>
+                      </div>
+                      </div>
+                      </div>
                       </form>
                     </div> 
                   </div>
@@ -353,13 +417,13 @@ if($accion=="guardarG")
                   <tbody>
                   <?php
                   include "../config/conexion.php";
-                  $result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+                  $result = $conexion->query("SELECT ttipobachillerato.ctipo, ccodigo,cnombe FROM ttipobachillerato INNER JOIN tbachilleratos ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo ORDER BY eid_bachillerato");
                   if ($result) {
                     while ($fila = $result->fetch_object()) {
                     echo "<tr>";
                     echo "<td>" . $fila->ccodigo . "</td>";
                     echo "<td>" . $fila->cnombe . "</td>";
-                    echo "<td>" . $fila->efk_tipo . "</td>";
+                    echo "<td>" . $fila->ctipo . "</td>";
                     echo "</tr>";
       }
       }
