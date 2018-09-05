@@ -3,8 +3,7 @@
 error_reporting(E_ALL & ~E_NOTICE);
 ?>
 <?php
-session_start();
-if($_SESSION["logueado"] == TRUE) {
+
 $id  = $_REQUEST["id"];
 $aux = " ";
 
@@ -108,7 +107,7 @@ if ($result) {
               <input type="hidden" name="aux" id="aux" value="<?php echo $aux; ?>">
               <input type="hidden" name="r" id="r" value="">
               <div class="col-md-12">
-                  <div class="col-md-6 panel panel-info">
+                  <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
                       <h4>Formulario Personal.</h4>
                     </div>
@@ -135,24 +134,17 @@ if ($result) {
                           
                               <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                               </div>
+
+                              
                         </div>
                         </div>
                       </form>
 
                     </div>
                   </div>
-                </div>
-                </form>
-              </div>
+                  
 
-              </div>
-              </div>
-              </div>
-            </div>
-          <!-- end: content -->
-           </div>
-                <div class="col-md-1">
-                </div>
+
                 <div class="col-md-7">
                   <div class="col-md-12">
                   <div class="panel">
@@ -212,6 +204,19 @@ if ($result) {
                 </div>
               </div>
               </div>
+
+
+                </form>
+              </div>
+
+              </div>
+              </div>
+              </div>
+            </div>
+          <!-- end: content -->
+           </div>
+              
+                
               </div>
 
               </form>
@@ -453,7 +458,5 @@ function msg($texto)
   //  echo "document.location.href='cuenta.php';";
     echo "</script>";
 }
-} else {
-header("Location: ../index.php");
-}
+
 ?>
