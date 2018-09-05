@@ -465,7 +465,7 @@ $opcion = $_REQUEST["opcion"];
 
 if ($bandera == "add") {
    msg("Entra a a gregar");
-    $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "')";
+    $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.
