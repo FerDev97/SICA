@@ -26,9 +26,44 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+      <script> 
+      function confirmar(id,op)
+        {
+          if (op==1)
+           {
+            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) 
+            {
+            document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.turismo.submit();
+            }else
+            {
+                alert("No entra");
+            }
+          }else{
+            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+          }else
+            {
+            alert("No entra");
+             }
+          }
+
+
+        }
+      
+      </script>
 </head>
 
 <body id="mimin" class="dashboard">
+<form id="turismo" name="turismo" action="" method="post">
+<input type="hidden" name="bandera" id="bandera">
+              <input type="hidden" name="baccion" id="baccion">
+
+</form>
       <!-- comienzo: Header -->
         <?php
         include "header.php";
@@ -186,3 +221,61 @@
 <!-- end: Javascript -->
 </body>
 </html>
+<?php
+
+include "../config/conexion.php";
+
+$bandera = $_REQUEST["bandera"];
+$baccion = $_REQUEST["baccion"];
+
+if ($bandera == "add") {
+    $consulta  = "INSERT INTO cliente VALUES('null','" . $nombrecliente . "','" . $apellidocliente . "','" . $duicliente . "','" . $telefonocliente . "','" . $direccioncliente . "')";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+if ($bandera == "desactivar") {
+  $consulta = "UPDATE tmaterias SET estado = '0' WHERE eid_materia = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+if ($bandera == "activar") {
+  $consulta = "UPDATE tmaterias SET estado = '1' WHERE eid_materia = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+
+if ($bandera == "desaparecer") {
+    $consulta  = "DELETE FROM tmaterias where eid_materia='" . $baccion . "'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+if ($bandera == 'enviar') {
+    echo "<script type='text/javascript'>";
+    echo "document.location.href='editpersonal.php?id=" . $baccion . "';";
+    echo "</script>";
+    # code...
+}
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='cmaterias.php';";
+    echo "</script>";
+}
+?>
