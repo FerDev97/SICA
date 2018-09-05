@@ -102,137 +102,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <tr>
-                              <td>MAT1GA</td>
-                              <td>Matematica</td>
-                              <td>030</td>
-                              <td bgcolor="#dff8e7">Activa</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round " data-toggle="modal" data-target=".bs-example-modal-lg">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CIEN1GA</td>
-                                <td>Ciencias</td>
-                                <td>020</td>
-                                <td bgcolor="#dff8e7">Activa</td>
-                                <td style="text-align:center;">
-                                    <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>LENG1GA</td>
-                                  <td>Lenguaje</td>
-                                  <td>040</td>
-                                  <td bgcolor="#dff8e7">Activa</td>
-                                  <td style="text-align:center;">
-                                      <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                      <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                    </td>
-                              </tr>
-                              <tr>
-                                  <td>HAB1GA</td>
-                                  <td>Habilitacion laboral</td>
-                                  <td>050</td>
-                                  <td bgcolor="#dff8e7">Activa</td>
-                                  <td style="text-align:center;">
-                                      <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                      <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td>SOS1GA</td>
-                                <td>Sociales</td>
-                                <td>070</td>
-                                <td bgcolor="#dff8e7">Activa</td>
-                                <td style="text-align:center;">
-                                    <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  </td>
-                          </tr>
+                     <?php
+                      include "../config/conexion.php";
+                      $result = $conexion->query("select eid_personal,tpersonal.ccodigo as codigo,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.iestado as estado,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo order by cargo");
+                      if ($result) {
+                          while ($fila = $result->fetch_object()) {
+                            echo '<tr>';
+                            echo '<td>MAT1GA</td>';
+                              echo '<td>Matematica</td>';
+                              echo '<td>030</td>';
+                              echo '<td bgcolor="#dff8e7">Activa</td>';
+                              echo '<td style="text-align:center;">';
+                              echo '    <button type="button" class="btn btn-info btn-sm btn-round " data-toggle="modal" data-target=".bs-example-modal-lg">Ver detalle</button>';
+                              echo '    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>';
+                              echo '  </td>';
+                            echo '</tr>';
+                          }
+                       }
+                    ?>
                           
-                          <tr>
-                              <td>ING1GA</td>
-                              <td>Ingles</td>
-                              <td>090</td>
-                              <td bgcolor="#dff8e7">Activa</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                </td>
-                          </tr>
-                          <tr>
-                            <td>REG1GA</td>
-                            <td>Religion</td>
-                            <td>080</td>
-                            <td bgcolor="#dff8e7">Activa</td>
-                            <td style="text-align:center;">
-                                <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>ART1GA</td>
-                              <td>Artistica</td>
-                              <td>010</td>
-                              <td bgcolor="">Inactiva</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>FIS1GA</td>
-                                <td>Educacion Fisica</td>
-                                <td>020</td>
-                                <td bgcolor="#dff8e7">Activa</td>
-                                <td style="text-align:center;">
-                                    <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>INF1GA</td>
-                                  <td>Educacion Informatica</td>
-                                  <td>030</td>
-                                  <td bgcolor="#dff8e7">Activa</td>
-                                  <td style="text-align:center;">
-                                      <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                      <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>MUS1GA</td>
-                                    <td>Musica</td>
-                                    <td>110</td>
-                                    <td bgcolor="">Inactiva</td>
-                                    <td style="text-align:center;">
-                                        <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                      </td>
-                                </tr>
-                                <tr>
-                                    <td>SEM1GA</td>
-                                    <td>Seminario</td>
-                                    <td>120</td>
-                                    <td bgcolor="#dff8e7">Activa</td>
-                                    <td style="text-align:center;">
-                                        <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                      </td>
-                                </tr>
-                                <tr>
-                                    <td>ORI1GA</td>
-                                    <td>Orientacion para la vida</td>
-                                    <td>140</td>
-                                    <td bgcolor="#dff8e7">Activa</td>
-                                    <td style="text-align:center;">
-                                        <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                      </td>
-                                </tr>
+                           
+                                   
                       </tbody>
                         </table>
                       </div>
