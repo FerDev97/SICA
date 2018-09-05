@@ -1,26 +1,3 @@
-<?php
-$id = $_REQUEST["id"];
-include "../config/conexion.php";
-$result = $conexion->query("select * from tpersonal where eid_personal=" . $id);
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        $idpersonalR       = $fila->eid_personal;
-        $codigopersonalR   = $fila->ccodigo;
-        $nombrepersonalR   = $fila->cnombre;
-        $apellidopersonalR = $fila->capellido;
-        $telefonopersonalR = $fila->ctelefono;
-        $correopersonalR   = $fila->ccorreo;
-        $direccionpersonalR = $fila->cdireccion;
-        $fechanacimientopersonalR  = $fila->ffechanacimiento;
-        $estadopersonalR   = $fila->iestado;
-        $isexopersonalR    = $fila->isexo;
-        $cargopersonalR    = $fila->efk_idcargo;
-
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
@@ -30,7 +7,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Cargo</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -75,18 +52,15 @@ error_reporting(E_ALL & ~E_NOTICE);
 				}
 
 			}
-          if(document.getElementById('codigo').value=="" ||
-            document.getElementById('nombre').value=="" ||
-            document.getElementById('apellido').value=="" ||
-            document.getElementById('direccion').value=="" ||
-            document.getElementById('fechanacimiento').value=="" ||document.getElementById('fechanacimiento').value==""
-            ||document.getElementById('correo').value==""||document.getElementById('telefono').value==""
-            ||document.getElementById('cargo').value=="" || banderaRb || banderaRb1){
+          if(document.getElementById('nombre').value=="" ){
             alert("Complete los campos");
           }else{
-            alert("entra");
-
+            if (document.getElementById('baccion').value!="") {
+              document.getElementById('bandera').value='modificar';
+              alert(document.getElementById('bandera').value);
+              }else{
             document.getElementById("bandera").value="add";
+          }
             document.turismo.submit();
           }
 
@@ -108,9 +82,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Editar Informaci&oacute;n Personal</h3>
+                         <h3 class="animated fadeInLeft">Cargo</h3>
                         <p class="animated fadeInDown">
-                          Personal <span class="fa-angle-right fa"></span>Datos del Personal.
+                          Cargo <span class="fa-angle-right fa"></span>Datos del Cargo.
                         </p>
                     </div>
                   </div>
@@ -119,140 +93,31 @@ error_reporting(E_ALL & ~E_NOTICE);
                 
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
-                <input type="hidden" name="baccion" id="baccion" value="<?php echo $idpersonalR; ?>">
+                <input type="hidden" id="baccion" name="baccion">
                 <div class="col-md-12">
-                  <div class="col-md-12 panel panel-info">
+                  <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario Personal.</h4>
+                      <h4>Formulario Cargo.</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
                         <form class="cmxform" id="formcliente" method="post" action="">
 
-                          <div class="col-md-6">
-                          <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" value="<?php echo $codigopersonalR; ?>">
-                              </div> 
-                              <br>
-                              <br> 
+                          <div class="col-md-12">
+                          
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $nombrepersonalR; ?>">
-                              </div>  
-                              <br>
-                              <br>
-                              <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" value="<?php echo $apellidopersonalR; ?>">
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
                               </div>
-                              <br> 
-                              <div class="input-group"style="padding-bottom:20px;">
-      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direccion" name="direccion" ><?php echo $direccionpersonalR; ?></textarea>
-      </div>
-                              
-                              <label>Fecha de nacimiento:</label>
-                              <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento" value="<?php echo $fechanacimientopersonalR; ?>">
-                              </div> 
-                              <div class="form-group">
-                              <div class='input-group date' id='datetimepicker1'>
-                              </div>
-                              </div>
-                              
-
-                            <!-- Div del span -->
+                              <!-- Div del span -->
                           </div>
                           <div class="col-md-6">                       
-                          
-                              <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" value="<?php echo $correopersonalR; ?>">
-                                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                              </div>   
-                              <br><br>                      
-                              <div class="input-group">
-                              
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" value="<?php echo $telefonopersonalR; ?>">
-                                  <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-
-                              </div> 
-                              <br>
-                              <br>
-                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-     <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo" >
-      <option value="">Seleccione Cargo</option>
-      <?php
-                      include '../config/conexion.php';
-
-                      $result = $conexion->query("select eid_cargo as id,ccargo as nombre FROM tcargos");
-                      if ($result) {
-
-                        while ($fila = $result->fetch_object()) {
-                          if ($fila->id == $cargopersonalR ) {
-                            echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
-                        
-                           }else {
-                            echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
-                        }
-                      }
-                    }else {
-                      echo '<option value="">Error en la BD</opcion>';
-                  }
-                       ?>
-                       </select>
-                              
-      <button align='center' type='button' style="margin-right:20px;margin-left:22px; font-size: 15px" class='btn btn-default' onclick=confirmar(" . $proveedor . ",1);><i class='fa fa-plus'></i></button>
-      </div>
-      
-      <br>
-      <div class="input-group " style="padding-bottom:25px;">
-     <i  class="fa fa-check-circle"></i><span class="label label-default" style="width: 20px; font-size: 15px">Estado</span>
-     <?php
-    if($estadopersonalR==1){
-     echo' <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1" checked>Activo</label>';
-     echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="2">Inactivo</label>';
-    }else{
-      echo' <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1" >Activo</label>';
-      echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="2" checked>Inactivo</label>';
-
-    }
-      ?>
-
-     
-     </div>
-     <br>
-     <br>
-      <div class="input-group " style="padding-bottom:25px;">
-      <i  class="fa fa-child"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sexo</span>
-      <?php 
-      if($isexopersonalR==1){
-    echo'<label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1" checked>Femenino</label>';
-    echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="masculino" name="sexo" value="2">Masculino</label>';
-}else{
-  echo'<label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1"> Femenino</label>';
-    echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="masculino" name="sexo" value="2" checked>Masculino</label>';
-
-}
-
-      ?>
-     
-     
-     </div>
-     
-                              
-                             
-                              
                           </div>
-                          
-
-                                                    <div class="col-md-12">
-                                                    <div class="col-md-3"></div>
-                              <div class="col-md-3">
-                              <br><b></b>
+                          <div class="col-md-12">
+                           <div class="col-md-3"></div>
+                           <div class="col-md-3">
+                              <br>
                               <!-- <button class="btn-flip btn btn-gradient btn-primary" onclick="verificar()">
                                 <div class="flip">
                                   <div class="side">
@@ -281,26 +146,99 @@ error_reporting(E_ALL & ~E_NOTICE);
                                 </div>
                                 <span class="icon"></span>
                               </button> -->
-                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;margin-left:25px" value="Cancelar" />
                               </div>
                         </div>
                         </div>
                       </form>
+                      
 
                     </div>
                   </div>
-                </div>
-                </form>
-              </div>
+                  <div class="col-md-1 ">
+                  </div>
 
-              </div>
-              </div>
-              </div>
+                  <div class="col-md-6 panel panel-info">
+                    <div class="col-md-12 panel-heading">
+                      <h4>Formulario Cargo.</h4>
+                    </div>
+
+                    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                      <div class="col-md-12">
+                        <form class="cmxform" id="formcliente" method="post" action="">
+                        <div class="panel-body">
+                        <div class="responsive-table">
+                      <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Modificar</th>
+                          <th>Nombre</th>
+                          <th>Estado</th>
+                          <th>Activar/Desactivar</th>
+                          
+                          
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      <?php
+include "../config/conexion.php";
+$result = $conexion->query("select eid_cargo as id,ccargo as cargo FROM tcargos");
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";
+        echo "<td>
+          <div class='col-md-2' style='margin-top:1px'>
+            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_cargo. ")';>
+            <div>
+              <span>Editar</span>
             </div>
+            </button>
+            </div>
+        </td>";
+        //echo "<tr>";
+        //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
+        //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
+       
+        echo "<td>" . $fila->cargo . "</td>";
+       
+       
+        if ($fila->estado==1) {
+          echo "<td>Activo</td>";
+           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
+          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_cargo. ",1);><i class='fa fa-remove'></i>
+             </button></td>";
+       }else
+       {
+          echo "<td>Inactivo</td>";
+           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
+          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_cargo . ",2);><i class='fa fa-check'></i>
+             </button></td>";
+       }
+       
+        
+        echo "</tr>";
+
+    }
+}
+
+?>
+                      </tbody>
+                      </table>
+                      </div>
+                      </form>
+                        </div>
+                        </div>
+                        </div>
+                        
+
+             
           <!-- end: content -->
+          
 
 
-      </div>
+      
 
       <!-- start: Mobile -->
       <div id="mimin-mobile" class="reverse">
@@ -678,19 +616,12 @@ include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
 $baccion  = $_REQUEST["baccion"];
-$codigo    = $_REQUEST["codigo"];
+
 $nombre  = $_REQUEST["nombre"];
-$apellido  = $_REQUEST["apellido"];
-$direccion      = $_REQUEST["direccion"];
-$fechanacimiento       = $_REQUEST["fechanacimiento"];
-$correo     = $_REQUEST["correo"];
-$telefono = $_REQUEST["telefono"];
-$cargo     = $_REQUEST["cargo"];
-$estado     = $_REQUEST["estado"];
-$sexo     = $_REQUEST["sexo"];
+
 
 if ($bandera == "add") {
-    $consulta  = "UPDATE tpersonal set ccodigo='" . $codigo . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "',iestado='" . $estado . "',isexo='" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
+    $consulta  = "INSERT INTO tcargos VALUES('null','" . $nombre . "')";
     $resultado = $conexion->query($consulta);
     
    
@@ -706,7 +637,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listapersonal.php';";
+    
     echo "</script>";
 }
 ?>
