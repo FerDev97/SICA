@@ -93,6 +93,7 @@
                               <div class="input-group " style="padding-bottom:10px;">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                                 <select id="bloque"  class="form-control" name="bloque" >
+                                  <option value="0">Seleccione un bloque</option>
                                   <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
                                   <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
                                   <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
@@ -799,7 +800,15 @@
             alert("No selecciono un dia");
             return false;
         }
-        
+        if(dia2 == "0"){
+            alert("No selecciono un dia");
+            return false;
+        }
+        if(bloque == "0"){
+            alert("No selecciono un bloque");
+            return false;
+        }
+
         var todo = $("#insertar").serialize();
 
         $.ajax({
@@ -808,7 +817,9 @@
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
-                
+                $("#dia1 option[value=0]").prop("selected",true);
+                $("#dia2 option[value=0]").prop("selected",true);
+                $("#bloque option[value=0]").prop("selected",true);
             },
             error: function(respuesta){
               alert("Error en el servidor: "+respuesta); 
@@ -826,6 +837,7 @@
       var dato = $("#dia1").val();
        if(dato == "Lunes"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -833,6 +845,7 @@
        }
        if(dato == "Martes"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -840,6 +853,7 @@
        }
        if(dato == "Miercoles"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -847,6 +861,7 @@
        }
        if(dato == "Jueves"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
@@ -854,6 +869,7 @@
        }
        if(dato == "Viernes"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
