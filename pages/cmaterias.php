@@ -27,6 +27,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script> 
+
+
+       function modify(id)
+        {
+          alert("entra:"+id);
+          document.location.href='editmateria.php?id='+id;
+        }
       function confirmar(id,op)
         {
           if (op==1)
