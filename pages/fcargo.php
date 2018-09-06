@@ -1,18 +1,16 @@
 <?php
-//Codigo que muestra solo los errores exceptuando los notice.
-error_reporting(E_ALL & ~E_NOTICE);
-?>
-<?php
 
 $id  = $_REQUEST["id"];
 $aux = " ";
 
 include "../config/conexion.php";
-$result = $conexion->query("select * from tcargos where eid_cargos=" . $id);
+$result = $conexion->query("select * from tcargos where eid_cargo=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
-        $idcargosR   = $fila->eid_cargo;
-        $nombreR     = $fila->ccargo;
+        $idcargoR   = $fila->eid_cargo;
+        $cargoR    = $fila->ccargo;
+        
+       
        
     }
     $aux = "modificar";
@@ -45,7 +43,7 @@ if ($result) {
       <script type="text/javascript">
      
       function verificar(){
-          if( document.getElementById('nombre').value=="" ){
+          if( document.getElementById('cargo').value=="" ){
             alert("Complete los campos");
           }else{
             if (document.getElementById("aux").value=="modificar") {
@@ -63,11 +61,8 @@ if ($result) {
 
         function modify(id)
         {
-          
-          document.getElementById('nombre').value="";
-          
-
-         document.location.href='fcargo.php?id='+id;
+          document.getElementById('cargo').value=="";
+          document.location.href='fcargo.php?id='+id;
         }
          function confirmar(id)
         {
@@ -103,9 +98,9 @@ if ($result) {
               </div>
               <form id="turismo" name="turismo" action="" method="post">
               <input type="hidden" name="bandera" id="bandera">
-              <input type="hidden" name="baccion" id="baccion" value="<?php echo $idcatalogoR; ?>" >
+              <input type="hidden" name="baccion" id="baccion" value="<?php echo $idcargoR ; ?>" >
               <input type="hidden" name="aux" id="aux" value="<?php echo $aux; ?>">
-              <input type="hidden" name="r" id="r" value="">
+              
               <div class="col-md-12">
                   <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
@@ -119,7 +114,7 @@ if ($result) {
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
+                                  <input id="cargo" type="text" class="form-control" name="cargo" placeholder="Nombre" value="<?php echo $cargoR ; ?>" >
                               </div>  
                               </div>
                                <div class="col-md-12">
@@ -132,7 +127,7 @@ if ($result) {
                           <div>
                             <br><b></b>
                           
-                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;margin-left:25px;" value="Cancelar" />
                               </div>
 
                               
@@ -154,38 +149,37 @@ if ($result) {
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th></th>
-                          <th>Codigo</th>
+                          <th>Modificar</th>
+                          
                           <th>Nombre</th>
+                          <th>Eliminar</th>
                           
                         </tr>
                       </thead>
                       <tbody>
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select * from catalogo order by codigocuenta");
+$result = $conexion->query("SELECT eid_cargo,ccargo as cargo FROM tcargos");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->idcatalogo . ")';>
+            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_cargo. ")';>
             <div>
               <span>Editar</span>
             </div>
             </button>
             </div>
         </td>";
-        //echo "<tr>";
-        //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
-        //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
+        
        
-        echo "<td>" . $fila->nombrecuenta . "</td>";
+        echo "<td>" . $fila->cargo. "</td>";
        
 
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idcatalogo . ")'>
+            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->eid_cargo. ")';>
             <div>
               <span>Borrar</span>
             </div>
@@ -406,40 +400,39 @@ include "../config/conexion.php";
 
 $bandera      = $_REQUEST["bandera"];
 $baccion      = $_REQUEST["baccion"];
-$nivelcuenta  = $_REQUEST["nivelcuenta"];
-$nombrecuenta = $_REQUEST["nombrecuenta"];
-$codigocuenta = $_REQUEST["codigocuenta"];
-$tipocuenta   = $_REQUEST["tipocuenta"];
-$saldocuenta  = $_REQUEST["saldocuenta"];
-$r            = $_REQUEST["r"];
+$cargo = $_REQUEST["cargo"];
+
+
 if ($bandera == "add") {
-    $consulta  = "INSERT INTO catalogo VALUES('null','" . $codigocuenta . "','" . $nombrecuenta . "','" . $tipocuenta . "','" . $saldocuenta . "','" . $r . "','" . $nivelcuenta . "')";
+    $consulta  = "INSERT INTO tcargos VALUES('null','" . $cargo . "')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
       echo "<script type='text/javascript'>";
       echo "alert('Exito');";
-      echo "document.location.href='cuenta.php';";
+      
+      echo "document.location.href='fcargo.php';";
       echo "</script>";
     } else {
         msg("No Exito");
     }
 }
 if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM catalogo where idcatalogo='" . $baccion . "'";
+    $consulta  = "DELETE FROM tcargos where eid_cargo='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
         msg("Exito");
+       
     } else {
         msg("No Exito");
     }
 }
 if ($bandera == "modificar") {
-    $consulta  = "UPDATE catalogo set codigocuenta='" . $codigocuenta . "',nombrecuenta='" . $nombrecuenta . "',tipocuenta='" . $tipocuenta . "',saldo='" . $saldocuenta . "',r='" . $r . "',nivel='" . $nivel . "' where idcatalogo='" . $baccion . "'";
+    $consulta  = "UPDATE tcargos set ccargo='" . $cargo .  "' where eid_cargo='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
       echo "<script type='text/javascript'>";
       echo "alert('$texto');";
-      echo "document.location.href='cuenta.php';";
+      echo "document.location.href='cargo.php';";
       echo "</script>";
     } else {
         msg("No Exito");
@@ -455,7 +448,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-  //  echo "document.location.href='cuenta.php';";
+ 
     echo "</script>";
 }
 

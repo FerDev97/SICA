@@ -133,7 +133,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" value="<?php echo $codigopersonalR; ?>">
+                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" value="<?php echo $codigopersonalR; ?>" readonly="readonly" >
                               </div> 
                               <br>
                               <br> 

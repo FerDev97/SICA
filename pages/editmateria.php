@@ -1,7 +1,7 @@
 <?php
 $id = $_REQUEST["id"];
 include "../config/conexion.php";
-$result = $conexion->query("select * from tmaterias where eid_materia=" . $id);
+$result = $conexion->query("select * from tmaterias,tpersonal_materia where eid_materia=" . $id." and efk_idmateria=".$id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
         $idmateriaR       = $fila->eid_materia;
@@ -10,7 +10,7 @@ if ($result) {
         $descripcionR = $fila->cdescripcion;
         $idopcion = $fila->efk_idopcion;
         $idhorario = $fila->efk_idhorario;
-        
+        $iddocente=$fila->efk_idpersonal;
 
     }
 }
@@ -99,6 +99,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
+                <input type="hidden" name="baccion" id="baccion" value="<?php echo $idmateriaR; ?>">
                 <input type="hidden" name="lastindex" id="lastindex" value="<?php echo ".$last." ?>">
                 
                 <div class="col-md-12">
@@ -148,13 +149,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                  
-                             echo "<option value='".$fila->id."'>".$fila->dias." ".$fila->bloque."</option>";
+
+                           if ($idhorario==$fila->id) {
+                              echo "<option selected value='".$fila->id."'>".$fila->dias." ".$fila->bloque."</option>";
                           
-                            
-                         
-                         
-                        
+                          } else {
+                              echo "<option value='".$fila->id."'>".$fila->dias." ".$fila->bloque."</option>";
+                          
+                          }
+  
                            }
                       }
                        ?>
@@ -172,11 +175,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          if ($idhorario==$fila->id) {
+
+                          if ($iddocente==$fila->id) {
                             echo "<option selected value='".$fila->id."'>".$fila->nombre."</option>";
                           } else {
                             echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
                           }
+                          
+                           
+                          
                           
                           
                          
@@ -485,17 +492,24 @@ error_reporting(E_ALL & ~E_NOTICE);
 include "../config/conexion.php";
 
 $bandera  = $_REQUEST["bandera"];
+$baccion  = $_REQUEST["baccion"];
 $codigom    = $_REQUEST["codigom"];
 $nombrem  = $_REQUEST["nombrem"];
 $descripcionm       = $_REQUEST["descripcionm"];
 $horario       = $_REQUEST["horario"];
 $docente = $_REQUEST["docente"];
 $opcion = $_REQUEST["opcion"];
-
+msg($codigom);
+msg($nombrem);
+msg($descripcionm);
+msg($horario  );
+msg($docente);
+msg($opcion);
 if ($bandera == "add") {
-   msg("Entra a a gregar");
-    $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
+  
+    $consulta  = "UPDATE tmaterias set ccodigo='" . $codigom . "',cnombre='" . $nombrem . "',cdescripcion='" . $descripcionm . "',efk_idopcion='" . $opcion . "',efk_idhorario='" . $horario . "',estado='1' where eid_materia='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
+    echo "".$consulta;
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.
         $result = $conexion->query("select MAX(eid_materia) as max from tmaterias");
@@ -503,14 +517,13 @@ if ($bandera == "add") {
 
                         while ($fila = $result->fetch_object()) {
                           $last=$fila->max;
-                         
-                        
+                                                 
                            }
                       }
         //Finde bloque.
         msg("Agrego materia.");
         //Query para agregar a la tabla de muchos a muchos.
-        $consulta2  = "INSERT INTO tpersonal_materia VALUES('null','" . $docente . "','" . $last . "')";
+        $consulta2  = "UPDATE tpersonal_materia set efk_idpersonal='" . $docente . "' where efk_idmateria='" . $baccion . "'";
         $resultado2 = $conexion->query($consulta2);
        if ($resultado2) {
     
@@ -528,7 +541,7 @@ if ($bandera == "add") {
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "prueba('$texto');";
+    echo "alert('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
