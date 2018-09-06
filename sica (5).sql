@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2018 a las 06:24:27
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Tiempo de generación: 06-09-2018 a las 22:06:33
+-- Versión del servidor: 10.1.29-MariaDB
+-- Versión de PHP: 7.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -182,8 +182,7 @@ CREATE TABLE `tgrado` (
 --
 
 INSERT INTO `tgrado` (`eid_grado`, `cgrado`) VALUES
-(1, 1),
-(2, 2);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -194,16 +193,19 @@ INSERT INTO `tgrado` (`eid_grado`, `cgrado`) VALUES
 CREATE TABLE `thorarios` (
   `eid_horario` int(11) NOT NULL,
   `cdia` varchar(20) NOT NULL,
-  `chora` varchar(20) NOT NULL
+  `chora` varchar(20) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `thorarios`
 --
 
-INSERT INTO `thorarios` (`eid_horario`, `cdia`, `chora`) VALUES
-(1, 'Lunes y Martes', '7:00 AM - 10:00 AM'),
-(2, 'Martes y Miercoles', '10:00 AM - 12:00 PM');
+INSERT INTO `thorarios` (`eid_horario`, `cdia`, `chora`, `estado`) VALUES
+(1, 'Lunes y Viernes', '7:00 AM - 10:00 AM', 1),
+(2, 'Martes y Miercoles', '10:00 AM - 12:00 PM', 1),
+(3, 'Miercoles y Viernes', '03:00 PM - 05:00 PM', 1),
+(4, 'Jueves y Viernes', '03:00 PM - 05:00 PM', 0);
 
 -- --------------------------------------------------------
 
@@ -226,9 +228,7 @@ CREATE TABLE `tmaterias` (
 --
 
 INSERT INTO `tmaterias` (`eid_materia`, `ccodigo`, `cnombre`, `cdescripcion`, `efk_idopcion`, `efk_idhorario`, `estado`) VALUES
-(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 1, 1),
-(2, '001', 'Lenguaje', 'Esta materia es la de lenguaje.', 1, 1, 1),
-(3, '002', 'Lenguaje', 'Materia donde se imparte literatura.', 1, 2, 0);
+(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -257,17 +257,15 @@ CREATE TABLE `topciones` (
   `ecupo_maximo` int(11) NOT NULL,
   `efk_bto` int(11) NOT NULL,
   `efk_grado` int(11) NOT NULL,
-  `efk_seccion` int(11) NOT NULL,
-  `eestado` int(11) NOT NULL
+  `efk_seccion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `topciones`
 --
 
-INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`) VALUES
-(1, 100, 1, 1, 1, 0),
-(2, 35, 1, 2, 1, 1);
+INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`) VALUES
+(1, 100, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -306,7 +304,7 @@ CREATE TABLE `tpermisos` (
 
 CREATE TABLE `tpersonal` (
   `eid_personal` int(11) NOT NULL,
-  `ccodigo` varchar(8) NOT NULL,
+  `cdui` varchar(10) NOT NULL,
   `cnombre` varchar(50) NOT NULL,
   `capellido` varchar(50) NOT NULL,
   `ctelefono` varchar(10) NOT NULL,
@@ -322,10 +320,13 @@ CREATE TABLE `tpersonal` (
 -- Volcado de datos para la tabla `tpersonal`
 --
 
-INSERT INTO `tpersonal` (`eid_personal`, `ccodigo`, `cnombre`, `capellido`, `ctelefono`, `ccorreo`, `cdireccion`, `ffechanacimiento`, `iestado`, `isexo`, `efk_idcargo`) VALUES
+INSERT INTO `tpersonal` (`eid_personal`, `cdui`, `cnombre`, `capellido`, `ctelefono`, `ccorreo`, `cdireccion`, `ffechanacimiento`, `iestado`, `isexo`, `efk_idcargo`) VALUES
 (1, '01', 'Fernando', 'Hernandez', '2345', 'hola', 'Sivar', '2018-08-04', 1, 2, 1),
 (3, '02', 'Jessica', 'Rosales', '23456798', 'jessi', 'San Vicente', '2018-08-02', 1, 1, 2),
-(4, '03', 'Alexander', 'Carcamo', '3457623', 'alexito', 'San Cayetano', '2018-08-18', 2, 2, 3);
+(4, '03', 'Alexander', 'Carcamo', '3457623', 'alexito', 'San Cayetano', '2018-08-18', 2, 2, 3),
+(5, '00000004', 'Alexander', 'Rosales RodrÃ­guez', '2345', 'alexito', 'San Cayetano', '2018-09-21', 0, 2, 2),
+(6, '00000005', 'Carmen', 'Henriquez', '23456789', 'carmen@gmail.com', 'San Vicente', '2018-09-14', 1, 1, 1),
+(7, '12344555-5', 'Josue Alexander', 'Hernandez', '12345678', 'alexito@gmail.com', 'San Rafael', '2018-09-14', 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -344,8 +345,7 @@ CREATE TABLE `tpersonal_materia` (
 --
 
 INSERT INTO `tpersonal_materia` (`eid_pm`, `efk_idpersonal`, `efk_idmateria`) VALUES
-(1, 4, 1),
-(2, 4, 3);
+(0, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -583,101 +583,115 @@ ALTER TABLE `tusuarios`
 --
 ALTER TABLE `talumno`
   MODIFY `eid_alumno` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `talumno_responsable`
 --
 ALTER TABLE `talumno_responsable`
   MODIFY `id_ar` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `talum_mat_not`
 --
 ALTER TABLE `talum_mat_not`
   MODIFY `id_amn` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tanio`
 --
 ALTER TABLE `tanio`
   MODIFY `eid_anio` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tbachilleratos`
 --
 ALTER TABLE `tbachilleratos`
   MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
   MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tcargos`
 --
 ALTER TABLE `tcargos`
   MODIFY `eid_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `tdatos_adicionales`
 --
 ALTER TABLE `tdatos_adicionales`
   MODIFY `eid_datosadicionales` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tficha`
 --
 ALTER TABLE `tficha`
   MODIFY `eid_ficha` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tgrado`
 --
 ALTER TABLE `tgrado`
-  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `thorarios`
 --
 ALTER TABLE `thorarios`
-  MODIFY `eid_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `eid_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `tmaterias`
 --
 ALTER TABLE `tmaterias`
-  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `tnotas`
 --
 ALTER TABLE `tnotas`
   MODIFY `eid_notas` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `topciones`
 --
 ALTER TABLE `topciones`
-  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `tperiodos`
 --
 ALTER TABLE `tperiodos`
   MODIFY `eid_periodo` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tpersonal`
 --
 ALTER TABLE `tpersonal`
-  MODIFY `eid_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `tpersonal_materia`
---
-ALTER TABLE `tpersonal_materia`
-  MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `eid_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT de la tabla `tresponsable`
 --
 ALTER TABLE `tresponsable`
   MODIFY `eid_responsable` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `tsecciones`
 --
 ALTER TABLE `tsecciones`
   MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `ttipobachillerato`
 --
 ALTER TABLE `ttipobachillerato`
   MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -773,9 +787,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-<<<<<<< HEAD:sica.sql
-=======
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-09-05 22:37:03
->>>>>>> b058493c9fcb6442610826fa8cde517ddfab8672:sicaultimaversion.sql
