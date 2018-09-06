@@ -29,13 +29,14 @@
       <script type="text/javascript">
         function modify(id)
         {
-          //alert("entra");
+         
           document.getElementById('bandera').value='enviar';
           document.getElementById('baccion').value=id;
          document.turismo.submit();
         }
          function confirmar(id)
         {
+          alert("entra");
           if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
             document.getElementById('bandera').value='desaparecer';
             document.getElementById('baccion').value=id;
@@ -45,6 +46,33 @@
           {
             alert("No entra");
           }
+
+        }
+        function confirmarAct(id,op)
+        {
+          alert("entra");
+          
+          if (op==1) {
+            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
+            document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }else{
+            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }
+
 
         }
 
@@ -90,15 +118,17 @@
                           <th>Nombre</th>
                           <th>Tipo</th>
                           <th>Seccion</th>
-                          <th>Editar</th>
+                          <th>Estado</th>
                           <th>Alta/Baja</th>
+                          <th>Editar</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT tbachilleratos.ccodigo,tbachilleratos.cnombe,ttipobachillerato.ctipo,tgrado.cgrado,tsecciones.cseccion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion ORDER BY eid_grado");
+$result = $conexion->query("SELECT tsecciones.cseccion,topciones.eestado,eid_opcion,tbachilleratos.cnombe,ccodigo,tgrado.cgrado,ttipobachillerato.ctipo FROM topciones INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo ORDER BY eid_grado");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -112,24 +142,28 @@ if ($result) {
         echo "<td>" . $fila->cnombe . "</td>";
         echo "<td>" . $fila->ctipo . "</td>";
         echo "<td>" . $fila->cseccion . "</td>";
+        if ($fila->eestado==1) {
+          echo "<td>Activo</td>";
+           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
+          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmarAct(" . $fila->eid_opcion . ",1);><i class='fa fa-remove'></i>
+             </button></td>";
+       }else
+       {
+          echo "<td>Inactivo</td>";
+           //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
+          echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmarAct(" . $fila->eid_opcion . ",2);><i class='fa fa-check'></i>
+             </button></td>";
+       }
         echo "<td>
           <div class='col-md-1' style='margin-top:4px'>
             <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idempleado . ")'>
             <div>
-              <span>Borrar</span>
+              <span>Editar</span>
             </div>
             </button>
             </div>
         </td>";
-        echo "<td>
-        <div class='col-md-1' style='margin-top:1px'>
-          <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->idempleado . ")';>
-          <div>
-            <span>Editar</span>
-          </div>
-          </button>
-          </div>
-      </td>";
+        
         echo "</tr>";
 
     }
@@ -331,6 +365,24 @@ if ($bandera == "add") {
         msg("No Exito");
     }
 }
+if ($bandera == "desactivar") {
+  $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
+if ($bandera == "activar") {
+  $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
 if ($bandera == "desaparecer") {
     $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
@@ -350,7 +402,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+    echo "document.location.href='listaOpciones.php';";
     echo "</script>";
 }
 ?>

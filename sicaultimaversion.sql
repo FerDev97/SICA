@@ -1,250 +1,158 @@
--- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1    Database: sica
--- ------------------------------------------------------
--- Server version	5.5.5-10.1.34-MariaDB
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-09-2018 a las 06:24:27
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `talum_mat_not`
+-- Base de datos: `sica`
 --
 
-DROP TABLE IF EXISTS `talum_mat_not`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `talum_mat_not` (
-  `id_amn` int(11) NOT NULL AUTO_INCREMENT,
-  `efk_idalumno` int(11) NOT NULL,
-  `efk_idmateria` int(11) NOT NULL,
-  `efk_idnota` int(11) NOT NULL,
-  PRIMARY KEY (`id_amn`),
-  KEY `fkalumno` (`efk_idalumno`),
-  KEY `fkmaetria` (`efk_idmateria`),
-  KEY `fknota` (`efk_idnota`),
-  CONSTRAINT `fkalumno` FOREIGN KEY (`efk_idalumno`) REFERENCES `talumno` (`eid_alumno`),
-  CONSTRAINT `fkmaetria` FOREIGN KEY (`efk_idmateria`) REFERENCES `tmaterias` (`eid_materia`),
-  CONSTRAINT `fknota` FOREIGN KEY (`efk_idnota`) REFERENCES `tnotas` (`eid_notas`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `talum_mat_not`
+-- Estructura de tabla para la tabla `talumno`
 --
 
-LOCK TABLES `talum_mat_not` WRITE;
-/*!40000 ALTER TABLE `talum_mat_not` DISABLE KEYS */;
-/*!40000 ALTER TABLE `talum_mat_not` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `talumno`
---
-
-DROP TABLE IF EXISTS `talumno`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `talumno` (
-  `eid_alumno` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_alumno` int(11) NOT NULL,
   `ccodigo` varchar(6) NOT NULL,
   `cnie` varchar(15) NOT NULL,
   `cnombre` varchar(100) NOT NULL,
   `capellido` varchar(100) NOT NULL,
   `cdireccion` varchar(200) NOT NULL,
   `edepto` varchar(50) NOT NULL,
-  `ffecha_nac` date NOT NULL,
-  PRIMARY KEY (`eid_alumno`)
+  `ffecha_nac` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `talumno`
+-- Estructura de tabla para la tabla `talumno_responsable`
 --
 
-LOCK TABLES `talumno` WRITE;
-/*!40000 ALTER TABLE `talumno` DISABLE KEYS */;
-/*!40000 ALTER TABLE `talumno` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `talumno_responsable`
---
-
-DROP TABLE IF EXISTS `talumno_responsable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `talumno_responsable` (
-  `id_ar` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ar` int(11) NOT NULL,
   `efk_alumno` int(11) NOT NULL,
-  `efk_responsable` int(11) NOT NULL,
-  PRIMARY KEY (`id_ar`),
-  KEY `fkalumnos` (`efk_alumno`),
-  KEY `fkresponsable` (`efk_responsable`),
-  CONSTRAINT `fkalumnos` FOREIGN KEY (`efk_alumno`) REFERENCES `talumno` (`eid_alumno`),
-  CONSTRAINT `fkresponsable` FOREIGN KEY (`efk_responsable`) REFERENCES `tresponsable` (`eid_responsable`)
+  `efk_responsable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `talumno_responsable`
+-- Estructura de tabla para la tabla `talum_mat_not`
 --
 
-LOCK TABLES `talumno_responsable` WRITE;
-/*!40000 ALTER TABLE `talumno_responsable` DISABLE KEYS */;
-/*!40000 ALTER TABLE `talumno_responsable` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `talum_mat_not` (
+  `id_amn` int(11) NOT NULL,
+  `efk_idalumno` int(11) NOT NULL,
+  `efk_idmateria` int(11) NOT NULL,
+  `efk_idnota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tanio`
+-- Estructura de tabla para la tabla `tanio`
 --
 
-DROP TABLE IF EXISTS `tanio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tanio` (
-  `eid_anio` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_anio` int(11) NOT NULL,
   `canio` int(11) NOT NULL,
-  `iestado` int(11) NOT NULL,
-  PRIMARY KEY (`eid_anio`)
+  `iestado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tanio`
+-- Estructura de tabla para la tabla `tbachilleratos`
 --
 
-LOCK TABLES `tanio` WRITE;
-/*!40000 ALTER TABLE `tanio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tanio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tbachilleratos`
---
-
-DROP TABLE IF EXISTS `tbachilleratos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tbachilleratos` (
-  `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_bachillerato` int(11) NOT NULL,
   `ccodigo` varchar(20) NOT NULL,
   `cnombe` varchar(30) NOT NULL,
   `cdescripcion` varchar(200) NOT NULL,
-  `efk_tipo` int(11) NOT NULL,
-  PRIMARY KEY (`eid_bachillerato`),
-  KEY `fktipo` (`efk_tipo`),
-  CONSTRAINT `fktipo` FOREIGN KEY (`efk_tipo`) REFERENCES `ttipobachillerato` (`eid_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `efk_tipo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbachilleratos`
+-- Volcado de datos para la tabla `tbachilleratos`
 --
 
-LOCK TABLES `tbachilleratos` WRITE;
-/*!40000 ALTER TABLE `tbachilleratos` DISABLE KEYS */;
-INSERT INTO `tbachilleratos` VALUES (1,'001','Contador','Esta materia es de contqador.',1);
-/*!40000 ALTER TABLE `tbachilleratos` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tbachilleratos` (`eid_bachillerato`, `ccodigo`, `cnombe`, `cdescripcion`, `efk_tipo`) VALUES
+(1, '001', 'Contador', 'Esta materia es de contqador.', 1);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tbitacora`
+-- Estructura de tabla para la tabla `tbitacora`
 --
 
-DROP TABLE IF EXISTS `tbitacora`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tbitacora` (
-  `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_bitacora` int(11) NOT NULL,
   `efk_idusuario` int(11) NOT NULL,
   `dtfecha` datetime NOT NULL,
-  `cdescripcion` varchar(200) NOT NULL,
-  PRIMARY KEY (`eid_bitacora`),
-  KEY `fk_idusuario` (`efk_idusuario`),
-  CONSTRAINT `fk_idusuario` FOREIGN KEY (`efk_idusuario`) REFERENCES `tusuarios` (`eid_usuario`)
+  `cdescripcion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tbitacora`
+-- Estructura de tabla para la tabla `tcargos`
 --
 
-LOCK TABLES `tbitacora` WRITE;
-/*!40000 ALTER TABLE `tbitacora` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbitacora` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tcargos`
---
-
-DROP TABLE IF EXISTS `tcargos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tcargos` (
-  `eid_cargo` int(11) NOT NULL AUTO_INCREMENT,
-  `ccargo` varchar(50) NOT NULL,
-  PRIMARY KEY (`eid_cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `eid_cargo` int(11) NOT NULL,
+  `ccargo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tcargos`
+-- Volcado de datos para la tabla `tcargos`
 --
 
-LOCK TABLES `tcargos` WRITE;
-/*!40000 ALTER TABLE `tcargos` DISABLE KEYS */;
-INSERT INTO `tcargos` VALUES (1,'Secretaria'),(2,'Director'),(3,'Docente');
-/*!40000 ALTER TABLE `tcargos` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tcargos` (`eid_cargo`, `ccargo`) VALUES
+(1, 'Secretaria'),
+(2, 'Director'),
+(3, 'Docente');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tdatos_adicionales`
+-- Estructura de tabla para la tabla `tdatos_adicionales`
 --
 
-DROP TABLE IF EXISTS `tdatos_adicionales`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tdatos_adicionales` (
-  `eid_datosadicionales` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_datosadicionales` int(11) NOT NULL,
   `bfoto_alumno` mediumblob NOT NULL,
   `bfoto_partida` mediumblob NOT NULL,
   `bfoto_bautismo` mediumblob NOT NULL,
   `bfoto_comunion` mediumblob NOT NULL,
-  `efk_ficha` int(11) NOT NULL,
-  PRIMARY KEY (`eid_datosadicionales`),
-  KEY `fkfichadatos` (`efk_ficha`),
-  CONSTRAINT `fkfichadatos` FOREIGN KEY (`efk_ficha`) REFERENCES `tficha` (`eid_ficha`)
+  `efk_ficha` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tdatos_adicionales`
+-- Estructura de tabla para la tabla `tficha`
 --
 
-LOCK TABLES `tdatos_adicionales` WRITE;
-/*!40000 ALTER TABLE `tdatos_adicionales` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tdatos_adicionales` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tficha`
---
-
-DROP TABLE IF EXISTS `tficha`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tficha` (
-  `eid_ficha` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_ficha` int(11) NOT NULL,
   `cdistancia` varchar(50) NOT NULL,
   `cmedio_trans` varchar(50) NOT NULL,
   `cenfermedades` varchar(200) NOT NULL,
@@ -255,203 +163,130 @@ CREATE TABLE `tficha` (
   `erepite` int(11) NOT NULL,
   `efk_anio` int(11) NOT NULL,
   `efk_alumno` int(11) NOT NULL,
-  `efk_opcion` int(11) NOT NULL,
-  PRIMARY KEY (`eid_ficha`),
-  KEY `fkanio` (`efk_anio`),
-  KEY `fkalumnoficha` (`efk_alumno`),
-  KEY `fkopciones` (`efk_opcion`),
-  CONSTRAINT `fkalumnoficha` FOREIGN KEY (`efk_alumno`) REFERENCES `talumno` (`eid_alumno`),
-  CONSTRAINT `fkanio` FOREIGN KEY (`efk_anio`) REFERENCES `tanio` (`eid_anio`),
-  CONSTRAINT `fkopciones` FOREIGN KEY (`efk_opcion`) REFERENCES `topciones` (`eid_opcion`)
+  `efk_opcion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tficha`
+-- Estructura de tabla para la tabla `tgrado`
 --
 
-LOCK TABLES `tficha` WRITE;
-/*!40000 ALTER TABLE `tficha` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tficha` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tgrado`
---
-
-DROP TABLE IF EXISTS `tgrado`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tgrado` (
-  `eid_grado` int(11) NOT NULL AUTO_INCREMENT,
-  `cgrado` int(11) NOT NULL,
-  PRIMARY KEY (`eid_grado`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `eid_grado` int(11) NOT NULL,
+  `cgrado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tgrado`
+-- Volcado de datos para la tabla `tgrado`
 --
 
-LOCK TABLES `tgrado` WRITE;
-/*!40000 ALTER TABLE `tgrado` DISABLE KEYS */;
-INSERT INTO `tgrado` VALUES (1,1);
-/*!40000 ALTER TABLE `tgrado` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tgrado` (`eid_grado`, `cgrado`) VALUES
+(1, 1),
+(2, 2);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `thorarios`
+-- Estructura de tabla para la tabla `thorarios`
 --
 
-DROP TABLE IF EXISTS `thorarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `thorarios` (
-  `eid_horario` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_horario` int(11) NOT NULL,
   `cdia` varchar(20) NOT NULL,
-  `chora` varchar(20) NOT NULL,
-  `estado` int(11) NOT NULL,
-  PRIMARY KEY (`eid_horario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `chora` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `thorarios`
+-- Volcado de datos para la tabla `thorarios`
 --
 
-LOCK TABLES `thorarios` WRITE;
-/*!40000 ALTER TABLE `thorarios` DISABLE KEYS */;
-INSERT INTO `thorarios` VALUES (1,'Lunes y Viernes','7:00 AM - 10:00 AM',1),(2,'Martes y Miercoles','10:00 AM - 12:00 PM',1),(3,'Miercoles y Viernes','03:00 PM - 05:00 PM',1),(4,'Jueves y Viernes','03:00 PM - 05:00 PM',1);
-/*!40000 ALTER TABLE `thorarios` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `thorarios` (`eid_horario`, `cdia`, `chora`) VALUES
+(1, 'Lunes y Martes', '7:00 AM - 10:00 AM'),
+(2, 'Martes y Miercoles', '10:00 AM - 12:00 PM');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tmaterias`
+-- Estructura de tabla para la tabla `tmaterias`
 --
 
-DROP TABLE IF EXISTS `tmaterias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tmaterias` (
-  `eid_materia` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_materia` int(11) NOT NULL,
   `ccodigo` varchar(10) NOT NULL,
   `cnombre` varchar(30) NOT NULL,
   `cdescripcion` varchar(200) NOT NULL,
   `efk_idopcion` int(11) NOT NULL,
   `efk_idhorario` int(11) NOT NULL,
-  `estado` int(11) NOT NULL,
-  PRIMARY KEY (`eid_materia`),
-  KEY `fkopcion` (`efk_idopcion`),
-  KEY `fkhorario_idx` (`efk_idhorario`),
-  CONSTRAINT `fkhorario` FOREIGN KEY (`efk_idhorario`) REFERENCES `thorarios` (`eid_horario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fkopcion` FOREIGN KEY (`efk_idopcion`) REFERENCES `topciones` (`eid_opcion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tmaterias`
+-- Volcado de datos para la tabla `tmaterias`
 --
 
-LOCK TABLES `tmaterias` WRITE;
-/*!40000 ALTER TABLE `tmaterias` DISABLE KEYS */;
-INSERT INTO `tmaterias` VALUES (1,'001','Matematicas','Esta es una materia llena de numeros.',1,1,0);
-/*!40000 ALTER TABLE `tmaterias` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tmaterias` (`eid_materia`, `ccodigo`, `cnombre`, `cdescripcion`, `efk_idopcion`, `efk_idhorario`, `estado`) VALUES
+(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 1, 1),
+(2, '001', 'Lenguaje', 'Esta materia es la de lenguaje.', 1, 1, 1),
+(3, '002', 'Lenguaje', 'Materia donde se imparte literatura.', 1, 2, 0);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tnotas`
+-- Estructura de tabla para la tabla `tnotas`
 --
 
-DROP TABLE IF EXISTS `tnotas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tnotas` (
-  `eid_notas` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_notas` int(11) NOT NULL,
   `dnota1` double NOT NULL,
   `dnota2` double NOT NULL,
   `dnota3` double NOT NULL,
   `drecuperacion` double NOT NULL,
   `dpromedio` double NOT NULL,
-  `efk_idperiodo` int(11) NOT NULL,
-  PRIMARY KEY (`eid_notas`),
-  KEY `fkperiodo` (`efk_idperiodo`),
-  CONSTRAINT `fkperiodo` FOREIGN KEY (`efk_idperiodo`) REFERENCES `tperiodos` (`eid_periodo`)
+  `efk_idperiodo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tnotas`
+-- Estructura de tabla para la tabla `topciones`
 --
 
-LOCK TABLES `tnotas` WRITE;
-/*!40000 ALTER TABLE `tnotas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tnotas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `topciones`
---
-
-DROP TABLE IF EXISTS `topciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `topciones` (
-  `eid_opcion` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_opcion` int(11) NOT NULL,
   `ecupo_maximo` int(11) NOT NULL,
   `efk_bto` int(11) NOT NULL,
   `efk_grado` int(11) NOT NULL,
   `efk_seccion` int(11) NOT NULL,
-  PRIMARY KEY (`eid_opcion`),
-  KEY `fkbto` (`efk_bto`),
-  KEY `fkgrado` (`efk_grado`),
-  KEY `fkseccion` (`efk_seccion`),
-  CONSTRAINT `fkbto` FOREIGN KEY (`efk_bto`) REFERENCES `tbachilleratos` (`eid_bachillerato`),
-  CONSTRAINT `fkgrado` FOREIGN KEY (`efk_grado`) REFERENCES `tgrado` (`eid_grado`),
-  CONSTRAINT `fkseccion` FOREIGN KEY (`efk_seccion`) REFERENCES `tsecciones` (`eid_seccion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `topciones`
---
-
-LOCK TABLES `topciones` WRITE;
-/*!40000 ALTER TABLE `topciones` DISABLE KEYS */;
-INSERT INTO `topciones` VALUES (1,100,1,1,1);
-/*!40000 ALTER TABLE `topciones` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tperiodos`
---
-
-DROP TABLE IF EXISTS `tperiodos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tperiodos` (
-  `eid_periodo` int(11) NOT NULL AUTO_INCREMENT,
-  `enum` int(11) NOT NULL,
-  `estado` int(11) NOT NULL,
-  PRIMARY KEY (`eid_periodo`)
+  `eestado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tperiodos`
+-- Volcado de datos para la tabla `topciones`
 --
 
-LOCK TABLES `tperiodos` WRITE;
-/*!40000 ALTER TABLE `tperiodos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tperiodos` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`) VALUES
+(1, 100, 1, 1, 1, 0),
+(2, 35, 1, 2, 1, 1);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tpermisos`
+-- Estructura de tabla para la tabla `tperiodos`
 --
 
-DROP TABLE IF EXISTS `tpermisos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tperiodos` (
+  `eid_periodo` int(11) NOT NULL,
+  `enum` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tpermisos`
+--
+
 CREATE TABLE `tpermisos` (
   `eid_permisos` int(11) NOT NULL,
   `ep_inscripciones` int(11) NOT NULL,
@@ -460,31 +295,17 @@ CREATE TABLE `tpermisos` (
   `ep_opciones` int(11) NOT NULL,
   `ep_materias` int(11) NOT NULL,
   `ep_notas` int(11) NOT NULL,
-  `efk_idusuario` int(11) NOT NULL,
-  PRIMARY KEY (`eid_permisos`),
-  KEY `fkusuario` (`efk_idusuario`),
-  CONSTRAINT `fkusuario` FOREIGN KEY (`efk_idusuario`) REFERENCES `tusuarios` (`eid_usuario`)
+  `efk_idusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tpermisos`
+-- Estructura de tabla para la tabla `tpersonal`
 --
 
-LOCK TABLES `tpermisos` WRITE;
-/*!40000 ALTER TABLE `tpermisos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tpermisos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tpersonal`
---
-
-DROP TABLE IF EXISTS `tpersonal`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tpersonal` (
-  `eid_personal` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_personal` int(11) NOT NULL,
   `ccodigo` varchar(8) NOT NULL,
   `cnombre` varchar(50) NOT NULL,
   `capellido` varchar(50) NOT NULL,
@@ -494,61 +315,46 @@ CREATE TABLE `tpersonal` (
   `ffechanacimiento` date NOT NULL,
   `iestado` int(11) NOT NULL,
   `isexo` int(11) NOT NULL,
-  `efk_idcargo` int(11) NOT NULL,
-  PRIMARY KEY (`eid_personal`),
-  KEY `fkcargo` (`efk_idcargo`),
-  CONSTRAINT `fkcargo` FOREIGN KEY (`efk_idcargo`) REFERENCES `tcargos` (`eid_cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `efk_idcargo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tpersonal`
+-- Volcado de datos para la tabla `tpersonal`
 --
 
-LOCK TABLES `tpersonal` WRITE;
-/*!40000 ALTER TABLE `tpersonal` DISABLE KEYS */;
-INSERT INTO `tpersonal` VALUES (1,'01','Fernando','Hernandez','2345','hola','Sivar','2018-08-04',1,2,1),(3,'02','Jessica','Rosales','23456798','jessi','San Vicente','2018-08-02',1,1,2),(4,'03','Alexander','Carcamo','3457623','alexito','San Cayetano','2018-08-18',2,2,3);
-/*!40000 ALTER TABLE `tpersonal` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tpersonal` (`eid_personal`, `ccodigo`, `cnombre`, `capellido`, `ctelefono`, `ccorreo`, `cdireccion`, `ffechanacimiento`, `iestado`, `isexo`, `efk_idcargo`) VALUES
+(1, '01', 'Fernando', 'Hernandez', '2345', 'hola', 'Sivar', '2018-08-04', 1, 2, 1),
+(3, '02', 'Jessica', 'Rosales', '23456798', 'jessi', 'San Vicente', '2018-08-02', 1, 1, 2),
+(4, '03', 'Alexander', 'Carcamo', '3457623', 'alexito', 'San Cayetano', '2018-08-18', 2, 2, 3);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tpersonal_materia`
+-- Estructura de tabla para la tabla `tpersonal_materia`
 --
 
-DROP TABLE IF EXISTS `tpersonal_materia`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tpersonal_materia` (
   `eid_pm` int(11) NOT NULL,
   `efk_idpersonal` int(11) NOT NULL,
-  `efk_idmateria` int(11) NOT NULL,
-  PRIMARY KEY (`eid_pm`),
-  KEY `fk_personal` (`efk_idpersonal`),
-  KEY `fk_materia` (`efk_idmateria`),
-  CONSTRAINT `fk_materia` FOREIGN KEY (`efk_idmateria`) REFERENCES `tmaterias` (`eid_materia`),
-  CONSTRAINT `fk_personal` FOREIGN KEY (`efk_idpersonal`) REFERENCES `tpersonal` (`eid_personal`)
+  `efk_idmateria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tpersonal_materia`
+-- Volcado de datos para la tabla `tpersonal_materia`
 --
 
-LOCK TABLES `tpersonal_materia` WRITE;
-/*!40000 ALTER TABLE `tpersonal_materia` DISABLE KEYS */;
-INSERT INTO `tpersonal_materia` VALUES (0,4,1);
-/*!40000 ALTER TABLE `tpersonal_materia` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tpersonal_materia` (`eid_pm`, `efk_idpersonal`, `efk_idmateria`) VALUES
+(1, 4, 1),
+(2, 4, 3);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tresponsable`
+-- Estructura de tabla para la tabla `tresponsable`
 --
 
-DROP TABLE IF EXISTS `tresponsable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tresponsable` (
-  `eid_responsable` int(11) NOT NULL AUTO_INCREMENT,
+  `eid_responsable` int(11) NOT NULL,
   `cnombre` varchar(50) NOT NULL,
   `capellido` varchar(50) NOT NULL,
   `clugar_trabajo` varchar(100) NOT NULL,
@@ -557,103 +363,419 @@ CREATE TABLE `tresponsable` (
   `cparentesco` varchar(20) NOT NULL,
   `econ_vivie` int(11) NOT NULL,
   `enum_miembros` int(11) NOT NULL,
-  `ereligion` int(11) NOT NULL,
-  PRIMARY KEY (`eid_responsable`)
+  `ereligion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tresponsable`
+-- Estructura de tabla para la tabla `tsecciones`
 --
 
-LOCK TABLES `tresponsable` WRITE;
-/*!40000 ALTER TABLE `tresponsable` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tresponsable` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tsecciones`
---
-
-DROP TABLE IF EXISTS `tsecciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tsecciones` (
-  `eid_seccion` int(11) NOT NULL AUTO_INCREMENT,
-  `cseccion` varchar(10) NOT NULL,
-  PRIMARY KEY (`eid_seccion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `eid_seccion` int(11) NOT NULL,
+  `cseccion` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tsecciones`
+-- Volcado de datos para la tabla `tsecciones`
 --
 
-LOCK TABLES `tsecciones` WRITE;
-/*!40000 ALTER TABLE `tsecciones` DISABLE KEYS */;
-INSERT INTO `tsecciones` VALUES (1,'A');
-/*!40000 ALTER TABLE `tsecciones` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `tsecciones` (`eid_seccion`, `cseccion`) VALUES
+(1, 'A');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `ttipobachillerato`
+-- Estructura de tabla para la tabla `ttipobachillerato`
 --
 
-DROP TABLE IF EXISTS `ttipobachillerato`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ttipobachillerato` (
-  `eid_tipo` int(11) NOT NULL AUTO_INCREMENT,
-  `ctipo` varchar(50) NOT NULL,
-  PRIMARY KEY (`eid_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `eid_tipo` int(11) NOT NULL,
+  `ctipo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ttipobachillerato`
+-- Volcado de datos para la tabla `ttipobachillerato`
 --
 
-LOCK TABLES `ttipobachillerato` WRITE;
-/*!40000 ALTER TABLE `ttipobachillerato` DISABLE KEYS */;
-INSERT INTO `ttipobachillerato` VALUES (1,'Tecnico');
-/*!40000 ALTER TABLE `ttipobachillerato` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `ttipobachillerato` (`eid_tipo`, `ctipo`) VALUES
+(1, 'Tecnico');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tusuarios`
+-- Estructura de tabla para la tabla `tusuarios`
 --
 
-DROP TABLE IF EXISTS `tusuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tusuarios` (
   `eid_usuario` int(11) NOT NULL,
   `cusuario` varchar(10) NOT NULL,
   `ccontraseña` varchar(50) NOT NULL,
   `etipo` int(11) NOT NULL,
-  `efk_personal` int(11) NOT NULL,
-  PRIMARY KEY (`eid_usuario`),
-  KEY `fkpersonal` (`efk_personal`),
-  CONSTRAINT `fkpersonal` FOREIGN KEY (`efk_personal`) REFERENCES `tpersonal` (`eid_personal`)
+  `efk_personal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tusuarios`
+-- Índices para tablas volcadas
 --
 
-LOCK TABLES `tusuarios` WRITE;
-/*!40000 ALTER TABLE `tusuarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tusuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Indices de la tabla `talumno`
+--
+ALTER TABLE `talumno`
+  ADD PRIMARY KEY (`eid_alumno`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indices de la tabla `talumno_responsable`
+--
+ALTER TABLE `talumno_responsable`
+  ADD PRIMARY KEY (`id_ar`),
+  ADD KEY `fkalumnos` (`efk_alumno`),
+  ADD KEY `fkresponsable` (`efk_responsable`);
+
+--
+-- Indices de la tabla `talum_mat_not`
+--
+ALTER TABLE `talum_mat_not`
+  ADD PRIMARY KEY (`id_amn`),
+  ADD KEY `fkalumno` (`efk_idalumno`),
+  ADD KEY `fkmaetria` (`efk_idmateria`),
+  ADD KEY `fknota` (`efk_idnota`);
+
+--
+-- Indices de la tabla `tanio`
+--
+ALTER TABLE `tanio`
+  ADD PRIMARY KEY (`eid_anio`);
+
+--
+-- Indices de la tabla `tbachilleratos`
+--
+ALTER TABLE `tbachilleratos`
+  ADD PRIMARY KEY (`eid_bachillerato`),
+  ADD KEY `fktipo` (`efk_tipo`);
+
+--
+-- Indices de la tabla `tbitacora`
+--
+ALTER TABLE `tbitacora`
+  ADD PRIMARY KEY (`eid_bitacora`),
+  ADD KEY `fk_idusuario` (`efk_idusuario`);
+
+--
+-- Indices de la tabla `tcargos`
+--
+ALTER TABLE `tcargos`
+  ADD PRIMARY KEY (`eid_cargo`);
+
+--
+-- Indices de la tabla `tdatos_adicionales`
+--
+ALTER TABLE `tdatos_adicionales`
+  ADD PRIMARY KEY (`eid_datosadicionales`),
+  ADD KEY `fkfichadatos` (`efk_ficha`);
+
+--
+-- Indices de la tabla `tficha`
+--
+ALTER TABLE `tficha`
+  ADD PRIMARY KEY (`eid_ficha`),
+  ADD KEY `fkanio` (`efk_anio`),
+  ADD KEY `fkalumnoficha` (`efk_alumno`),
+  ADD KEY `fkopciones` (`efk_opcion`);
+
+--
+-- Indices de la tabla `tgrado`
+--
+ALTER TABLE `tgrado`
+  ADD PRIMARY KEY (`eid_grado`);
+
+--
+-- Indices de la tabla `thorarios`
+--
+ALTER TABLE `thorarios`
+  ADD PRIMARY KEY (`eid_horario`);
+
+--
+-- Indices de la tabla `tmaterias`
+--
+ALTER TABLE `tmaterias`
+  ADD PRIMARY KEY (`eid_materia`),
+  ADD KEY `fkopcion` (`efk_idopcion`),
+  ADD KEY `fkhorario_idx` (`efk_idhorario`);
+
+--
+-- Indices de la tabla `tnotas`
+--
+ALTER TABLE `tnotas`
+  ADD PRIMARY KEY (`eid_notas`),
+  ADD KEY `fkperiodo` (`efk_idperiodo`);
+
+--
+-- Indices de la tabla `topciones`
+--
+ALTER TABLE `topciones`
+  ADD PRIMARY KEY (`eid_opcion`),
+  ADD KEY `fkbto` (`efk_bto`),
+  ADD KEY `fkgrado` (`efk_grado`),
+  ADD KEY `fkseccion` (`efk_seccion`);
+
+--
+-- Indices de la tabla `tperiodos`
+--
+ALTER TABLE `tperiodos`
+  ADD PRIMARY KEY (`eid_periodo`);
+
+--
+-- Indices de la tabla `tpermisos`
+--
+ALTER TABLE `tpermisos`
+  ADD PRIMARY KEY (`eid_permisos`),
+  ADD KEY `fkusuario` (`efk_idusuario`);
+
+--
+-- Indices de la tabla `tpersonal`
+--
+ALTER TABLE `tpersonal`
+  ADD PRIMARY KEY (`eid_personal`),
+  ADD KEY `fkcargo` (`efk_idcargo`);
+
+--
+-- Indices de la tabla `tpersonal_materia`
+--
+ALTER TABLE `tpersonal_materia`
+  ADD PRIMARY KEY (`eid_pm`),
+  ADD KEY `fk_personal` (`efk_idpersonal`),
+  ADD KEY `fk_materia` (`efk_idmateria`);
+
+--
+-- Indices de la tabla `tresponsable`
+--
+ALTER TABLE `tresponsable`
+  ADD PRIMARY KEY (`eid_responsable`);
+
+--
+-- Indices de la tabla `tsecciones`
+--
+ALTER TABLE `tsecciones`
+  ADD PRIMARY KEY (`eid_seccion`);
+
+--
+-- Indices de la tabla `ttipobachillerato`
+--
+ALTER TABLE `ttipobachillerato`
+  ADD PRIMARY KEY (`eid_tipo`);
+
+--
+-- Indices de la tabla `tusuarios`
+--
+ALTER TABLE `tusuarios`
+  ADD PRIMARY KEY (`eid_usuario`),
+  ADD KEY `fkpersonal` (`efk_personal`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `talumno`
+--
+ALTER TABLE `talumno`
+  MODIFY `eid_alumno` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `talumno_responsable`
+--
+ALTER TABLE `talumno_responsable`
+  MODIFY `id_ar` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `talum_mat_not`
+--
+ALTER TABLE `talum_mat_not`
+  MODIFY `id_amn` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tanio`
+--
+ALTER TABLE `tanio`
+  MODIFY `eid_anio` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tbachilleratos`
+--
+ALTER TABLE `tbachilleratos`
+  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tbitacora`
+--
+ALTER TABLE `tbitacora`
+  MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tcargos`
+--
+ALTER TABLE `tcargos`
+  MODIFY `eid_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `tdatos_adicionales`
+--
+ALTER TABLE `tdatos_adicionales`
+  MODIFY `eid_datosadicionales` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tficha`
+--
+ALTER TABLE `tficha`
+  MODIFY `eid_ficha` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tgrado`
+--
+ALTER TABLE `tgrado`
+  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `thorarios`
+--
+ALTER TABLE `thorarios`
+  MODIFY `eid_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tmaterias`
+--
+ALTER TABLE `tmaterias`
+  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `tnotas`
+--
+ALTER TABLE `tnotas`
+  MODIFY `eid_notas` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `topciones`
+--
+ALTER TABLE `topciones`
+  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tperiodos`
+--
+ALTER TABLE `tperiodos`
+  MODIFY `eid_periodo` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tpersonal`
+--
+ALTER TABLE `tpersonal`
+  MODIFY `eid_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `tpersonal_materia`
+--
+ALTER TABLE `tpersonal_materia`
+  MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tresponsable`
+--
+ALTER TABLE `tresponsable`
+  MODIFY `eid_responsable` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tsecciones`
+--
+ALTER TABLE `tsecciones`
+  MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `ttipobachillerato`
+--
+ALTER TABLE `ttipobachillerato`
+  MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `talumno_responsable`
+--
+ALTER TABLE `talumno_responsable`
+  ADD CONSTRAINT `fkalumnos` FOREIGN KEY (`efk_alumno`) REFERENCES `talumno` (`eid_alumno`),
+  ADD CONSTRAINT `fkresponsable` FOREIGN KEY (`efk_responsable`) REFERENCES `tresponsable` (`eid_responsable`);
+
+--
+-- Filtros para la tabla `talum_mat_not`
+--
+ALTER TABLE `talum_mat_not`
+  ADD CONSTRAINT `fkalumno` FOREIGN KEY (`efk_idalumno`) REFERENCES `talumno` (`eid_alumno`),
+  ADD CONSTRAINT `fkmaetria` FOREIGN KEY (`efk_idmateria`) REFERENCES `tmaterias` (`eid_materia`),
+  ADD CONSTRAINT `fknota` FOREIGN KEY (`efk_idnota`) REFERENCES `tnotas` (`eid_notas`);
+
+--
+-- Filtros para la tabla `tbachilleratos`
+--
+ALTER TABLE `tbachilleratos`
+  ADD CONSTRAINT `fktipo` FOREIGN KEY (`efk_tipo`) REFERENCES `ttipobachillerato` (`eid_tipo`);
+
+--
+-- Filtros para la tabla `tbitacora`
+--
+ALTER TABLE `tbitacora`
+  ADD CONSTRAINT `fk_idusuario` FOREIGN KEY (`efk_idusuario`) REFERENCES `tusuarios` (`eid_usuario`);
+
+--
+-- Filtros para la tabla `tdatos_adicionales`
+--
+ALTER TABLE `tdatos_adicionales`
+  ADD CONSTRAINT `fkfichadatos` FOREIGN KEY (`efk_ficha`) REFERENCES `tficha` (`eid_ficha`);
+
+--
+-- Filtros para la tabla `tficha`
+--
+ALTER TABLE `tficha`
+  ADD CONSTRAINT `fkalumnoficha` FOREIGN KEY (`efk_alumno`) REFERENCES `talumno` (`eid_alumno`),
+  ADD CONSTRAINT `fkanio` FOREIGN KEY (`efk_anio`) REFERENCES `tanio` (`eid_anio`),
+  ADD CONSTRAINT `fkopciones` FOREIGN KEY (`efk_opcion`) REFERENCES `topciones` (`eid_opcion`);
+
+--
+-- Filtros para la tabla `tmaterias`
+--
+ALTER TABLE `tmaterias`
+  ADD CONSTRAINT `fkhorario` FOREIGN KEY (`efk_idhorario`) REFERENCES `thorarios` (`eid_horario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fkopcion` FOREIGN KEY (`efk_idopcion`) REFERENCES `topciones` (`eid_opcion`);
+
+--
+-- Filtros para la tabla `tnotas`
+--
+ALTER TABLE `tnotas`
+  ADD CONSTRAINT `fkperiodo` FOREIGN KEY (`efk_idperiodo`) REFERENCES `tperiodos` (`eid_periodo`);
+
+--
+-- Filtros para la tabla `topciones`
+--
+ALTER TABLE `topciones`
+  ADD CONSTRAINT `fkbto` FOREIGN KEY (`efk_bto`) REFERENCES `tbachilleratos` (`eid_bachillerato`),
+  ADD CONSTRAINT `fkgrado` FOREIGN KEY (`efk_grado`) REFERENCES `tgrado` (`eid_grado`),
+  ADD CONSTRAINT `fkseccion` FOREIGN KEY (`efk_seccion`) REFERENCES `tsecciones` (`eid_seccion`);
+
+--
+-- Filtros para la tabla `tpermisos`
+--
+ALTER TABLE `tpermisos`
+  ADD CONSTRAINT `fkusuario` FOREIGN KEY (`efk_idusuario`) REFERENCES `tusuarios` (`eid_usuario`);
+
+--
+-- Filtros para la tabla `tpersonal`
+--
+ALTER TABLE `tpersonal`
+  ADD CONSTRAINT `fkcargo` FOREIGN KEY (`efk_idcargo`) REFERENCES `tcargos` (`eid_cargo`);
+
+--
+-- Filtros para la tabla `tpersonal_materia`
+--
+ALTER TABLE `tpersonal_materia`
+  ADD CONSTRAINT `fk_materia` FOREIGN KEY (`efk_idmateria`) REFERENCES `tmaterias` (`eid_materia`),
+  ADD CONSTRAINT `fk_personal` FOREIGN KEY (`efk_idpersonal`) REFERENCES `tpersonal` (`eid_personal`);
+
+--
+-- Filtros para la tabla `tusuarios`
+--
+ALTER TABLE `tusuarios`
+  ADD CONSTRAINT `fkpersonal` FOREIGN KEY (`efk_personal`) REFERENCES `tpersonal` (`eid_personal`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+<<<<<<< HEAD:sica.sql
+=======
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-09-05 22:37:03
+>>>>>>> b058493c9fcb6442610826fa8cde517ddfab8672:sicaultimaversion.sql
