@@ -126,7 +126,7 @@ error_reporting(E_ALL & ~E_NOTICE);
               document.getElementById('bandera').value='modificar';
               alert(document.getElementById('bandera').value);
               }else{
-                alert("Antes de bandera");
+                
             document.getElementById("bandera").value="add";
           }
             document.turismo.submit();
@@ -711,9 +711,7 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-  msg("Entra add");
-  
-  $query = "select cdui FROM tpersonal WHERE cdui like '%".$dui."%';";
+  $query = "select cdui,ccorreo FROM tpersonal WHERE cdui like '%".$dui."%' OR ccorreo like '%".$correo."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
@@ -738,7 +736,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    //echo "document.location.href='fpersonal.php';";
+    echo "document.location.href='fpersonal.php';";
     echo "</script>";
 }
 ?>
