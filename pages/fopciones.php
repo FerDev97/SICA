@@ -191,7 +191,7 @@ if ($result) {
                           <div>
                             <br><b></b>
                           
-                            <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                            <input type="reset" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                               </div>
 
                               
@@ -487,7 +487,7 @@ if ($result) {
             <div class="modal-body">
                 <p class="statusMsg"></p>
                   <!--aqui va el codigo-->
-                  
+                  <form id="insertarT">
                   <div class="input-group" style="margin-left:75px">
                   <span class="input-group-addon"><i class="fa fa-book"></i></span>
                   <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" placeholder="Nuevo tipo de Bachillerato" >
@@ -495,10 +495,11 @@ if ($result) {
                   <br>
                    <center>
                    <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarTipo()">
+                  <button title="Agrega Nueva Opcionel al Sistema" id="guardarT" name="guardarT" style="margin-left:0px;" class="btn btn-info" type="button" >
                   Guardar</button>
                   </div>
                   </center>
+                  </form>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">
@@ -583,6 +584,36 @@ if ($result) {
         $.ajax({
             type: 'post',
             url: '../pages/agregarOPcion.php?accion=guardarGrado',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
+
+      return false;
+        
+
+     });//fin del click
+    });//fin del ready
+    //Ajax para Guardar Tipo
+  $(document).ready(function(){
+  $('#guardarT').on('click',function(){
+        var grado = $('#tipom').val();
+       
+
+        if(grado == ""){
+            alert("Por favor llene correctamente los datos");
+            return false;
+        }
+        var todo = $("#insertarT").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarTipo',
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 

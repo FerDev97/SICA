@@ -60,6 +60,22 @@ if ($result) {
             }
             }
         }
+        function limpiar(){
+          if( document.setElementById('nombre').value=="" ){
+            alert("Complete los campos");
+          }else{
+            if (document.setElementById("aux").value=="modificar") {
+              alert('Va a modificar.');
+           
+            document.getElementById('bandera').value="modificar";
+            document.turismo.submit();
+            }else
+            {
+              document.getElementById('bandera').value="add";
+              document.turismo.submit();
+            }
+            }
+        }
 
         function modify(id)
         {
@@ -101,7 +117,7 @@ if ($result) {
                     </div>
                   </div>
               </div>
-              <form id="turismo" name="turismo" action="" method="post">
+              <form id="insertar" name="turismo" action="" method="post">
               <input type="hidden" name="bandera" id="bandera">
               <input type="hidden" name="baccion" id="baccion" value="<?php echo $idcatalogoR; ?>" >
               <input type="hidden" name="aux" id="aux" value="<?php echo $aux; ?>">
@@ -114,18 +130,18 @@ if ($result) {
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
-                        <form class="cmxform" id="formcliente" method="post" action="">
+                        <form class="cmxform" id="insertar" method="post" action="">
 
                           <div class="col-md-12">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input style="width:250px;" id="nombre" type="text" class="form-control" name="nombre" placeholder="Codigo">
+                                  <input style="width:250px;" id="codigoo" type="text" class="form-control" name="codigoo" placeholder="Codigo">
                                   
                               </div>  
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre de Opcion">
+                              <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de Opcion">
                               </div>
                               <br>
                               <div class="input-group">
@@ -157,14 +173,14 @@ if ($result) {
 
                               <div class="col-md-3">
                               <br><b></b>
-                              <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
+                              <input title="Agrega Nueva Opcionel al Sistema" type="button" name="guardar" id="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
                               </div>
                           <div>
                             <br><b></b>
                           
-                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="reset" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" onclick="limpiar()" value="Cancelar" />
                               </div>
-
+                              
                               
                         </div>
                         </div>
@@ -184,7 +200,6 @@ if ($result) {
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                        
                           <th>Editar</th>
                           <th>Codigo</th>
                           <th>Opcion</th>
@@ -259,142 +274,48 @@ if ($result) {
           <!-- end: right menu -->
 
       </div>
-
-      <!-- start: Mobile -->
-      <div id="mimin-mobile" class="reverse">
-        <div class="mimin-mobile-menu-list">
-            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
-                <ul class="nav nav-list">
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-home fa"></span>Dashboard
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
-                          <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-diamond fa"></span>Layout
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="topnav.html">Top Navigation</a></li>
-                        <li><a href="boxed.html">Boxed</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-area-chart fa"></span>Charts
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="chartjs.html">ChartJs</a></li>
-                        <li><a href="morris.html">Morris</a></li>
-                        <li><a href="flot.html">Flot</a></li>
-                        <li><a href="sparkline.html">SparkLine</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-pencil-square"></span>Ui Elements
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="color.html">Color</a></li>
-                        <li><a href="weather.html">Weather</a></li>
-                        <li><a href="typography.html">Typography</a></li>
-                        <li><a href="icons.html">Icons</a></li>
-                        <li><a href="buttons.html">Buttons</a></li>
-                        <li><a href="media.html">Media</a></li>
-                        <li><a href="panels.html">Panels & Tabs</a></li>
-                        <li><a href="notifications.html">Notifications & Tooltip</a></li>
-                        <li><a href="badges.html">Badges & Label</a></li>
-                        <li><a href="progress.html">Progress</a></li>
-                        <li><a href="sliders.html">Sliders</a></li>
-                        <li><a href="timeline.html">Timeline</a></li>
-                        <li><a href="modal.html">Modals</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                       <span class="fa fa-check-square-o"></span>Forms
-                       <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="formelement.html">Form Element</a></li>
-                        <li><a href="#">Wizard</a></li>
-                        <li><a href="#">File Upload</a></li>
-                        <li><a href="#">Text Editor</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-table"></span>Tables
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="datatables.html">Data Tables</a></li>
-                        <li><a href="handsontable.html">handsontable</a></li>
-                        <li><a href="tablestatic.html">Static</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a href="calendar.html">
-                         <span class="fa fa-calendar-o"></span>Calendar
-                      </a>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-envelope-o"></span>Mail
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="mail-box.html">Inbox</a></li>
-                        <li><a href="compose-mail.html">Compose Mail</a></li>
-                        <li><a href="view-mail.html">View Mail</a></li>
-                      </ul>
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-file-code-o"></span>Pages
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="forgotpass.html">Forgot Password</a></li>
-                        <li><a href="login.html">SignIn</a></li>
-                        <li><a href="reg.html">SignUp</a></li>
-                        <li><a href="article-v1.html">Article v1</a></li>
-                        <li><a href="search-v1.html">Search Result v1</a></li>
-                        <li><a href="productgrid.html">Product Grid</a></li>
-                        <li><a href="profile-v1.html">Profile v1</a></li>
-                        <li><a href="invoice-v1.html">Invoice v1</a></li>
-                      </ul>
-                    </li>
-                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa "></span> MultiLevel  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="view-mail.html">Level 1</a></li>
-                        <li><a href="view-mail.html">Level 1</a></li>
-                        <li class="ripple">
-                          <a class="sub-tree-toggle nav-header">
-                            <span class="fa fa-envelope-o"></span> Level 1
-                            <span class="fa-angle-right fa right-arrow text-right"></span>
-                          </a>
-                          <ul class="nav nav-list sub-tree">
-                            <li><a href="mail-box.html">Level 2</a></li>
-                            <li><a href="compose-mail.html">Level 2</a></li>
-                            <li><a href="view-mail.html">Level 2</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="credits.html">Credits</a></li>
-                  </ul>
+      <!-- Modal de Tipo bachillerato-->
+ <div class="modal fade" id="modalTipo" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Forumulario de Tipo de Bachillerato</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el codigo-->
+                  <form id="insertarT">
+                  <div class="input-group" style="margin-left:75px">
+                  <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" placeholder="Nuevo tipo de Bachillerato" >
+                  </div>
+                  <br>
+                   <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema" id="guardarT" name="guardarT" style="margin-left:0px;" class="btn btn-info" type="button" >
+                  Guardar</button>
+                  </div>
+                  </center>
+                  </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
-      </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de Tipo Bachillerato --> 
+
+      <!-- start: Mobile -->
+      
       <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
         <span class="fa fa-bars"></span>
       </button>
@@ -420,9 +341,70 @@ if ($result) {
   $(document).ready(function(){
     $('#datatables-example').DataTable();
   });
+  $(document).ready(function(){
+  $('#guardar').on('click',function(){
+        var codigo = $('#codigoo').val();
+        var nombre = $('#nombrem').val();
+        var descripcion = $('#descripcion').val();
+        var tipo = $('#tipob').val();
+        if(codigo==""||nombre==""||descripcion==""){
+            alert("Complete los campos");
+            return false;
+        }else if(tipo == "tipo"){
+            alert("Ingrese Tipo de bachillerato");
+            return false;
+        }
+        var todo = $("#insertar").serialize();
 
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarBto',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
 
+      return false;
+        
 
+     });//fin del click
+    });//fin del ready
+
+ //Ajax para Guardar Tipo
+ $(document).ready(function(){
+  $('#guardarT').on('click',function(){
+        var grado = $('#tipom').val();
+       
+
+        if(grado == ""){
+            alert("Por favor llene correctamente los datos");
+            return false;
+        }
+        var todo = $("#insertarT").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarTipo',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
+
+      return false;
+        
+
+     });//fin del click
+    });//fin del ready
 
 
 
@@ -453,7 +435,7 @@ if ($bandera == "add") {
       echo "document.location.href='cuenta.php';";
       echo "</script>";
     } else {
-        msg("No Exito");
+       
     }
 }
 if ($bandera == "desaparecer") {
