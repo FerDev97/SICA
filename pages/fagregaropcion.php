@@ -147,17 +147,12 @@ if ($result) {
                               <div class="input-group">
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 12px">Tipo Bachillerato:</span>
-                              <select id="tipob" class="select2 show-tick" style="width: 200px; font-size: 15px" name="tipob">
+                              <select id="tipob" class="select2 show-tick ajaxtipo" style="width: 200px; font-size: 15px" name="tipob">
                               <option value="tipo">Tipo</option>
-                              <?php
-                           include "../config/conexion.php";
-                           $result = $conexion->query("select * from ttipobachillerato order by eid_tipo");
-                           if ($result) {
-                               while ($fila = $result->fetch_object()) {
-                                echo "<option value=".$fila->eid_tipo.">".$fila->ctipo."</option>";
-                              }
-                           }
-                           ?>  
+
+                                <?php
+                                  include('combo.php')?>
+
                               </select>
                               <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipo">Nuevo Tipo</button>
                                 <br><br>
@@ -393,6 +388,7 @@ if ($result) {
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
+                $("#tipob").load("combo.php");
                 
             },
             error: function(respuesta){

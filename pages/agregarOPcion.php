@@ -73,7 +73,6 @@ echo $mensaje;
     $nombre   = $_POST['nombrem'];
     $tipo  = $_POST['tipob'];
     $descripcion  = $_POST['descripcion'];
-    echo $codigo;
     $query = "SELECT ccodigo, cnombe FROM tbachilleratos WHERE ccodigo like '%".$codigo."%' AND cnombe like '%".$nombre."';";
     $result = $conexion->query($query);
     if($result->num_rows == 0){
