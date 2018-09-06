@@ -67,6 +67,14 @@ error_reporting(E_ALL & ~E_NOTICE);
   'success'
 )
         }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
 
       //SWEET ALERTS
       //Validacion Solo letras js
@@ -100,7 +108,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             document.getElementById('horario').value=="" ||
             document.getElementById('docente').value==""||
             document.getElementById('opcion').value==""){
-            alert("Complete los campos prueba");
+            sweetError("Complete los campos prueba");
             
           }else{
             alert(document.getElementById("lastindex"));
@@ -565,6 +573,13 @@ function msgAdd($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
