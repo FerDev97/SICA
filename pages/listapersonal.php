@@ -110,7 +110,7 @@
                       <thead>
                         <tr>
                           <th>Modificar</th>
-                          <th>Codigo</th>
+                          <th>DUI</th>
                           <th>Nombre</th>
                           <th>Apellido</th>
                           <th>Estado</th>
@@ -123,7 +123,7 @@
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select eid_personal,tpersonal.ccodigo as codigo,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.iestado as estado,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo order by cargo");
+$result = $conexion->query("select eid_personal,tpersonal.cdui as dui,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.iestado as estado,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo order by cargo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -139,7 +139,7 @@ if ($result) {
         //echo "<tr>";
         //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
-        echo "<td>" . $fila->codigo . "</td>";
+        echo "<td>" . $fila->dui . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
        

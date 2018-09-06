@@ -5,7 +5,7 @@ $result = $conexion->query("select * from tpersonal where eid_personal=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
         $idpersonalR       = $fila->eid_personal;
-        $codigopersonalR   = $fila->ccodigo;
+        $duipersonalR   = $fila->cdui;
         $nombrepersonalR   = $fila->cnombre;
         $apellidopersonalR = $fila->capellido;
         $telefonopersonalR = $fila->ctelefono;
@@ -54,6 +54,58 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+       //Validacion Correo Electronico
+       function validateMail(Correo)
+      {
+        //Creamos un objeto 
+        object=document.getElementById(Correo);
+        valueForm=object.value;
+        // Patron para el correo
+        var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+        if(valueForm.search(patron)==0)
+        {
+          //Mail correcto
+          object.style.color="#000";
+          return;
+          }
+          //Mail incorrecto
+          object.style.color="#f00";
+          }
+      // Fin Validacion Correo Electronico
+
+      //Validacion Telefono
+      var nav4 = window.Event ? true : false;
+      function aceptNum(evt){
+        var key = nav4 ? evt.which : evt.keyCode;
+        return (key <= 13 || (key>= 48 && key <= 57));
+      }
+      //Fin Validacion Telefono
+
+      //Validacion Solo letras
+      function sololetras(e) {
+        key=e.keyCode || e.which;
+ 
+        teclado=String.fromCharCode(key).toLowerCase();
+ 
+        letras="qwertyuiopasdfghjklñzxcvbnm ";
+ 
+        especiales="8-37-38-46-164";
+ 
+        teclado_especial=false;
+ 
+        for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true;
+                break;
+            }
+        }
+ 
+        if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+        }
+    }
+     //Validacion Solo letras
+    
         function verificar(){
         var rb=document.getElementsByName('estado');
 				var banderaRb=true;
@@ -75,7 +127,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 				}
 
 			}
-          if(document.getElementById('codigo').value=="" ||
+          if(document.getElementById('dui').value=="" ||
             document.getElementById('nombre').value=="" ||
             document.getElementById('apellido').value=="" ||
             document.getElementById('direccion').value=="" ||
@@ -133,19 +185,19 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" value="<?php echo $codigopersonalR; ?>" readonly="readonly" >
+                                  <input id="dui" type="text" class="form-control" name="dui" placeholder="DUI" value="<?php echo $duipersonalR; ?>" readonly="readonly" >
                               </div> 
                               <br>
                               <br> 
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $nombrepersonalR; ?>">
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $nombrepersonalR; ?>" onkeypress="return sololetras(event)">
                               </div>  
                               <br>
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" value="<?php echo $apellidopersonalR; ?>">
+                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" value="<?php echo $apellidopersonalR; ?>" onkeypress="return sololetras(event)">
                               </div>
                               <br> 
                               <div class="input-group"style="padding-bottom:20px;">
@@ -169,13 +221,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">                       
                           
                               <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" value="<?php echo $correopersonalR; ?>">
+                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" value="<?php echo $correopersonalR; ?>" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                               </div>   
                               <br><br>                      
                               <div class="input-group">
                               
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" value="<?php echo $telefonopersonalR; ?>">
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" value="<?php echo $telefonopersonalR; ?>" size="8" maxlength="8" onkeypress="return aceptNum(event)">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
 
                               </div> 
@@ -678,7 +730,7 @@ include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
 $baccion  = $_REQUEST["baccion"];
-$codigo    = $_REQUEST["codigo"];
+$dui    = $_REQUEST["dui"];
 $nombre  = $_REQUEST["nombre"];
 $apellido  = $_REQUEST["apellido"];
 $direccion      = $_REQUEST["direccion"];
@@ -690,7 +742,7 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-    $consulta  = "UPDATE tpersonal set ccodigo='" . $codigo . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "',iestado='" . $estado . "',isexo='" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
+    $consulta  = "UPDATE tpersonal set cdui='" . $dui . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "',iestado='" . $estado . "',isexo='" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     
    

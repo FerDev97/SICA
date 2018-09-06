@@ -1,9 +1,4 @@
-<?php
-include "../config/conexion.php";
-$result = $conexion->query("select * from tpersonal");
-$codigoPersonal=$result->num_rows+1;
-$codigoPer=sprintf("%08d",$codigoPersonal);
- ?>
+
 <!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
@@ -37,6 +32,62 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+
+      //Validacion Correo Electronico
+      function validateMail(Correo)
+      {
+        //Creamos un objeto 
+        object=document.getElementById(Correo);
+        valueForm=object.value;
+        // Patron para el correo
+        var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+        if(valueForm.search(patron)==0)
+        {
+          //Mail correcto
+          object.style.color="#000";
+          return;
+          }
+          //Mail incorrecto
+          object.style.color="#f00";
+          }
+      // Fin Validacion Correo Electronico
+
+      //Validacion Telefono
+      var nav4 = window.Event ? true : false;
+      function aceptNum(evt){
+        var key = nav4 ? evt.which : evt.keyCode;
+        return (key <= 13 || (key>= 48 && key <= 57));
+      }
+      //Fin Validacion Telefono
+
+      //Validacion Solo letras
+      function sololetras(e) {
+        key=e.keyCode || e.which;
+ 
+        teclado=String.fromCharCode(key).toLowerCase();
+ 
+        letras="qwertyuiopasdfghjklñzxcvbnm ";
+ 
+        especiales="8-37-38-46-164";
+ 
+        teclado_especial=false;
+ 
+        for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true;
+                break;
+            }
+        }
+ 
+        if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+        }
+    }
+     //Validacion Solo letras
+    
+
+
+      
       function prueba()
       {
         document.getElementById("codigo").value=document.getElementById("barcode").value;
@@ -62,9 +113,9 @@ error_reporting(E_ALL & ~E_NOTICE);
 				}
 
 			}
-          if(document.getElementById('codigo').value=="" ||
-            document.getElementById('nombre').value=="" ||
-            document.getElementById('apellido').value=="" ||
+          if(document.getElementById('dui').value=="" ||
+             document.getElementById('nombre').value=="" ||
+             document.getElementById('apellido').value=="" ||
             document.getElementById('direccion').value=="" ||
             document.getElementById('fechanacimiento').value=="" ||document.getElementById('fechanacimiento').value==""
             ||document.getElementById('correo').value==""||document.getElementById('telefono').value==""
@@ -110,7 +161,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
                 <input type="hidden" id="baccion" name="baccion">
-                <input type="hidden" name="barcode" id="barcode" value="<?php echo $codigoPer; ?>">
+               
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
@@ -125,22 +176,19 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="input-group">
                           
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"  ></i></span>
-                                <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" style="width: 431px;">
-                                <button  data-toggle="tooltip" style="margin-right:20px;margin-left:22px; font-size: 15px" data-placement="top" title="Generar Codigo" align='center' type='button' class='btn btn-default' onclick="prueba();"><i class='fa fa-barcode'></i>
-                        </button>
-                                
-                              </div> 
+                                <input id="dui" type="text" class="form-control" name="dui" placeholder="DUI" style="width: 530px;">
+                               </div> 
                               <br>
                               <br> 
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" onkeypress="return sololetras(event)">
                               </div>  
                               <br>
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido">
+                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" onkeypress="return sololetras(event)">
                               </div>
                               <br> 
                               <div class="input-group"style="padding-bottom:20px;">
@@ -164,13 +212,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">                       
                           
                               <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico">
+                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')" >
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                               </div>   
                               <br><br>                    
                               <div class="input-group">
                               
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" size="8" maxlength="8" onkeypress="return aceptNum(event)">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
 
                               </div> 
@@ -178,7 +226,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo">
+      <select id="cargo"   class="select2 show-tick" style="width: 495px; font-size: 15px" name="cargo">
       <option value="">Seleccione Cargo</option>
       <?php
                       include '../config/conexion.php';
@@ -195,7 +243,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                        ?>
                        </select>
                               
-      <button align='center' type='button' style="margin-right:20px;margin-left:22px; font-size: 15px" class='btn btn-default' onclick=confirmar(" . $proveedor . ",1);><i class='fa fa-plus'></i></button>
+      
       </div>
       
       <br>
@@ -650,7 +698,7 @@ include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
 $baccion  = $_REQUEST["baccion"];
-$codigo    = $_REQUEST["codigo"];
+$dui   = $_REQUEST["dui"];
 $nombre  = $_REQUEST["nombre"];
 $apellido  = $_REQUEST["apellido"];
 $direccion      = $_REQUEST["direccion"];
@@ -662,7 +710,7 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-    $consulta  = "INSERT INTO tpersonal VALUES('null','" . $codigo . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
+    $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
     $resultado = $conexion->query($consulta);
     
    
