@@ -185,7 +185,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="dui" type="text" class="form-control" name="dui" placeholder="DUI" value="<?php echo $duipersonalR; ?>" readonly="readonly" >
+                                  <input id="dui" type="text" class="form-text mask-dui" name="dui" placeholder="DUI" value="<?php echo $duipersonalR; ?>" readonly="readonly" style="width: 530px;" >
                               </div> 
                               <br>
                               <br> 
