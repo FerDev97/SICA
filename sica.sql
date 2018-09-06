@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2018 a las 22:06:33
--- Versión del servidor: 10.1.29-MariaDB
--- Versión de PHP: 7.1.12
+-- Tiempo de generación: 06-09-2018 a las 22:54:32
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -87,15 +87,17 @@ CREATE TABLE `tbachilleratos` (
   `ccodigo` varchar(20) NOT NULL,
   `cnombe` varchar(30) NOT NULL,
   `cdescripcion` varchar(200) NOT NULL,
-  `efk_tipo` int(11) NOT NULL
+  `efk_tipo` int(11) NOT NULL,
+  `eestado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbachilleratos`
 --
 
-INSERT INTO `tbachilleratos` (`eid_bachillerato`, `ccodigo`, `cnombe`, `cdescripcion`, `efk_tipo`) VALUES
-(1, '001', 'Contador', 'Esta materia es de contqador.', 1);
+INSERT INTO `tbachilleratos` (`eid_bachillerato`, `ccodigo`, `cnombe`, `cdescripcion`, `efk_tipo`, `eestado`) VALUES
+(1, '001', 'Contador', 'Esta materia es de contqador.', 1, 0),
+(2, 'SE1267', 'Sistemas Electricos', 'skdhkjshf', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -583,115 +585,96 @@ ALTER TABLE `tusuarios`
 --
 ALTER TABLE `talumno`
   MODIFY `eid_alumno` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `talumno_responsable`
 --
 ALTER TABLE `talumno_responsable`
   MODIFY `id_ar` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `talum_mat_not`
 --
 ALTER TABLE `talum_mat_not`
   MODIFY `id_amn` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tanio`
 --
 ALTER TABLE `tanio`
   MODIFY `eid_anio` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tbachilleratos`
 --
 ALTER TABLE `tbachilleratos`
-  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
   MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tcargos`
 --
 ALTER TABLE `tcargos`
   MODIFY `eid_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `tdatos_adicionales`
 --
 ALTER TABLE `tdatos_adicionales`
   MODIFY `eid_datosadicionales` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tficha`
 --
 ALTER TABLE `tficha`
   MODIFY `eid_ficha` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tgrado`
 --
 ALTER TABLE `tgrado`
   MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `thorarios`
 --
 ALTER TABLE `thorarios`
   MODIFY `eid_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `tmaterias`
 --
 ALTER TABLE `tmaterias`
   MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `tnotas`
 --
 ALTER TABLE `tnotas`
   MODIFY `eid_notas` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `topciones`
 --
 ALTER TABLE `topciones`
   MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `tperiodos`
 --
 ALTER TABLE `tperiodos`
   MODIFY `eid_periodo` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tpersonal`
 --
 ALTER TABLE `tpersonal`
   MODIFY `eid_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT de la tabla `tresponsable`
 --
 ALTER TABLE `tresponsable`
   MODIFY `eid_responsable` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tsecciones`
 --
 ALTER TABLE `tsecciones`
   MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `ttipobachillerato`
 --
 ALTER TABLE `ttipobachillerato`
   MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- Restricciones para tablas volcadas
 --
