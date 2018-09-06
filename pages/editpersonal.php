@@ -54,6 +54,58 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+       //Validacion Correo Electronico
+       function validateMail(Correo)
+      {
+        //Creamos un objeto 
+        object=document.getElementById(Correo);
+        valueForm=object.value;
+        // Patron para el correo
+        var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+        if(valueForm.search(patron)==0)
+        {
+          //Mail correcto
+          object.style.color="#000";
+          return;
+          }
+          //Mail incorrecto
+          object.style.color="#f00";
+          }
+      // Fin Validacion Correo Electronico
+
+      //Validacion Telefono
+      var nav4 = window.Event ? true : false;
+      function aceptNum(evt){
+        var key = nav4 ? evt.which : evt.keyCode;
+        return (key <= 13 || (key>= 48 && key <= 57));
+      }
+      //Fin Validacion Telefono
+
+      //Validacion Solo letras
+      function sololetras(e) {
+        key=e.keyCode || e.which;
+ 
+        teclado=String.fromCharCode(key).toLowerCase();
+ 
+        letras="qwertyuiopasdfghjklñzxcvbnm ";
+ 
+        especiales="8-37-38-46-164";
+ 
+        teclado_especial=false;
+ 
+        for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true;
+                break;
+            }
+        }
+ 
+        if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+        }
+    }
+     //Validacion Solo letras
+    
         function verificar(){
         var rb=document.getElementsByName('estado');
 				var banderaRb=true;
@@ -139,13 +191,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br> 
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $nombrepersonalR; ?>">
+                                  <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php echo $nombrepersonalR; ?>" onkeypress="return sololetras(event)">
                               </div>  
                               <br>
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" value="<?php echo $apellidopersonalR; ?>">
+                                  <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido" value="<?php echo $apellidopersonalR; ?>" onkeypress="return sololetras(event)">
                               </div>
                               <br> 
                               <div class="input-group"style="padding-bottom:20px;">
@@ -169,13 +221,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">                       
                           
                               <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" value="<?php echo $correopersonalR; ?>">
+                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" value="<?php echo $correopersonalR; ?>" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                               </div>   
                               <br><br>                      
                               <div class="input-group">
                               
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" value="<?php echo $telefonopersonalR; ?>">
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" value="<?php echo $telefonopersonalR; ?>" size="8" maxlength="8" onkeypress="return aceptNum(event)">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
 
                               </div> 
