@@ -1,3 +1,9 @@
+<?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tpersonal");
+$codigoPersonal=$result->num_rows+1;
+$codigoPer=sprintf("%08d",$codigoPersonal);
+ ?>
 <!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
@@ -31,6 +37,10 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+      function prueba()
+      {
+        document.getElementById("codigo").value=document.getElementById("barcode").value;
+      }
         function verificar(){
         var rb=document.getElementsByName('estado');
 				var banderaRb=true;
@@ -100,6 +110,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
                 <input type="hidden" id="baccion" name="baccion">
+                <input type="hidden" name="barcode" id="barcode" value="<?php echo $codigoPer; ?>">
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
@@ -112,8 +123,12 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                           <div class="col-md-6">
                           <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo">
+                          
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"  ></i></span>
+                                <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" style="width: 431px;">
+                                <button  data-toggle="tooltip" style="margin-right:20px;margin-left:22px; font-size: 15px" data-placement="top" title="Generar Codigo" align='center' type='button' class='btn btn-default' onclick="prueba();"><i class='fa fa-barcode'></i>
+                        </button>
+                                
                               </div> 
                               <br>
                               <br> 
@@ -152,7 +167,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                   <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                               </div>   
-                              <br><br>                      
+                              <br><br>                    
                               <div class="input-group">
                               
                                   <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono">
@@ -160,7 +175,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                               </div> 
                               <br>
-                              <br>
+                              
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
       <select id="cargo"   class="select2 show-tick" style="width: 400px; font-size: 15px" name="cargo">
@@ -191,6 +206,8 @@ error_reporting(E_ALL & ~E_NOTICE);
      </div>
      <br>
      <br>
+     <br> 
+     
       <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-child"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sexo</span>
      <label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1">Femenino</label>
@@ -661,7 +678,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    
+    echo "document.location.href='fpersonal.php';";
     echo "</script>";
 }
 ?>
