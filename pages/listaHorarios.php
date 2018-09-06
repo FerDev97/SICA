@@ -49,9 +49,9 @@
                     </div>
                   </div>
               </div>
-              <form id="lista"  action="" method="post">              
+                           
 
-              <div class="col-md-12 top-20 padding-0">
+              <div class="col-md-12 top-20 padding-0"> <!--Div ajax-->
                 <div class="col-md-12">
                   <div class="panel">
                     <div class="panel-heading"><h3>Horarios</h3></div>
@@ -62,15 +62,15 @@
                       <thead>
                         <tr>
                           <th>Dias</th>
-                          <th>Horarios</th>
-                          <th>Activar/Desactivar</th>                          
-                        </tr>
+                          <th>Horario</th>
+                          <th>Estado</th>
+                          <th>Acciones</th>  
+                                                 
+                      </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="tabla_ajax">
                         
-                        <?php 
-                            include "../config/conexion.php" ;   
-                        ?>
+                        <?php include('tablaHorarios.php') ?>
 
                       </tbody>
                         </table>
@@ -79,10 +79,85 @@
                 </div>
               </div>
               </div>
-              </form>
+              
             </div>
-          <!-- end: content -->
 
+          <!-- end: content -->
+          <!--MODAL-->
+               <div class="modal fade" id="modalito">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Modificar horario</h4>
+                                      </div>
+                                      <div class="modal-body col-md-12">
+                                          <form id="modificar" >
+                                          <input type="hidden" id="id" name="id" value="">
+                                                  <div class="col-md-6">
+                                                        <br>
+                            
+                              
+                                                        <div class="input-group " style="padding-bottom:10px;">
+                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                          <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()">
+                                                            <option value="0">Seleccione un dia</option>
+                                                            <option value="Lunes">Lunes</option>
+                                                            <option value="Martes">Martes</option>
+                                                            <option value="Miercoles">Miercoles</option>
+                                                            <option value="Jueves">Jueves</option>
+                                                            <option value="Viernes">Viernes</option>
+                                                          </select>
+                                                        </div>
+                                                      
+                                                          <br>
+                                                          
+                                                        <div class="input-group " style="padding-bottom:10px;">
+                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                                          <select id="bloque"  class="form-control" name="bloque" >
+                                                            <option value="0">Seleccione un bloque</option>
+                                                            <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
+                                                            <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+                                                            <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
+                                                            <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
+                                                                    
+                                                          </select>
+                                                        </div>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                        <br>
+                                                        <div class="input-group " style="padding-bottom:10px;">
+                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                          <select id="dia2"  class="form-control" name="diaDos">
+                                                            <option value="0">Seleccione otro dia</option>                                                                          
+                                                            <option value="Martes">Martes</option>
+                                                            <option value="Miercoles">Miercoles</option>
+                                                            <option value="Jueves">Jueves</option>
+                                                            <option value="Viernes">Viernes</option>
+                                                          </select>
+                                                      </div>
+                                                      <br>
+                                                        <div class="input-group " style="padding-bottom:10px;">
+                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle"></i></span>
+                                                          <select id="estado"  class="form-control" name="estado">
+                                                            <option value="1">ACTIVO</option>                                                                          
+                                                            <option value="0">INACTIVO</option>        
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                          
+                                      </div>
+                                        <br><br><br><br><br><br><br><br><br><br>
+                                      
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button id="guardar" type="button" class="btn btn-primary">Guardar Cambios</button>
+                                      </div>
+                                      </form>
+                                    </div><!-- /.modal-content -->
+                                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+          <!--MODAL-->
 
           <!-- end: right menu -->
 
@@ -245,68 +320,120 @@
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
 <script type="text/javascript">
+
   $(document).ready(function(){
     $('#datatables-example').DataTable();
-  });
+
+    $("#guardar").on('click',function(){
+
+        var dia1 = $('#dia1').val();
+        var dia2 = $('#dia2').val();
+        var bloque = $('#bloque').val();
+
+        if(dia1 == "0"){
+            alert("No selecciono un dia");
+            return false;
+        }
+        if(dia2 == "0"){
+            alert("No selecciono un dia");
+            return false;
+        }
+        if(bloque == "0"){
+            alert("No selecciono un bloque");
+            return false;
+        }
+
+        var todo = $("#modificar").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: 'editarHorario.php',
+            data: todo,
+            success: function(respuesta) {
+              
+                $("#dia1 option[value=0]").prop("selected",true);
+                $("#dia2 option[value=0]").prop("selected",true);
+                $("#bloque option[value=0]").prop("selected",true);
+                $("#modalito").modal('hide');
+                //alert(respuesta);
+                $(".tabla_ajax").load("tablaHorarios.php"); 
+                $('#datatables-example').DataTable();
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });//fin de ajax
+
+      return false;
+    });//fin del click
+    
+  });//fin del ready
+
+  function editar(id, dias, horas, estado){
+
+      
+      elemento = dias.split(" ");
+      dia1=elemento[0];
+      dia2=elemento[2];
+      
+      $("#dia1 option[value="+dia1+"]").prop("selected", true);
+      $("#dia2 option[value="+dia2+"]").prop("selected", true);
+      $("#estado option[value="+estado+"]").prop("selected", true);
+      $("#bloque").val(horas);
+      $("#id").val(id);
+      $("#modalito").modal();
+      
+    }
+
+  function verificar(){
+       
+       var dato = $("#dia1").val();
+        if(dato == "Lunes"){
+          $("#dia2").empty();
+          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+          $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
+          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+          $("#dia2").append("<option value='Jueves'>Jueves</option>");
+          $("#dia2").append("<option value='Viernes'>Viernes</option>");
+        }
+        if(dato == "Martes"){
+          $("#dia2").empty();
+          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+          $("#dia2").append("<option value='Jueves'>Jueves</option>");
+          $("#dia2").append("<option value='Viernes'>Viernes</option>");
+        }
+        if(dato == "Miercoles"){
+          $("#dia2").empty();
+          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+          $("#dia2").append("<option value='Martes'>Martes</option>");
+          $("#dia2").append("<option value='Jueves'>Jueves</option>");
+          $("#dia2").append("<option value='Viernes'>Viernes</option>");
+        }
+        if(dato == "Jueves"){
+          $("#dia2").empty();
+          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+          $("#dia2").append("<option value='Martes'>Martes</option>");
+          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+          $("#dia2").append("<option value='Viernes'>Viernes</option>");
+        }
+        if(dato == "Viernes"){
+          $("#dia2").empty();
+          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
+          $("#dia2").append("<option value='Martes'>Martes</option>");
+          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
+          $("#dia2").append("<option value='Jueves'>Jueves</option>");
+        }
+ 
+     }
+  
+
 </script>
 <!-- end: Javascript -->
+
 </body>
 </html>
-<?php
-
-include "../config/conexion.php";
-
-$bandera = $_REQUEST["bandera"];
-$baccion = $_REQUEST["baccion"];
-
-if ($bandera == "add") {
-    $consulta  = "INSERT INTO cliente VALUES('null','" . $nombrecliente . "','" . $apellidocliente . "','" . $duicliente . "','" . $telefonocliente . "','" . $direccioncliente . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == "desactivar") {
-  $consulta = "UPDATE tpersonal SET iestado = '0' WHERE eid_personal = '".$baccion."'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == "activar") {
-  $consulta = "UPDATE tpersonal SET iestado = '1' WHERE eid_personal = '".$baccion."'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM tpersonal where eid_personal='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == 'enviar') {
-    echo "<script type='text/javascript'>";
-    echo "document.location.href='editpersonal.php?id=" . $baccion . "';";
-    echo "</script>";
-    # code...
-}
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listapersonal.php';";
-    echo "</script>";
-}
-?>

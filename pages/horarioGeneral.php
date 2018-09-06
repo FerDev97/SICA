@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
-  <link href="../vendor/hora/mdtimepicker.css" rel="stylesheet">
+  
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -175,7 +175,7 @@
                   <div class="user col-md-12">
                    <ul class="nav nav-list">
                     <li class="online">
-                      <img src="asset/img/avatar.jpg" alt="user name">
+                      <img src="../asset/img/avatar.jpg" alt="user name">
                       <div class="name">
                         <h5><b>Bill Gates</b></h5>
                         <p>Hi there.?</p>
@@ -780,7 +780,6 @@
 <script src="../asset/js/plugins/datatables.bootstrap.min.js"></script>
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
 <script src="../asset/js/plugins/select2.full.min.js"></script>
-<script src="../vendor/hora/mdtimepicker.js"></script>
 
 
 <!-- custom -->
@@ -813,7 +812,7 @@
 
         $.ajax({
             type: 'post',
-            url: '../pages/agregarHorario.php',
+            url: 'agregarHorario.php',
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
