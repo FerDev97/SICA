@@ -5,7 +5,7 @@ $result = $conexion->query("select * from tpersonal where eid_personal=" . $id);
 if ($result) {
     while ($fila = $result->fetch_object()) {
         $idpersonalR       = $fila->eid_personal;
-        $codigopersonalR   = $fila->ccodigo;
+        $duipersonalR   = $fila->cdui;
         $nombrepersonalR   = $fila->cnombre;
         $apellidopersonalR = $fila->capellido;
         $telefonopersonalR = $fila->ctelefono;
@@ -127,7 +127,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 				}
 
 			}
-          if(document.getElementById('codigo').value=="" ||
+          if(document.getElementById('dui').value=="" ||
             document.getElementById('nombre').value=="" ||
             document.getElementById('apellido').value=="" ||
             document.getElementById('direccion').value=="" ||
@@ -185,7 +185,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input id="codigo" type="text" class="form-control" name="codigo" placeholder="Codigo" value="<?php echo $codigopersonalR; ?>" readonly="readonly" >
+                                  <input id="dui" type="text" class="form-control" name="dui" placeholder="DUI" value="<?php echo $duipersonalR; ?>" readonly="readonly" >
                               </div> 
                               <br>
                               <br> 
@@ -730,7 +730,7 @@ include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
 $baccion  = $_REQUEST["baccion"];
-$codigo    = $_REQUEST["codigo"];
+$dui    = $_REQUEST["dui"];
 $nombre  = $_REQUEST["nombre"];
 $apellido  = $_REQUEST["apellido"];
 $direccion      = $_REQUEST["direccion"];
@@ -742,7 +742,7 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-    $consulta  = "UPDATE tpersonal set ccodigo='" . $codigo . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "',iestado='" . $estado . "',isexo='" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
+    $consulta  = "UPDATE tpersonal set cdui='" . $dui . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "',iestado='" . $estado . "',isexo='" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     
    
