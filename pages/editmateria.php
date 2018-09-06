@@ -172,7 +172,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          if ($idhorario==$fila->id) {
+                            echo "<option selected value='".$fila->id."'>".$fila->nombre."</option>";
+                          } else {
+                            echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          }
+                          
+                          
                          
                            }
                       }
@@ -189,7 +195,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          if ($idopcion==$fila->id) {
+                             echo "<option selected value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          } else {
+                            echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          }
+                          
+                         
                          
                         
                            }

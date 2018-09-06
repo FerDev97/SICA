@@ -79,7 +79,7 @@
                           </a>
                           <ul class="nav nav-list sub-tree">
                             <li><a href="horarioGeneral.php">Agregar horario</a></li>
-                            <li><a href="#">Lista de horarios</a></li>                 
+                            <li><a href="listaHorarios.php">Lista de horarios</a></li>                 
                           </ul>
                     </li>
                   </ul>

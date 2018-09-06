@@ -30,13 +30,13 @@ if($accion=="guardarG")
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
   <!-- plugins -->
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/nouislider.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
-  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -46,11 +46,11 @@ if($accion=="guardarG")
   <link rel="shortcut icon" href="../asset/img/logomi.png">
 
       <script type="text/javascript">
-         function verificar(){
+        function verificar(){
           if(document.getElementById('opc').value=="Opcion" || document.getElementById('grado').value=="Grado" || document.getElementById('seccion').value=="Seccion" || document.getElementById('cupo').value==""){
             alert("Complete los campos");
           }else{
-            location.href="fopciones.php?accion=guardarOpc&opcion="+document.getElementById("opc").value+"&cupo="+document.getElementById("cupo").value+"&grado="+document.getElementById("grado").value+"&seccion="+document.getElementById("seccion").value;
+            //location.href="fopciones.php?accion=guardarOpc&opcion="+document.getElementById("opc").value+"&cupo="+document.getElementById("cupo").value+"&grado="+document.getElementById("grado").value+"&seccion="+document.getElementById("seccion").value;
             }
         }
         function guardarGrado(){
@@ -104,11 +104,11 @@ if($accion=="guardarG")
                   </div>
                 </div>
                 <div class="form-element">
-                <form id="turismo" name="turismo" action="" method="post">
+                <form id="insertar">
                 <input type="hidden" name="bandera" id="bandera">
                 <div class="col-md-12">
                   <div class="col-md-12 panel panel-info">
-                    <div class="col-md-12 panel1-heading">
+                    <div class="col-md-12 panel-heading">
                       <!--<h4>Informaci&oacute;n Materia</h4>-->
                     <h4>Formulario Opci&oacute;nes de Bachillerato</h4>
                     </div>
@@ -125,24 +125,8 @@ if($accion=="guardarG")
                            </br>
                            </br>
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-                             <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
-                              <select  id="opc" class="select2 show-tick" style="width: 470px; font-size: 15px" name="opc">
-                              <option value="">Opcion</option>
-                              <?php
-                           include "../config/conexion.php";
-                           $result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
-                           if ($result) {
-                               while ($fila = $result->fetch_object()) {
-                                echo "<option value=".$fila->eid_bachillerato.">".$fila->cnombe."</option>";
-                              }
-                           }
-                           ?> 
-                              </select>
-                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
-                              </div>
-                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-clipboard"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Grado: </span>
-                              <select id="grado" class="select2 show-tick" style="width: 470px; font-size: 15px" name="grado">
+                              <select id="grado" class="select2 show-tick" style="width: 350px; font-size: 15px" name="grado">
                               <option value="">Grado</option>
                           <?php
                            include "../config/conexion.php";
@@ -156,10 +140,27 @@ if($accion=="guardarG")
                               </select>
                               <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">+</button>
                               </div>
+                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
+                              <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc">
+                              <option value="opcion">Opcion</option>
+                              <?php
+                           include "../config/conexion.php";
+                           $result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+                           if ($result) {
+                               while ($fila = $result->fetch_object()) {
+                                echo "<option value=".$fila->eid_bachillerato.">".$fila->cnombe."</option>";
+                              }
+                           }
+                           ?> 
+                              </select>
+                              <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
+                              </div>
+                           
 
                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
-                              <select id="seccion" class="select2 show-tick" style="width: 470px; font-size: 15px" name="seccion">
+                              <select id="seccion" class="select2 show-tick" style="width: 350px; font-size: 15px" name="seccion">
                               <option value="">Seccion</option>
                               <?php
                            include "../config/conexion.php";
@@ -185,7 +186,7 @@ if($accion=="guardarG")
                               <div class="col-md-4">
                               <br><b></b>
                              
-                              <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" onclick="verificar()" style="font-size:20px;" value="Guardar" />
+                              <input type="button" id="guardar" name="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
                           </div>
                           <div>
                             <br><b></b>
@@ -282,13 +283,13 @@ if ($result) {
                   <!--aqui va el codigo-->
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
-                  <form id="turismo" name="turismo" action="" method="post">
+                  <form id="insertarG">
                   <input id="gradom" type="number" style="width: 400px; font-size: 15px" class="form-control" name="gradom" placeholder="Nuevo Grado" >
                   </div>
                   <br>
                    <center>
                    <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarGrado()" >
+                  <button title="Agrega Nuevo Grado al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" id="guardarG" name="guardarG" data-dismiss="modal">
                   Guardar</button>
                   </div>
                   </center>
@@ -322,15 +323,17 @@ if ($result) {
                   
                   <div class="input-group" style="margin-left:75px">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                  <form id="insertarS">
                   <input id="seccionm" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="seccionm" placeholder="Nueva Seccion" >
                   </div>
                   <br>
                    <center>
                    <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarSeccion()">
+                  <button title="Agrega Nueva Opcionel al Sistema" data-dismiss="modal" style="margin-left:0px;" class="btn btn-info" type="button" id="guardarS" name="guardarS" >
                   Guardar</button>
                   </div>
                   </center>
+                  </form>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">
@@ -362,6 +365,7 @@ if ($result) {
                   <!--aqui va el codigo-->
                   <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                           <form id="insertarB">
                            <input id="codigoo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigoo" placeholder="Codigo">
                   </div>
                   <br>
@@ -372,8 +376,8 @@ if ($result) {
                   <br>
                   <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
-                              <select id="tipob" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipo">
-                              <option value="">Tipo</option>
+                              <select id="tipob" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipob">
+                              <option value="tipo">Tipo</option>
                               <?php
                            include "../config/conexion.php";
                            $result = $conexion->query("select * from ttipobachillerato order by eid_tipo");
@@ -394,12 +398,13 @@ if ($result) {
                     <br>         
                     <center>
                    <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" onclick="guardarOpcion()">
+                  <button title="Agrega Nueva Opcionel al Sistema"  style="margin-left:0px;" class="btn btn-info" type="button" id="guardarB" name="guardarB">
                   Guardar</button>
 
                   <button style="margin-left:15px" type="button" class="btn" data-dismiss="modal">Cerrar</button>
                   </div>
                   </center>
+                  </form>
                   <br>
                   <center><h4>Registro</h4></center>
                   
@@ -508,222 +513,145 @@ if ($result) {
 <script src="../asset/js/plugins/select2.full.min.js"></script>
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
+<script src="../asset/js/main.js"></script>
+<script type="text/javascript">
+ 
+  $(document).ready(function(){
+    
+    //$('#datatables-example').DataTable();
+     
+     $('#guardar').on('click',function(){
+        var opcion = $('#opc').val();
+        var grado = $('#grado').val();
+        var seccion = $('#seccion').val();
+        var cupo = $('#cupo').val();
 
+        if(opcion == "opcion"){
+            alert("Selecciones una opcion opo");
+            return false;
+        }
+        var todo = $("#insertar").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarOpc',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
+
+      return false;
+        
+
+     });//fin del click
+  });//fin del ready
+  //Ajax para Guardar grado
+  $(document).ready(function(){
+  $('#guardarG').on('click',function(){
+        var grado = $('#gradom').val();
+       
+
+        if(grado == ""){
+            alert("Por favor llene correctamente los datos");
+            return false;
+        }
+        var todo = $("#insertarG").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarGrado',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
+
+      return false;
+        
+
+     });//fin del click
+    });//fin del ready
+    //Ajax para Guardar Bachillerato
+  $(document).ready(function(){
+  $('#guardarB').on('click',function(){
+        var codigo = $('#codigoo').val();
+        var nombre = $('#nombrem').val();
+        var descripcion = $('#descripcion').val();
+        var tipo = $('#tipob').val();
+        if(tipo == "tipo"){
+            alert("Ingrese Tipo de bachillerato");
+            return false;
+        }else if(codigo==""||nombre==""||descripcion==""){
+            alert("Complete los campos");
+            return false;
+        }
+        var todo = $("#insertarB").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarBto',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
+
+      return false;
+        
+
+     });//fin del click
+    });//fin del ready
+    //Ajax para Guardar Seccion
+  $(document).ready(function(){
+  $('#guardarS').on('click',function(){
+        var seccion = $('#seccionm').val();
+       
+
+        if(seccion == ""){
+            alert("Por favor llene correctamente los datos");
+            return false;
+        }
+        var todo = $("#insertarS").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: '../pages/agregarOPcion.php?accion=guardarSeccion',
+            data: todo,
+            success: function(respuesta) {
+                alert(respuesta); 
+                
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });
+
+      return false;
+        
+
+     });//fin del click
+    });//fin del ready
+
+</script>
+<!-- end: Javascript -->
 
 
 <!-- custom -->
-<script src="../asset/js/main.js"></script>
-<script>$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});</script>
-<script type="text/javascript">
-  $(document).ready(function(){
-
-    $("#formcliente").validate({
-      errorElement: "em",
-      errorPlacement: function(error, element) {
-        $(element.parent("div").addClass("form-animate-error"));
-        error.appendTo(element.parent("div"));
-      },
-      success: function(label) {
-        $(label.parent("div").removeClass("form-animate-error"));
-      },
-      rules: {
-        nombrecliente: "required",
-        apellidocliente: "required",
-        duicliente: "required",
-        telefonocliente: "required",
-        direccioncliente: "required"
-      },
-      messages: {
-        nombrecliente: "Digita tu nombre",
-        apellidocliente: "Digita tu apellido",
-        duicliente: "Digita tu DUI",
-        telefonocliente: "Digita tu numero telefonico",
-        direccioncliente: "Digita tu direcci&oacuten"
-      }
-    });
-
-    // propose username by combining first- and lastname
-    $("#username").focus(function() {
-      var firstname = $("#firstname").val();
-      var lastname = $("#lastname").val();
-      if (firstname && lastname && !this.value) {
-        this.value = firstname + "." + lastname;
-      }
-    });
 
 
-    $('.mask-dui').mask('00000000-0');
-    $('.mask-codigo').mask('AA000');
-    $('.mask-time').mask('00:00:00');
-    $('.mask-date_time').mask('00/00/0000 00:00:00');
-    $('.mask-cep').mask('00000-000');
-    $('.mask-telefono').mask('0000-0000');
-    $('.mask-nit').mask('0000-000000-000-0');
-    $('.mask-phone_with_ddd').mask('(00) 0000-0000');
-    $('.mask-phone_us').mask('(000) 000-0000');
-    $('.mask-mixed').mask('AAA 000-S0S');
-    $('.mask-cpf').mask('000.000.000-00', {reverse: true});
-    $('.mask-money').mask('000.000.000.000.000,00', {reverse: true});
-    $('.mask-money2').mask("#.##0,00", {reverse: true});
-    $('.mask-ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
-      translation: {
-        'Z': {
-          pattern: /[0-9]/, optional: true
-        }
-      }
-    });
-    $('.mask-ip_address').mask('099.099.099.099');
-    $('.mask-percent').mask('##0,00%', {reverse: true});
-    $('.mask-clear-if-not-match').mask("00/00/0000", {clearIfNotMatch: true});
-    $('.mask-placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
-    $('.mask-fallback').mask("00r00r0000", {
-      translation: {
-        'r': {
-          pattern: /[\/]/,
-          fallback: '/'
-        },
-        placeholder: "__/__/____"
-      }
-    });
-    $('.mask-selectonfocus').mask("00/00/0000", {selectOnFocus: true});
-
-    var options =  {onKeyPress: function(cep, e, field, options){
-      var masks = ['00000-000', '0-00-00-00'];
-      mask = (cep.length>7) ? masks[1] : masks[0];
-      $('.mask-crazy_cep').mask(mask, options);
-    }};
-
-    $('.mask-crazy_cep').mask('00000-000', options);
-
-
-    var options2 =  {
-      onComplete: function(cep) {
-        alert('CEP Completed!:' + cep);
-      },
-      onKeyPress: function(cep, event, currentField, options){
-        console.log('An key was pressed!:', cep, ' event: ', event,
-          'currentField: ', currentField, ' options: ', options);
-      },
-      onChange: function(cep){
-        console.log('cep changed! ', cep);
-      },
-      onInvalid: function(val, e, f, invalid, options){
-        var error = invalid[0];
-        console.log ("Digit: ", error.v, " is invalid for the position: ", error.p, ". We expect something like: ", error.e);
-      }
-    };
-
-    $('.mask-cep_with_callback').mask('00000-000', options2);
-
-    var SPMaskBehavior = function (val) {
-      return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-    },
-    spOptions = {
-      onKeyPress: function(val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-      }
-    };
-
-    $('.mask-sp_celphones').mask(SPMaskBehavior, spOptions);
-
-
-
-    var slider = document.getElementById('noui-slider');
-    noUiSlider.create(slider, {
-      start: [20, 80],
-      connect: true,
-      range: {
-        'min': 0,
-        'max': 100
-      }
-    });
-
-    var slider = document.getElementById('noui-range');
-    noUiSlider.create(slider, {
-                        start: [ 20, 80 ], // Handle start position
-                        step: 10, // Slider moves in increments of '10'
-                        margin: 20, // Handles must be more than '20' apart
-                        connect: true, // Display a colored bar between the handles
-                        direction: 'rtl', // Put '0' at the bottom of the slider
-                        orientation: 'vertical', // Orient the slider vertically
-                        behaviour: 'tap-drag', // Move handle on tap, bar is draggable
-                        range: { // Slider can select '0' to '100'
-                        'min': 0,
-                        'max': 100
-                      },
-                        pips: { // Show a scale with the slider
-                          mode: 'steps',
-                          density: 2
-                        }
-                      });
-
-
-
-    $(".select2-A").select2({
-      placeholder: "Select a state",
-      allowClear: true
-    });
-
-    $(".select2-B").select2({
-      tags: true
-    });
-
-    $("#range1").ionRangeSlider({
-      type: "double",
-      grid: true,
-      min: -1000,
-      max: 1000,
-      from: -500,
-      to: 500
-    });
-
-    $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true});
-    $('.date').bootstrapMaterialDatePicker({ weekStart : 0, time: false});
-    $('.time').bootstrapMaterialDatePicker({ date: false,format:'HH:mm',animation:true});
-    $('.datetime').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',animation:true});
-    $('.date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER'});
-    $('.min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
-
-
-    $(".dial").knob({
-      height:80
-    });
-
-    $('.dial1').trigger(
-     'configure',
-     {
-       "min":10,
-       "width":80,
-       "max":80,
-       "fgColor":"#FF6656",
-       "skin":"tron"
-     }
-     );
-
-    $('.dial2').trigger(
-     'configure',
-     {
-
-       "width":80,
-       "fgColor":"#FF6656",
-       "skin":"tron",
-       "cursor":true
-     }
-     );
-
-    $('.dial3').trigger(
-     'configure',
-     {
-
-       "width":80,
-       "fgColor":"#27C24C",
-     }
-     );
-  });
-</script>
-<!-- end: Javascript -->
 </body>
 </html>
 <?php

@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
-  <link href="../vendor/hora/mdtimepicker.css" rel="stylesheet">
+  
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -93,6 +93,7 @@
                               <div class="input-group " style="padding-bottom:10px;">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                                 <select id="bloque"  class="form-control" name="bloque" >
+                                  <option value="0">Seleccione un bloque</option>
                                   <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
                                   <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
                                   <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
@@ -174,7 +175,7 @@
                   <div class="user col-md-12">
                    <ul class="nav nav-list">
                     <li class="online">
-                      <img src="asset/img/avatar.jpg" alt="user name">
+                      <img src="../asset/img/avatar.jpg" alt="user name">
                       <div class="name">
                         <h5><b>Bill Gates</b></h5>
                         <p>Hi there.?</p>
@@ -779,7 +780,6 @@
 <script src="../asset/js/plugins/datatables.bootstrap.min.js"></script>
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
 <script src="../asset/js/plugins/select2.full.min.js"></script>
-<script src="../vendor/hora/mdtimepicker.js"></script>
 
 
 <!-- custom -->
@@ -799,16 +799,26 @@
             alert("No selecciono un dia");
             return false;
         }
-        
+        if(dia2 == "0"){
+            alert("No selecciono un dia");
+            return false;
+        }
+        if(bloque == "0"){
+            alert("No selecciono un bloque");
+            return false;
+        }
+
         var todo = $("#insertar").serialize();
 
         $.ajax({
             type: 'post',
-            url: '../pages/agregarHorario.php',
+            url: 'agregarHorario.php',
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
-                
+                $("#dia1 option[value=0]").prop("selected",true);
+                $("#dia2 option[value=0]").prop("selected",true);
+                $("#bloque option[value=0]").prop("selected",true);
             },
             error: function(respuesta){
               alert("Error en el servidor: "+respuesta); 
@@ -826,6 +836,7 @@
       var dato = $("#dia1").val();
        if(dato == "Lunes"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -833,6 +844,7 @@
        }
        if(dato == "Martes"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -840,6 +852,7 @@
        }
        if(dato == "Miercoles"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -847,6 +860,7 @@
        }
        if(dato == "Jueves"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
@@ -854,6 +868,7 @@
        }
        if(dato == "Viernes"){
          $("#dia2").empty();
+         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");

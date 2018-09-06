@@ -81,7 +81,7 @@
                     <div class="panel-heading"><h3>Lista</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
-                      <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                      <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
                           
@@ -90,8 +90,8 @@
                           <th>Nombre</th>
                           <th>Tipo</th>
                           <th>Seccion</th>
-                          <th></th>
-                          <th></th>
+                          <th>Editar</th>
+                          <th>Alta/Baja</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -134,7 +134,6 @@ if ($result) {
 
     }
 }
-
 ?>
                       </tbody>
                         </table>
