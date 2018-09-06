@@ -126,6 +126,7 @@ error_reporting(E_ALL & ~E_NOTICE);
               document.getElementById('bandera').value='modificar';
               alert(document.getElementById('bandera').value);
               }else{
+                alert("Antes de bandera");
             document.getElementById("bandera").value="add";
           }
             document.turismo.submit();
@@ -176,7 +177,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="input-group">
                           
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"  ></i></span>
-                                <input id="dui" type="text" class="form-control" name="dui" placeholder="DUI" style="width: 530px;">
+                                <input id="dui" type="text"  class="form-text mask-dui" name="dui" placeholder="DUI" style="width: 530px;">
                                </div> 
                               <br>
                               <br> 
@@ -710,23 +711,34 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
+  msg("Entra add");
+  
+  $query = "select cdui FROM tpersonal WHERE cdui like '%".$dui."%';";
+  $result = $conexion->query($query);
+  if($result->num_rows == 0){
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
-    $resultado = $conexion->query($consulta);
-    
-   
-    
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
+      $resultado = $conexion->query($consulta);
+        if ($resultado) {
+            $mensaje="Se agregaron los datos correctamente";
+            msg($mensaje);
+        } else {
+            $mensaje="Error al insertar los datos";
+            msg($mensaje);
+        }
+      
+  }else{
+
+      $mensaje="Los datos que desea ingresar ya existen: ";
+      msg($mensaje);
+  }
 }
+
 
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='fpersonal.php';";
+    //echo "document.location.href='fpersonal.php';";
     echo "</script>";
 }
 ?>
