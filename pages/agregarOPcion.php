@@ -76,7 +76,7 @@ echo $mensaje;
     $query = "SELECT ccodigo, cnombe FROM tbachilleratos WHERE ccodigo like '%".$codigo."%' AND cnombe like '%".$nombre."';";
     $result = $conexion->query($query);
     if($result->num_rows == 0){
-        $consulta  = "INSERT INTO tbachilleratos VALUES('null','" . $codigo . "','" .$nombre. "','" .$descripcion. "','" .$tipo. "')";
+        $consulta  = "INSERT INTO tbachilleratos VALUES('null','" . $codigo . "','" .$nombre. "','" .$descripcion. "','" .$tipo. "','1')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
               $mensaje="Se agregaron los datos correctamente";
