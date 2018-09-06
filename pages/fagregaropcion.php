@@ -388,7 +388,7 @@ if ($result) {
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
-                $(".tipob").load("combo.php");
+                $("#tipob").load("combo.php");
                 
             },
             error: function(respuesta){
