@@ -23,6 +23,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <link href="../asset/css/style.css" rel="stylesheet">
@@ -35,6 +36,71 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+
+      //SWEET ALERTS
+      function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
+      //SWEET ALERTS
+      //Validacion Solo letras js
+      function sololetras(e) {
+        key=e.keyCode || e.which;
+ 
+        teclado=String.fromCharCode(key).toLowerCase();
+ 
+        letras="qwertyuiopasdfghjklñzxcvbnm ";
+ 
+        especiales="8-37-38-46-164";
+ 
+        teclado_especial=false;
+ 
+        for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true;
+                break;
+            }
+        }
+ 
+        if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+        }
+    }
+     //Validacion Solo letras
         function verificar(){
           if(document.getElementById('codigom').value=="" ||
             document.getElementById('nombrem').value=="" ||
@@ -42,7 +108,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             document.getElementById('horario').value=="" ||
             document.getElementById('docente').value==""||
             document.getElementById('opcion').value==""){
-            alert("Complete los campos prueba");
+            sweetError("Complete los campos prueba");
             
           }else{
             alert(document.getElementById("lastindex"));
@@ -107,7 +173,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
+                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre" onkeypress="return sololetras(event)">
                            </div>
                            </br>
                            </br>
@@ -168,7 +234,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <option value="">Seleccione Opcion</option>
                                <?php
                       include '../config/conexion.php';
-                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
+                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo and op.iestado='1'");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
@@ -221,7 +287,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 <!-- plugins -->
 <script src="../asset/js/plugins/moment.min.js"></script>
@@ -479,7 +545,7 @@ if ($bandera == "add") {
                            }
                       }
         //Finde bloque.
-        msg("Agrego materia.");
+        msgAdd("Agrego materia.");
         //Query para agregar a la tabla de muchos a muchos.
         $consulta2  = "INSERT INTO tpersonal_materia VALUES('null','" . $docente . "','" . $last . "')";
         $resultado2 = $conexion->query($consulta2);
@@ -499,7 +565,21 @@ if ($bandera == "add") {
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "prueba('$texto');";
+   // echo "prueba('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgAdd($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
