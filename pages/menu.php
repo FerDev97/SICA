@@ -50,6 +50,7 @@
                   <ul class="nav nav-list tree">
                     <li><a href="fpersonal.php">Agregar Nuevo</a></li>
                     <li><a href="listapersonal.php">Lista de Personal</a></li>
+                    <li><a href="fcargo.php">Cargo</a></li>
                   </ul>
 
                 </li>
@@ -78,7 +79,7 @@
                           </a>
                           <ul class="nav nav-list sub-tree">
                             <li><a href="horarioGeneral.php">Agregar horario</a></li>
-                            <li><a href="#">Lista de horarios</a></li>                 
+                            <li><a href="listaHorarios.php">Lista de horarios</a></li>                 
                           </ul>
                     </li>
                   </ul>

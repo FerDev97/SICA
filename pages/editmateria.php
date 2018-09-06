@@ -1,3 +1,21 @@
+<?php
+$id = $_REQUEST["id"];
+include "../config/conexion.php";
+$result = $conexion->query("select * from tmaterias where eid_materia=" . $id);
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        $idmateriaR       = $fila->eid_materia;
+        $codigomateriaR   = $fila->ccodigo;
+        $nombremateriaR   = $fila->cnombre;
+        $descripcionR = $fila->cdescripcion;
+        $idopcion = $fila->efk_idopcion;
+        $idhorario = $fila->efk_idhorario;
+        
+
+    }
+}
+
+?>
 <!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
@@ -10,7 +28,6 @@ error_reporting(E_ALL & ~E_NOTICE);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Turismo</title>
-
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
 
@@ -101,19 +118,19 @@ error_reporting(E_ALL & ~E_NOTICE);
                         
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo">
+                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo" value="<?php echo $codigomateriaR; ?>">
                            </div>
                            </br>
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre">
+                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre" value="<?php echo $nombremateriaR; ?>">
                            </div>
                            </br>
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><span class="glyphicon glyphicon-align-justify"></span></span>
-                           <textarea rows="3" size="30" value="" id="descripcionm" name="descripcionm" class="form-control" placeholder="Descripción"></textarea> 
+                           <textarea rows="3" size="30" value="" id="descripcionm" name="descripcionm" class="form-control" placeholder="Descripción"><?php echo $descripcionR; ?></textarea> 
                            </div>
                            
                            </div>
@@ -155,7 +172,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          if ($idhorario==$fila->id) {
+                            echo "<option selected value='".$fila->id."'>".$fila->nombre."</option>";
+                          } else {
+                            echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          }
+                          
+                          
                          
                            }
                       }
@@ -172,7 +195,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          if ($idopcion==$fila->id) {
+                             echo "<option selected value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          } else {
+                            echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          }
+                          
+                         
                          
                         
                            }

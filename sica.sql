@@ -143,7 +143,7 @@ CREATE TABLE `tbachilleratos` (
   PRIMARY KEY (`eid_bachillerato`),
   KEY `fktipo` (`efk_tipo`),
   CONSTRAINT `fktipo` FOREIGN KEY (`efk_tipo`) REFERENCES `ttipobachillerato` (`eid_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,6 +152,7 @@ CREATE TABLE `tbachilleratos` (
 
 LOCK TABLES `tbachilleratos` WRITE;
 /*!40000 ALTER TABLE `tbachilleratos` DISABLE KEYS */;
+INSERT INTO `tbachilleratos` VALUES (1,'001','Contador','Esta materia es de contqador.',1);
 /*!40000 ALTER TABLE `tbachilleratos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +286,7 @@ CREATE TABLE `tgrado` (
   `eid_grado` int(11) NOT NULL AUTO_INCREMENT,
   `cgrado` int(11) NOT NULL,
   PRIMARY KEY (`eid_grado`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,6 +295,7 @@ CREATE TABLE `tgrado` (
 
 LOCK TABLES `tgrado` WRITE;
 /*!40000 ALTER TABLE `tgrado` DISABLE KEYS */;
+INSERT INTO `tgrado` VALUES (1,1);
 /*!40000 ALTER TABLE `tgrado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,8 +310,9 @@ CREATE TABLE `thorarios` (
   `eid_horario` int(11) NOT NULL AUTO_INCREMENT,
   `cdia` varchar(20) NOT NULL,
   `chora` varchar(20) NOT NULL,
+  `estado` int(11) NOT NULL,
   PRIMARY KEY (`eid_horario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +321,7 @@ CREATE TABLE `thorarios` (
 
 LOCK TABLES `thorarios` WRITE;
 /*!40000 ALTER TABLE `thorarios` DISABLE KEYS */;
-INSERT INTO `thorarios` VALUES (1,'Lunes y Martes','7:00 AM - 10:00 AM');
+INSERT INTO `thorarios` VALUES (1,'Lunes y Viernes','7:00 AM - 10:00 AM',1),(2,'Martes y Miercoles','10:00 AM - 12:00 PM',1),(3,'Miercoles y Viernes','03:00 PM - 05:00 PM',1),(4,'Jueves y Viernes','03:00 PM - 05:00 PM',1);
 /*!40000 ALTER TABLE `thorarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,12 +339,13 @@ CREATE TABLE `tmaterias` (
   `cdescripcion` varchar(200) NOT NULL,
   `efk_idopcion` int(11) NOT NULL,
   `efk_idhorario` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
   PRIMARY KEY (`eid_materia`),
   KEY `fkopcion` (`efk_idopcion`),
   KEY `fkhorario_idx` (`efk_idhorario`),
   CONSTRAINT `fkhorario` FOREIGN KEY (`efk_idhorario`) REFERENCES `thorarios` (`eid_horario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fkopcion` FOREIGN KEY (`efk_idopcion`) REFERENCES `topciones` (`eid_opcion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -350,6 +354,7 @@ CREATE TABLE `tmaterias` (
 
 LOCK TABLES `tmaterias` WRITE;
 /*!40000 ALTER TABLE `tmaterias` DISABLE KEYS */;
+INSERT INTO `tmaterias` VALUES (1,'001','Matematicas','Esta es una materia llena de numeros.',1,1,0);
 /*!40000 ALTER TABLE `tmaterias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +408,7 @@ CREATE TABLE `topciones` (
   CONSTRAINT `fkbto` FOREIGN KEY (`efk_bto`) REFERENCES `tbachilleratos` (`eid_bachillerato`),
   CONSTRAINT `fkgrado` FOREIGN KEY (`efk_grado`) REFERENCES `tgrado` (`eid_grado`),
   CONSTRAINT `fkseccion` FOREIGN KEY (`efk_seccion`) REFERENCES `tsecciones` (`eid_seccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,6 +417,7 @@ CREATE TABLE `topciones` (
 
 LOCK TABLES `topciones` WRITE;
 /*!40000 ALTER TABLE `topciones` DISABLE KEYS */;
+INSERT INTO `topciones` VALUES (1,100,1,1,1);
 /*!40000 ALTER TABLE `topciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -530,6 +536,7 @@ CREATE TABLE `tpersonal_materia` (
 
 LOCK TABLES `tpersonal_materia` WRITE;
 /*!40000 ALTER TABLE `tpersonal_materia` DISABLE KEYS */;
+INSERT INTO `tpersonal_materia` VALUES (0,4,1);
 /*!40000 ALTER TABLE `tpersonal_materia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,7 +582,7 @@ CREATE TABLE `tsecciones` (
   `eid_seccion` int(11) NOT NULL AUTO_INCREMENT,
   `cseccion` varchar(10) NOT NULL,
   PRIMARY KEY (`eid_seccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -584,6 +591,7 @@ CREATE TABLE `tsecciones` (
 
 LOCK TABLES `tsecciones` WRITE;
 /*!40000 ALTER TABLE `tsecciones` DISABLE KEYS */;
+INSERT INTO `tsecciones` VALUES (1,'A');
 /*!40000 ALTER TABLE `tsecciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -598,7 +606,7 @@ CREATE TABLE `ttipobachillerato` (
   `eid_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `ctipo` varchar(50) NOT NULL,
   PRIMARY KEY (`eid_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -607,6 +615,7 @@ CREATE TABLE `ttipobachillerato` (
 
 LOCK TABLES `ttipobachillerato` WRITE;
 /*!40000 ALTER TABLE `ttipobachillerato` DISABLE KEYS */;
+INSERT INTO `ttipobachillerato` VALUES (1,'Tecnico');
 /*!40000 ALTER TABLE `ttipobachillerato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -647,4 +656,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-02 12:28:46
+-- Dump completed on 2018-09-05 21:47:10

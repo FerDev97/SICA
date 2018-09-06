@@ -150,7 +150,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <br> 
                               <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direccion" name="direccion" value="<?php echo $direccionpersonalR; ?>"></textarea>
+      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direccion" name="direccion" ><?php echo $direccionpersonalR; ?></textarea>
       </div>
                               
                               <label>Fecha de nacimiento:</label>
@@ -211,15 +211,36 @@ error_reporting(E_ALL & ~E_NOTICE);
       <br>
       <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-check-circle"></i><span class="label label-default" style="width: 20px; font-size: 15px">Estado</span>
-     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1">Activo</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="2">Inactivo</label>
+     <?php
+    if($estadopersonalR==1){
+     echo' <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1" checked>Activo</label>';
+     echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="2">Inactivo</label>';
+    }else{
+      echo' <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1" >Activo</label>';
+      echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="2" checked>Inactivo</label>';
+
+    }
+      ?>
+
+     
      </div>
      <br>
      <br>
       <div class="input-group " style="padding-bottom:25px;">
-     <i  class="fa fa-child"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sexo</span>
-     <label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1">Femenino</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="masculino" name="sexo" value="2">Masculino</label>
+      <i  class="fa fa-child"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sexo</span>
+      <?php 
+      if($isexopersonalR==1){
+    echo'<label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1" checked>Femenino</label>';
+    echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="masculino" name="sexo" value="2">Masculino</label>';
+}else{
+  echo'<label class="radio-inline" style="margin-right:54px;margin-left:80px; font-size: 15px"><input type="radio" id="femenino" name="sexo" value="1"> Femenino</label>';
+    echo'<label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="masculino" name="sexo" value="2" checked>Masculino</label>';
+
+}
+
+      ?>
+     
+     
      </div>
      
                               
@@ -669,7 +690,7 @@ $estado     = $_REQUEST["estado"];
 $sexo     = $_REQUEST["sexo"];
 
 if ($bandera == "add") {
-    $consulta  = "UPDATE tpersonal set ccodigo='" . $codigo . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "','" . $estado . "','" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
+    $consulta  = "UPDATE tpersonal set ccodigo='" . $codigo . "',cnombre='" . $nombre . "',capellido='" . $apellido . "',ctelefono='" . $telefono . "',ccorreo='" . $correo . "',cdireccion='" . $direccion . "',ffechanacimiento='" . $fechanacimiento. "',iestado='" . $estado . "',isexo='" . $sexo . "',efk_idcargo='" . $cargo . "' where eid_personal='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     
    
