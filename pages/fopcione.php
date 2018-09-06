@@ -1,123 +1,124 @@
+<!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-?>
-<?php
-
-$id  = $_REQUEST["id"];
-$aux = " ";
-
-include "../config/conexion.php";
-$result = $conexion->query("select * from tcargos where eid_cargos=" . $id);
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        $idcargosR   = $fila->eid_cargo;
-        $nombreR     = $fila->ccargo;
-       
-    }
-    $aux = "modificar";
+$accion=$_REQUEST['accion'];
+if($accion=="guardarG")
+{
+    guardarGrado();
+}else if($accion=="guardarS")
+{
+    guardarSeccion();
+}else if($accion=="guardarO")
+{
+    guardarOpcion();
+}else if($accion=="guardarOpc")
+{
+    guardarOpcionCompleta();
+}else if($accion=="guardarT")
+{
+    guardarTipo();
 }
+
 ?>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Miminium Admin Template v.1">
-  <meta name="author" content="Isna Nur Azis">
-  <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SICA-Opciones</title>
+  <title>Opciones</title>
+
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
   <!-- plugins -->
-  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/nouislider.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
+
       <script type="text/javascript">
-     
-      function verificar(){
-          if( document.getElementById('nombre').value=="" ){
+        function verificar(){
+          if(document.getElementById('opc').value=="Opcion" || document.getElementById('grado').value=="Grado" || document.getElementById('seccion').value=="Seccion" || document.getElementById('cupo').value==""){
             alert("Complete los campos");
           }else{
-            if (document.getElementById("aux").value=="modificar") {
-              alert('Va a modificar.');
-           
-            document.getElementById('bandera').value="modificar";
-            document.turismo.submit();
-            }else
-            {
-              document.getElementById('bandera').value="add";
-              document.turismo.submit();
-            }
+            //location.href="fopciones.php?accion=guardarOpc&opcion="+document.getElementById("opc").value+"&cupo="+document.getElementById("cupo").value+"&grado="+document.getElementById("grado").value+"&seccion="+document.getElementById("seccion").value;
             }
         }
-
-        function modify(id)
-        {
-          
-          document.getElementById('nombre').value="";
-          
-
-         document.location.href='fcargo.php?id='+id;
+        function guardarGrado(){
+          if(document.getElementById('gradom').value=="" ){
+            alert("Complete el campo para guardar");
+          }else{ 
+            location.href="fopciones.php?accion=guardarG&grado="+document.getElementById("gradom").value;
+            }
         }
-         function confirmar(id)
-        {
-          if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            alert(id);
-            document.turismo.submit();
-          }else
-          {
-            alert("Error al borrar.");
-          }
+        function guardarSeccion(){
+          if(document.getElementById('seccionm').value=="" ){
+            alert("Complete el campo para guardar");
+          }else{ 
+            location.href="fopciones.php?accion=guardarS&seccion="+document.getElementById("seccionm").value;
+            }
         }
+        function guardarOpcion(){
+          if(document.getElementById('codigoo').value=="" || document.getElementById('nombrem').value=="" || document.getElementById('descripcion').value==""){
+            alert("Complete el campo para guardar");
+          }else if(document.getElementById('tipob').value=="Tipo"){ 
+            alert("Seleccion Tipo de Bachillerato");
+            }else{
+              location.href="fopciones.php?accion=guardarO&codigo="+document.getElementById("codigoo").value+"&nombre="+document.getElementById("nombrem").value+"&tipo="+document.getElementById("tipob").value+"&descripcion="+document.getElementById("descripcion").value;
+            }
+        }
+        function guardarTipo(){
+          if(document.getElementById('tipom').value==""){
+            alert("Complete el campo para guardar");
+          }else{
+              location.href="fopciones.php?accion=guardarT&tipo="+document.getElementById("tipom").value;
+            }
+        }
+        
       </script>
 </head>
 
 <body id="mimin" class="dashboard">
-      <?php include "header.php"?>
-
+   <?php include "header.php"?>
       <div class="container-fluid mimin-wrapper">
-
-<?php include "menu.php";?>
+          <?php include "menu.php";?>
+          <!-- start: Content -->
             <div id="content">
-               <div class="panel box-shadow-none content-header">
+                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
-                    <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Opcion</h3>
+                    <div class="col-md-12" >
+                    <h3 class="animated fadeInLeft">Opciones</h3>
                         <p class="animated fadeInDown">
-                          SICA <span class="fa-angle-right fa"></span> Datos del Opcion de Bachillerato.
+                          Opciones <span class="fa-angle-right fa"></span>Datos de la Opcion.
                         </p>
                     </div>
                   </div>
-              </div>
-              <form id="insertar" name="turismo" action="" method="post">
-              <input type="hidden" name="bandera" id="bandera">
-              <input type="hidden" name="baccion" id="baccion" value="<?php echo $idcatalogoR; ?>" >
-              <input type="hidden" name="aux" id="aux" value="<?php echo $aux; ?>">
-              <input type="hidden" name="r" id="r" value="">
-              <div class="col-md-12">
-                  <div class="col-md-5 panel panel-info">
+                </div>
+                <div class="form-element">
+                <form id="insertar">
+                <input type="hidden" name="bandera" id="bandera">
+                <div class="col-md-12">
+                  <div class="col-md-12 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario De Nueva Opcion</h4>
+                      <!--<h4>Informaci&oacute;n Materia</h4>-->
+                    <h4>Formulario Opci&oacute;nes de Bachillerato</h4>
                     </div>
-
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
-                        <form class="cmxform" id="insertar" method="post" action="">
-
-                          <div class="col-md-12">
-                          <div class="input-group">
+                      <form class="cmxform" id="formcliente" method="post" action="">
+                      <div class="col-md-12">
+                          </br>
+                           </br>
+                           <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                            <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
                            </div>
@@ -139,8 +140,7 @@ if ($result) {
                               </select>
                               <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">+</button>
                               </div>
-                            
-                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
                               <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc">
                               <option value="opcion">Opcion</option>
@@ -156,7 +156,9 @@ if ($result) {
                               </select>
                               <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
                               </div>
-                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                           
+
+                             <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
                               <select id="seccion" class="select2 show-tick" style="width: 350px; font-size: 15px" name="seccion">
                               <option value="">Seccion</option>
@@ -180,43 +182,30 @@ if ($result) {
                            </div>
                            
                           </div> 
-                        </div>
-                               <div class="col-md-12">
-                                <div class="col-md-3"></div>
-
-                              <div class="col-md-3">
+                          <div class="col-md-12">
+                              <div class="col-md-4">
                               <br><b></b>
+                             
                               <input type="button" id="guardar" name="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
-                              </div>
+                          </div>
                           <div>
                             <br><b></b>
-                          
-                            <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                               </div>
-
-                              
-                        </div>
-                        </div>
-                      </form>
-
-                    </div>
-                  </div>
-                  
-
-
-                <div class="col-md-7">
-                  <div class="col-md-12">
-                  <div class="panel">
-                  <div class="panel-heading"><h3>Lista De Opciones</h3></div>
+                              <div class="col-md-6">
+                  <div class="col-md-6">
+                  <div class="panel1">
+                    <div class="panel-heading"><h3>Lista De Opciones</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
+                        
                           <th>Editar</th>
                           <th>Codigo</th>
                           <th>Opcion</th>
-                          <th>Descripcion</th>
+                          <th>Tipo</th>
                           <th>Alta/Baja</th>
                         </tr>
                       </thead>
@@ -262,31 +251,28 @@ if ($result) {
                       </div>
                   </div>
                 </div>
-              </div>
-              </div>
-
-
-                </form>
-              </div>
-
-              </div>
-              </div>
-              </div>
-            </div>
-          <!-- end: content -->
-           </div>
               
+                              
+                       </div>
+                        </div> 
+                        
+                      </div>
+                          </div>
+                          </form>
+                      </div>
+                      
+                      </div>
+                      
+                    
+                      
+                    </div> 
+                  </div>
+                  
+                </div>
                 
               </div>
-
-              </form>
-            </div>
-          <!-- end: content -->
-<!--Modales-->
-
-          <!-- end: right menu -->
-
-      </div>
+              
+<!-- end: content -->
 <!-- Modal de Grado-->
 <div class="modal fade" id="modalGrado" role="dialog">
     <div class="modal-dialog">
@@ -510,8 +496,13 @@ if ($result) {
 
   <!-- Fin Modal de Tipo Bachillerato -->   
  
+
+
+
       <!-- start: Mobile -->
-    
+        <?php 
+        include "menuMovil.php";
+        ?>
        <!-- end: Mobile -->
 
 <!-- start: Javascript -->
@@ -520,20 +511,19 @@ if ($result) {
 <script src="../asset/js/bootstrap.min.js"></script>
 
 
-
 <!-- plugins -->
 <script src="../asset/js/plugins/moment.min.js"></script>
-<script src="../asset/js/plugins/jquery.datatables.min.js"></script>
-<script src="../asset/js/plugins/datatables.bootstrap.min.js"></script>
+<script src="../asset/js/plugins/jquery.knob.js"></script>
+<script src="../asset/js/plugins/ion.rangeSlider.min.js"></script>
+<script src="../asset/js/plugins/bootstrap-material-datetimepicker.js"></script>
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
-
-
-<!-- custom -->
+<script src="../asset/js/plugins/jquery.mask.min.js"></script>
+<script src="../asset/js/plugins/select2.full.min.js"></script>
+<script src="../asset/js/plugins/nouislider.min.js"></script>
+<script src="../asset/js/plugins/jquery.validate.min.js"></script>
 <script src="../asset/js/main.js"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('#datatables-example').DataTable();
-  });
+ 
   $(document).ready(function(){
     
     //$('#datatables-example').DataTable();
@@ -662,8 +652,112 @@ if ($result) {
 
      });//fin del click
     });//fin del ready
+
 </script>
 <!-- end: Javascript -->
+
+
+<!-- custom -->
+
+
 </body>
 </html>
+<?php
 
+include "../config/conexion.php";
+
+$bandera = $_REQUEST["bandera"];
+$baccion = $_REQUEST["baccion"];
+$grado   = $_REQUEST["grado"];
+
+
+function guardarGrado()
+{
+  include "../config/conexion.php";
+  $grado   = $_REQUEST["grado"];
+      $consulta  = "INSERT INTO tgrado VALUES('null','" . $grado . "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Exito grado");
+      } else {
+          msgOpc("No se Guardo el Dato");
+      }
+}
+function guardarSeccion()
+{
+  include "../config/conexion.php";
+  $seccion   = $_REQUEST["seccion"];
+      $consulta  = "INSERT INTO tsecciones VALUES('null','" . $seccion . "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Seccion Guardada con Exito");
+      } else {
+          msgOpc("No Se guardo el dato");
+      }
+}
+function guardarTipo()
+{
+  include "../config/conexion.php";
+  $tipo   = $_REQUEST["tipo"];
+      $consulta  = "INSERT INTO ttipobachillerato VALUES('null','" . $tipo . "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgTipo("Tipo Guardado con Exito");
+      } else {
+          msgTipo("No Se guardo el dato");
+      }
+}
+function guardarOpcion()
+{
+  include "../config/conexion.php";
+  $codigo   = $_REQUEST["codigo"];
+  $nombre   = $_REQUEST["nombre"];
+  $tipo   = $_REQUEST["tipo"];
+  $descripcion   = $_REQUEST["descripcion"];
+      $consulta  = "INSERT INTO tbachilleratos VALUES('null','" . $codigo . "','" .$nombre. "','" .$descripcion. "','" .$tipo. "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Opcion Guardada con Exito");
+      } else {
+          msgOpc("No Se guardo el dato");
+      }
+}
+function guardarOpcionCompleta()
+{
+  include "../config/conexion.php";
+  $cupo   = $_REQUEST["cupo"];
+  $opcion   = $_REQUEST["opcion"];
+  $grado   = $_REQUEST["grado"];
+  $seccion  = $_REQUEST["seccion"];
+      $consulta  = "INSERT INTO topciones VALUES('null','" . $cupo . "','" .$opcion. "','" .$grado. "','" .$seccion. "')";
+      $resultado = $conexion->query($consulta);
+      if ($resultado) {
+          msgOpc("Opcion Guardada con Exito");
+      } else {
+          msgOpc("No Se guardo el dato");
+      }
+}
+
+function msgOpc($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='fopciones.php';";
+    echo "</script>";
+}
+function msgTipo($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='fopciones.php';";
+    echo "</script>";
+}
+
+
+function mensajes($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "</script>";
+}
+?>
