@@ -6,6 +6,7 @@ $aux = " ";
 include "../config/conexion.php";
 $result = $conexion->query("select * from tcargos where eid_cargo=" . $id);
 if ($result) {
+  
     while ($fila = $result->fetch_object()) {
         $idcargoR   = $fila->eid_cargo;
         $cargoR    = $fila->ccargo;
@@ -31,6 +32,9 @@ if ($result) {
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
@@ -41,10 +45,51 @@ if ($result) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+
+      //SWEET ALERTS
+      function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
+      //SWEET ALERTS
      
       function verificar(){
           if( document.getElementById('cargo').value=="" ){
-            alert("Complete los campos");
+            sweetError("Complete los campos ");
           }else{
             if (document.getElementById("aux").value=="modificar") {
               alert('Va a modificar.');
@@ -64,18 +109,7 @@ if ($result) {
           document.getElementById('cargo').value=="";
           document.location.href='fcargo.php?id='+id;
         }
-         function confirmar(id)
-        {
-          if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            alert(id);
-            document.turismo.submit();
-          }else
-          {
-            alert("Error al borrar.");
-          }
-        }
+         
       </script>
 </head>
 
@@ -114,7 +148,7 @@ if ($result) {
                           <div class="col-md-6">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="cargo" type="text" class="form-control" name="cargo" placeholder="Nombre" value="<?php echo $cargoR ; ?>" >
+                                  <input id="cargo" type="text" class="form-control" name="cargo" placeholder="Nombre" value="<?php echo $cargoR ; ?>" style="width: 370px;" >
                               </div>  
                               </div>
                                <div class="col-md-12">
@@ -149,10 +183,10 @@ if ($result) {
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Modificar</th>
+                          <th></th>
                           
                           <th>Nombre</th>
-                          <th>Eliminar</th>
+                          
                           
                         </tr>
                       </thead>
@@ -163,9 +197,9 @@ $result = $conexion->query("SELECT eid_cargo,ccargo as cargo FROM tcargos");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_cargo. ")';>
+        echo "<td >
+          <div class='col-md-2' style='margin-top:1px' >
+            <button class='btn ripple-infinite btn-round btn-warning'   onclick='modify(" . $fila->eid_cargo. ")';>
             <div>
               <span>Editar</span>
             </div>
@@ -177,15 +211,7 @@ if ($result) {
         echo "<td>" . $fila->cargo. "</td>";
        
 
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->eid_cargo. ")';>
-            <div>
-              <span>Borrar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
         echo "</tr>";
 
     }
@@ -366,6 +392,7 @@ if ($result) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 
@@ -409,32 +436,18 @@ if ($bandera == "add") {
     $consulta  = "INSERT INTO tcargos VALUES('null','" . $cargo . "')";
       $resultado = $conexion->query($consulta);
         if ($resultado) {
-            $mensaje="Se agregaron los datos correctamente";
-            msg($mensaje);
+          msgAdd("Agrego cargo exitosamente");
         } else {
-            $mensaje="Error al insertar los datos";
-            msg($mensaje);
+          msgError("Error al insertar los datos");
         }
       
   }else{
 
-      $mensaje="Los datos que desea ingresar ya existen: ";
-      msg($mensaje);
+    msgError("Los datos que desea ingresar ya existen");
   }
 }
 
 
-
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM tcargos where eid_cargo='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-       
-    } else {
-        msg("No Exito");
-    }
-}
 if ($bandera == "modificar") {
     $consulta  = "UPDATE tcargos set ccargo='" . $cargo .  "' where eid_cargo='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
@@ -444,12 +457,12 @@ if ($bandera == "modificar") {
       echo "document.location.href='cargo.php';";
       echo "</script>";
     } else {
-        msg("No Exito");
+      msgError("Error al modificar los datos");
     }
 }
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
-    echo "document.location.href='cuenta.php?id=" . $baccion . "';";
+    echo "document.location.href='fcargo.php?id=" . $baccion . "';";
     echo "</script>";
     # code...
 }
@@ -459,6 +472,21 @@ function msg($texto)
     echo "alert('$texto');";
     echo "document.location.href='fcargo.php';";
  
+    echo "</script>";
+}
+function msgAdd($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    
+    
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    
     echo "</script>";
 }
 

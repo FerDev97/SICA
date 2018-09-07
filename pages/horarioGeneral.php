@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
-  
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -27,6 +27,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+   
   
       
 </head>
@@ -71,7 +72,8 @@
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
                         <form id="insertar">
-
+                            <input type="hidden" id="id" name="id" value="">
+                            <input type="hidden" id="estado" name="estado" value="">
                           <div class="col-md-6">
                               <br><br>
                             
@@ -144,7 +146,31 @@
               </div>
             </div>
           <!-- final: Contenido -->
-
+          <!--MODAL-->
+          <div class="modal fade" id="modalito">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">¿Activar este horario?</h4>
+                                      </div>
+                                      <div class="modal-body col-md-12">
+                                          <p style="text-align:center;">
+                                              El registro que desea agregar ya existe y se encuentra INACTIVO
+                                              ¿Desea activarlo?
+                                          </p>
+                                      </div>
+                                        <br><br><br>
+                                      
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button id="activar" type="button" class="btn btn-primary">Activar</button>
+                                      </div>
+                                      </form>
+                                    </div><!-- /.modal-content -->
+                                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+          <!--MODAL-->
 
 
           <!-- inicio: menu derecho del icono de la taza de cafe -->
@@ -771,7 +797,7 @@
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -796,15 +822,15 @@
         var bloque = $('#bloque').val();
 
         if(dia1 == "0"){
-            alert("No selecciono un dia");
+            sweetWar("No selecciono un dia");
             return false;
         }
         if(dia2 == "0"){
-            alert("No selecciono un dia");
+            sweetWar("No selecciono un dia");
             return false;
         }
         if(bloque == "0"){
-            alert("No selecciono un bloque");
+            sweetWar("No selecciono un bloque");
             return false;
         }
 
@@ -815,13 +841,31 @@
             url: 'agregarHorario.php',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
-                $("#dia1 option[value=0]").prop("selected",true);
-                $("#dia2 option[value=0]").prop("selected",true);
-                $("#bloque option[value=0]").prop("selected",true);
+                
+                if(respuesta != ""){
+                    if(respuesta == 1){
+                        sweetGuardo("Los datos se agregaron correctamente"); 
+                        $("#dia1 option[value=0]").prop("selected",true);
+                        $("#dia2 option[value=0]").prop("selected",true);
+                        $("#bloque option[value=0]").prop("selected",true);
+                    }
+                    else if(respuesta == 2){
+                      sweetError("Error: Los datos no se agregaron");
+                    }else{
+                      var vector = respuesta.split("/");//datos
+                      if(vector[4]==0){
+                        $("#id").val(vector[1]);
+                        $("#estado").val(1);//estado activo
+                        $("#modalito").modal();
+                      }else{
+                        sweetInfo("Ya existe","El registro que desea ingresar ya existe y está ACTIVO");
+                      }
+                    }
+                    
+                }
             },
             error: function(respuesta){
-              alert("Error en el servidor: "+respuesta); 
+              sweetError("Error en el servidor: "+respuesta); 
             }
         });
 
@@ -829,7 +873,36 @@
 
      });//fin del click
 
+     $("#activar").on('click', function(){
+
+        var todo = $("#insertar").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: 'editarHorario.php',
+            data: todo,
+            success: function(respuesta) {
+                          
+                $("#modalito").modal('hide');
+                sweetInfo("Activado","Se activo el registro correctamente");
+                $("#dia1 option[value=0]").prop("selected",true);
+                $("#dia2 option[value=0]").prop("selected",true);
+                $("#bloque option[value=0]").prop("selected",true);
+                $("#id").val("");
+                $("#estado").val("");
+                
+            },
+            error: function(respuesta){
+              sweetError("Error en el servidor: "+respuesta); 
+            }
+        });//fin de ajax
+
+        return false;
+
+     });//fin del click activar
+
   });//fin del ready
+
 
     function verificar(){
        
@@ -883,7 +956,66 @@
       allowClear: true
      
     });
+    
 
+                //SWEET ALERTS
+                function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡No sera posible revertir esta acción!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                swal(
+                                  '¡Exito!',
+                                  'La accion ha sido completada.',
+                                  'success'
+                                )
+                              }
+                        })
+                      }
+
+
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
+
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
+
+                  //SWEET ALERTS
     
    
 

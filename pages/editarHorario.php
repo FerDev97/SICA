@@ -9,20 +9,20 @@ $activo = $_POST['estado'];
 $id = $_POST['id'];
 $mensaje = "";
 
-$query = "SELECT cdia, chora FROM thorarios WHERE cdia like '%".$dias."%' AND chora like '%".$bloque."%' AND estado like '%".$activo."%';";
+$query = "SELECT cdia, chora FROM thorarios WHERE cdia like '%".$dias."%' AND chora like '%".$bloque."%';";
 $result = $conexion->query($query);
     if($result->num_rows == 0){
         $consulta  = "UPDATE thorarios SET cdia='" .$dias. "', chora='" . $bloque . "', estado='".$activo."' WHERE eid_horario='".$id."'";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
-              $mensaje="Se editaron los datos correctamente";
+              $mensaje="1";//los datos se agregaronc correctamente
           } else {
-              $mensaje="Error al editar los datos";
+              $mensaje="2";//Error al editar los datos
           }
         
     }else{
 
-        $mensaje="Los datos que desea editar ya existen: ";
+        $mensaje="3";//los datos ya existen
     }
         
 echo $mensaje;

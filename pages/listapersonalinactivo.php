@@ -123,7 +123,7 @@
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select eid_personal,tpersonal.cdui as dui,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.iestado as estado,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo AND tpersonal.iestado = '1'  order by cargo");
+$result = $conexion->query("select eid_personal,tpersonal.cdui as dui,tpersonal.cnombre as nombre,tpersonal.capellido as apellido,tpersonal.iestado as estado,tcargos.ccargo as cargo from tpersonal,tcargos where tpersonal.efk_idcargo=tcargos.eid_cargo AND tpersonal.iestado = '0'  order by cargo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";

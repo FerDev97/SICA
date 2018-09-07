@@ -77,7 +77,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
        function modify(id)
         {
-          alert("entra:"+id);
+         
           document.location.href='editmateria.php?id='+id;
         }
       function confirmar(id,op)
@@ -146,7 +146,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                     <div class="panel-heading col-md-12">
                        
                          
-                             <h5 class="col-md-4">Opcion: 
+                             <h5 class="col-md-4">Opción: 
                                   <select class="select2-A">  
                                    <?php
                       include '../config/conexion.php';
