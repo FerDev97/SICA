@@ -499,12 +499,7 @@ $descripcionm       = $_REQUEST["descripcionm"];
 $horario       = $_REQUEST["horario"];
 $docente = $_REQUEST["docente"];
 $opcion = $_REQUEST["opcion"];
-msg($codigom);
-msg($nombrem);
-msg($descripcionm);
-msg($horario  );
-msg($docente);
-msg($opcion);
+
 if ($bandera == "add") {
   
     $consulta  = "UPDATE tmaterias set ccodigo='" . $codigom . "',cnombre='" . $nombrem . "',cdescripcion='" . $descripcionm . "',efk_idopcion='" . $opcion . "',efk_idhorario='" . $horario . "',estado='1' where eid_materia='" . $baccion . "'";
