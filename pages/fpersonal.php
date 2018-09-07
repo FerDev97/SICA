@@ -22,6 +22,9 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
@@ -32,6 +35,47 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+
+      //SWEET ALERTS
+      function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
+      //SWEET ALERTS
 
       //Validacion Correo Electronico
       function validateMail(Correo)
@@ -120,7 +164,8 @@ error_reporting(E_ALL & ~E_NOTICE);
             document.getElementById('fechanacimiento').value=="" ||document.getElementById('fechanacimiento').value==""
             ||document.getElementById('correo').value==""||document.getElementById('telefono').value==""
             ||document.getElementById('cargo').value=="" || banderaRb || banderaRb1){
-            alert("Complete los campos");
+
+             sweetError("Complete los campos prueba");
           }else{
             if (document.getElementById('baccion').value!="") {
               document.getElementById('bandera').value='modificar';
@@ -467,6 +512,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -717,17 +763,16 @@ if ($bandera == "add") {
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
       $resultado = $conexion->query($consulta);
         if ($resultado) {
-            $mensaje="Se agregaron los datos correctamente";
-            msg($mensaje);
+           msgAdd("Agrego personal exitosamente");
         } else {
-            $mensaje="Error al insertar los datos";
-            msg($mensaje);
+           
+            msgError("Error al insertar los datos");
         }
       
   }else{
 
-      $mensaje="Los datos que desea ingresar ya existen: ";
-      msg($mensaje);
+      
+      msgError("Los datos que desea ingresar ya existen");
   }
 }
 
@@ -737,6 +782,20 @@ function msg($texto)
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
     echo "document.location.href='fpersonal.php';";
+    echo "</script>";
+}
+function msgAdd($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    
     echo "</script>";
 }
 ?>

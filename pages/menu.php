@@ -50,6 +50,7 @@
                   <ul class="nav nav-list tree">
                     <li><a href="fpersonal.php">Agregar Nuevo</a></li>
                     <li><a href="listapersonal.php">Lista de Personal</a></li>
+                    <li><a href="listapersonalinactivo.php">Lista de Personal Inactivo</a></li>
                     <li><a href="fcargo.php">Cargo</a></li>
                   </ul>
 
