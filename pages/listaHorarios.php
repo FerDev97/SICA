@@ -18,6 +18,7 @@
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -307,7 +308,7 @@
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -331,15 +332,15 @@
         var bloque = $('#bloque').val();
 
         if(dia1 == "0"){
-            alert("No selecciono un dia");
+            sweetWar("No selecciono un dia");
             return false;
         }
         if(dia2 == "0"){
-            alert("No selecciono un dia");
+            sweetWar("No selecciono un dia");
             return false;
         }
         if(bloque == "0"){
-            alert("No selecciono un bloque");
+            sweetWar("No selecciono un bloque");
             return false;
         }
 
@@ -350,17 +351,32 @@
             url: 'editarHorario.php',
             data: todo,
             success: function(respuesta) {
-              
-                $("#dia1 option[value=0]").prop("selected",true);
-                $("#dia2 option[value=0]").prop("selected",true);
-                $("#bloque option[value=0]").prop("selected",true);
-                $("#modalito").modal('hide');
-                //alert(respuesta);
-                $(".tabla_ajax").load("tablaHorarios.php"); 
-                $('#datatables-example').DataTable();
+
+                if(respuesta==3){
+                  sweetWar2("Estos datos ya existen");
+                }
+                if(respuesta==1){
+                  $("#dia1 option[value=0]").prop("selected",true);
+                  $("#dia2 option[value=0]").prop("selected",true);
+                  $("#bloque option[value=0]").prop("selected",true);
+                  $("#modalito").modal('hide');
+                  sweetGuardo("Se modificó correctamente");
+                  $(".tabla_ajax").load("tablaHorarios.php"); 
+                  $('#datatables-example').DataTable();
+                }
+                if(respuesta==2){
+                  $("#dia1 option[value=0]").prop("selected",true);
+                  $("#dia2 option[value=0]").prop("selected",true);
+                  $("#bloque option[value=0]").prop("selected",true);
+                  $("#modalito").modal('hide');
+                  sweetError("Error del servidor: No se modificaron los datos");
+                }
+                
+                
+                
             },
             error: function(respuesta){
-              alert("Error en el servidor: "+respuesta); 
+              sweetError("Error en el servidor: "+respuesta); 
             }
         });//fin de ajax
 
@@ -430,7 +446,73 @@
         }
  
      }
-  
+
+            //SWEET ALERTS
+                function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡No sera posible revertir esta acción!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                swal(
+                                  '¡Exito!',
+                                  'La accion ha sido completada.',
+                                  'success'
+                                )
+                              }
+                        })
+                      }
+
+
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
+
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
+
+                  //SWEET ALERTS 
 
 </script>
 <!-- end: Javascript -->
