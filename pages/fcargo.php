@@ -109,18 +109,7 @@ if ($result) {
           document.getElementById('cargo').value=="";
           document.location.href='fcargo.php?id='+id;
         }
-         function confirmar(id)
-        {
-          if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            alert(id);
-            document.turismo.submit();
-          }else
-          {
-            alert("Error al borrar.");
-          }
-        }
+         
       </script>
 </head>
 
