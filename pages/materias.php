@@ -14,7 +14,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                          
                            }
                       }   
-                      $codigo=sprintf("%03s",$temp);           
+                      $codigo=sprintf("%03s",$temp+1);           
 ?>
 <html lang="en">
 <head>
@@ -206,7 +206,7 @@ function sweetError(str){
                               <option value="">Seleccione Horario</option>
                                <?php
                       include '../config/conexion.php';
-                      $result = $conexion->query("select eid_horario as id, cdia as dias, chora as bloque from thorarios");
+                      $result = $conexion->query("select eid_horario as id, cdia as dias, chora as bloque from thorarios where estado='1'");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
@@ -543,7 +543,7 @@ $docente = $_REQUEST["docente"];
 $opcion = $_REQUEST["opcion"];
 
 if ($bandera == "add") {
-   msg("Entra a a gregar");
+   //msg("Entra a a gregar");
   //  Validamos que no exista ese mismo bloque para otra materia.
   $query = "select efk_idopcion,efk_idhorario FROM tmaterias WHERE efk_idopcion like '%".$opcion."%' AND efk_idhorario like '%".$horario."%';";
   $result = $conexion->query($query);
@@ -562,20 +562,20 @@ if ($bandera == "add") {
                            }
                       }
         //Finde bloque.
-        msgAdd("Agrego una nueva materia.");
+        
         //Query para agregar a la tabla de muchos a muchos.
         $consulta2  = "INSERT INTO tpersonal_materia VALUES('null','" . $docente . "','" . $last . "')";
         $resultado2 = $conexion->query($consulta2);
        if ($resultado2) {
     
-        msg("Agrego pm.");
+        //msg("Agrego pm.");
         //Query para agregar a la tabla de muchos a muchos.
-        
+        msgAdd("Agrego una nueva materia.");
          } else {
-       // echo("Error pm:".mysqli_error($conexion));
+        echo("Error pm:".mysqli_error($conexion));
           }
     } else {
-       // echo("Error materia:".mysqli_error($conexion));
+        echo("Error materia:".mysqli_error($conexion));
     }
   }else{
      $mensaje="El horario que desea agregar ya existe. ";
@@ -587,7 +587,7 @@ if ($bandera == "add") {
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
-   // echo "prueba('$texto');";
+    echo "alert('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }

@@ -40,6 +40,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <link href="../asset/css/style.css" rel="stylesheet">
@@ -52,6 +53,76 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+//SWEET ALERTS
+      function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+setTimeout(function() {
+  document.location.href='cmaterias.php';
+}, 2000);
+
+        }
+function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Ha ocurrido un error durante el llenado de los campos.'
+})
+        }
+
+      //SWEET ALERTS
+      //Validacion Solo letras js
+      function sololetras(e) {
+        key=e.keyCode || e.which;
+ 
+        teclado=String.fromCharCode(key).toLowerCase();
+ 
+        letras="qwertyuiopasdfghjklñzxcvbnm ";
+ 
+        especiales="8-37-38-46-164";
+ 
+        teclado_especial=false;
+ 
+        for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true;
+                break;
+            }
+        }
+ 
+        if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+        }
+    }
+     //Validacion Solo letras
+
+
         function verificar(){
           if(document.getElementById('codigom').value=="" ||
             document.getElementById('nombrem').value=="" ||
@@ -59,17 +130,18 @@ error_reporting(E_ALL & ~E_NOTICE);
             document.getElementById('horario').value=="" ||
             document.getElementById('docente').value==""||
             document.getElementById('opcion').value==""){
-            alert("Complete los campos prueba");
+            sweetError("Por favor complete los campos.");
             
           }else{
-            alert(document.getElementById("lastindex"));
+            //alert(document.getElementById("lastindex"));
             document.getElementById("bandera").value="add";
             document.turismo.submit();
           }
 
         }
-        function prueba(text) {
-          alert("Funcioan prro"+text)
+       //boton cancelar
+        function cancel(){
+          document.location.href='cmaterias.php';
         }
       </script>
 </head>
@@ -119,13 +191,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                         
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo" value="<?php echo $codigomateriaR; ?>">
+                           <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo" readonly value="<?php echo $codigomateriaR; ?>">
                            </div>
                            </br>
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre" value="<?php echo $nombremateriaR; ?>">
+                           <input id="nombrem" type="text" class="form-control" name="nombrem"  placeholder="Nombre" onkeypress="return sololetras(event)" value="<?php echo $nombremateriaR; ?>">
                            </div>
                            </br>
                            </br>
@@ -145,7 +217,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <option value="">Seleccione Horario</option>
                                <?php
                       include '../config/conexion.php';
-                      $result = $conexion->query("select eid_horario as id, cdia as dias, chora as bloque from thorarios");
+                      $result = $conexion->query("select eid_horario as id, cdia as dias, chora as bloque from thorarios where estado='1'");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
@@ -171,7 +243,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <option value="">Seleccione Docente</option>
                                <?php
                       include '../config/conexion.php';
-                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcargos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente'");
+                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcargos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente' and p.iestado='1'");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
@@ -198,7 +270,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <option value="">Seleccione Opcion</option>
                                <?php
                       include '../config/conexion.php';
-                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
+                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo and op.eestado='1' ");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
@@ -227,7 +299,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                                <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" onclick="verificar();"/>                          </div>
                           <div class="col-md-3">
                           <br><br>
-                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" onclick="cancel();" />
                           </div>
                         </div>
                       </form>
@@ -257,7 +329,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 <!-- plugins -->
 <script src="../asset/js/plugins/moment.min.js"></script>
@@ -501,10 +573,13 @@ $docente = $_REQUEST["docente"];
 $opcion = $_REQUEST["opcion"];
 
 if ($bandera == "add") {
-  
-    $consulta  = "UPDATE tmaterias set ccodigo='" . $codigom . "',cnombre='" . $nombrem . "',cdescripcion='" . $descripcionm . "',efk_idopcion='" . $opcion . "',efk_idhorario='" . $horario . "',estado='1' where eid_materia='" . $baccion . "'";
+    //  Validamos que no exista ese mismo bloque para otra materia.
+  $query = "select efk_idopcion,efk_idhorario FROM tmaterias WHERE efk_idopcion like '%".$opcion."%' AND efk_idhorario like '%".$horario."%' AND ccodigo NOT LIKE '%".$codigom."%';";
+  $result = $conexion->query($query);
+  if($result->num_rows == 0){
+  $consulta  = "UPDATE tmaterias set ccodigo='" . $codigom . "',cnombre='" . $nombrem . "',cdescripcion='" . $descripcionm . "',efk_idopcion='" . $opcion . "',efk_idhorario='" . $horario . "',estado='1' where eid_materia='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
-    echo "".$consulta;
+    //echo "".$consulta;
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.
         $result = $conexion->query("select MAX(eid_materia) as max from tmaterias");
@@ -516,27 +591,47 @@ if ($bandera == "add") {
                            }
                       }
         //Finde bloque.
-        msg("Agrego materia.");
+        msgAdd("Se actualizo la materia.");
         //Query para agregar a la tabla de muchos a muchos.
         $consulta2  = "UPDATE tpersonal_materia set efk_idpersonal='" . $docente . "' where efk_idmateria='" . $baccion . "'";
         $resultado2 = $conexion->query($consulta2);
        if ($resultado2) {
     
-        msg("Agrego pm.");
+        //msg("Agrego pm.");
         //Query para agregar a la tabla de muchos a muchos.
         
          } else {
-        echo("Error pm:".mysqli_error($conexion));
+        //echo("Error pm:".mysqli_error($conexion));
           }
     } else {
-        echo("Error materia:".mysqli_error($conexion));
+        //echo("Error materia:".mysqli_error($conexion));
     }
+  }else{
+       $mensaje="El horario que desea agregar ya existe. ";
+    msgError($mensaje);
+  }
+
+  
 }
 
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgAdd($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
