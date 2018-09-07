@@ -176,7 +176,7 @@ if ($result) {
                             
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
-                              <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc">
+                              <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc" onchange="verificar()">
                               <option value="opcion">Opcion</option>
                               <?php include('comboopcion.php')?>
                               </select>
@@ -225,51 +225,44 @@ if ($result) {
                 <div class="col-md-6">
                   <div class="col-md-12">
                   <div class="panel">
-                  <div class="panel-heading"><h3>Lista de Opciones de Bachillerato</h3></div>
+                  <div class="panel-heading"><h3>Lista de Opciones de Bachillerato Activas</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Editar</th>
+                          <
                           <th>Codigo</th>
                           <th>Opcion</th>
+                          <th>Tipo</th>
                           <th>Descripcion</th>
-                          <th>Alta/Baja</th>
+                         
                         </tr>
                       </thead>
                       <tbody>
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+$result = $conexion->query("select * from tbachilleratos where eestado='1' order by eid_bachillerato");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_bachillerato . ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
         //echo "<tr>";
         //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
         echo "<td>" . $fila->ccodigo . "</td>";
         echo "<td>" . $fila->cnombe . "</td>";
+        if(eestado=='1'){
+          echo "<td>Activo</td>";
+        }else{
+          echo "<td>Inactivo</td>";
+        }
         echo "<td>" . $fila->cdescripcion . "</td>";
+        
 
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idcatalogo . ")'>
-            <div>
-              <span>Alta</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
+
+        
         echo "</tr>";
 
     }

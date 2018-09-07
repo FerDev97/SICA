@@ -1,6 +1,6 @@
 <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT ttipobachillerato.ctipo,tbachilleratos.ccodigo,eid_bachillerato,cnombe,eestado,cdescripcion,efk_tipo FROM tbachilleratos INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo ORDER BY cnombe");
+$result = $conexion->query("SELECT ttipobachillerato.ctipo,tbachilleratos.ccodigo,eid_bachillerato,cnombe,eestado,cdescripcion,efk_tipo FROM tbachilleratos INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo  ORDER BY cnombe");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";

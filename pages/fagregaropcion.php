@@ -590,7 +590,7 @@ if ($bandera == "desactivar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        sweetGuardo("Exito");
+       msg("Registro desactivado");
     } else {
       sweetError("No se desactivo el registro");
     }
@@ -598,7 +598,7 @@ if ($bandera == "desactivar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '1' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      sweetGuardo("Exito");
+      msg("Registro Activado");
     } else {
       sweetError("No se activo el registro");
     }
