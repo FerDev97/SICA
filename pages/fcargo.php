@@ -6,6 +6,7 @@ $aux = " ";
 include "../config/conexion.php";
 $result = $conexion->query("select * from tcargos where eid_cargo=" . $id);
 if ($result) {
+  
     while ($fila = $result->fetch_object()) {
         $idcargoR   = $fila->eid_cargo;
         $cargoR    = $fila->ccargo;
@@ -193,7 +194,7 @@ if ($result) {
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Modificar</th>
+                          <th></th>
                           
                           <th>Nombre</th>
                           
@@ -207,9 +208,9 @@ $result = $conexion->query("SELECT eid_cargo,ccargo as cargo FROM tcargos");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_cargo. ")';>
+        echo "<td >
+          <div class='col-md-2' style='margin-top:1px' >
+            <button class='btn ripple-infinite btn-round btn-warning'   onclick='modify(" . $fila->eid_cargo. ")';>
             <div>
               <span>Editar</span>
             </div>
@@ -458,17 +459,6 @@ if ($bandera == "add") {
 }
 
 
-
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM tcargos where eid_cargo='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-      msgAdd("Eliminar cargo exitosamente");
-       
-    } else {
-      msgError("Error al eliminar los datos");
-    }
-}
 if ($bandera == "modificar") {
     $consulta  = "UPDATE tcargos set ccargo='" . $cargo .  "' where eid_cargo='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
