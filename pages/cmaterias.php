@@ -77,7 +77,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
        function modify(id)
         {
-          alert("entra:"+id);
+         
           document.location.href='editmateria.php?id='+id;
         }
       function confirmar(id,op)
