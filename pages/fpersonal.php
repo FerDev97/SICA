@@ -1,4 +1,14 @@
+<?php
+$hoy = getdate();
+$anioMayor=$hoy['year']-18;
+$anioMenor=$hoy['year']-61;
+$mes=sprintf("%02s",$hoy['mon']);
+$dia=sprintf("%02s",$hoy['mday']);
 
+$fechamax=$anioMayor."-".$mes."-".$dia;
+$fechamin=$anioMenor."-".$mes."-".$dia;
+
+?>
 <!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
@@ -245,7 +255,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <label>Fecha de nacimiento:</label>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento">
+                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento" min="<?php echo $fechamin; ?>" max="<?php echo $fechamax; ?>"  >
                               </div> 
                               <div class="form-group">
                               <div class='input-group date' id='datetimepicker1'>
@@ -739,6 +749,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <!-- end: Javascript -->
 </body>
 </html>
+
 <?php
 
 include "../config/conexion.php";
@@ -781,7 +792,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='fpersonal.php';";
+   // echo "document.location.href='fpersonal.php';";
     echo "</script>";
 }
 function msgAdd($texto)
