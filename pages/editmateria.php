@@ -82,6 +82,10 @@ error_reporting(E_ALL & ~E_NOTICE);
   ''+str,
   'success'
 )
+setTimeout(function() {
+  document.location.href='cmaterias.php';
+}, 2000);
+
         }
 function sweetError(str){
          swal({
@@ -129,7 +133,7 @@ function sweetError(str){
             sweetError("Por favor complete los campos.");
             
           }else{
-            alert(document.getElementById("lastindex"));
+            //alert(document.getElementById("lastindex"));
             document.getElementById("bandera").value="add";
             document.turismo.submit();
           }
@@ -193,7 +197,7 @@ function sweetError(str){
                            </br>
                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombrem" type="text" class="form-control" name="nombrem"  placeholder="Nombre" onkeypress="return sololetras(event) value="<?php echo $nombremateriaR; ?>">
+                           <input id="nombrem" type="text" class="form-control" name="nombrem"  placeholder="Nombre" onkeypress="return sololetras(event)" value="<?php echo $nombremateriaR; ?>">
                            </div>
                            </br>
                            </br>
@@ -295,7 +299,7 @@ function sweetError(str){
                                <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" onclick="verificar();"/>                          </div>
                           <div class="col-md-3">
                           <br><br>
-                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" onclick="cancel();" />
                           </div>
                         </div>
                       </form>
@@ -575,7 +579,7 @@ if ($bandera == "add") {
   if($result->num_rows == 0){
   $consulta  = "UPDATE tmaterias set ccodigo='" . $codigom . "',cnombre='" . $nombrem . "',cdescripcion='" . $descripcionm . "',efk_idopcion='" . $opcion . "',efk_idhorario='" . $horario . "',estado='1' where eid_materia='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
-    echo "".$consulta;
+    //echo "".$consulta;
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.
         $result = $conexion->query("select MAX(eid_materia) as max from tmaterias");
@@ -587,20 +591,20 @@ if ($bandera == "add") {
                            }
                       }
         //Finde bloque.
-        msg("Agrego materia.");
+        msgAdd("Se actualizo la materia.");
         //Query para agregar a la tabla de muchos a muchos.
         $consulta2  = "UPDATE tpersonal_materia set efk_idpersonal='" . $docente . "' where efk_idmateria='" . $baccion . "'";
         $resultado2 = $conexion->query($consulta2);
        if ($resultado2) {
     
-        msg("Agrego pm.");
+        //msg("Agrego pm.");
         //Query para agregar a la tabla de muchos a muchos.
         
          } else {
-        echo("Error pm:".mysqli_error($conexion));
+        //echo("Error pm:".mysqli_error($conexion));
           }
     } else {
-        echo("Error materia:".mysqli_error($conexion));
+        //echo("Error materia:".mysqli_error($conexion));
     }
   }else{
        $mensaje="El horario que desea agregar ya existe. ";
@@ -614,6 +618,20 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgAdd($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
