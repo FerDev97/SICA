@@ -1,4 +1,16 @@
 <?php
+$hoy = getdate();
+$anioMayor=$hoy['year']-18;
+$anioMenor=$hoy['year']-61;
+$mes=sprintf("%02s",$hoy['mon']);
+$dia=sprintf("%02s",$hoy['mday']);
+
+$fechamax=$anioMayor."-".$mes."-".$dia;
+$fechamin=$anioMenor."-".$mes."-".$dia;
+
+?>
+
+<?php
 $id = $_REQUEST["id"];
 include "../config/conexion.php";
 $result = $conexion->query("select * from tpersonal where eid_personal=" . $id);
@@ -251,7 +263,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                               <label>Fecha de nacimiento:</label>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento" value="<?php echo $fechanacimientopersonalR; ?>">
+                                  <input id="fechanacimiento" type="date" class="form-control" name="fechanacimiento" value="<?php echo $fechanacimientopersonalR; ?>" min="<?php echo $fechamin; ?>" max="<?php echo $fechamax; ?>" >
                               </div> 
                               <div class="form-group">
                               <div class='input-group date' id='datetimepicker1'>
@@ -809,6 +821,7 @@ function msgAdd($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
+    echo "document.location.href='listapersonal.php';";
     
     echo "</script>";
 }
