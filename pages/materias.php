@@ -244,7 +244,7 @@ function sweetError(str){
                             </div>
                            <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
                               <select id="opcion"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="opcion">
-                              <option value="">Seleccione Opcion</option>
+                              <option value="">Seleccione Opción</option>
                                <?php
                       include '../config/conexion.php';
                       $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo and op.eestado='1'");
