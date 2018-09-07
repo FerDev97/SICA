@@ -6,7 +6,7 @@ $accion =$_REQUEST['accion'];
 if($accion=="guardarOpc"){
 $cupo   = $_POST['cupo'];
 $opcion   = $_POST['opc'];
-$grado   = $_POST['grado'];
+$grado   = $_POST['gradom'];
 $seccion  = $_POST['seccion'];
 
 $query = "SELECT efk_bto, efk_grado, efk_seccion FROM topciones WHERE efk_bto like '%".$opcion."%' AND efk_grado like '%".$grado."%' AND efk_seccion like '%".$seccion."';";
@@ -22,7 +22,7 @@ $result = $conexion->query($query);
         
     }else{
 
-        $mensaje="Los datos que desea ingresar ya existen: ";
+        $mensaje="Esta opcion de bachillerato ya existe ";
     }
         
 echo $mensaje;

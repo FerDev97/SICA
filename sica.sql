@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2018 a las 22:54:32
+-- Tiempo de generación: 07-09-2018 a las 03:38:18
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -96,8 +96,12 @@ CREATE TABLE `tbachilleratos` (
 --
 
 INSERT INTO `tbachilleratos` (`eid_bachillerato`, `ccodigo`, `cnombe`, `cdescripcion`, `efk_tipo`, `eestado`) VALUES
-(1, '001', 'Contador', 'Esta materia es de contqador.', 1, 0),
-(2, 'SE1267', 'Sistemas Electricos', 'skdhkjshf', 1, 1);
+(1, '001', 'Contador', 'Esta materia es de contqador.', 1, 1),
+(2, 'SE1267', 'Sistemas Electricos', 'skdhkjshf', 1, 1),
+(3, 'BG89', 'Bachillerato General', 'Bachillerato de tipo general', 2, 1),
+(4, 'DS829', 'Desarrollo de Software', 'Bachillerato de software', 1, 1),
+(5, 'BS124', 'Bachillerato en Salud', 'bachillerato para los doctores', 1, 1),
+(6, 'SC344', 'Secretariado', 'bachillerato para las secretaruas', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +188,9 @@ CREATE TABLE `tgrado` (
 --
 
 INSERT INTO `tgrado` (`eid_grado`, `cgrado`) VALUES
-(1, 1);
+(1, 1),
+(2, 2),
+(4, 3);
 
 -- --------------------------------------------------------
 
@@ -259,15 +265,20 @@ CREATE TABLE `topciones` (
   `ecupo_maximo` int(11) NOT NULL,
   `efk_bto` int(11) NOT NULL,
   `efk_grado` int(11) NOT NULL,
-  `efk_seccion` int(11) NOT NULL
+  `efk_seccion` int(11) NOT NULL,
+  `eestado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `topciones`
 --
 
-INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`) VALUES
-(1, 100, 1, 1, 1);
+INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`) VALUES
+(1, 100, 1, 1, 1, 1),
+(2, 1, 3, 1, 1, 1),
+(10, 49, 5, 1, 1, 1),
+(11, 49, 5, 1, 1, 1),
+(12, 32, 5, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -384,7 +395,8 @@ CREATE TABLE `tsecciones` (
 --
 
 INSERT INTO `tsecciones` (`eid_seccion`, `cseccion`) VALUES
-(1, 'A');
+(1, 'A'),
+(2, 'B');
 
 -- --------------------------------------------------------
 
@@ -402,7 +414,14 @@ CREATE TABLE `ttipobachillerato` (
 --
 
 INSERT INTO `ttipobachillerato` (`eid_tipo`, `ctipo`) VALUES
-(1, 'Tecnico');
+(1, 'Tecnico'),
+(2, 'General'),
+(3, 'DIstancia'),
+(4, 'sdf'),
+(5, 'sasf'),
+(6, 'aaa'),
+(7, 'nueva'),
+(8, 'as');
 
 -- --------------------------------------------------------
 
@@ -604,7 +623,7 @@ ALTER TABLE `tanio`
 -- AUTO_INCREMENT de la tabla `tbachilleratos`
 --
 ALTER TABLE `tbachilleratos`
-  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
@@ -629,7 +648,7 @@ ALTER TABLE `tficha`
 -- AUTO_INCREMENT de la tabla `tgrado`
 --
 ALTER TABLE `tgrado`
-  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `thorarios`
 --
@@ -649,7 +668,7 @@ ALTER TABLE `tnotas`
 -- AUTO_INCREMENT de la tabla `topciones`
 --
 ALTER TABLE `topciones`
-  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tperiodos`
 --
@@ -669,12 +688,12 @@ ALTER TABLE `tresponsable`
 -- AUTO_INCREMENT de la tabla `tsecciones`
 --
 ALTER TABLE `tsecciones`
-  MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ttipobachillerato`
 --
 ALTER TABLE `ttipobachillerato`
-  MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Restricciones para tablas volcadas
 --
