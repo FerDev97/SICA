@@ -97,6 +97,31 @@ if ($result) {
             alert("Error al borrar.");
           }
         }
+        function confirmarAct(id,op)
+        {
+          if (op==1) {
+            alert(""+id);
+            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
+            document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }else{
+            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+          }
+
+
+        }
       </script>
 </head>
 
@@ -151,7 +176,7 @@ if ($result) {
                               <option value="tipo">Tipo</option>
 
                                 <?php
-                                  include('combo.php')?>
+                                  include('combotipo.php')?>
 
                               </select>
                               <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipo">Nuevo Tipo</button>
@@ -195,50 +220,16 @@ if ($result) {
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Editar</th>
                           <th>Codigo</th>
-                          <th>Opcion</th>
+                          <th>Nombre</th>
                           <th>Tipo</th>
+                          <th>Estado</th>
                           <th>Alta/Baja</th>
+                          <th>Editar</th>
                         </tr>
                       </thead>
-                      <tbody>
-                      <?php
-include "../config/conexion.php";
-$result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_bachillerato . ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
-        //echo "<tr>";
-        //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
-        //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
-        echo "<td>" . $fila->ccodigo . "</td>";
-        echo "<td>" . $fila->cnombe . "</td>";
-        echo "<td>" . $fila->cdescripcion . "</td>";
-
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idcatalogo . ")'>
-            <div>
-              <span>Alta</span>
-            </div>
-            </button>
-            </div>
-        </td>";
-        echo "</tr>";
-
-    }
-}
-?>
+                      <tbody class="tabla_ajax">
+                      <?php include('tablaOpciones.php') ?>
                       </tbody>
                         </table>
                       </div>
@@ -356,7 +347,8 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarBto',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
+                alert(respuesta);
+                $(".tabla_ajax").load("tablaOpciones.php"); 
                 
             },
             error: function(respuesta){
@@ -388,7 +380,8 @@ if ($result) {
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
-                $("#tipob").load("combo.php");
+                $("#tipob").load("combotipo.php");
+                $("#modalTipo").modal('hide');
                 
             },
             error: function(respuesta){
@@ -422,6 +415,24 @@ $codigocuenta = $_REQUEST["codigocuenta"];
 $tipocuenta   = $_REQUEST["tipocuenta"];
 $saldocuenta  = $_REQUEST["saldocuenta"];
 $r            = $_REQUEST["r"];
+
+if ($bandera == "desactivar") {
+  $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}else if ($bandera == "activar") {
+  $consulta = "UPDATE tbachilleratos SET eestado = '1' WHERE eid_bachillerato = '".$baccion."'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+        msg("Exito");
+    } else {
+        msg("No Exito");
+    }
+}
 if ($bandera == "add") {
     $consulta  = "INSERT INTO catalogo VALUES('null','" . $codigocuenta . "','" . $nombrecuenta . "','" . $tipocuenta . "','" . $saldocuenta . "','" . $r . "','" . $nivelcuenta . "')";
     $resultado = $conexion->query($consulta);
@@ -465,7 +476,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-  //  echo "document.location.href='cuenta.php';";
+    echo "document.location.href='fagregaropcion.php';";
     echo "</script>";
 }
 

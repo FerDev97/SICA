@@ -60,7 +60,7 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                  <li><a href="fagregaropcion.php">Agregar Opcion</a></li>
+                  <li><a href="fagregaropcion.php">Mantenimiento Opcion</a></li>
                     <li><a href="fopciones.php">Gestionar Opciones</a></li>
                     <li><a href="listaOpciones.php">Lista de Opciones</a></li>
                   </ul>

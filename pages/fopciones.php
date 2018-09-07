@@ -25,7 +25,8 @@ if ($result) {
   <meta name="description" content="Miminium Admin Template v.1">
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=devi
+  ce-width, initial-scale=1">
   <title>SICA-Opciones</title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -125,17 +126,9 @@ if ($result) {
                            </br>
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-clipboard"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Grado: </span>
-                              <select id="grado" class="select2 show-tick" style="width: 350px; font-size: 15px" name="grado">
-                              <option value="">Grado</option>
-                          <?php
-                           include "../config/conexion.php";
-                           $result = $conexion->query("select * from tgrado order by eid_grado");
-                           if ($result) {
-                               while ($fila = $result->fetch_object()) {
-                                echo "<option value=".$fila->eid_grado.">".$fila->cgrado."</option>";
-                              }
-                           }
-                           ?>   
+                              <select id="grado" class="select2 show-tick" style="width: 350px; font-size: 15px" name="gradom">
+                              <option value="grado">Grado</option>
+                               <?php include('combogrado.php')?>
                               </select>
                               <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">+</button>
                               </div>
@@ -144,31 +137,15 @@ if ($result) {
                              <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
                               <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc">
                               <option value="opcion">Opcion</option>
-                              <?php
-                           include "../config/conexion.php";
-                           $result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
-                           if ($result) {
-                               while ($fila = $result->fetch_object()) {
-                                echo "<option value=".$fila->eid_bachillerato.">".$fila->cnombe."</option>";
-                              }
-                           }
-                           ?> 
+                              <?php include('comboopcion.php')?>
                               </select>
                               <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
                               </div>
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
                               <select id="seccion" class="select2 show-tick" style="width: 350px; font-size: 15px" name="seccion">
-                              <option value="">Seccion</option>
-                              <?php
-                           include "../config/conexion.php";
-                           $result = $conexion->query("select * from tsecciones order by eid_seccion");
-                           if ($result) {
-                               while ($fila = $result->fetch_object()) {
-                                echo "<option value=".$fila->eid_seccion.">".$fila->cseccion."</option>";
-                              }
-                           }
-                           ?>   
+                              <option value="seccion">Seccion</option>
+                              <?php include('comboseccion.php')?>
                               </select>
                               <button   style="margin-left:16px; border-radius: 50px 20px" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">+</button>
                               </br>
@@ -176,7 +153,7 @@ if ($result) {
                               </br>
                               <div class="input-group col-md-6">
                               <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
-                               <input id="cupo" type="number" class="form-control" name="cupo" placeholder="Cupo Maximo">
+                               <input id="cupo" type="number" class="form-control mask-cupo" name="cupo" placeholder="Cupo Maximo" min="1" max="50">
                            </div>
                            
                           </div> 
@@ -306,7 +283,7 @@ if ($result) {
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
                   <form id="insertarG">
-                  <input id="gradom" type="number" style="width: 400px; font-size: 15px" class="form-control" name="gradom" placeholder="Nuevo Grado" >
+                  <input id="gradom" type="number" style="width: 400px; font-size: 15px" class="form-control" name="gradom" placeholder="Nuevo Grado" min="1" max="3">
                   </div>
                   <br>
                    <center>
@@ -389,26 +366,19 @@ if ($result) {
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                            <form id="insertarB">
                            <input id="codigoo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigoo" placeholder="Codigo">
-                  </div>
-                  <br>
-                  <div class="input-group">
+                            </div>
+                            <br>
+                            <div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
                            <input id="nombrem" type="text" style="width: 300px; font-size: 15px" class="form-control" name="nombrem" placeholder="Nombre de Opcion">
-                  </div>
-                  <br>
-                  <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                            </div>
+                            <br>
+                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
                               <select id="tipob" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipob">
                               <option value="tipo">Tipo</option>
                               <?php
-                           include "../config/conexion.php";
-                           $result = $conexion->query("select * from ttipobachillerato order by eid_tipo");
-                           if ($result) {
-                               while ($fila = $result->fetch_object()) {
-                                echo "<option value=".$fila->eid_tipo.">".$fila->ctipo."</option>";
-                              }
-                           }
-                           ?>  
+                                  include('combotipo.php')?> 
                               </select>
                               <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipo">Nuevo Tipo</button>
                     <br><br>
@@ -441,20 +411,9 @@ if ($result) {
                       <th>Tipo</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tablaopc">
                   <?php
-                  include "../config/conexion.php";
-                  $result = $conexion->query("SELECT ttipobachillerato.ctipo, ccodigo,cnombe FROM ttipobachillerato INNER JOIN tbachilleratos ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo ORDER BY eid_bachillerato");
-                  if ($result) {
-                    while ($fila = $result->fetch_object()) {
-                    echo "<tr>";
-                    echo "<td>" . $fila->ccodigo . "</td>";
-                    echo "<td>" . $fila->cnombe . "</td>";
-                    echo "<td>" . $fila->ctipo . "</td>";
-                    echo "</tr>";
-      }
-      }
-      ?>
+                                  include('tablaModalOpc.php')?> 
       </tbody>
         </table>
             </div>
@@ -545,8 +504,11 @@ if ($result) {
         var seccion = $('#seccion').val();
         var cupo = $('#cupo').val();
 
-        if(opcion == "opcion"){
-            alert("Selecciones una opcion opo");
+        if(opcion == "opcion"||grado=="grado"||seccion=="seccion"){
+            alert("Por favor llene el formulario. Todos los campos son obligatorios");
+            return false;
+        }else if(cupo < 1||cupo>50){
+            alert("El cupo es erroneo cupo maximo 60 alumnos");
             return false;
         }
         var todo = $("#insertar").serialize();
@@ -573,10 +535,11 @@ if ($result) {
   $(document).ready(function(){
   $('#guardarG').on('click',function(){
         var grado = $('#gradom').val();
-       
-
         if(grado == ""){
             alert("Por favor llene correctamente los datos");
+            return false;
+        }else if(grado<1||grado>3){
+          alert("El formato de grados en bachillerato es de 1° a 3°");
             return false;
         }
         var todo = $("#insertarG").serialize();
@@ -587,6 +550,8 @@ if ($result) {
             data: todo,
             success: function(respuesta) {
                 alert(respuesta); 
+                $("#grado").load("combogrado.php");
+                $("#modalGrado").modal('hide');
                 
             },
             error: function(respuesta){
@@ -615,8 +580,11 @@ if ($result) {
             type: 'post',
             url: '../pages/agregarOPcion.php?accion=guardarTipo',
             data: todo,
-            success: function(respuesta) {
-                alert(respuesta); 
+            success: function(respuesta) { 
+            alert(respuesta); 
+            $("#tipob").load("combotipo.php");
+            $("#modalTipo").modal('hide');
+            
                 
             },
             error: function(respuesta){
@@ -650,7 +618,9 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarBto',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
+                alert(respuesta);
+                $("#opc").load("comboopcion.php"); 
+                $("#tablaopc").load("tablaModalOpc.php");
                 
             },
             error: function(respuesta){
@@ -680,7 +650,9 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarSeccion',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
+                alert(respuesta);
+                $("#seccion").load("comboseccion.php"); 
+                $("#modalSeccion").modal('hide');
                 
             },
             error: function(respuesta){
@@ -693,6 +665,13 @@ if ($result) {
 
      });//fin del click
     });//fin del ready
+//Mascaras
+$(document).ready(function(){
+  $('.mask-cupo').mask('00');
+});
+
+
+
 </script>
 <!-- end: Javascript -->
 </body>
