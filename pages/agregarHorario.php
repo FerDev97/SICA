@@ -8,20 +8,22 @@ $dias = $dia1.' y '.$dia2;
 $activo = 1;
 $mensaje = "";
 
-$query = "SELECT cdia, chora FROM thorarios WHERE cdia like '%".$dias."%' AND chora like '%".$bloque."%';";
+$query = "SELECT eid_horario ,cdia, chora, estado FROM thorarios WHERE cdia like '%".$dias."%' AND chora like '%".$bloque."%';";
 $result = $conexion->query($query);
+$fila=$result->fetch_row(); 
     if($result->num_rows == 0){
         $consulta  = "INSERT INTO thorarios VALUES('null','" .$dias. "','" . $bloque . "','".$activo."')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
-              $mensaje="Se agregaron los datos correctamente";
+              $mensaje="1"; //los datos se agregaron correctamente
           } else {
-              $mensaje="Error al insertar los datos";
+              $mensaje="2";// Error: Los datos no se agregaron
           }
         
     }else{
-
-        $mensaje="Los datos que desea ingresar ya existen: ";
+            
+            $mensaje="3/".$fila[0]."/".$fila[1]."/".$fila[2]."/".$fila[3];
+        
     }
         
 echo $mensaje;
