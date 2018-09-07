@@ -258,13 +258,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-6">                       
                           
                               <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electronico" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')" >
+                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electrónico" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')" >
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                               </div>   
                               <br><br>                    
                               <div class="input-group">
                               
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Telefono" size="8" maxlength="8" onkeypress="return aceptNum(event)">
+                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Teléfono" size="8" maxlength="8" onkeypress="return aceptNum(event)">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
 
                               </div> 
