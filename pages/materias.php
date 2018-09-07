@@ -2,7 +2,7 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
- include '../config/conexion.php';
+// include '../config/conexion.php';
                       
 ?>
 <html lang="en">
@@ -36,7 +36,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-
+      
       //SWEET ALERTS
       function sweetConfirm(){
         swal({
@@ -66,6 +66,14 @@ error_reporting(E_ALL & ~E_NOTICE);
   ''+str,
   'success'
 )
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
         }
 
       //SWEET ALERTS
@@ -100,7 +108,7 @@ error_reporting(E_ALL & ~E_NOTICE);
             document.getElementById('horario').value=="" ||
             document.getElementById('docente').value==""||
             document.getElementById('opcion').value==""){
-            alert("Complete los campos prueba");
+            sweetError("Complete los campos prueba");
             
           }else{
             alert(document.getElementById("lastindex"));
@@ -523,7 +531,11 @@ $opcion = $_REQUEST["opcion"];
 
 if ($bandera == "add") {
    msg("Entra a a gregar");
-    $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
+  //  Validamos que no exista ese mismo bloque para otra materia.
+  $query = "select efk_idopcion,efk_idhorario FROM tmaterias WHERE efk_idopcion like '%".$opcion."%' OR efk_idhorario like '%".$horario."%';";
+  $result = $conexion->query($query);
+  if($result->num_rows == 0){
+       $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.
@@ -547,11 +559,16 @@ if ($bandera == "add") {
         //Query para agregar a la tabla de muchos a muchos.
         
          } else {
-        echo("Error pm:".mysqli_error($conexion));
+       // echo("Error pm:".mysqli_error($conexion));
           }
     } else {
-        echo("Error materia:".mysqli_error($conexion));
+       // echo("Error materia:".mysqli_error($conexion));
     }
+  }else{
+     $mensaje="El horario que desea agregar ya existe. ";
+    msgError($mensaje);
+  }
+   
 }
 
 function msg($texto)
@@ -565,6 +582,13 @@ function msgAdd($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }

@@ -400,22 +400,31 @@ include "../config/conexion.php";
 
 $bandera      = $_REQUEST["bandera"];
 $baccion      = $_REQUEST["baccion"];
-$cargo = $_REQUEST["cargo"];
-
+$cargo        = $_REQUEST["cargo"];
 
 if ($bandera == "add") {
+  $query = "select ccargo FROM tcargos WHERE ccargo like '%".$cargo."%';";
+  $result = $conexion->query($query);
+  if($result->num_rows == 0){
     $consulta  = "INSERT INTO tcargos VALUES('null','" . $cargo . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-      echo "<script type='text/javascript'>";
-      echo "alert('Exito');";
+      $resultado = $conexion->query($consulta);
+        if ($resultado) {
+            $mensaje="Se agregaron los datos correctamente";
+            msg($mensaje);
+        } else {
+            $mensaje="Error al insertar los datos";
+            msg($mensaje);
+        }
       
-      echo "document.location.href='fcargo.php';";
-      echo "</script>";
-    } else {
-        msg("No Exito");
-    }
+  }else{
+
+      $mensaje="Los datos que desea ingresar ya existen: ";
+      msg($mensaje);
+  }
 }
+
+
+
 if ($bandera == "desaparecer") {
     $consulta  = "DELETE FROM tcargos where eid_cargo='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
@@ -448,6 +457,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
+    echo "document.location.href='fcargo.php';";
  
     echo "</script>";
 }
