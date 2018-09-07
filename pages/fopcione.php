@@ -118,10 +118,10 @@ if($accion=="guardarG")
                       <div class="col-md-12">
                           </br>
                            </br>
-                           <div class="input-group">
+                           <!--<div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                            <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
-                           </div>
+                           </div>-->
                            </br>
                            </br>
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">

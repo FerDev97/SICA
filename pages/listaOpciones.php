@@ -12,6 +12,7 @@
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
 
   <!-- plugins -->
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
@@ -27,6 +28,46 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+
+//SWEET ALERTS
+function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
         function modify(id)
         {
          
@@ -75,6 +116,7 @@
 
 
         }
+
 
       </script>
 </head>
@@ -148,7 +190,7 @@
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Modificar horario</h4>
+                                        <h4 class="modal-title">Modificar Opcion</h4>
                                       </div>
                                       <div class="modal-body col-md-12">
                                           <form id="modificar" >
@@ -159,8 +201,8 @@
                               
                                                         <div class="input-group " style="padding-bottom:10px;">
                                                           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                          <select id="grado"  class="form-control" name="diaUno" onchange="verificar()">
-                                                          <option value="grado">Grado</option>
+                                                          <select id="grado"  class="form-control" name="grado" onchange="verificar()">
+                                                          
                                                               <?php include('combogrado.php')?>
                                                           </select>
                                                         </div>
@@ -169,8 +211,8 @@
                                                           
                                                         <div class="input-group " style="padding-bottom:10px;">
                                                           <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                                          <select id="opc"  class="form-control" name="bloque" >
-                                                          <option value="opcion">Opcion</option>
+                                                          <select id="opcion"  class="form-control" name="opcion" onchange="verificar()">
+                                                          
                                                              <?php include('comboopcion.php')?>
                                                           </select>
                                                         </div>
@@ -179,8 +221,8 @@
                                                         <br>
                                                         <div class="input-group " style="padding-bottom:10px;">
                                                           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                          <select id="seccion"  class="form-control" name="diaDos">
-                                                          <option value="seccion">Seccion</option>
+                                                          <select id="seccion"  class="form-control" name="seccion">
+                                                        
                                                               <?php include('comboseccion.php')?>
                                                           </select>
                                                       </div>
@@ -217,6 +259,7 @@
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 
@@ -233,17 +276,69 @@
   $(document).ready(function(){
     $('#datatables-example').DataTable();
   });
+  $(document).ready(function(){
+    $('#datatables-example').DataTable();
+
+    $("#guardar").on('click',function(){
+      var grado = $('#grado').val();
+        var opcion = $('#opcion').val();
+        var seccion = $('#seccion').val();
+        var cupo = $('#cupo').val();
+
+        if(grado == ""){
+          sweetError("Grado incorrecto");
+            return false;
+        }
+        if(opcion == ""){
+            sweetError("No se selecciono una opcion");
+            return false;
+        }
+        if(seccion == ""){
+          sweetError("No se selcciono una seccion");
+            return false;
+        }
+        if(cupo ==""||cupo<0||cupo>60){
+          sweetError("Cupo incorrecto");
+            return false;
+        }
+       
+        var todo = $("#modificar").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: 'editarOpcion.php',
+            data: todo,
+            success: function(respuesta) {
+             
+                $("#grado option[value=0]").prop("selected",true);
+                $("#opcion option[value=0]").prop("selected",true);
+                $("#seccion option[value=0]").prop("selected",true);
+                $("#cupo").val(0);
+                $("#modalito").modal('hide');
+                sweetGuardo(respuesta);
+                $(".tabla_ajax").load("tablaOpcCom.php"); 
+                //$('#datatables-example').DataTable();
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });//fin de ajax
+
+      return false;
+    });//fin del click
+    
+  });//fin del ready
 
 
 function editar(id, grado, nombre, seccion, cupo){
-  $("#grado option[value="+grado+"]").prop("selected", true);
-  $("#opc option[value="+nombre+"]").prop("selected", true);
-  $("#seccion option[value="+seccion+"]").prop("selected", true);
-//$("#dia1 option[value="+dia1+"]").prop("selected", true);
+ $("#grado option[value="+grado+"]").prop("selected", true);
+ $("#opcion option[value="+nombre+"]").prop("selected", true);
+ $("#seccion option[value="+seccion+"]").prop("selected", true);
+$("#cupo").val(cupo);
 //$("#dia2 option[value="+dia2+"]").prop("selected", true);
 //$("#estado option[value="+estado+"]").prop("selected", true);
 //$("#bloque").val(horas);
-//$("#id").val(id);
+$("#id").val(id);
 $("#modalito").modal();
 
 }
@@ -259,31 +354,23 @@ include "../config/conexion.php";
 $bandera = $_REQUEST["bandera"];
 $baccion = $_REQUEST["baccion"];
 
-if ($bandera == "add") {
-    $consulta  = "INSERT INTO cliente VALUES('null','" . $nombrecliente . "','" . $apellidocliente . "','" . $duicliente . "','" . $telefonocliente . "','" . $direccioncliente . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
+
 if ($bandera == "desactivar") {
   $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+      sweetGuardo("Dato Activado");
     } else {
-        msg("No Exito");
+        sweetError("No se desactivo el registro");
     }
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+      sweetGuardo("Dato activado");
     } else {
-        msg("No Exito");
+      sweetError("No se activo el registro");
     }
 }
 if ($bandera == "desaparecer") {
@@ -292,7 +379,7 @@ if ($bandera == "desaparecer") {
     if ($resultado) {
         msg("Exito");
     } else {
-        msg("No Exito");
+      sweetError("No se activo el registro");
     }
 }
 if ($bandera == 'enviar') {
