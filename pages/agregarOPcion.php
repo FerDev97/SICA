@@ -79,14 +79,14 @@ echo $mensaje;
         $consulta  = "INSERT INTO tbachilleratos VALUES('null','" . $codigo . "','" .$nombre. "','" .$descripcion. "','" .$tipo. "','1')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
-              $mensaje="Se agregaron los datos correctamente";
+              $mensaje="Se guardaron los datos correctamente";
           } else {
-              $mensaje="Error al insertar los datos bto";
+              $mensaje="Error al insertar los datos";
           }
         
     }else{
 
-        $mensaje="Los datos que desea ingresar ya existen: ";
+        $mensaje="Los datos ingresados ya existen.!";
     }
         
 echo $mensaje;

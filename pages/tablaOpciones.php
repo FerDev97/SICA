@@ -1,6 +1,6 @@
 <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT ttipobachillerato.ctipo,tbachilleratos.ccodigo,eid_bachillerato,cnombe,eestado FROM tbachilleratos INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo ORDER BY cnombe");
+$result = $conexion->query("SELECT ttipobachillerato.ctipo,tbachilleratos.ccodigo,eid_bachillerato,cnombe,eestado,cdescripcion,efk_tipo FROM tbachilleratos INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo  ORDER BY cnombe");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -23,15 +23,14 @@ if ($result) {
             echo "<td style='text-align:center;'><button title='Activar Opcion' align='center' type='button' class='btn btn-default' onclick=confirmarAct(" . $fila->eid_bachillerato . ",2);><i class='fa fa-check'></i>
                </button></td>";
          }
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_bachillerato . ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
+        $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
+       $aux.="onclick=\"editar('".$fila->eid_bachillerato."','".$fila->ccodigo."','".$fila->cnombe."','".$fila->cdescripcion."','".$fila->efk_tipo."')\";>";
+       $aux.="Modificar</button>";
+       echo "<td width='90'>";
+     
+       echo $aux;
+        
         
         echo "</tr>";
 

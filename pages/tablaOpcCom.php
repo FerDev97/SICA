@@ -1,6 +1,6 @@
 <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT tsecciones.cseccion,topciones.eestado,eid_opcion,ecupo_maximo,tbachilleratos.cnombe,ccodigo,tgrado.cgrado,ttipobachillerato.ctipo FROM topciones INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo ORDER BY eid_grado");
+$result = $conexion->query("SELECT tsecciones.cseccion,topciones.eestado,eid_opcion,ecupo_maximo,efk_bto,efk_grado,efk_seccion,tbachilleratos.cnombe,ccodigo,tgrado.cgrado,ttipobachillerato.ctipo FROM topciones INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo where tbachilleratos.eestado='1'ORDER BY eid_grado");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -26,14 +26,14 @@ if ($result) {
           echo "<td style='text-align:center;'><button title='Activar el registro' align='center' type='button' class='btn btn-default' onclick=confirmarAct(" . $fila->eid_opcion . ",2);><i class='fa fa-check'></i>
              </button></td>";
        }
-      
+       
        $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
-       $aux.="onclick=\"editar('".$fila->eid_opcion."','".$fila->cgrado."','".$fila->cnombe."','".$fila->cseccion."','".$fila->ecupo_maximo."')\";>";
+       $aux.="onclick=\"editar('".$fila->eid_opcion."','".$fila->efk_grado."','".$fila->efk_bto."','".$fila->efk_seccion."','".$fila->ecupo_maximo."')\";>";
        $aux.="Modificar</button>";
        echo "<td width='90'>";
      
        echo $aux;
-       
+                                
         echo "</tr>";
 
     }

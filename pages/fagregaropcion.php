@@ -29,6 +29,7 @@ if ($result) {
   <title>SICA-Opciones</title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- plugins -->
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
@@ -44,6 +45,45 @@ if ($result) {
       <![endif]-->
       <script type="text/javascript">
      
+      //SWEET ALERTS
+      function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
       function verificar(){
           if( document.getElementById('nombre').value=="" ){
             alert("Complete los campos");
@@ -60,22 +100,7 @@ if ($result) {
             }
             }
         }
-        function limpiar(){
-          if( document.setElementById('nombre').value=="" ){
-            alert("Complete los campos");
-          }else{
-            if (document.setElementById("aux").value=="modificar") {
-              alert('Va a modificar.');
-           
-            document.getElementById('bandera').value="modificar";
-            document.turismo.submit();
-            }else
-            {
-              document.getElementById('bandera').value="add";
-              document.turismo.submit();
-            }
-            }
-        }
+      
 
         function modify(id)
         {
@@ -90,7 +115,7 @@ if ($result) {
           if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
             document.getElementById('bandera').value='desaparecer';
             document.getElementById('baccion').value=id;
-            alert(id);
+            //alert(id);
             document.turismo.submit();
           }else
           {
@@ -100,7 +125,7 @@ if ($result) {
         function confirmarAct(id,op)
         {
           if (op==1) {
-            alert(""+id);
+           
             if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
             document.getElementById('bandera').value='desactivar';
             document.getElementById('baccion').value=id;
@@ -135,9 +160,9 @@ if ($result) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Opcion</h3>
+                        <h3 class="animated fadeInLeft">Formulario de Opciones de Bachillerato</h3>
                         <p class="animated fadeInDown">
-                          SICA <span class="fa-angle-right fa"></span> Datos del Opcion de Bachillerato.
+                          SICA <span class="fa-angle-right fa"></span> Datos de Opcion.
                         </p>
                     </div>
                   </div>
@@ -150,7 +175,7 @@ if ($result) {
               <div class="col-md-12">
                   <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario De Nueva Opcion</h4>
+                      <h4>Formulario de Opcion</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -214,7 +239,7 @@ if ($result) {
                 <div class="col-md-7">
                   <div class="col-md-12">
                   <div class="panel">
-                  <div class="panel-heading"><h3>Lista De Opciones</h3></div>
+                  <div class="panel-heading"><h3>Lista de Opciones de Bachillerato</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -299,6 +324,90 @@ if ($result) {
 </div>
 
   <!-- Fin Modal de Tipo Bachillerato --> 
+  <!-- Modal de opciones-->
+  <div class="modal fade" id="modalForm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Forumulario de Nueva Opcion de Bachillerato</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el codigo-->
+                  <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                           <form id="modificar">
+                           <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                           <input id="nombre" type="text" style="width: 300px; font-size: 15px" class="form-control" name="nombre" placeholder="Nombre de Opcion">
+                            </div>
+                            <br>
+                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
+                              <select id="tipo" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipo">
+                              <option value="tipo">Tipo</option>
+                              <?php
+                                  include('combotipo.php')?> 
+                              </select>
+                              
+                    <br><br>
+                        </div>
+                     <div class="input-group"style="padding-bottom:0px;">
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descrip" placeholder="Descripcion" id="descrip"></textarea>
+                    </div> 
+                    <br>         
+                    <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema"  style="margin-left:0px;" class="btn btn-info" type="button" id="guardarB" name="guardarB">
+                  Modificar</button>
+
+                  <button style="margin-left:15px" type="button" class="btn" data-dismiss="modal">Cerrar</button>
+                  </div>
+                  </center>
+                  </form>
+                  <br>
+                 <!-- <center><h4>Registro</h4></center>
+                  
+                  <div class="modal-body">
+                <p class="statusMsg"></p>-->
+                 <!-- <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                    
+                      <th>Codigo</th>
+                      <th>Nombre</th>
+                      <th>Tipo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablaopc">
+                  <?php
+                                //  include('tablaModalOpc.php')?> 
+      </tbody>
+        </table>-->
+            </div>
+
+
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de opciones -->
 
       <!-- start: Mobile -->
       
@@ -311,7 +420,7 @@ if ($result) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -334,10 +443,10 @@ if ($result) {
         var descripcion = $('#descripcion').val();
         var tipo = $('#tipob').val();
         if(codigo==""||nombre==""||descripcion==""){
-            alert("Complete los campos");
+          sweetError("Complete los campos");
             return false;
         }else if(tipo == "tipo"){
-            alert("Ingrese Tipo de bachillerato");
+          sweetError("Ingrese Tipo de bachillerato");
             return false;
         }
         var todo = $("#insertar").serialize();
@@ -347,7 +456,7 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarBto',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta);
+             sweetGuardo(respuesta);
                 $(".tabla_ajax").load("tablaOpciones.php"); 
                 
             },
@@ -369,7 +478,7 @@ if ($result) {
        
 
         if(grado == ""){
-            alert("Por favor llene correctamente los datos");
+          sweetError("Por favor.. llene correctamente los datos");
             return false;
         }
         var todo = $("#insertarT").serialize();
@@ -379,9 +488,10 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarTipo',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
+                sweetGuardo(respuesta);
                 $("#tipob").load("combotipo.php");
                 $("#modalTipo").modal('hide');
+                
                 
             },
             error: function(respuesta){
@@ -394,8 +504,68 @@ if ($result) {
 
      });//fin del click
     });//fin del ready
+function editar(id, codigo, nombre, descripcion, tipo){
+  $("#tipo option[value="+tipo+"]").prop("selected", true);
+  $("#codigo").val(codigo);
+  $("#nombre").val(nombre);
+  $("#descrip").val(descripcion);
+ 
+//$("#dia2 option[value="+dia2+"]").prop("selected", true);
+//$("#estado option[value="+estado+"]").prop("selected", true);
+//$("#bloque").val(horas);
+$("#id").val(id);
+$("#modalForm").modal();
 
+}
+$(document).ready(function(){
+    $('#datatables-example').DataTable();
 
+    $("#guardarB").on('click',function(){
+      
+        var nombre = $('#nombre').val();
+        var tipo = $('#tipo').val();
+        var descrip = $('#descrip').val();
+
+        if(nombre == ""){
+            sweetError("Complete el campo nombre");
+            return false;
+        }
+        if(tipo == ""){
+            sweetError("No selecciono un tipo");
+            return false;
+        }
+        if(descrip == ""){
+            sweetError("Agregue una descripcion");
+            return false;
+        }
+      
+       
+        var todo = $("#modificar").serialize();
+
+        $.ajax({
+            type: 'post',
+            url: 'editarBto.php',
+            data: todo,
+            success: function(respuesta) {
+             
+                $("#tipo option[value=0]").prop("selected",true);
+                $("#descrip").val(0);
+                $("#nombre").val(0);
+                $("#codigo").val(0);
+                $("#modalForm").modal('hide');
+                sweetGuardo(respuesta);
+                $("#tabla_ajax").load("tablaOpciones.php");
+                $('#datatables-example').DataTable();
+            },
+            error: function(respuesta){
+              alert("Error en el servidor: "+respuesta); 
+            }
+        });//fin de ajax
+
+      return false;
+    });//fin del click
+    
+  });//fin del ready
 
 
 
@@ -420,31 +590,20 @@ if ($bandera == "desactivar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+       msg("Registro desactivado");
     } else {
-        msg("No Exito");
+      sweetError("No se desactivo el registro");
     }
 }else if ($bandera == "activar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '1' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+      msg("Registro Activado");
     } else {
-        msg("No Exito");
+      sweetError("No se activo el registro");
     }
 }
-if ($bandera == "add") {
-    $consulta  = "INSERT INTO catalogo VALUES('null','" . $codigocuenta . "','" . $nombrecuenta . "','" . $tipocuenta . "','" . $saldocuenta . "','" . $r . "','" . $nivelcuenta . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-      echo "<script type='text/javascript'>";
-      echo "alert('Exito');";
-      echo "document.location.href='cuenta.php';";
-      echo "</script>";
-    } else {
-       
-    }
-}
+
 if ($bandera == "desaparecer") {
     $consulta  = "DELETE FROM catalogo where idcatalogo='" . $baccion . "'";
     $resultado = $conexion->query($consulta);

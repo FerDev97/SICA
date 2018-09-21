@@ -30,11 +30,13 @@ if ($result) {
   <title>SICA-Opciones</title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- plugins -->
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -44,7 +46,46 @@ if ($result) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-     
+        //SWEET ALERTS
+        function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
+
       function verificar(){
           if( document.getElementById('nombre').value=="" ){
             alert("Complete los campos");
@@ -95,7 +136,7 @@ if ($result) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Opcion</h3>
+                        <h3 class="animated fadeInLeft">Gestionar Opciones</h3>
                         <p class="animated fadeInDown">
                           SICA <span class="fa-angle-right fa"></span> Datos del Opcion de Bachillerato.
                         </p>
@@ -108,9 +149,9 @@ if ($result) {
               <input type="hidden" name="aux" id="aux" value="<?php echo $aux; ?>">
               <input type="hidden" name="r" id="r" value="">
               <div class="col-md-12">
-                  <div class="col-md-5 panel panel-info">
+                  <div class="col-md-6 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario De Nueva Opcion</h4>
+                      <h4>Formulario De Nueva Opcion de Bachillerato</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -118,10 +159,10 @@ if ($result) {
                         <form class="cmxform" id="insertar" method="post" action="">
 
                           <div class="col-md-12">
-                          <div class="input-group">
+                          <!--<div class="input-group">
                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                            <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
-                           </div>
+                           </div>-->
                            </br>
                            </br>
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
@@ -135,7 +176,7 @@ if ($result) {
                             
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
-                              <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc">
+                              <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc" onchange="verificar()">
                               <option value="opcion">Opcion</option>
                               <?php include('comboopcion.php')?>
                               </select>
@@ -181,54 +222,47 @@ if ($result) {
                   
 
 
-                <div class="col-md-7">
+                <div class="col-md-6">
                   <div class="col-md-12">
                   <div class="panel">
-                  <div class="panel-heading"><h3>Lista De Opciones</h3></div>
+                  <div class="panel-heading"><h3>Lista de Opciones de Bachillerato Activas</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Editar</th>
+                          <
                           <th>Codigo</th>
                           <th>Opcion</th>
+                          <th>Tipo</th>
                           <th>Descripcion</th>
-                          <th>Alta/Baja</th>
+                         
                         </tr>
                       </thead>
                       <tbody>
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select * from tbachilleratos order by eid_bachillerato");
+$result = $conexion->query("select * from tbachilleratos where eestado='1' order by eid_bachillerato");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_bachillerato . ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
         //echo "<tr>";
         //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
         echo "<td>" . $fila->ccodigo . "</td>";
         echo "<td>" . $fila->cnombe . "</td>";
+        if(eestado=='1'){
+          echo "<td>Activo</td>";
+        }else{
+          echo "<td>Inactivo</td>";
+        }
         echo "<td>" . $fila->cdescripcion . "</td>";
+        
 
-        echo "<td>
-          <div class='col-md-2' style='margin-top:1px'>
-            <button class='btn ripple-infinite btn-round btn-success' onclick='confirmar(" . $fila->idcatalogo . ")'>
-            <div>
-              <span>Alta</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+        
+
+        
         echo "</tr>";
 
     }
@@ -486,7 +520,7 @@ if ($result) {
 <script src="../asset/js/plugins/jquery.datatables.min.js"></script>
 <script src="../asset/js/plugins/datatables.bootstrap.min.js"></script>
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
@@ -505,10 +539,12 @@ if ($result) {
         var cupo = $('#cupo').val();
 
         if(opcion == "opcion"||grado=="grado"||seccion=="seccion"){
-            alert("Por favor llene el formulario. Todos los campos son obligatorios");
+            sweetError("Por favor llene el formulario. Todos los campos son obligatorios");
+         
             return false;
-        }else if(cupo < 1||cupo>50){
-            alert("El cupo es erroneo cupo maximo 60 alumnos");
+        }else if(cupo < 1||cupo>60){
+            sweetError("El cupo es erroneo cupo maximo 60 alumnos");
+        
             return false;
         }
         var todo = $("#insertar").serialize();
@@ -518,8 +554,8 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarOpc',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
-                
+                sweetGuardo(respuesta);
+             
             },
             error: function(respuesta){
               alert("Error en el servidor: "+respuesta); 
@@ -536,10 +572,12 @@ if ($result) {
   $('#guardarG').on('click',function(){
         var grado = $('#gradom').val();
         if(grado == ""){
-            alert("Por favor llene correctamente los datos");
+            sweetError("Por favor llene correctamente los datos");
+            
             return false;
         }else if(grado<1||grado>3){
-          alert("El formato de grados en bachillerato es de 1° a 3°");
+            sweetError("El formato de grados en bachillerato es de 1° a 3°");
+         
             return false;
         }
         var todo = $("#insertarG").serialize();
@@ -549,7 +587,7 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarGrado',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta); 
+                sweetGuardo(respuesta); 
                 $("#grado").load("combogrado.php");
                 $("#modalGrado").modal('hide');
                 
@@ -571,7 +609,7 @@ if ($result) {
        
 
         if(grado == ""){
-            alert("Por favor llene correctamente los datos");
+            sweetError("Por favor llene correctamente los datos");
             return false;
         }
         var todo = $("#insertarT").serialize();
@@ -581,7 +619,7 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarTipo',
             data: todo,
             success: function(respuesta) { 
-            alert(respuesta); 
+                sweetGuardo(respuesta); 
             $("#tipob").load("combotipo.php");
             $("#modalTipo").modal('hide');
             
@@ -605,10 +643,11 @@ if ($result) {
         var descripcion = $('#descripcion').val();
         var tipo = $('#tipob').val();
         if(tipo == "tipo"){
-            alert("Ingrese Tipo de bachillerato");
+            sweetError("Ingrese Tipo de bachillerato");
+           
             return false;
         }else if(codigo==""||nombre==""||descripcion==""){
-            alert("Complete los campos");
+            sweetError("Por favor.! Complete los campos");
             return false;
         }
         var todo = $("#insertarB").serialize();
@@ -618,7 +657,7 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarBto',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta);
+                sweetGuardo(respuesta);
                 $("#opc").load("comboopcion.php"); 
                 $("#tablaopc").load("tablaModalOpc.php");
                 
@@ -640,7 +679,7 @@ if ($result) {
        
 
         if(seccion == ""){
-            alert("Por favor llene correctamente los datos");
+            sweetError("Por favor llene correctamente los datos");
             return false;
         }
         var todo = $("#insertarS").serialize();
@@ -650,7 +689,7 @@ if ($result) {
             url: '../pages/agregarOPcion.php?accion=guardarSeccion',
             data: todo,
             success: function(respuesta) {
-                alert(respuesta);
+                sweetGuardo(respuesta);
                 $("#seccion").load("comboseccion.php"); 
                 $("#modalSeccion").modal('hide');
                 
