@@ -68,6 +68,18 @@
                 </li>
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
+                    <span class="fa-user fa"></span> Usuarios
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fusuario.php">Agregar Nuevo</a></li>
+                    <li><a href="listapersonal.php">Lista de Usuarios</a></li>
+                    
+                  </ul>
+
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
                     <span class="fa fa-book"></span> Materias
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
