@@ -245,13 +245,13 @@ error_reporting(E_ALL & ~E_NOTICE);
                           
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='20' minlength='3' onkeypress="return check(event)">
+                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='8' minlength='4' onkeypress="return check(event)">
                               </div>  
                               <br>
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="password" class="form-control" name="contrasena" placeholder="Contraseña">
+                                  <input id="contrasena" type="password" class="form-control" name="contrasena" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
                               </div>
                               
                               
