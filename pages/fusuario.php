@@ -87,6 +87,23 @@ error_reporting(E_ALL & ~E_NOTICE);
 
       //SWEET ALERTS
 
+      //SOLO NUMEROS Y LETRAS
+
+      function check(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla == 8) {
+        return true;
+    }
+
+    // Patron de entrada, en este caso solo acepta numeros y letras
+    patron = /[A-Za-z0-9]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
+}
+//FIN SOLO NUMEROS Y LETRAS
+
       //Validacion Correo Electronico
       function validateMail(Correo)
       {
@@ -228,7 +245,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='32' minlength='3' >
+                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='20' minlength='3' onkeypress="return check(event)">
                               </div>  
                               <br>
                               <br>
