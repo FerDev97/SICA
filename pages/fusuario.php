@@ -167,13 +167,9 @@ error_reporting(E_ALL & ~E_NOTICE);
 				}
 
 			}
-          if(document.getElementById('dui').value=="" ||
-             document.getElementById('nombre').value=="" ||
-             document.getElementById('apellido').value=="" ||
-            document.getElementById('direccion').value=="" ||
-            document.getElementById('fechanacimiento').value=="" ||document.getElementById('fechanacimiento').value==""
-            ||document.getElementById('correo').value==""||document.getElementById('telefono').value==""
-            ||document.getElementById('cargo').value=="" || banderaRb || banderaRb1){
+          if(document.getElementById('usuario').value==""
+            ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
+            ||document.getElementById('tipo').value=="seleccione" ){
 
              sweetError("Complete los campos prueba");
           }else{
@@ -232,15 +228,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                           
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" onkeypress="return sololetras(event)">
+                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='32' minlength='3' >
                               </div>  
                               <br>
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="text" class="form-control" name="contrasena" placeholder="Contraseña" onkeypress="return sololetras(event)">
+                                  <input id="contrasena" type="password" class="form-control" name="contrasena" placeholder="Contraseña">
                               </div>
-                              <br> 
+                              
                               
                               
                               
@@ -248,29 +244,15 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                             <!-- Div del span -->
                           </div>
-                          <div class="col-md-6">                       
-                          
-                              <div class="input-group">
-                                  <input id="correo" type="text" class="form-control" name="correo" placeholder="Correo Electrónico" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')" >
-                                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                              </div>   
-                              <br><br>                    
-                              <div class="input-group">
-                              
-                                  <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Teléfono" size="8" maxlength="8" onkeypress="return aceptNum(event)">
-                                  <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-
-                              </div> 
-                              <br>
-                              
-                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-     <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="cargo"   class="select2 show-tick" style="width: 495px; font-size: 15px" name="cargo">
-      <option value="">Seleccione Cargo</option>
+                          <div class="col-md-6">
+                          <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="fa fa-user"></i><span class="label label-default" style="width: 100px; font-size: 15px">Personal</span>
+      <select id="personal"   class="select2 show-tick" style="width: 470px; font-size: 15px" name="personal">
+      <option value="">Seleccione personal</option>
       <?php
                       include '../config/conexion.php';
 
-                      $result = $conexion->query("select eid_cargo as id,ccargo as nombre FROM tcargos");
+                      $result = $conexion->query("select eid_personal as id,cnombre as nombre FROM tpersonal");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
@@ -283,8 +265,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                        </select>
                               
       
-      </div>
-      
+      </div>                      
+                          <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Tipo</span>
+      <select id="tipo"   class="select2 show-tick" style="width: 470px; font-size: 15px;margin-right:10px;margin-left:30px" name="tipo">
+      <option value="seleccione">Seleccione tipo de usuario</option>
+      <option value="">Administrador</option>
+      <option value="">Docente</option>
+       </select>
+       </div>
       <br>
       
      
@@ -728,25 +717,19 @@ include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
 $baccion  = $_REQUEST["baccion"];
-$dui   = $_REQUEST["dui"];
-$nombre  = $_REQUEST["nombre"];
-$apellido  = $_REQUEST["apellido"];
-$direccion      = $_REQUEST["direccion"];
-$fechanacimiento       = $_REQUEST["fechanacimiento"];
-$correo     = $_REQUEST["correo"];
-$telefono = $_REQUEST["telefono"];
-$cargo     = $_REQUEST["cargo"];
-$estado     = $_REQUEST["estado"];
-$sexo     = $_REQUEST["sexo"];
+$usuario = $_REQUEST["usuario"];
+$contrasena    = $_REQUEST["contrasena"];
+$personal     = $_REQUEST["personal"];
+$tipo    = $_REQUEST["tipo"];
 
 if ($bandera == "add") {
-  $query = "select cdui,ccorreo FROM tpersonal WHERE cdui like '%".$dui."%' OR ccorreo like '%".$correo."%';";
+  $query = "select cusuario FROM tusuarios WHERE cusuario like '%".$usuario."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
-    $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
+    $consulta  = "INSERT INTO tusuarios VALUES('null','" . $usuario . "','" . $contrasena. "','" . $tipo . "','" . $personal . "')";
       $resultado = $conexion->query($consulta);
         if ($resultado) {
-           msgAdd("Agrego personal exitosamente");
+           msgAdd("Agrego usuario exitosamente");
         } else {
            
             msgError("Error al insertar los datos");
