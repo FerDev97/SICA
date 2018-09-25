@@ -163,13 +163,18 @@ error_reporting(E_ALL & ~E_NOTICE);
       {
         document.getElementById("codigo").value=document.getElementById("barcode").value;
       }
-        function verificar(formu){
-          if (formu.c1.value==formu.c2.value) 
-         { alert('las contraseñas coinciden'); return true }
-	else 
-{ alert('las dos contraseñas no son iguales'); return false }
-        
-          if(document.getElementById('usuario').value==""
+        function verificar(){
+           
+   	contrasena1 = document.turismo.contrasena1.value 
+   	contrasena2 = document.turismo.contrasena2.value 
+
+   	if (contrasena1 == contrasena2){
+      alert("Contraseñas iguales");
+
+     }else {
+      alert("Contraseñas no iguales");
+     }
+     if(document.getElementById('usuario').value==""
             ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="seleccione" ){
 
@@ -238,14 +243,14 @@ error_reporting(E_ALL & ~E_NOTICE);
                               
                               <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="password" class="form-control" name="c1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                                  <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
                               </div>
                               <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>
                               <br>
 
                               <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="password" class="form-control" name="c2" placeholder=" Repita Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                                  <input id="contrasena" type="password" class="form-control" name="contrasena2" placeholder=" Repita Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
                               </div>
                               
                               
