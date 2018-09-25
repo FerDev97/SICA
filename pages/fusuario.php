@@ -159,23 +159,19 @@ error_reporting(E_ALL & ~E_NOTICE);
     }
      //Validacion Solo letras
 function verificar(){
-  // contrasena1 = document.turismo.contrasena1.value; 
-  // contrasena2 = document.turismo.contrasena2.value; 
+   contrasena1 = document.turismo.contrasena1.value; 
+   contrasena2 = document.turismo.contrasena2.value; 
 
-  //  	if (contrasena1 == contrasena2){
-  //     alert("Contraseñas iguales");
+  	if (contrasena1 == contrasena2){
+        alert("Contraseñas iguales");
 
-  //    }else {
-  //     alert("Contraseñas no iguales");
-  //    }
-      
-  
+   }else {
+  //sweetError("Las contraseñas no son iguales");
+   alert("Contraseñas no iguales");
+   }
    if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
-              alert(document.getElementById('usuario').value);
-              alert(document.getElementById('contrasena').value);
-              alert(document.getElementById('personal').value);
-              alert(document.getElementById('tipo').value);
+              
 
              sweetError("Complete los campos");
           }else{
