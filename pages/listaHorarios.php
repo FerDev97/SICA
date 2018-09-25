@@ -392,8 +392,10 @@
       dia1=elemento[0];
       dia2=elemento[2];
       
-      $("#dia1 option[value="+dia1+"]").prop("selected", true);
-      $("#dia2 option[value="+dia2+"]").prop("selected", true);
+      //$("#dia1 option[value="+dia1+"]").prop("selected", true);
+      //$("#dia2 option[value="+dia2+"]").prop("selected", true);
+      $('#dia1').val(dia1);
+      $('#dia2').val(dia2);
       $("#estado option[value="+estado+"]").prop("selected", true);
       $("#bloque").val(horas);
       $("#id").val(id);

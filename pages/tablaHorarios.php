@@ -1,7 +1,7 @@
 <?php 
                             include "../config/conexion.php" ; 
 
-                            $result = $conexion->query("SELECT * FROM thorarios GROUP BY cdia");
+                            $result = $conexion->query("SELECT * FROM thorarios");
 
                             if($result->num_rows != 0){
 

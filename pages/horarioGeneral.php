@@ -882,14 +882,20 @@
             url: 'editarHorario.php',
             data: todo,
             success: function(respuesta) {
-                          
-                $("#modalito").modal('hide');
-                sweetInfo("Activado","Se activo el registro correctamente");
-                $("#dia1 option[value=0]").prop("selected",true);
-                $("#dia2 option[value=0]").prop("selected",true);
-                $("#bloque option[value=0]").prop("selected",true);
-                $("#id").val("");
-                $("#estado").val("");
+
+                if(respuesta == 1){
+                  $("#modalito").modal('hide');
+                  sweetInfo("Activado","Se activo el registro correctamente");
+                  $("#dia1 option[value=0]").prop("selected",true);
+                  $("#dia2 option[value=0]").prop("selected",true);
+                  $("#bloque option[value=0]").prop("selected",true);
+                  $("#id").val("");
+                  $("#estado").val("");
+                }
+                if(respuesta == 2 || respuesta == 3){
+                  sweetError("Error: Al intentar activar el horario"); 
+                }          
+               
                 
             },
             error: function(respuesta){
