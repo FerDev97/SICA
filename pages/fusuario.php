@@ -156,6 +156,15 @@ error_reporting(E_ALL & ~E_NOTICE);
     }
      //Validacion Solo letras
 function verificar(){
+  contrasena1 = document.turismo.contrasena1.value 
+  contrasena2 = document.turismo.contrasena2.value 
+
+   	if (contrasena1 == contrasena2){
+      alert("Contraseñas iguales");
+
+     }else {
+      alert("Contraseñas no iguales");
+     }
   
    if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
@@ -254,7 +263,7 @@ function verificar(){
       <?php
                       include '../config/conexion.php';
 
-                      $result = $conexion->query("select eid_personal as id,cnombre as nombre FROM tpersonal WHERE iestado='1'");
+                      $result = $conexion->query("select p.eid_personal as idp, p.cnombre as nombre from tpersonal as p where iestado='1' AND p.eid_personal NOT IN (SELECT tusuarios.efk_personal from tusuarios)");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
