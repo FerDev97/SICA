@@ -1,3 +1,11 @@
+<?php
+session_start();
+include "../config/conexion.php";
+if (isset($_SESSION['usuario'])) {
+	echo '<script> window.location="inicio.php";<script>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +35,50 @@
 	<link rel="stylesheet" type="text/css" href="../asset/css/main.css">
 <!--===============================================================================================-->
 </head>
+<script type="text/javascript">
+        //SWEET ALERTS
+        function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+       function verificar(){
+           alert("llego");
+        document.location.href="chekLogin.php?usuario="+document.getElementById("usuario").value+"&pass="+document.getElementById("pass").value;
+        }
+      </script>
 <body>
 	
 	<div class="limiter">
@@ -35,22 +87,24 @@
 				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-33">
 						Iniciar Sesion
-					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Es necesario un usuario valido: ejemplo@gmail.com">
-						<input class="input100" type="text" name="email" placeholder="Usuario.">
+                    </span>
+                    <div class="login">
+                
+                        <br>
+					<div class="wrap-input100 validate-input" data-validate = "Es necesario un usuario valido:UserSica99">
+						<input class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario." autocomplete="off">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
-
-					<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Contraseña.">
+                    </br>
+					<div class="wrap-input100 rs1 validate-input" data-validate="La contraseña es Obligatoria">
+						<input class="input100" type="password" name="pass" id="pass" placeholder="Contraseña.">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-20">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" onclick="verificar()">
 							Entrar
 						</button>
 					</div>
@@ -65,8 +119,7 @@
 						</a>
 					</div>
 
-					
-				</form>
+</div>
 			</div>
 		</div>
 	</div>
