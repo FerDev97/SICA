@@ -359,18 +359,18 @@ if ($bandera == "desactivar") {
   $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      sweetGuardo("Dato Activado");
+      msg("Dato Activado");
     } else {
-        sweetError("No se desactivo el registro");
+        msg("No se desactivo el registro");
     }
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      sweetGuardo("Dato activado");
+      msg("Dato activado");
     } else {
-      sweetError("No se activo el registro");
+      msg("No se activo el registro");
     }
 }
 if ($bandera == "desaparecer") {

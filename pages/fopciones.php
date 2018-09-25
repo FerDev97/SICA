@@ -231,7 +231,7 @@ if ($result) {
                       <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <
+                          
                           <th>Codigo</th>
                           <th>Opcion</th>
                           <th>Tipo</th>

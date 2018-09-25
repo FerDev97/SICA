@@ -17,6 +17,18 @@ if ($result) {
     }
     $aux = "modificar";
 }
+//Query para generar codigo.
+
+                 $resultc = $conexion->query("select eid_bachillerato as id from tbachilleratos");
+                     if ($resultc) {
+
+                       while ($filac = $resultc->fetch_object()) {
+                         $temp=$filac->id;
+                        
+                          }
+                     }   
+                     $codigo=sprintf("%03s",$temp+1);           
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -184,7 +196,7 @@ if ($result) {
 
                           <div class="col-md-12">
                           <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                   <input style="width:250px;" id="codigoo" type="text" class="form-control" name="codigoo" placeholder="Codigo">
                                   
                               </div>  
@@ -324,6 +336,50 @@ if ($result) {
 </div>
 
   <!-- Fin Modal de Tipo Bachillerato --> 
+  <!--MODAL-->
+  <div class="modal fade" id="modalito">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Modificar Opcion</h4>
+                                      </div>
+                                      <div class="modal-body col-md-12">
+                                          <form id="modificar" >
+                                          <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                           <input id="nombre" type="text" style="width: 300px; font-size: 15px" class="form-control" name="nombre" placeholder="Nombre de Opcion">
+                            </div>
+                            <br>
+                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
+                              <select id="tipo" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipo">
+                              <option value="tipo">Tipo</option>
+                              <?php
+                                  include('combotipo.php')?> 
+                              </select>
+                              
+                    <br><br>
+                        </div>
+                     <div class="input-group"style="padding-bottom:0px;">
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descrip" placeholder="Descripcion" id="descrip"></textarea>
+                    </div> 
+                    <br>         
+                                        <br><br><br><br><br><br><br><br><br><br>
+                                      
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button id="guardarB" type="button" class="btn btn-primary">Guardar Cambios</button>
+                                      </div>
+                                      </form>
+                                    </div><!-- /.modal-content -->
+                                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+          <!--MODAL-->
   <!-- Modal de opciones-->
   <div class="modal fade" id="modalForm" role="dialog">
     <div class="modal-dialog">
@@ -514,7 +570,7 @@ function editar(id, codigo, nombre, descripcion, tipo){
 //$("#estado option[value="+estado+"]").prop("selected", true);
 //$("#bloque").val(horas);
 $("#id").val(id);
-$("#modalForm").modal();
+$("#modalito").modal();
 
 }
 $(document).ready(function(){
@@ -552,7 +608,7 @@ $(document).ready(function(){
                 $("#descrip").val(0);
                 $("#nombre").val(0);
                 $("#codigo").val(0);
-                $("#modalForm").modal('hide');
+                $("#modalito").modal('hide');
                 sweetGuardo(respuesta);
                 $("#tabla_ajax").load("tablaOpciones.php");
                 $('#datatables-example').DataTable();
