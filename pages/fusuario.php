@@ -155,33 +155,16 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
     }
      //Validacion Solo letras
+function verificar(){
+  
+   if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
+            ||document.getElementById('tipo').value=="" ){
+              alert(document.getElementById('usuario').value);
+              alert(document.getElementById('contrasena').value);
+              alert(document.getElementById('personal').value);
+              alert(document.getElementById('tipo').value);
 
-    
-
-    
-
-
-      
-      function prueba()
-      {
-        document.getElementById("codigo").value=document.getElementById("barcode").value;
-      }
-        function verificar(){
-           
-   	contrasena1 = document.turismo.contrasena1.value 
-   	contrasena2 = document.turismo.contrasena2.value 
-
-   	if (contrasena1 == contrasena2){
-      alert("Contraseñas iguales");
-
-     }else {
-      alert("Contraseñas no iguales");
-     }
-     if(document.getElementById('usuario').value==""
-            ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
-            ||document.getElementById('tipo').value=="seleccione" ){
-
-             sweetError("Complete los campos prueba");
+             sweetError("Complete los campos");
           }else{
             if (document.getElementById('baccion').value!="") {
               document.getElementById('bandera').value='modificar';
@@ -288,7 +271,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Tipo</span>
       <select id="tipo"   class="select2 show-tick" style="width: 470px; font-size: 15px;margin-right:10px;margin-left:30px" name="tipo">
-      <option value="seleccione">Seleccione tipo de usuario</option>
+      <option value="">Seleccione tipo de usuario</option>
       <option value="">Administrador</option>
       <option value="">Docente</option>
        </select>
