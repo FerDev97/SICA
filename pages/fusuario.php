@@ -154,17 +154,21 @@ error_reporting(E_ALL & ~E_NOTICE);
             return false;
         }
     }
+    function comr(){
+      alert(document.getElementById('personal').value);
+    }
      //Validacion Solo letras
 function verificar(){
-  contrasena1 = document.turismo.contrasena1.value 
-  contrasena2 = document.turismo.contrasena2.value 
+  // contrasena1 = document.turismo.contrasena1.value; 
+  // contrasena2 = document.turismo.contrasena2.value; 
 
-   	if (contrasena1 == contrasena2){
-      alert("Contraseñas iguales");
+  //  	if (contrasena1 == contrasena2){
+  //     alert("Contraseñas iguales");
 
-     }else {
-      alert("Contraseñas no iguales");
-     }
+  //    }else {
+  //     alert("Contraseñas no iguales");
+  //    }
+      
   
    if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
@@ -259,7 +263,7 @@ function verificar(){
                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-user"></i><span class="label label-default" style="width: 100px; font-size: 15px">Personal</span>
       <select id="personal"   class="select2 show-tick" style="width: 470px; font-size: 15px" name="personal">
-      <option value="">Seleccione personal</option>
+      <option value="valor">Seleccione personal</option>
       <?php
                       include '../config/conexion.php';
 
@@ -267,7 +271,7 @@ function verificar(){
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          echo "<option value='".$fila->idp."'>".$fila->nombre."</option>";
                          
                         
                            }
@@ -281,8 +285,8 @@ function verificar(){
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Tipo</span>
       <select id="tipo"   class="select2 show-tick" style="width: 470px; font-size: 15px;margin-right:10px;margin-left:30px" name="tipo">
       <option value="">Seleccione tipo de usuario</option>
-      <option value="">Administrador</option>
-      <option value="">Docente</option>
+      <option value="1">Administrador</option>
+      <option value="0">Docente</option>
        </select>
        </div>
       <br>
