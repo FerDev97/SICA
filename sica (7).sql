@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-09-2018 a las 06:18:23
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.1.14
+-- Tiempo de generación: 25-09-2018 a las 22:06:27
+-- Versión del servidor: 10.1.29-MariaDB
+-- Versión de PHP: 7.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -438,6 +438,15 @@ CREATE TABLE `tusuarios` (
   `etipo` int(11) NOT NULL,
   `efk_personal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tusuarios`
+--
+
+INSERT INTO `tusuarios` (`eid_usuario`, `cusuario`, `ccontraseña`, `etipo`, `efk_personal`) VALUES
+(0, 'Jessi', 'hola', 0, 4),
+(1, 'Jessi', 'jessiquita', 1, 1),
+(2, 'Fer', 'fernandito', 2, 3);
 
 --
 -- Índices para tablas volcadas

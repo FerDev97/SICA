@@ -155,6 +155,9 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
     }
      //Validacion Solo letras
+
+    
+
     
 
 
@@ -268,7 +271,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       <?php
                       include '../config/conexion.php';
 
-                      $result = $conexion->query("select eid_personal as id,cnombre as nombre FROM tpersonal");
+                      $result = $conexion->query("select eid_personal as id,cnombre as nombre FROM tpersonal WHERE iestado='1'");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
