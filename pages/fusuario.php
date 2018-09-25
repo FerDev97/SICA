@@ -76,6 +76,14 @@ error_reporting(E_ALL & ~E_NOTICE);
   'success'
 )
         }
+function sweetNel(str){
+          swal(
+  'Abi babosa :v!',
+  ''+str,
+  'success'
+)
+}
+
         function sweetError(str){
          swal({
   type: 'error',
@@ -164,12 +172,7 @@ function verificar(){
 
   	if (contrasena1 == contrasena2){
         alert("Contraseñas iguales");
-
-   }else {
-  //sweetError("Las contraseñas no son iguales");
-   alert("Contraseñas no iguales");
-   }
-   if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
+          if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
               
 
@@ -184,6 +187,12 @@ function verificar(){
           }
             document.turismo.submit();
           }
+
+   }else {
+  sweetError("Las contraseñas no son iguales");
+   
+   }
+
 
         }
       </script>
