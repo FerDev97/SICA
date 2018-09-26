@@ -11,7 +11,7 @@
                 <a href="index.html" class="navbar-brand">
                 </a>
               <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span>Fernando Hernandez </span></li>
+                <li class="user-name"><span><?php echo $_SESSION["usuario"]; ?> </span></li>
                   <li class="dropdown avatar-dropdown">
                    <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                    <ul class="dropdown-menu user-dropdown">
@@ -22,7 +22,7 @@
                       <ul>
                         <li><a href=""><span class="fa fa-cogs"></span></a></li>
                         <li><a href=""><span class="fa fa-lock"></span></a></li>
-                        <li><a href=""><span class="fa fa-power-off "></span></a></li>
+                        <li><a href="logout.php"><span class="fa fa-power-off "></span></a></li>
                       </ul>
                     </li>
                   </ul>

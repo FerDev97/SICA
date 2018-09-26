@@ -1,37 +1,45 @@
 <?php
-echo "hola";
-	if(isset($_POST["enviar"])) {
-			$loginNombre = $_POST["usuario"];
-			$loginPassword =$_POST["pass"];
-      $correcto=false;
-      include "../config/conexion.php";
-    
-      $result = $conexion->query("SELECT tpersonal.cnombre,capellido,tusuarios.cusuario,cpass FROM tusuarios INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal where cusuario='$loginNombre' AND cpass='$loginPassword'");
-     
-      echo "<script>function hola(){
-        alert('".$loginNombre."');
-      }</script>";
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        $passR = $fila->cpass;
-		$Nombre=$fila->cnombre;
-        if($passR==$loginPassword){
-          $correcto=true;
-        }
-    }
-}
-			if(isset($loginNombre) && isset($loginPassword)) {
-				if($correcto==true) {
-					session_start();
-					$_SESSION["logueado"] = TRUE;
-					$_SESSION["usuario"] = $Nombre;
-					header("Location:inicio.php");
-				}
-				else {
-					Header("Location:index.php?error=login");
-				}
+	msg("hola");
+	      $loginNombre = $_POST["usuario"];
+		  $loginPassword =$_POST["pass"];
+		  $correcto=false;
+		  include "../config/conexion.php";
+	msg("holaa"+$loginNombre);
+		  $result = $conexion->query("SELECT tpersonal.cnombre,capellido,tusuarios.cusuario,cpass,etipo FROM tusuarios INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal where cusuario='$loginNombre' AND cpass='$loginPassword'");
+	if ($result) {
+		while ($fila = $result->fetch_object()) {
+			$passR = $fila->cpass;
+			$Nombre=$fila->cnombre;
+			$tipo=$fila->etipo;
+			if($passR==$loginPassword){
+			  $correcto=true;
 			}
-		} else {
-			header("Location:index.php");
 		}
+	}
+				if(isset($loginNombre) && isset($loginPassword)) {
+					if($correcto==true) {
+						session_start();
+						$_SESSION["logueado"] = TRUE;
+						$_SESSION["usuario"] = $Nombre;
+						$_SESSION["tipo"] = $tipo;
+						if($tipo==1){
+							header("Location:inicio.php?tipo=1");
+						}else{
+							header("Location:inicio.php?tipo=0");
+						}
+						
+					}
+					else {
+						Header("Location:index.php?error=login");
+					}
+				}
+
+	
+		function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
+}
  ?>

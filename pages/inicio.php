@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION["logueado"] == TRUE) {
-
+$tipo  = $_REQUEST["tipo"];
 $id  = $_REQUEST["id"];
 $aux = " ";
 $anio=$_REQUEST["anio"];
@@ -111,7 +111,12 @@ error_reporting(E_ALL & ~E_NOTICE);
 
       <div class="container-fluid mimin-wrapper">
 
-          <?php include "menu.php";?>
+          <?php
+          if($tipo==1){
+            include "menu.php";
+          }else{
+            include "menuD.php";
+          } ?>
 
 
           <!-- start: Content -->
