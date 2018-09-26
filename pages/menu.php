@@ -73,7 +73,8 @@
                   </a>
                   <ul class="nav nav-list tree">
                     <li><a href="fusuario.php">Agregar Nuevo</a></li>
-                    <li><a href="listapersonal.php">Lista de Usuarios</a></li>
+                    <li><a href="listaUsuariosActivos.php">Usuarios Activos</a></li>
+                    <li><a href="listaUsuariosInactivos.php">Usuarios Inactivos</a></li>
                     
                   </ul>
 
