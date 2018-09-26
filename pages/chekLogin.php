@@ -11,6 +11,7 @@
 			$passR = $fila->cpass;
 			$Nombre=$fila->cnombre;
 			$tipo=$fila->etipo;
+			$apellido=$fila->capellido;
 			if($passR==$loginPassword){
 			  $correcto=true;
 			}
@@ -20,7 +21,7 @@
 					if($correcto==true) {
 						session_start();
 						$_SESSION["logueado"] = TRUE;
-						$_SESSION["usuario"] = $Nombre;
+						$_SESSION["usuario"] = $Nombre." ".$apellido;
 						$_SESSION["tipo"] = $tipo;
 						if($tipo==1){
 							header("Location:inicio.php?tipo=1");

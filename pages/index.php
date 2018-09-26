@@ -6,7 +6,7 @@ session_start();
  
 if ($_SESSION["logueado"]==TRUE) {
    $tipos=$_SESSION["tipo"];
-	Header("Location: inicio.php?tipo=$tipos");
+    Header("Location: inicio.php?tipo=$tipos");
 }else {
 	$errorLogin=$_GET["error"];
 	if($errorLogin=="login") {
@@ -45,9 +45,11 @@ if ($_SESSION["logueado"]==TRUE) {
 	 <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
  <!--===============================================================================================-->
  </head>
- <script type="text/javascript">
-         //SWEET ALERTS
-         function sweetConfirm(){
+ <script type="text/javascript">    
+         function go(){
+         document.form.submit(); 
+              //SWEET ALERTS
+              function sweetConfirm(){
          swal({
    title: '¿Está seguro que desea continuar?',
    text: "¡No sera posible revertir esta acción!",
@@ -83,9 +85,6 @@ if ($_SESSION["logueado"]==TRUE) {
    footer: 'Revise que todos los campos esten completados.'
  })
          }
-        
-         function go(){
-         document.form.submit(); 
  } 
        </script>
  <body oncopy="return false" onpaste="return false">
@@ -130,7 +129,7 @@ if ($_SESSION["logueado"]==TRUE) {
      </div>
      </div>
      </div>
- 
+     <script src="../asset/js/sweetalert2.js"></script>
  <!--===============================================================================================-->
      <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
  <!--===============================================================================================-->
@@ -147,7 +146,7 @@ if ($_SESSION["logueado"]==TRUE) {
      <script src="../vendor/countdowntime/countdowntime.js"></script>
  <!--===============================================================================================-->
      <script src="../asset/js/mains.js"></script>
-	 <script src="../asset/js/sweetalert2.js"></script>
+	
  
  </body>
  </html>
@@ -162,7 +161,7 @@ if ($_SESSION["logueado"]==TRUE) {
  function msgError($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "sweetError('$texto');";
+    echo "sweetConfirm('$texto');";
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
