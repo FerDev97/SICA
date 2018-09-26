@@ -78,7 +78,7 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
 function sweetNel(str){
           swal(
-  'Abi babosa :v!',
+  'Contraseñas iguales',
   ''+str,
   'success'
 )
@@ -171,12 +171,11 @@ function verificar(){
    contrasena2 = document.turismo.contrasena2.value; 
 
   	if (contrasena1 == contrasena2){
-        alert("Contraseñas iguales");
+        //sweetNel("Contraseñas iguales");
           if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
-              
-
-             sweetError("Complete los campos");
+              alert(document.getElementById('contrasena').value);
+              sweetError("Complete los campos");
           }else{
             if (document.getElementById('baccion').value!="") {
               document.getElementById('bandera').value='modificar';
