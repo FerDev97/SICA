@@ -3,36 +3,6 @@ session_start();
 if($_SESSION["logueado"] == TRUE) {
 $tipo  = $_REQUEST["tipo"];
 $id  = $_REQUEST["id"];
-$aux = " ";
-$anio=$_REQUEST["anio"];
-include "../config/conexion.php";
-$result = $conexion->query("select * from usuario where idusuario=" . $id);
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        $idusuarioR   = $fila->idusuario;
-        $nombreR  = $fila->nombre;
-        $passR = $fila->pass;
-        $mailR = $fila->mail;
-        $telefonoR  = $fila->telefono;
-        $fechaR = $fila->fecha;
-        $usuarioR= $fila->usuario;
-    }
-    $aux = "modificar";
-}
-if(empty($anio))
-{
-
-}else
-{
-  $consulta  = "INSERT INTO anio VALUES('".$anio."','0','-1')";
-  $resultado = $conexion->query($consulta);
-  if ($resultado) {
-      //msg("Exito");
-  } else {
-      //msg(mysqli_error($conexion));
-  }
-}
-
 ?>
 <!DOCTYPE html>
 <?php
