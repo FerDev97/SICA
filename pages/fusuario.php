@@ -174,7 +174,7 @@ function verificar(){
         //sweetNel("Contraseñas iguales");
           if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
-              alert(document.getElementById('contrasena').value);
+              
               sweetError("Complete los campos");
           }else{
             if (document.getElementById('baccion').value!="") {
@@ -197,7 +197,7 @@ function verificar(){
       </script>
 </head>
 
-<body id="mimin" class="dashboard">
+<body id="mimin" class="dashboard" oncopy="return false" onpaste="return false">
    <?php include "header.php"?>
 
       <div class="container-fluid mimin-wrapper">
