@@ -332,20 +332,21 @@ error_reporting(E_ALL & ~E_NOTICE);
 
     $("#guardar").on('click',function(){
 
-        var dia1 = $('#dia1').val();
-        var dia2 = $('#dia2').val();
-        var bloque = $('#bloque').val();
+        var id = $('#id').val();
+        var nombre = $('#nombre').val();
+        var contra = $('#contra').val();
+        var tipo = $('#tipo').val();
 
-        if(dia1 == "0"){
-            sweetWar("No selecciono un dia");
+        if(nombre == "" || nombre == " "){
+            sweetWar("No ingreso un nombre de usuario");
             return false;
         }
-        if(dia2 == "0"){
-            sweetWar("No selecciono un dia");
+        if(contra == "" || contra == " "){
+            sweetWar("No ingreso una contraseña");
             return false;
         }
-        if(bloque == "0"){
-            sweetWar("No selecciono un bloque");
+        if(tipo == "" || tipo == " "){
+            sweetWar("No selecciono un tipo de usuario");
             return false;
         }
 
@@ -353,7 +354,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
         $.ajax({
             type: 'post',
-            url: 'editarHorario.php',
+            url: 'editarUsuariosAc.php',
             data: todo,
             success: function(respuesta) {
 
@@ -393,60 +394,15 @@ error_reporting(E_ALL & ~E_NOTICE);
   function editar(id, nombre, contra, tipo){
 
       
-      $('#dia1').val(dia1);
-      $('#dia2').val(dia2);
-      $("#estado option[value="+estado+"]").prop("selected", true);
-      $("#bloque").val(horas);
-      $("#id").val(id);
+      $('#id').val(id);
+      $('#nombre').val(nombre);
+      $('#contra').val(contra);
+      $('#tipo').val(tipo);
       $("#modalito").modal();
       
     }
 
-  function verificar(){
-       
-       var dato = $("#dia1").val();
-        if(dato == "Lunes"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Martes"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Miercoles"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Martes'>Martes</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Jueves"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Martes'>Martes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Viernes"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Martes'>Martes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-        }
- 
-     }
+  
 
             //SWEET ALERTS
                 function sweetConfirm(){
