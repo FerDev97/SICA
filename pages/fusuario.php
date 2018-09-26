@@ -735,11 +735,13 @@ function verificar(){
 include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
-$baccion  = $_REQUEST["baccion"];
-$usuario = $_REQUEST["usuario"];
-$contrasena    = $_REQUEST["contrasena"];
-$personal     = $_REQUEST["personal"];
-$tipo    = $_REQUEST["tipo"];
+$baccion           = $_REQUEST["baccion"];
+$usuario           = $_REQUEST["usuario"];
+$contrasena        = $_REQUEST["contrasena"];
+$personal          = $_REQUEST["personal"];
+$tipo              = $_REQUEST["tipo"];
+
+
 
 if ($bandera == "add") {
   $query = "select cusuario FROM tusuarios WHERE cusuario like '%".$usuario."%';";
