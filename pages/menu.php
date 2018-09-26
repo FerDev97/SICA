@@ -31,7 +31,7 @@
                   </ul>
 
                 </li>
-                <li class="ripple">
+                <!--<li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-user fa"></span> Docentes
                     <span class="fa-angle-right fa right-arrow text-right"></span>
@@ -41,7 +41,7 @@
                     <li><a href="fdocentes.php">Lista de docentes</a></li>
                   </ul>
 
-                </li>
+                </li>-->
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-user fa"></span> Personal

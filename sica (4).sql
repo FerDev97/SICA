@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-09-2018 a las 06:18:23
--- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.1.14
+-- Tiempo de generación: 25-09-2018 a las 23:15:49
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -96,12 +96,9 @@ CREATE TABLE `tbachilleratos` (
 --
 
 INSERT INTO `tbachilleratos` (`eid_bachillerato`, `ccodigo`, `cnombe`, `cdescripcion`, `efk_tipo`, `eestado`) VALUES
-(1, '001', 'Contador', 'Esta materia es de contqador.', 1, 1),
-(2, 'SE1267', 'Sistemas Electricos', 'skdhkjshf', 1, 1),
-(3, 'BG89', 'Bachillerato General', 'Bachillerato de tipo general', 2, 1),
-(4, 'DS829', 'Desarrollo de Software', 'Bachillerato de software', 1, 1),
-(5, 'BS124', 'Bachillerato en Salud', 'bachillerato para los doctores', 1, 1),
-(6, 'SC344', 'Secretariado', 'bachillerato para las secretaruas', 2, 1);
+(1, '001', 'Contador', 'Bachillerato orientado a la contabilidad financier aplicada', 1, 1),
+(3, 'BG89', 'Bachillerato General', 'Bachillerato orientado a las generalidadesbasicas que todo bachillere debe poseer', 2, 0),
+(7, 'BS273', 'Bachillerato en Salud', 'Bachillerato orientado a la salud', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -134,7 +131,9 @@ CREATE TABLE `tcargos` (
 INSERT INTO `tcargos` (`eid_cargo`, `ccargo`) VALUES
 (1, 'Secretaria'),
 (2, 'Director'),
-(3, 'Docente');
+(3, 'Docente'),
+(4, 'Subdirectora'),
+(5, 'Ordenanza');
 
 -- --------------------------------------------------------
 
@@ -190,7 +189,7 @@ CREATE TABLE `tgrado` (
 INSERT INTO `tgrado` (`eid_grado`, `cgrado`) VALUES
 (1, 1),
 (2, 2),
-(4, 3);
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -210,10 +209,12 @@ CREATE TABLE `thorarios` (
 --
 
 INSERT INTO `thorarios` (`eid_horario`, `cdia`, `chora`, `estado`) VALUES
-(1, 'Lunes y Viernes', '7:00 AM - 10:00 AM', 1),
+(1, 'Lunes y Martes', '7:00 AM - 10:00 AM', 0),
 (2, 'Martes y Miercoles', '10:00 AM - 12:00 PM', 1),
 (3, 'Miercoles y Viernes', '03:00 PM - 05:00 PM', 1),
-(4, 'Jueves y Viernes', '03:00 PM - 05:00 PM', 0);
+(4, 'Jueves y Jueves', '03:00 PM - 05:00 PM', 0),
+(5, 'Martes y Miercoles', '01:00 PM - 03:00 PM', 1),
+(6, 'Jueves y Viernes', '03:00 PM - 05:00 PM', 1);
 
 -- --------------------------------------------------------
 
@@ -236,8 +237,12 @@ CREATE TABLE `tmaterias` (
 --
 
 INSERT INTO `tmaterias` (`eid_materia`, `ccodigo`, `cnombre`, `cdescripcion`, `efk_idopcion`, `efk_idhorario`, `estado`) VALUES
-(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 1, 1),
-(8, '002', 'Lenguaje y Literatura', 'Esta es una materia sobre lectura.', 1, 2, 1);
+(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 6, 1),
+(8, '002', 'Lenguaje y Literatura', 'Esta es una materia sobre lectura.', 1, 2, 1),
+(9, '009', 'Sociales', 'Historia de el salvador', 2, 1, 1),
+(10, '010', 'Manejo Softwar', 'Aqui se usa word.', 2, 2, 1),
+(11, '011', 'Turismo', 'fotografia', 1, 5, 1),
+(12, '011', 'Ingles', 'segundo idioma', 2, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -276,10 +281,7 @@ CREATE TABLE `topciones` (
 
 INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`) VALUES
 (1, 100, 1, 1, 1, 1),
-(2, 1, 3, 1, 1, 1),
-(10, 49, 5, 1, 1, 1),
-(11, 49, 5, 1, 1, 1),
-(12, 32, 5, 1, 2, 1);
+(2, 1, 3, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -335,12 +337,11 @@ CREATE TABLE `tpersonal` (
 --
 
 INSERT INTO `tpersonal` (`eid_personal`, `cdui`, `cnombre`, `capellido`, `ctelefono`, `ccorreo`, `cdireccion`, `ffechanacimiento`, `iestado`, `isexo`, `efk_idcargo`) VALUES
-(1, '01', 'Fernando', 'Hernandez', '2345', 'hola', 'Sivar', '2018-08-04', 1, 2, 1),
-(3, '02', 'Jessica', 'Rosales', '23456798', 'jessi', 'San Vicente', '2018-08-02', 1, 1, 2),
-(4, '03', 'Alexander', 'Carcamo', '3457623', 'alexito', 'San Cayetano', '2018-08-18', 1, 2, 3),
-(5, '00000004', 'Alexander', 'Rosales RodrÃ­guez', '2345', 'alexito', 'San Cayetano', '2018-09-21', 0, 2, 2),
-(6, '00000005', 'Carmen', 'Henriquez', '23456789', 'carmen@gmail.com', 'San Vicente', '2018-09-14', 1, 1, 1),
-(7, '12344555-5', 'Josue Alexander', 'Hernandez', '12345678', 'alexito@gmail.com', 'San Rafael', '2018-09-14', 1, 2, 2);
+(1, '05547552-8', 'Fernando', 'Hernandez', '12345678', 'fernan@hotmil.com', 'San Vicente, Barrio El Santuario , casa 2', '2000-08-04', 1, 2, 1),
+(4, '05547552-9', 'Alexander', 'Carcamo', '12345678', 'alexito@hotmail.com', 'San Cayetano , San Vicente , El Salvador', '2000-07-06', 1, 2, 3),
+(7, '12344555-5', 'Josue Benjamin', 'Hernandez Alfaro', '12345678', 'alexito@gmail.com', 'San Rafael', '2018-09-14', 1, 2, 2),
+(8, '05547552-7', 'Jessica Alexandra', 'Rosales RodrÃ­guez', '12614143', 'jess@hotmail.com', 'San Vicente,San eEsteban Catarina, BÂ° Concepcion, casa#2 ', '2000-09-04', 1, 1, 3),
+(9, '12345678-9', 'Tatiana Isabel', 'Alvarado Melara', '12345678', 'tatiana@gmail.com', 'San Vicente , Barrio El Calvario , casa 2', '2000-09-05', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -360,7 +361,11 @@ CREATE TABLE `tpersonal_materia` (
 
 INSERT INTO `tpersonal_materia` (`eid_pm`, `efk_idpersonal`, `efk_idmateria`) VALUES
 (1, 4, 1),
-(2, 4, 8);
+(2, 4, 8),
+(3, 4, 9),
+(4, 8, 10),
+(5, 4, 11),
+(6, 4, 12);
 
 -- --------------------------------------------------------
 
@@ -398,7 +403,8 @@ CREATE TABLE `tsecciones` (
 
 INSERT INTO `tsecciones` (`eid_seccion`, `cseccion`) VALUES
 (1, 'A'),
-(2, 'B');
+(2, 'B'),
+(3, 'C');
 
 -- --------------------------------------------------------
 
@@ -434,10 +440,19 @@ INSERT INTO `ttipobachillerato` (`eid_tipo`, `ctipo`) VALUES
 CREATE TABLE `tusuarios` (
   `eid_usuario` int(11) NOT NULL,
   `cusuario` varchar(10) NOT NULL,
-  `ccontraseña` varchar(50) NOT NULL,
+  `cpass` varchar(50) NOT NULL,
   `etipo` int(11) NOT NULL,
   `efk_personal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tusuarios`
+--
+
+INSERT INTO `tusuarios` (`eid_usuario`, `cusuario`, `cpass`, `etipo`, `efk_personal`) VALUES
+(1, 'Fernando97', 'casaca', 1, 1),
+(2, 'carcamo1', 'casaca', 0, 4),
+(3, 'carcamo1', 'casaca', 0, 4);
 
 --
 -- Índices para tablas volcadas
@@ -484,7 +499,7 @@ ALTER TABLE `tbachilleratos`
 --
 ALTER TABLE `tbitacora`
   ADD PRIMARY KEY (`eid_bitacora`),
-  ADD KEY `fk_idusuario` (`efk_idusuario`);
+  ADD KEY `efkusuario` (`efk_idusuario`);
 
 --
 -- Indices de la tabla `tcargos`
@@ -606,121 +621,106 @@ ALTER TABLE `tusuarios`
 --
 ALTER TABLE `talumno`
   MODIFY `eid_alumno` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `talumno_responsable`
 --
 ALTER TABLE `talumno_responsable`
   MODIFY `id_ar` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `talum_mat_not`
 --
 ALTER TABLE `talum_mat_not`
   MODIFY `id_amn` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tanio`
 --
 ALTER TABLE `tanio`
   MODIFY `eid_anio` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tbachilleratos`
 --
 ALTER TABLE `tbachilleratos`
-  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
   MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tcargos`
 --
 ALTER TABLE `tcargos`
-  MODIFY `eid_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `eid_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tdatos_adicionales`
 --
 ALTER TABLE `tdatos_adicionales`
   MODIFY `eid_datosadicionales` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tficha`
 --
 ALTER TABLE `tficha`
   MODIFY `eid_ficha` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tgrado`
 --
 ALTER TABLE `tgrado`
-  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `eid_grado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `thorarios`
 --
 ALTER TABLE `thorarios`
-  MODIFY `eid_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `eid_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tmaterias`
 --
 ALTER TABLE `tmaterias`
-  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tnotas`
 --
 ALTER TABLE `tnotas`
   MODIFY `eid_notas` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `topciones`
 --
 ALTER TABLE `topciones`
-  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tperiodos`
 --
 ALTER TABLE `tperiodos`
   MODIFY `eid_periodo` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tpersonal`
 --
 ALTER TABLE `tpersonal`
-  MODIFY `eid_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+  MODIFY `eid_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tpersonal_materia`
 --
 ALTER TABLE `tpersonal_materia`
-  MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tresponsable`
 --
 ALTER TABLE `tresponsable`
   MODIFY `eid_responsable` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tsecciones`
 --
 ALTER TABLE `tsecciones`
-  MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `eid_seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ttipobachillerato`
 --
 ALTER TABLE `ttipobachillerato`
   MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+--
+-- AUTO_INCREMENT de la tabla `tusuarios`
+--
+ALTER TABLE `tusuarios`
+  MODIFY `eid_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
@@ -750,7 +750,7 @@ ALTER TABLE `tbachilleratos`
 -- Filtros para la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
-  ADD CONSTRAINT `fk_idusuario` FOREIGN KEY (`efk_idusuario`) REFERENCES `tusuarios` (`eid_usuario`);
+  ADD CONSTRAINT `efkusuario` FOREIGN KEY (`efk_idusuario`) REFERENCES `tusuarios` (`eid_usuario`);
 
 --
 -- Filtros para la tabla `tdatos_adicionales`

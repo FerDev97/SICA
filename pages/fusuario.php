@@ -76,6 +76,14 @@ error_reporting(E_ALL & ~E_NOTICE);
   'success'
 )
         }
+function sweetNel(str){
+          swal(
+  'Contraseñas iguales',
+  ''+str,
+  'success'
+)
+}
+
         function sweetError(str){
          swal({
   type: 'error',
@@ -154,41 +162,20 @@ error_reporting(E_ALL & ~E_NOTICE);
             return false;
         }
     }
+    function comr(){
+      alert(document.getElementById('personal').value);
+    }
      //Validacion Solo letras
-    
+function verificar(){
+   contrasena1 = document.turismo.contrasena1.value; 
+   contrasena2 = document.turismo.contrasena2.value; 
 
-
-      
-      function prueba()
-      {
-        document.getElementById("codigo").value=document.getElementById("barcode").value;
-      }
-        function verificar(){
-        var rb=document.getElementsByName('estado');
-				var banderaRb=true;
-			for (var i =0; i < rb.length; i++) {
-				if(rb[i].checked)
-				{
-					banderaRb=false;
-					break;
-				}
-
-			}
-      var rb1=document.getElementsByName('sexo');
-				var banderaRb1=true;
-			for (var i =0; i < rb1.length; i++) {
-				if(rb1[i].checked)
-				{
-					banderaRb1=false;
-					break;
-				}
-
-			}
-          if(document.getElementById('usuario').value==""
-            ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
-            ||document.getElementById('tipo').value=="seleccione" ){
-
-             sweetError("Complete los campos prueba");
+  	if (contrasena1 == contrasena2){
+        //sweetNel("Contraseñas iguales");
+          if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
+            ||document.getElementById('tipo').value=="" ){
+              alert(document.getElementById('contrasena').value);
+              sweetError("Complete los campos");
           }else{
             if (document.getElementById('baccion').value!="") {
               document.getElementById('bandera').value='modificar';
@@ -199,6 +186,12 @@ error_reporting(E_ALL & ~E_NOTICE);
           }
             document.turismo.submit();
           }
+
+   }else {
+  sweetError("Las contraseñas no son iguales");
+   
+   }
+
 
         }
       </script>
@@ -246,12 +239,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                             <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                   <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='8' minlength='4' onkeypress="return check(event)">
-                              </div>  
+                                  
+                              </div>
+                              <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>  
                               <br>
-                              <br>
+                              
                               <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="password" class="form-control" name="contrasena" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                                  <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                              </div>
+                              <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>
+                              <br>
+
+                              <div class="input-group">
+                              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                  <input id="contrasena" type="password" class="form-control" name="contrasena2" placeholder=" Repita Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
                               </div>
                               
                               
@@ -265,15 +267,15 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-user"></i><span class="label label-default" style="width: 100px; font-size: 15px">Personal</span>
       <select id="personal"   class="select2 show-tick" style="width: 470px; font-size: 15px" name="personal">
-      <option value="">Seleccione personal</option>
+      <option value="valor">Seleccione personal</option>
       <?php
                       include '../config/conexion.php';
 
-                      $result = $conexion->query("select eid_personal as id,cnombre as nombre FROM tpersonal");
+                      $result = $conexion->query("select p.eid_personal as idp, p.cnombre as nombre from tpersonal as p where iestado='1' AND p.eid_personal NOT IN (SELECT tusuarios.efk_personal from tusuarios)");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                          echo "<option value='".$fila->idp."'>".$fila->nombre."</option>";
                          
                         
                            }
@@ -286,9 +288,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Tipo</span>
       <select id="tipo"   class="select2 show-tick" style="width: 470px; font-size: 15px;margin-right:10px;margin-left:30px" name="tipo">
-      <option value="seleccione">Seleccione tipo de usuario</option>
-      <option value="">Administrador</option>
-      <option value="">Docente</option>
+      <option value="">Seleccione tipo de usuario</option>
+      <option value="1">Administrador</option>
+      <option value="0">Docente</option>
        </select>
        </div>
       <br>
@@ -733,11 +735,13 @@ error_reporting(E_ALL & ~E_NOTICE);
 include "../config/conexion.php";
 
 $bandera           = $_REQUEST["bandera"];
-$baccion  = $_REQUEST["baccion"];
-$usuario = $_REQUEST["usuario"];
-$contrasena    = $_REQUEST["contrasena"];
-$personal     = $_REQUEST["personal"];
-$tipo    = $_REQUEST["tipo"];
+$baccion           = $_REQUEST["baccion"];
+$usuario           = $_REQUEST["usuario"];
+$contrasena        = $_REQUEST["contrasena"];
+$personal          = $_REQUEST["personal"];
+$tipo              = $_REQUEST["tipo"];
+
+
 
 if ($bandera == "add") {
   $query = "select cusuario FROM tusuarios WHERE cusuario like '%".$usuario."%';";
