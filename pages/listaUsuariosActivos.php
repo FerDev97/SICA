@@ -105,42 +105,41 @@ error_reporting(E_ALL & ~E_NOTICE);
                             
                               
                                                         <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                          <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()">
-                                                            <option value="0">Seleccione un dia</option>
-                                                            <option value="Lunes">Lunes</option>
-                                                            <option value="Martes">Martes</option>
-                                                            <option value="Miercoles">Miercoles</option>
-                                                            <option value="Jueves">Jueves</option>
-                                                            <option value="Viernes">Viernes</option>
+                                                          <span class="input-group-addon"><i class="fa fa-suitcase"></i></span>
+                                                          <select id="tipo"  class="form-control" name="tipo">
+                                                            <option value="">Seleccione tipo de usuario</option>
+                                                            <option value="1">Administrador</option>
+                                                            <option value="0">Docente</option>
                                                           </select>
+                                                          
                                                         </div>
                                                       
                                                           <br>
                                                           
                                                         <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                                          <select id="bloque"  class="form-control" name="bloque" >
-                                                            <option value="0">Seleccione un bloque</option>
-                                                            <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
-                                                            <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
-                                                            <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
-                                                            <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
-                                                                    
-                                                          </select>
+                                                         
+                                                          
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                            <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='8' minlength='4' onkeypress="return check(event)">
+
                                                         </div>
                                                   </div>
                                                   <div class="col-md-6">
                                                         <br>
                                                         <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                          <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                           <select id="dia2"  class="form-control" name="diaDos">
                                                             <option value="0">Seleccione otro dia</option>                                                                          
                                                             <option value="Martes">Martes</option>
                                                             <option value="Miercoles">Miercoles</option>
                                                             <option value="Jueves">Jueves</option>
                                                             <option value="Viernes">Viernes</option>
-                                                          </select>
+                                                          </select>-->
+                                                          
+
+                                                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                            <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                                                          
                                                       </div>
                                                       <br>
                                                         <div class="input-group " style="padding-bottom:10px;">
@@ -394,10 +393,10 @@ error_reporting(E_ALL & ~E_NOTICE);
   function editar(id, nombre, contra, tipo){
 
       
-      $('#id').val(id);
+      /*$('#id').val(id);
       $('#nombre').val(nombre);
       $('#contra').val(contra);
-      $('#tipo').val(tipo);
+      $('#tipo').val(tipo);*/
       $("#modalito").modal();
       
     }
