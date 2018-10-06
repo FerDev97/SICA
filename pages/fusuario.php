@@ -184,7 +184,7 @@ function verificar(){
         //sweetNel("Contraseñas iguales");
           if(document.getElementById('usuario').value=="" ||document.getElementById('contrasena').value==""||document.getElementById('personal').value==""
             ||document.getElementById('tipo').value=="" ){
-              alert(document.getElementById('contrasena').value);
+              
               sweetError("Complete los campos");
           }else{
             if (document.getElementById('baccion').value!="") {
@@ -207,7 +207,7 @@ function verificar(){
       </script>
 </head>
 
-<body id="mimin" class="dashboard">
+<body id="mimin" class="dashboard" oncopy="return false" onpaste="return false">
    <?php include "header.php"?>
 
       <div class="container-fluid mimin-wrapper">
@@ -245,38 +245,9 @@ function verificar(){
                         <form class="cmxform" id="formcliente" method="post" action="">
 
                           <div class="col-md-6">
-                          
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='8' minlength='4' onkeypress="return check(event)">
-                                  
-                              </div>
-                              <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>  
-                              <br>
-                              
-                              <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
-                              </div>
-                              <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>
-                              <br>
-
-                              <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                  <input id="contrasena" type="password" class="form-control" name="contrasena2" placeholder=" Repita Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
-                              </div>
-                              
-                              
-                              
-                              
-                              
-
-                            <!-- Div del span -->
-                          </div>
-                          <div class="col-md-6">
                           <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-user"></i><span class="label label-default" style="width: 100px; font-size: 15px">Personal</span>
-      <select id="personal"   class="select2 show-tick" style="width: 470px; font-size: 15px" name="personal">
+      <select id="personal"   class="select2 show-tick" style="width: 478px; font-size: 15px" name="personal">
       <option value="valor">Seleccione personal</option>
       <?php
                       include '../config/conexion.php';
@@ -292,25 +263,36 @@ function verificar(){
                       }
                        ?>
                        </select>
-                              
-      
-      </div>                      
-                          <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                       </div> 
+             
+      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Tipo</span>
       <select id="tipo"   class="select2 show-tick" style="width: 470px; font-size: 15px;margin-right:10px;margin-left:30px" name="tipo">
       <option value="">Seleccione tipo de usuario</option>
       <option value="1">Administrador</option>
       <option value="0">Docente</option>
        </select>
-       </div>
-      <br>
-      
-     
-      
-     
+       </div>       
+       <!-- Div del span -->
+                          </div>
+                          <div class="col-md-6">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='8' minlength='4' onkeypress="return check(event)">
+                           </div>
+                              <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>  
                               
-                             
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                              <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                          </div>
+                              <p>Debe contener entre 4 y 8 caracteres, puede utilizar números y letras</p>
                               
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                              <input id="contrasena" type="password" class="form-control" name="contrasena2" placeholder=" Repita Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
+                          </div>
+                          
                           </div>
                           
 
@@ -747,7 +729,7 @@ include "../config/conexion.php";
 $bandera           = $_REQUEST["bandera"];
 $baccion           = $_REQUEST["baccion"];
 $usuario           = $_REQUEST["usuario"];
-$contrasena        = $_REQUEST["contrasena"];
+$contrasena        = $_REQUEST["contrasena1"];
 $personal          = $_REQUEST["personal"];
 $tipo              = $_REQUEST["tipo"];
 

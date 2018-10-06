@@ -15,7 +15,7 @@
 
                                         echo "<tr>";
                                             echo "<td width='200'>".$fila->cusuario."</td>";
-                                            echo "<td>".$fila->ccontra."</td>";
+                                            echo "<td>".$fila->cpass."</td>";
 
                                             if($fila->etipo == 0){
                                                 echo "<td bgcolor=#dff8e7 width='180'> ADMINISTRADOR </td>";
@@ -26,7 +26,7 @@
                                             
 
                                             $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
-                                            $aux.="onclick=\"editar('".$fila->eid_usuario."','".$fila->cusuario."','".$fila->ccontra."','".$fila->etipo."')\";>";
+                                            $aux.="onclick=\"editar('".$fila->eid_usuario."','".$fila->cusuario."','".$fila->cpass."','".$fila->etipo."')\";>";
                                             $aux.="Modificar</button>";
                                             echo "<td width='90'>";
                                             
