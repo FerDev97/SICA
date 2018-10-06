@@ -1,4 +1,13 @@
+<?php
+//Codigo que muestra solo los errores exceptuando los notice.
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+$nombre=$_SESSION["usuario"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -521,3 +530,9 @@
 
 </body>
 </html>
+<?php
+} else {
+  header("Location: index.php");
+  }
+  
+?>

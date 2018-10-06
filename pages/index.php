@@ -3,16 +3,20 @@
 error_reporting(E_ALL & ~E_NOTICE);
 // include '../config/conexion.php';
 session_start();
- 
+
+$nombre=$_SESSION["usuario"];
 if ($_SESSION["logueado"]==TRUE) {
    $tipos=$_SESSION["tipo"];
     Header("Location: inicio.php?tipo=$tipos");
 }else {
 	$errorLogin=$_GET["error"];
 	if($errorLogin=="login") {
-		$error="El usuario o contraseña es invalido.";
-		msgError($error);
-	 }
+		$error="Usuario o contraseña es invalido o Usuario inactivo";
+		msgAdd($error);
+	 }else if($errorLogin=="loginInactivo"){
+        $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
+		msg($error);
+     }
 }
  ?>
 <!DOCTYPE html>
@@ -21,6 +25,7 @@ if ($_SESSION["logueado"]==TRUE) {
      <title>SICA</title>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
  <!--===============================================================================================-->	
      <link rel="icon" type="image/png" href="../asset/images/icons/favicon.ico"/>
  <!--===============================================================================================-->
@@ -42,15 +47,14 @@ if ($_SESSION["logueado"]==TRUE) {
  <!--===============================================================================================-->
      <link rel="stylesheet" type="text/css" href="../asset/css/util.css">
      <link rel="stylesheet" type="text/css" href="../asset/css/main.css">
-	 <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+	 
  <!--===============================================================================================-->
+ 
  </head>
  <script type="text/javascript">    
-         function go(){
-         document.form.submit(); 
-              //SWEET ALERTS
-              function sweetConfirm(){
-         swal({
+ //SWEET ALERTS
+function sweetConfirm(){
+   swal({
    title: '¿Está seguro que desea continuar?',
    text: "¡No sera posible revertir esta acción!",
    type: 'warning',
@@ -72,10 +76,10 @@ if ($_SESSION["logueado"]==TRUE) {
 
          function sweetGuardo(str){
            swal(
-   'Exito!',
-   ''+str,
-   'success'
- )
+        'Exito!',
+        ''+str,
+         'success'
+            )
          }
 		 function sweetError(str){
           swal({
@@ -86,6 +90,9 @@ if ($_SESSION["logueado"]==TRUE) {
  })
          }
  } 
+         function go(){
+         document.form.submit(); 
+}
        </script>
  <body oncopy="return false" onpaste="return false">
      
@@ -155,14 +162,20 @@ if ($_SESSION["logueado"]==TRUE) {
  {
      echo "<script type='text/javascript'>";
      echo "alert('$texto');";
-     //echo "document.location.href='materias.php';";
      echo "</script>";
  }
  function msgError($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "sweetConfirm('$texto');";
-    //echo "document.location.href='materias.php';";
+    echo "sweetError('$texto');";
+
     echo "</script>";
 }
+function msgAdd($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    echo "</script>";
+}
+
  ?>
