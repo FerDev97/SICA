@@ -1,31 +1,15 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
-// include '../config/conexion.php';
-session_start();
-
-$nombre=$_SESSION["usuario"];
-if ($_SESSION["logueado"]==TRUE) {
-   $tipos=$_SESSION["tipo"];
-    Header("Location: inicio.php?tipo=$tipos");
-}else {
-	$errorLogin=$_GET["error"];
-	if($errorLogin=="login") {
-		$error="Usuario o contraseña es invalido o Usuario inactivo";
-		msgAdd($error);
-	 }else if($errorLogin=="loginInactivo"){
-        $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
-		msg($error);
-     }
-}
  ?>
 <!DOCTYPE html>
  <html lang="en">
  <head>
-     <title>SICA</title>
-     <meta charset="UTF-8">
+ <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+ <title>SICA</title>
+ <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+ </head>
  <!--===============================================================================================-->	
      <link rel="icon" type="image/png" href="../asset/images/icons/favicon.ico"/>
  <!--===============================================================================================-->
@@ -47,13 +31,25 @@ if ($_SESSION["logueado"]==TRUE) {
  <!--===============================================================================================-->
      <link rel="stylesheet" type="text/css" href="../asset/css/util.css">
      <link rel="stylesheet" type="text/css" href="../asset/css/main.css">
-	 
  <!--===============================================================================================-->
- 
- </head>
- <script type="text/javascript">    
- //SWEET ALERTS
-function sweetConfirm(){
+
+<SCRIPT  language=JavaScript> 
+function go(){
+     if(document.getElementById('usuario').value=="" || document.getElementById('pass').value=="")
+        {
+          }else{
+        document.form.submit(); 
+          }
+} 
+function sweetError(str){
+          swal({
+   type: 'error',
+   title: 'Error...',
+   text: ''+str,
+   footer: 'Revise que todos los campos esten completados.'
+ })
+         }
+         function sweetConfirm(){
    swal({
    title: '¿Está seguro que desea continuar?',
    text: "¡No sera posible revertir esta acción!",
@@ -81,19 +77,8 @@ function sweetConfirm(){
          'success'
             )
          }
-		 function sweetError(str){
-          swal({
-   type: 'error',
-   title: 'Error...',
-   text: ''+str,
-   footer: 'Revise que todos los campos esten completados.'
- })
-         }
- } 
-         function go(){
-         document.form.submit(); 
-}
-       </script>
+</SCRIPT> 
+  
  <body oncopy="return false" onpaste="return false">
      
      <div class="limiter">
@@ -105,13 +90,13 @@ function sweetConfirm(){
                      <div class="login">
                      <form name="form" method="post" action="chekLogin.php">
                      <div style="border-radius: 25px;"  class="wrap-input100 validate-input" data-validate = "Es necesario un usuario valido:UserSica99">
-                         <input  class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario." autocomplete="off" autofocus>
+                         <input style="font-size:17px;"  class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario" autocomplete="off" autofocus required>
                          <span class="focus-input100-1"></span>
                          <span class="focus-input100-2"></span>
                      </div>
                      <br>
                      <div style="border-radius: 25px;" class="wrap-input100 rs1 validate-input" data-validate="La contraseña es Obligatoria">
-                         <input class="input100" type="password" name="pass" id="pass" placeholder="Contraseña.">
+                         <input style="font-size:17px;" class="input100" type="password" name="pass" id="pass" placeholder="Contraseña" required>
                          <span class="focus-input100-1"></span>
                          <span class="focus-input100-2"></span>
                      </div>
@@ -135,7 +120,7 @@ function sweetConfirm(){
              </div>
      </div>
      </div>
-     </div>
+   
      <script src="../asset/js/sweetalert2.js"></script>
  <!--===============================================================================================-->
      <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -160,15 +145,16 @@ function sweetConfirm(){
  <?php
  function msg($texto)
  {
-     echo "<script type='text/javascript'>";
-     echo "alert('$texto');";
-     echo "</script>";
+    echo "<script type='text/javascript'>";
+    echo "sweetConfirm('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
  }
  function msgError($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetError('$texto');";
-
+    //echo "document.location.href='materias.php';";
     echo "</script>";
 }
 function msgAdd($texto)
@@ -178,4 +164,21 @@ function msgAdd($texto)
     echo "</script>";
 }
 
+ ?>
+<?php
+ session_start();
+ $nombre=$_SESSION["usuario"];
+ if ($_SESSION["logueado"]==TRUE) {
+    $tipos=$_SESSION["tipo"];
+     Header("Location: inicio.php?tipo=$tipos");
+ }else {
+     $errorLogin=$_GET["error"];
+     if($errorLogin=="login") {
+         $error="Usuario o contraseña es invalido o Usuario inactivo";
+         msgError($error);
+      }else if($errorLogin=="loginInactivo"){
+         $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
+         msgError($error);
+      }
+ }
  ?>

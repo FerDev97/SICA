@@ -2,9 +2,9 @@
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+if($_SESSION["logueado"] == TRUE) {
 $nombre=$_SESSION["usuario"];
-$tipo  = $_REQUEST["tipo"];
+$tipo  =$_SESSION["tipo"];
 $id  = $_REQUEST["id"];
 
 ?>
@@ -56,7 +56,7 @@ $id  = $_REQUEST["id"];
 </head>
 
 <body id="mimin" class="dashboard">
-<?php include "header.php"?>
+<?php include "header.php";?>
 
       <div class="container-fluid mimin-wrapper">
   

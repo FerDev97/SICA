@@ -61,12 +61,12 @@ if ($result) {
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-      <script type="text/javascript">
+<script type="text/javascript">
      
       //SWEET ALERTS
-      function sweetConfirm(){
+      function sweetConfirm(str){
         swal({
-  title: '¿Está seguro que desea continuar?',
+  title: ''+str,
   text: "¡No sera posible revertir esta acción!",
   type: 'warning',
   showCancelButton: true,
@@ -81,6 +81,7 @@ if ($result) {
       'La accion ha sido completada.',
       'success'
     )
+    return true;
   }
 })
         }
@@ -122,15 +123,12 @@ if ($result) {
 
         function modify(id)
         {
-          
           document.getElementById('nombre').value="";
-          
-
          document.location.href='fcargo.php?id='+id;
         }
          function confirmar(id)
         {
-          if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
+          if (sweetConfirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
             document.getElementById('bandera').value='desaparecer';
             document.getElementById('baccion').value=id;
             //alert(id);
@@ -143,27 +141,26 @@ if ($result) {
         function confirmarAct(id,op)
         {
           if (op==1) {
-           
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
+            if (sweetConfirm("Desactivar")==true) {
             document.getElementById('bandera').value='desactivar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            }else{
+              sweetGuardo("EL archivo no se desactivo");
+            }
+          }else if (op==2){
+            if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
             document.getElementById('bandera').value='activar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
+          }else{
+              sweetGuardo("EL archivo no se Activo");
+            }
           }else
           {
             alert("No entra");
           }
-          }
-
-
+         
         }
       </script>
 </head>
@@ -178,7 +175,7 @@ if ($result) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Formulario de Opciones de Bachillerato</h3>
+                        <h3 class="animated fadeInLeft">Mantenimiento Opcion</h3>
                         <p class="animated fadeInDown">
                           SICA <span class="fa-angle-right fa"></span> Datos de Opcion.
                         </p>
@@ -636,6 +633,34 @@ $(document).ready(function(){
 </body>
 </html>
 <?php
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
+function msgConf($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetConfirm('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
+function msgGuar($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
 
 include "../config/conexion.php";
 
@@ -652,17 +677,17 @@ if ($bandera == "desactivar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-       msg("Registro desactivado");
+       msgGuar("Registro desactivado");
     } else {
-      sweetError("No se desactivo el registro");
+      msgError("No se desactivo el registro");
     }
 }else if ($bandera == "activar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '1' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Registro Activado");
+      msgGuar("Registro Activado");
     } else {
-      sweetError("No se activo el registro");
+      msgError("No se activo el registro");
     }
 }
 
@@ -693,13 +718,7 @@ if ($bandera == 'enviar') {
     echo "</script>";
     # code...
 }
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='fagregaropcion.php';";
-    echo "</script>";
-}
+
 } else {
   header("Location: index.php");
   }
