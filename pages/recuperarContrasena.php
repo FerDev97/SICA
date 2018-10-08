@@ -8,15 +8,6 @@ $nombre=$_SESSION["usuario"];
 if ($_SESSION["logueado"]==TRUE) {
    $tipos=$_SESSION["tipo"];
     Header("Location: inicio.php?tipo=$tipos");
-}else {
-	$errorLogin=$_GET["error"];
-	if($errorLogin=="login") {
-		$error="Usuario o contraseña es invalido o Usuario inactivo";
-		msgAdd($error);
-	 }else if($errorLogin=="loginInactivo"){
-        $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
-		msg($error);
-     }
 }
  ?>
 <!DOCTYPE html>
@@ -53,10 +44,6 @@ if ($_SESSION["logueado"]==TRUE) {
  </head>
  <script type="text/javascript">    
  //SWEET ALERTS
-
-
-}
-
 function sweetConfirm(){
    swal({
    title: '¿Está seguro que desea continuar?',
@@ -76,7 +63,7 @@ function sweetConfirm(){
      )
    }
  })
-}
+         }
 
          function sweetGuardo(str){
            swal(
@@ -93,9 +80,27 @@ function sweetConfirm(){
    footer: 'Revise que todos los campos esten completados.'
  })
          }
-  
+ 
          function go(){
-         document.form.submit(); 
+        // /  document.form.submit(); 
+        // AJAX PARA COMPROBAR SI EL USUARIO TIENE CORREO
+        var parametros={"usuario":document.getElementById("usuario").value};
+        $.ajax(
+            {
+                data:parametros,
+                url:'emailExiste.php',
+                type:'post',
+                beforeSend:function(){
+                    alert('Procesando consulta por favor espere.');
+                },
+                success:function(response) {
+                    alert(response);
+                }
+            }
+
+        );
+       
+
 }
        </script>
  <body oncopy="return false" onpaste="return false">
@@ -104,10 +109,10 @@ function sweetConfirm(){
      <div class="container-login100">
      <div class="wrap-login100 p-l-25 p-r-20 p-t-45 p-b-60">
      <span class="login100-form-title p-b-73">
-                         Iniciar Sesion
+                         Recuperacion de  contraseña.
                      </span>
                      <div class="login">
-                     <form name="form" method="post" action="chekLogin.php">
+                 <!-- <form name="form" > -->
                      <div style="border-radius: 25px;"  class="wrap-input100 validate-input" data-validate = "Es necesario un usuario valido:UserSica99">
                          <input  class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario." autocomplete="off" autofocus>
                          <span class="focus-input100-1"></span>
@@ -115,27 +120,22 @@ function sweetConfirm(){
                      </div>
                      <br>
                      <div style="border-radius: 25px;" class="wrap-input100 rs1 validate-input" data-validate="La contraseña es Obligatoria">
-                         <input class="input100" type="password" name="pass" id="pass" placeholder="Contraseña.">
-                         <span class="focus-input100-1"></span>
-                         <span class="focus-input100-2"></span>
+                         <p>Por favor digite su usuario, si el usuario es correcto se le enviará un correo electronico con su contrasena.</p>
                      </div>
  
                      <div class="container-login100-form-btn m-t-20">
                          <button style="border-radius: 25px;"  class="login100-form-btn" onclick=go() name=enviar >
-                             Entrar
+                             Enviar
                          </button>
                      </div>
  
                      <div class="text-center p-t-45 p-b-4">
-                         ¿Olvido su
-                         <span class="txt1">
-                         </span>
- 
-                         <a href="recuperarContrasena.php" class="txt2 hov1">
-                             contraseña?
+                         
+                         <a href="index.php" class="txt2 hov1">
+                             Cancelar
                          </a>
                      </div>
-                     </form>
+                     <!-- </form> -->
              </div>
      </div>
      </div>
