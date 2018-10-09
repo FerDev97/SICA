@@ -32,7 +32,6 @@ error_reporting(E_ALL & ~E_NOTICE);
      <link rel="stylesheet" type="text/css" href="../asset/css/util.css">
      <link rel="stylesheet" type="text/css" href="../asset/css/main.css">
  <!--===============================================================================================-->
-<<<<<<< HEAD
 
 <SCRIPT  language=JavaScript> 
 function go(){
@@ -51,17 +50,6 @@ function sweetError(str){
  })
          }
          function sweetConfirm(){
-=======
- 
- </head>
- <script type="text/javascript">    
- //SWEET ALERTS
-
-
-}
-
-function sweetConfirm(){
->>>>>>> 225b6165d0dd25c498ff849187bcb8f75806bde7
    swal({
    title: '¿Está seguro que desea continuar?',
    text: "¡No sera posible revertir esta acción!",
@@ -89,24 +77,8 @@ function sweetConfirm(){
          'success'
             )
          }
-<<<<<<< HEAD
 </SCRIPT> 
   
-=======
-		 function sweetError(str){
-          swal({
-   type: 'error',
-   title: 'Error...',
-   text: ''+str,
-   footer: 'Revise que todos los campos esten completados.'
- })
-         }
-  
-         function go(){
-         document.form.submit(); 
-}
-       </script>
->>>>>>> 225b6165d0dd25c498ff849187bcb8f75806bde7
  <body oncopy="return false" onpaste="return false">
      
      <div class="limiter">
@@ -202,7 +174,7 @@ function msgAdd($texto)
  }else {
      $errorLogin=$_GET["error"];
      if($errorLogin=="login") {
-         $error="Usuario o contraseña es invalido o Usuario inactivo";
+         $error="Usuario o contraseña Invalido";
          msgError($error);
       }else if($errorLogin=="loginInactivo"){
          $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
