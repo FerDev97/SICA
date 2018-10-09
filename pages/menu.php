@@ -14,7 +14,7 @@
                   </a>
                   <ul class="nav nav-list tree">
                   <li><a href="anioactivo.php">Año Activo</a></li>
-                     <li><a href="listacliente.php">Permisos</a></li>
+                     <li><a href="permisos.php">Permisos Temporales</a></li>
                      <li><a href="cadministradores.php">Lista de administradores</a></li>
                      <li><a href="listacliente.php">Estadisticas</a></li>
               
