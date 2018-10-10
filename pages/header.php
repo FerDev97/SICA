@@ -51,7 +51,7 @@ $nombre=$_REQUEST["nombre"];
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Perfil de Usuario:<?php $nombre ?></h4>
+                <h4 class="modal-title" id="myModalLabel">Perfil de Usuario: <?php echo $_SESSION["usuario"]; ?></h4>
             </div>
             <!-- Modal Body -->
             <div class="modal-body">

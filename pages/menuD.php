@@ -28,10 +28,10 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="cnotas.php">Notas</a></li>
-                        <li><a href="listabus.php">Estadisticas</a></li>
+                        <li><a href="cnotas.php">Registro de Notas</a></li>
                         <li><a href="listabus.php">Boleta de notas</a></li>
-                        <li><a href="listabus.php">Cierre de Sistema</a></li>
+                        <li><a href="listabus.php">Estadisticas</a></li>
+   
                       </ul>
                     </li>
                    

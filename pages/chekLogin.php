@@ -26,6 +26,7 @@
 							session_start();
 							
 							$_SESSION["logueado"] = TRUE;
+							$_SESSION["nombre"] = $Nombre." ".$apellido;
 							$_SESSION["usuario"] = $usuario;
 							$_SESSION["tipo"] = $tipo;
 							if($tipo==1){
