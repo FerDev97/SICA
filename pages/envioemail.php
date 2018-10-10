@@ -2,6 +2,8 @@
 $iduser=$_REQUEST["id"];
 echo $iduser;
  include '../config/conexion.php';
+ include 'EDE.php';
+ 
 
                       $result = $conexion->query("SELECT cnombre as nombre, capellido as apellido, cpass as contra, ccorreo as correo FROM tusuarios,tpersonal where eid_usuario='".$iduser."' and efk_personal=eid_personal");
                       if ($result) {
@@ -10,6 +12,7 @@ echo $iduser;
                             $nombre=$fila->nombre;
                             $apellido=$fila->apellido;
                             $contra=$fila->contra;
+                            $contra=EDE:: desencriptar($contra);//agregue esta linea para mostrar la contrasena desencriptada
                             $correo=$fila->correo;
                             }
                             $row_cnt = mysqli_num_rows($result);

@@ -33,6 +33,19 @@
                       
                   </ul>
                 </li>
+                <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-list-alt"></span> Control de Notas
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                      <li><a href="listabus.php">Gestion de Periodos</a></li>
+                        <li><a href="cnotas.php">Registro de Notas</a></li>
+                        <li><a href="listabus.php">Boleta de notas</a></li>
+                        <li><a href="listabus.php">Estadisticas</a></li>
+                        <li><a href="listabus.php">Cierre de Sistema</a></li>
+                      </ul>
+                    </li>
                 
                 <!--<li class="ripple">
                   <a class="tree-toggle nav-header">
@@ -45,19 +58,7 @@
                   </ul>
 
                 </li>-->
-                <li class="ripple">
-                  <a class="tree-toggle nav-header">
-                    <span class="fa-user fa"></span> Personal
-                    <span class="fa-angle-right fa right-arrow text-right"></span>
-                  </a>
-                  <ul class="nav nav-list tree">
-                    <li><a href="fpersonal.php">Agregar Nuevo</a></li>
-                    <li><a href="listapersonal.php">Lista de Personal</a></li>
-                    <li><a href="listapersonalinactivo.php">Lista de Personal Inactivo</a></li>
-                    <li><a href="fcargo.php">Cargo</a></li>
-                  </ul>
-
-                </li>
+                
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa fa-graduation-cap"></span> Opciones
@@ -69,19 +70,6 @@
                     <li><a href="listaOpciones.php">Opciones Activas</a></li>
                     <li><a href="listaOpcionesIna.php">Opciones Inactivas</a></li>
                   </ul>
-                </li>
-                <li class="ripple">
-                  <a class="tree-toggle nav-header">
-                    <span class="fa-user fa"></span> Usuarios
-                    <span class="fa-angle-right fa right-arrow text-right"></span>
-                  </a>
-                  <ul class="nav nav-list tree">
-                    <li><a href="fusuario.php">Agregar Nuevo</a></li>
-                    <li><a href="listaUsuariosActivos.php">Usuarios Activos</a></li>
-                    <li><a href="listaUsuariosInactivos.php">Usuarios Inactivos</a></li>
-                    
-                  </ul>
-
                 </li>
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
@@ -104,19 +92,48 @@
                   </ul>
 
                 </li>
-                     <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa fa-list-alt"></span> Control de Notas
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                      <li><a href="listabus.php">Gestion de Periodos</a></li>
-                        <li><a href="cnotas.php">Registro de Notas</a></li>
-                        <li><a href="listabus.php">Boleta de notas</a></li>
-                        <li><a href="listabus.php">Estadisticas</a></li>
-                        <li><a href="listabus.php">Cierre de Sistema</a></li>
-                      </ul>
-                    </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa-users fa"></span> Personal
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fpersonal.php">Agregar Nuevo</a></li>
+                    <li><a href="listapersonal.php">Lista de Personal</a></li>
+                    <li><a href="listapersonalinactivo.php">Lista de Personal Inactivo</a></li>
+                    <li><a href="fcargo.php">Cargo</a></li>
+                  </ul>
+
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa-user fa"></span> Usuarios
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fusuario.php">Agregar Nuevo</a></li>
+                    <li><a href="listaUsuariosActivos.php">Usuarios Activos</a></li>
+                    <li><a href="listaUsuariosInactivos.php">Usuarios Inactivos</a></li>
+                    
+                  </ul>
+
+                </li>
+                <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                
+                    <span class="fa-book fa "></span> Estadisticas
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                    <li><a href="fusuario.php">Estadisitcas Generales</a></li>
+                    <li><a href="listaUsuariosActivos.php">Alumnos por Sexo</a></li>
+                    <li><a href="listaUsuariosInactivos.php">Aprobados y Reprobados</a></li>
+                    
+                  </ul>
+
+                </li>
+                
+                     
                     <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa fa-lock "></span> Seguridad

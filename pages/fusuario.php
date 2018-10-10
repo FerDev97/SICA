@@ -705,14 +705,14 @@ function verificar(){
 <?php
 
 include "../config/conexion.php";
-
+include "EDE.php";
 $bandera           = $_REQUEST["bandera"];
 $baccion           = $_REQUEST["baccion"];
 $usuario           = $_REQUEST["usuario"];
 $contrasena        = $_REQUEST["contrasena1"];
 $personal          = $_REQUEST["personal"];
 $tipo              = $_REQUEST["tipo"];
-
+$contrasena=EDE:: encriptar($contrasena);
 
 
 if ($bandera == "add") {

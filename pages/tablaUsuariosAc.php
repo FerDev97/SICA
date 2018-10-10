@@ -1,5 +1,6 @@
 <?php 
                             include "../config/conexion.php" ; 
+                            include "EDE.php";//INCLUDE DE LA CLASE PARA ENCRIPTAR
 
                             $result = $conexion->query("SELECT * FROM tusuarios");
 

@@ -6,7 +6,13 @@ $id = $_POST['id'];
 $tipo = $_POST['tipo'];
 $usuario = $_POST['usuario'];
 $contra = $_POST['contrasena1'];
+
+
+//CODIGO QUE ENCRIPTA LA CONTRASENA
+include "EDE.php";
+$contra=EDE:: encriptar($contra);
 $mensaje = "";
+//FIN CODIGO DE ENCRIPTACION DE CONTRASENA
 
     if($opcion=="2"){
 
