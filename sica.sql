@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2018 a las 23:15:49
+-- Tiempo de generación: 10-10-2018 a las 17:24:17
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -76,6 +76,15 @@ CREATE TABLE `tanio` (
   `iestado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tanio`
+--
+
+INSERT INTO `tanio` (`eid_anio`, `canio`, `iestado`) VALUES
+(1, 2018, 1),
+(3, 2017, 0),
+(4, 2016, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -98,7 +107,8 @@ CREATE TABLE `tbachilleratos` (
 INSERT INTO `tbachilleratos` (`eid_bachillerato`, `ccodigo`, `cnombe`, `cdescripcion`, `efk_tipo`, `eestado`) VALUES
 (1, '001', 'Contador', 'Bachillerato orientado a la contabilidad financier aplicada', 1, 1),
 (3, 'BG89', 'Bachillerato General', 'Bachillerato orientado a las generalidadesbasicas que todo bachillere debe poseer', 2, 0),
-(7, 'BS273', 'Bachillerato en Salud', 'Bachillerato orientado a la salud', 1, 0);
+(7, 'BS273', 'Bachillerato en Salud', 'Bachillerato orientado a la salud', 1, 1),
+(8, 'BE-988', 'Bachillerato en Electricidad', 'Bachillerato con enfasisi en electrinica digital', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -281,7 +291,7 @@ CREATE TABLE `topciones` (
 
 INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`) VALUES
 (1, 100, 1, 1, 1, 1),
-(2, 1, 3, 1, 1, 1);
+(2, 1, 3, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -304,13 +314,16 @@ CREATE TABLE `tperiodos` (
 CREATE TABLE `tpermisos` (
   `eid_permisos` int(11) NOT NULL,
   `ep_inscripciones` int(11) NOT NULL,
-  `ep_administradores` int(11) NOT NULL,
-  `ep_docentes` int(11) NOT NULL,
-  `ep_opciones` int(11) NOT NULL,
-  `ep_materias` int(11) NOT NULL,
-  `ep_notas` int(11) NOT NULL,
   `efk_idusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tpermisos`
+--
+
+INSERT INTO `tpermisos` (`eid_permisos`, `ep_inscripciones`, `efk_idusuario`) VALUES
+(1, 1, 1),
+(2, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -429,7 +442,8 @@ INSERT INTO `ttipobachillerato` (`eid_tipo`, `ctipo`) VALUES
 (5, 'sasf'),
 (6, 'aaa'),
 (7, 'nueva'),
-(8, 'as');
+(8, 'as'),
+(9, 'nuevo');
 
 -- --------------------------------------------------------
 
@@ -451,8 +465,7 @@ CREATE TABLE `tusuarios` (
 
 INSERT INTO `tusuarios` (`eid_usuario`, `cusuario`, `cpass`, `etipo`, `efk_personal`) VALUES
 (1, 'Fernando97', 'casaca', 1, 1),
-(2, 'carcamo1', 'casaca', 0, 4),
-(3, 'carcamo1', 'casaca', 0, 4);
+(2, 'carcamo1', 'casaca', 0, 4);
 
 --
 -- Índices para tablas volcadas
@@ -635,12 +648,12 @@ ALTER TABLE `talum_mat_not`
 -- AUTO_INCREMENT de la tabla `tanio`
 --
 ALTER TABLE `tanio`
-  MODIFY `eid_anio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `eid_anio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tbachilleratos`
 --
 ALTER TABLE `tbachilleratos`
-  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `eid_bachillerato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
@@ -715,12 +728,12 @@ ALTER TABLE `tsecciones`
 -- AUTO_INCREMENT de la tabla `ttipobachillerato`
 --
 ALTER TABLE `ttipobachillerato`
-  MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `eid_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tusuarios`
 --
 ALTER TABLE `tusuarios`
-  MODIFY `eid_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `eid_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
