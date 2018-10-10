@@ -1,3 +1,16 @@
+<?php 
+$iduser=$_REQUEST["id"];
+ include '../config/conexion.php';
+
+                      $result = $conexion->query("SELECT cnombre as nombre, capellido as apellido, cpass as contra ccorreo as correo, FROM tusuarios,tpersonal where eid_usuario='".$iduser."' and efk_personal=eid_personal");
+                      if ($result) {
+                            
+                            while ($fila = $result->fetch_object()) { 
+                            $id=$fila->id;
+                            }
+                            $row_cnt = mysqli_num_rows($result);
+                      }
+?>
 <!DOCTYPE html>
 <html>
 <head>

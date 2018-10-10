@@ -59,7 +59,7 @@ function go(){
                         //alert("No existe ese correo.");
                         mailInexistente();
                     }else{
-                        const ventana = window.open("envioemail.php","_blank");
+                        const ventana = window.open("envioemail.php?id="+response,"_blank");
                         setTimeout(function(){
                         ventana.close();
                         }, 5000); /* 5 Segundos*/
