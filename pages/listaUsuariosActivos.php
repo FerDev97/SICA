@@ -69,7 +69,10 @@ error_reporting(E_ALL & ~E_NOTICE);
                         <tr>
                           <th>Nombre de usuario</th>
                           <th>Contraseña</th>
-                          <th>Tipo de usuario</th>               
+                          <th>Tipo de usuario</th> 
+                          <th>DUI</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>            
                           <th>Acciones</th>  
                                                  
                       </tr>
@@ -91,74 +94,81 @@ error_reporting(E_ALL & ~E_NOTICE);
           <!-- end: content -->
           <!--MODAL-->
                <div class="modal fade" id="modalito">
-                                  <div class="modal-dialog">
+                                  <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">Modificar usuario</h4>
                                       </div>
                                       <div class="modal-body col-md-12">
-                                          <form id="modificar" >
-                                          <input type="hidden" id="id" name="id" value="">
-                                                  <div class="col-md-6">
+                                                <form id="modificar" >
+                                                <input type="hidden" id="id" name="id" value="">
+                                                  <div class="col-md-2">
+                                                       <!--contenedor lateral-->      
+                                                          
+                                                  </div>
+                                                  <div class="col-md-8">
                                                         <br>
+
+                                                        <div class="input-group " style="padding-bottom:25px;">
+                                                                
+                                                                <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="radio1" name="opcion" value="1" checked="cheked" style="width: 15px; height:15px;">Usuario y tipo</label>
+                                                                <label class="radio-inline" style="font-size: 15px;"><input type="radio" id="radio2" name="opcion" value="2" style="width: 15px; height:15px;">Cambiar contraseña</label>
+                                                        </div>
                             
-                              
+                                                    
+                                                    <div id="div">
                                                         <div class="input-group " style="padding-bottom:10px;">
                                                           <span class="input-group-addon"><i class="fa fa-suitcase"></i></span>
                                                           <select id="tipo"  class="form-control" name="tipo">
-                                                            <option value="">Seleccione tipo de usuario</option>
+                                                            
                                                             <option value="1">Administrador</option>
                                                             <option value="0">Docente</option>
                                                           </select>
                                                           
                                                         </div>
-                                                      
-                                                          <br>
-                                                          
-                                                        <div class="input-group " style="padding-bottom:10px;">
-                                                         
-                                                          
-                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                            <input id="usuario" type="text" class="form-control" name="usuario" placeholder="Usuario" maxlength='8' minlength='4' onkeypress="return check(event)">
-
-                                                        </div>
-                                                  </div>
-                                                  <div class="col-md-6">
                                                         <br>
                                                         <div class="input-group " style="padding-bottom:10px;">
-                                                          <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                          <select id="dia2"  class="form-control" name="diaDos">
-                                                            <option value="0">Seleccione otro dia</option>                                                                          
-                                                            <option value="Martes">Martes</option>
-                                                            <option value="Miercoles">Miercoles</option>
-                                                            <option value="Jueves">Jueves</option>
-                                                            <option value="Viernes">Viernes</option>
-                                                          </select>-->
                                                           
-
-                                                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                                            <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Contraseña" maxlength='8' minlength='4' onkeypress="return check(event)">
                                                           
-                                                      </div>
-                                                      <br>
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                            <input id="usuario" type="text" class="form-control"  name="usuario" placeholder="Usuario" maxlength='8' minlength="4" onkeypress="return check(event)" autocomplete="off">
+                                                          
+                                                        </div>
+                                                        <p id="mensaje1"></p>
+                                                        <br>
+                                                      </div><!--Fin de div1-->
+                                                      
+                                                      
+                                                      <div id="div2" style="display:none;">
                                                         <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle"></i></span>
-                                                          <select id="estado"  class="form-control" name="estado">
-                                                            <option value="1">ACTIVO</option>                                                                          
-                                                            <option value="0">INACTIVO</option>        
-                                                          </select>
+                                                         
+                                                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                            <input id="contrasena" type="password" class="form-control" name="contrasena1" placeholder="Ingrese la nueva contraseña" maxlength='8' minlength="4" onkeypress="return check(event)">
+                                                        </div>
+                                                        <p id="mensaje2"></p>
+                                                        <br>
+                                                        <div class="input-group " style="padding-bottom:10px;">
+                                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                            <input id="contrasena2" type="password" class="form-control" name="contrasena2" placeholder="Repita contraseña" maxlength='8' minlength="4" onkeypress="return check(event)">
                                                       </div>
-                                                  </div>
+                                                      <p id="mensaje3"></p><br>
+                                                      </div>
+                                                      </div><!--Finde div2-->
+                                                      </form>
+                                                      <div class="col-md-2">
+                                                          <!--contenedor lateral-->      
+                                                          
+                                                      </div>
                                           
                                       </div>
-                                        <br><br><br><br><br><br><br><br><br><br>
+                                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                       
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                         <button id="guardar" type="button" class="btn btn-primary">Guardar Cambios</button>
                                       </div>
-                                      </form>
+                                      
                                     </div><!-- /.modal-content -->
                                   </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
@@ -332,74 +342,256 @@ error_reporting(E_ALL & ~E_NOTICE);
     $("#guardar").on('click',function(){
 
         var id = $('#id').val();
-        var nombre = $('#nombre').val();
-        var contra = $('#contra').val();
+        var nombre = $('#usuario').val();
+        var contra = $('#contrasena').val();
+        var contra = $('#contrasena2').val();
         var tipo = $('#tipo').val();
 
-        if(nombre == "" || nombre == " "){
-            sweetWar("No ingreso un nombre de usuario");
-            return false;
-        }
-        if(contra == "" || contra == " "){
-            sweetWar("No ingreso una contraseña");
-            return false;
-        }
-        if(tipo == "" || tipo == " "){
-            sweetWar("No selecciono un tipo de usuario");
-            return false;
-        }
 
-        var todo = $("#modificar").serialize();
+        swal({
+            title: '¿Está seguro de realizar estos cambios?',
+            text: "",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Si, seguro'
+        }).then((result) => {
+            if (result.value) {
 
-        $.ajax({
-            type: 'post',
-            url: 'editarUsuariosAc.php',
-            data: todo,
-            success: function(respuesta) {
+                  var todo = $("#modificar").serialize();
 
-                if(respuesta==3){
-                  sweetWar2("Estos datos ya existen");
-                }
-                if(respuesta==1){
-                  $("#dia1 option[value=0]").prop("selected",true);
-                  $("#dia2 option[value=0]").prop("selected",true);
-                  $("#bloque option[value=0]").prop("selected",true);
-                  $("#modalito").modal('hide');
-                  sweetGuardo("Se modificó correctamente");
-                  $(".tabla_ajax").load("tablaHorarios.php"); 
-                  $('#datatables-example').DataTable();
-                }
-                if(respuesta==2){
-                  $("#dia1 option[value=0]").prop("selected",true);
-                  $("#dia2 option[value=0]").prop("selected",true);
-                  $("#bloque option[value=0]").prop("selected",true);
-                  $("#modalito").modal('hide');
-                  sweetError("Error del servidor: No se modificaron los datos");
-                }
-                
-                
-                
-            },
-            error: function(respuesta){
-              sweetError("Error en el servidor: "+respuesta); 
+                  $.ajax({
+                      type: 'post',
+                      url: 'editarUsuariosAc.php',
+                      data: todo,
+                      success: function(respuesta) {
+
+                          if(respuesta==3){
+                            sweetWar2("Estos datos ya existen");
+                          }
+                          if(respuesta==1){
+                            
+                            $("#modalito").modal('hide');
+                            sweetGuardo("Se modificó correctamente");
+                            $(".tabla_ajax").load("tablaUsuariosAc.php"); 
+                            $('#datatables-example').DataTable();
+                              contra1 = "NO OK";
+                              contra2 = "NO OK";
+                              user = "OK";
+                          }
+                          if(respuesta==2){
+                            
+                            $("#modalito").modal('hide');
+                            sweetError("Error del servidor: No se modificaron los datos");
+                          }
+                          
+                          
+                          
+                      },
+                      error: function(respuesta){
+                        sweetError("Error en el servidor: "+respuesta); 
+                      }
+                  });//fin de ajax
+     
             }
-        });//fin de ajax
+        })
+
+        
 
       return false;
     });//fin del click
+
+        var contra1 = "NO OK";
+        var contra2 = "NO OK";
+        var user = "OK";
+
+       $('#contrasena2').keyup(function(){
+          
+          var contrasena2 = $('#contrasena2').val();
+          var contrasena = $('#contrasena').val();
+
+
+          if(contrasena.length >= 4 && contrasena2 != ""){
+            $("#guardar").prop("disabled",true);
+              contra1="NO OK";
+              contra2="NO OK";
+            if(contrasena2 == contrasena){
+             $("#guardar").prop("disabled",false);
+             $("#mensaje3").text("Las contraseñas coinciden!").css("color","green");
+                if(user != "OK"){
+                  $("#guardar").prop("disabled",true);
+                  
+                }
+             contra2 = "OK";
+             contra1 = "OK";
+             }else{
+              $("#guardar").prop("disabled",true);
+              $("#mensaje3").text("Las contraseñas no coinciden").css("color","red");
+             }
+          }
+          if(contrasena.length < 4){
+            $("#guardar").prop("disabled",true);
+            $("#mensaje2").text("Minimo 4 caracteres").css("color","red");
+            contra1="NO OK";
+            contra2="NO OK";
+          }          
+          
+    });
+    $('#contrasena').keyup(function(){
+          
+          var contrasena2 = $('#contrasena2').val();
+          var contrasena = $('#contrasena').val();
+
+        
+          if(contrasena.length >= 4 && contrasena2 == ""){
+            $("#guardar").prop("disabled",true);
+            $("#mensaje2").text(" ");
+              contra1="NO OK";
+              contra2="NO OK";
+            if(contrasena2 == contrasena){
+             $("#guardar").prop("disabled",false);
+             $("#mensaje2").text(" ");
+             $("#mensaje3").text("Las contraseñas coinciden!").css("color","green");
+                if(user != "OK"){
+                  $("#guardar").prop("disabled",true);
+                }
+              contra1="OK";
+              contra2="OK";
+             }else{
+              $("#guardar").prop("disabled",true);
+              $("#mensaje2").text("");
+              $("#mensaje3").text("Las contraseñas no coinciden").css("color","red");
+              contra1="NO OK";
+              contra2="NO OK";
+             }
+          }
+          if(contrasena.length >= 4 && contrasena2 != ""){
+            $("#guardar").prop("disabled",true);
+            $("#mensaje2").text(" ");
+            if(contrasena2 == contrasena){
+             $("#guardar").prop("disabled",false);
+             $("#mensaje2").text(" ");
+             $("#mensaje3").text("Las contraseñas coinciden!").css("color","green");
+             if(user != "OK"){
+              $("#guardar").prop("disabled",true);
+             }
+             contra1="OK";
+             contra2="OK";
+             }else{
+              $("#guardar").prop("disabled",true);
+              $("#mensaje2").text("");
+              $("#mensaje3").text("Las contraseñas no coinciden").css("color","red");
+              contra1="NO OK";
+              contra2="NO OK";
+             }
+          }
+          if(contrasena.length < 4){
+            $("#guardar").prop("disabled",true);
+            $("#mensaje3").text("");
+            $("#mensaje2").text("Minimo 4 caracteres").css("color","red");
+            if(contrasena.length < 4 && contrasena2 !=""){
+                if(contrasena != contrasena2){
+                  $("#mensaje3").text("Las contraseñas no coinciden").css("color","red"); 
+                }
+            }
+            contra1="NO OK";
+            contra2="NO OK";
+          }
+    });
+    $("#usuario").keyup(function(){
+
+          var usuario = $("#usuario").val();
+
+          var opcion = $('input:radio[name=opcion]:checked').val();
+          if(opcion == 1){
+              
+              if(usuario.length < 4){
+              $("#guardar").prop("disabled",true);
+              $("#mensaje1").text("Minimo 4 caracteres").css("color","red"); 
+              user = "NO OK";  
+            }else{
+              user = "OK";
+              $("#mensaje1").text("");
+              $("#guardar").prop("disabled",false);
+            }
+
+          }else{
+                  if(usuario.length < 4){
+                  $("#guardar").prop("disabled",true);
+                  $("#mensaje1").text("Minimo 4 caracteres").css("color","red"); 
+                  user = "NO OK";  
+                }else{
+                  user = "OK";
+                  $("#mensaje1").text("");
+                  if(contra1 == "OK" && contra2 == "OK"){
+                    $("#guardar").prop("disabled",false); 
+                  }else{
+                    $("#guardar").prop("disabled",true);
+                  }
+                } 
+          }
+         
+    });
+
+    $('input[type=radio][name=opcion]').on('change',function(){
+          
+          var opcion = $('input:radio[name=opcion]:checked').val();
+          if(opcion == 1){
+              $("#div2").hide();
+              $("#div1").show();
+              $("#guardar").prop("disabled",false);
+          }else{
+              $("#div2").show();
+              $("#div1").hide();
+              $("#guardar").prop("disabled",true);
+              $('#contrasena').val("");
+              $('#contrasena2').val("");
+              $("#mensaje2").text("Debe contener entre 4 y 8 caracteres, puede utilizar números y letras").css("color","grey");
+              $("#mensaje3").text("");
+          }
+
+    });
     
   });//fin del ready
 
   function editar(id, nombre, contra, tipo){
 
+    
+      $('#id').val("");//limpio el formulario del modal
+      $('#usuario').val("");
+      $('#tipo').val("");
+      $('#contrasena').val("");
+      $('#contrasena2').val("");
+      //inicializo los mensajes
+      $("#mensaje1").text("Debe contener entre 4 y 8 caracteres, puede utilizar números y letras").css("color","grey");
+      $("#mensaje2").text("Debe contener entre 4 y 8 caracteres, puede utilizar números y letras").css("color","grey");
+      $("#mensaje3").text("");
       
-      /*$('#id').val(id);
-      $('#nombre').val(nombre);
-      $('#contra').val(contra);
-      $('#tipo').val(tipo);*/
+      $('#id').val(id);
+      $('#usuario').val(nombre);//paso parametros
+      $('#tipo').val(tipo);
       $("#modalito").modal();
+      $("#guardar").prop("disabled",false);
+
       
     }
+//SOLO NUMEROS Y LETRAS
+function check(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla == 8) {
+        return true;
+    }
+
+    // Patron de entrada, en este caso solo acepta numeros y letras
+    patron = /[A-Za-z0-9]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
+}
+//FIN SOLO NUMEROS Y LETRAS
 
   
 
