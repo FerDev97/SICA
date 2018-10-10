@@ -260,17 +260,18 @@ function verificar(){
                         }
                         $row_cnt=mysqli_num_rows($result);
                       }
-                      if($row_cnt==1){
-                        echo $id;
+                      if($row_cnt<3){
+                        echo '<option value="1">Administrador</option>
+      <option value="0">Docente</option>';
+                      }else{
+                        echo '
+      <option value="0">Docente</option>';
                       }
-                          echo "<option value='".$fila->idp."'>".$fila->nombre."</option>";
+                          
                          
-                        
-                           }
-                      }
+                    
                        ?>
-      <option value="1">Administrador</option>
-      <option value="0">Docente</option>
+      
        </select>
        </div>       
        <!-- Div del span -->
