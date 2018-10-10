@@ -54,7 +54,7 @@ $mail->isSMTP();
 // 0 = off (para uso en producción)
 // 1 = mensajes de cliente
 // 2 = mensajes de cliente y servidor
-$mail->SMTPDebug = 0;
+$mail->SMTPDebug = 2;
 // Solicita salida de depuración amigable para HTML
 $mail-> Debugoutput = 'html';
  // Establecer el nombre de host del servidor de correo gmail
