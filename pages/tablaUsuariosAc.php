@@ -16,9 +16,7 @@
 
                                         echo "<tr>";
                                             echo "<td width='200'>".$fila->cusuario."</td>";
-                                            $contra=EDE:: desencriptar($fila->cpass);//agregue esta linea para mostrar la contrasena desencriptada
-
-                                            echo "<td>".$contra."</td>";
+                                            
 
                                             if($fila->etipo == 1){
                                                 echo "<td bgcolor=#dff8e7 width='180'> ADMINISTRADOR </td>";

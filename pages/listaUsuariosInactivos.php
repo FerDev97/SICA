@@ -71,10 +71,12 @@ $id  = $_REQUEST["id"];
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Nombre de usuario</th>
-                          <th>Contraseña</th>
-                          <th>Tipo de usuario</th>               
-                          <th>Acciones</th>  
+                         <th>Nombre de usuario</th>
+                          <th>Tipo de usuario</th> 
+                          <th>DUI</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>            
+                          <th>Acciones</th>   
                                                  
                       </tr>
                       </thead>
