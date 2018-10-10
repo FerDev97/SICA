@@ -15,7 +15,7 @@
 
                                         echo "<tr>";
                                             echo "<td width='200'>".$fila->cusuario."</td>";
-                                            echo "<td>".$fila->cpass."</td>";
+                                            
 
                                             if($fila->etipo == 1){
                                                 echo "<td bgcolor=#dff8e7 width='180'> ADMINISTRADOR </td>";

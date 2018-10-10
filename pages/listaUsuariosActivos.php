@@ -72,7 +72,7 @@ $id  = $_REQUEST["id"];
                       <thead>
                         <tr>
                           <th>Nombre de usuario</th>
-                          <th>Contraseña</th>
+                          
                           <th>Tipo de usuario</th> 
                           <th>DUI</th>
                           <th>Nombre</th>
@@ -572,6 +572,10 @@ $id  = $_REQUEST["id"];
       $("#mensaje1").text("Debe contener entre 4 y 8 caracteres, puede utilizar números y letras").css("color","grey");
       $("#mensaje2").text("Debe contener entre 4 y 8 caracteres, puede utilizar números y letras").css("color","grey");
       $("#mensaje3").text("");
+
+       $("#radio1").prop('checked', true);
+       $("#radio2").prop('checked', false);
+       $("#div2").hide();
       
       $('#id').val(id);
       $('#usuario').val(nombre);//paso parametros
