@@ -8,11 +8,12 @@
 
                                 while($fila = $result->fetch_object()){
 
-                                    $consulta ="SELECT iestado, cdui, cnombre, capellido FROM tpersonal WHERE eid_personal = ".$fila->efk_personal;
+                                    $consulta ="SELECT tpersonal.iestado, tpersonal.cdui, tpersonal.cnombre, tpersonal.capellido, tcargos.eid_cargo FROM tpersonal 
+                                    INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo WHERE eid_personal = ".$fila->efk_personal;
                                     $resultado = $conexion->query($consulta);
-                                    $aux=$resultado->fetch_row();
+                                    $aux1=$resultado->fetch_row();
 
-                                    if($aux[0] == 1){//si el personal esta activo
+                                    if($aux1[0] == 1){//si el personal esta activo
 
                                         echo "<tr>";
                                             echo "<td width='200'>".$fila->cusuario."</td>";
@@ -25,12 +26,12 @@
                                                 echo "<td> DOCENTE </td>";
                                             }
                                             
-                                            echo "<td>".$aux[1]."</td>";
-                                            echo "<td>".$aux[2]."</td>";
-                                            echo "<td>".$aux[3]."</td>";
+                                            echo "<td>".$aux1[1]."</td>";
+                                            echo "<td>".$aux1[2]."</td>";
+                                            echo "<td>".$aux1[3]."</td>";
 
                                             $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
-                                            $aux.="onclick=\"editar('".$fila->eid_usuario."','".$fila->cusuario."','".$fila->cpass."','".$fila->etipo."')\";>";
+                                            $aux.="onclick=\"editar('".$fila->eid_usuario."','".$fila->cusuario."','".$fila->cpass."','".$fila->etipo."','".$aux1[4]."')\";>";
                                             $aux.="Modificar</button>";
                                             echo "<td width='90'>";
                                             

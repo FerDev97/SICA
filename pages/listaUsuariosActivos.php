@@ -560,9 +560,10 @@ $id  = $_REQUEST["id"];
     
   });//fin del ready
 
-  function editar(id, nombre, contra, tipo){
+  function editar(id, nombre, contra, tipo, cargo){
 
-    
+
+
       $('#id').val("");//limpio el formulario del modal
       $('#usuario').val("");
       $('#tipo').val("");
@@ -582,6 +583,13 @@ $id  = $_REQUEST["id"];
       $('#tipo').val(tipo);
       $("#modalito").modal();
       $("#guardar").prop("disabled",false);
+
+      
+      if(cargo == 1 && tipo == 1){// si es secretaria y admin
+        $('#tipo').prop("disabled",true);
+      }else{
+        $('#tipo').prop("disabled",false);
+      }
 
       
     }
