@@ -1,22 +1,17 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
-error_reporting(E_ALL & ~E_NOTICE);
-// include '../config/conexion.php';
 session_start();
+error_reporting(E_ALL & ~E_NOTICE);
 
-$nombre=$_SESSION["usuario"];
-if ($_SESSION["logueado"]==TRUE) {
-   $tipos=$_SESSION["tipo"];
-    Header("Location: inicio.php?tipo=$tipos");
-}
  ?>
 <!DOCTYPE html>
  <html lang="en">
  <head>
-     <title>SICA</title>
-     <meta charset="UTF-8">
+ <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+ <title>SICA</title>
+ <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
+ </head>
  <!--===============================================================================================-->	
      <link rel="icon" type="image/png" href="../asset/images/icons/favicon.ico"/>
  <!--===============================================================================================-->
@@ -38,13 +33,63 @@ if ($_SESSION["logueado"]==TRUE) {
  <!--===============================================================================================-->
      <link rel="stylesheet" type="text/css" href="../asset/css/util.css">
      <link rel="stylesheet" type="text/css" href="../asset/css/main.css">
-	 
  <!--===============================================================================================-->
- 
- </head>
- <script type="text/javascript">    
- //SWEET ALERTS
-function sweetConfirm(){
+
+<SCRIPT  language=JavaScript> 
+function go(){
+     if(document.getElementById('usuario').value=="")
+        {
+          }else{
+            
+        
+        // /  document.form.submit(); 
+        // AJAX PARA COMPROBAR SI EL USUARIO TIENE CORREO
+        var parametros={"usuario":document.getElementById("usuario").value};
+        $.ajax(
+            {
+                data:parametros,
+                url:'emailExiste.php',
+                type:'post',
+                beforeSend:function(){
+                    alert('Procesando consulta por favor espere.');
+                },
+                success:function(response) {
+                    // alert(response);
+                    if(response==""){
+                        //alert("No existe ese correo.");
+                        mailInexistente();
+                    }else{
+                        const ventana = window.open("envioemail.php","_blank");
+                        setTimeout(function(){
+                        ventana.close();
+                        }, 5000); /* 5 Segundos*/
+                    }
+                }
+            }
+
+        );
+       
+
+
+          }
+} 
+function sweetError(str){
+          swal({
+   type: 'error',
+   title: 'Error...',
+   text: ''+str,
+   footer: 'Revise que todos los campos esten completados.'
+ })
+         }
+         function mailInexistente(){
+          swal({
+   type: 'error',
+   title: 'Error...',
+   text: 'El usuario que ingreso no existe.',
+   footer: 'Por favor ingrese su usuario correctamente.'
+ })
+         }
+         function sweetConfirm(){
    swal({
    title: '¿Está seguro que desea continuar?',
    text: "¡No sera posible revertir esta acción!",
@@ -63,7 +108,7 @@ function sweetConfirm(){
      )
    }
  })
-         }
+}
 
          function sweetGuardo(str){
            swal(
@@ -72,65 +117,41 @@ function sweetConfirm(){
          'success'
             )
          }
-		 function sweetError(str){
-          swal({
-   type: 'error',
-   title: 'Error...',
-   text: ''+str,
-   footer: 'Revise que todos los campos esten completados.'
- })
+         function prueba(){
+             alert("");
          }
- 
-         function go(){
-        // /  document.form.submit(); 
-        // AJAX PARA COMPROBAR SI EL USUARIO TIENE CORREO
-        var parametros={"usuario":document.getElementById("usuario").value};
-        $.ajax(
-            {
-                data:parametros,
-                url:'emailExiste.php',
-                type:'post',
-                beforeSend:function(){
-                    alert('Procesando consulta por favor espere.');
-                },
-                success:function(response) {
-                    alert(response);
-                }
-            }
-
-        );
-       
-
-}
-       </script>
+</script> 
+  
  <body oncopy="return false" onpaste="return false">
      
      <div class="limiter">
      <div class="container-login100">
      <div class="wrap-login100 p-l-25 p-r-20 p-t-45 p-b-60">
      <span class="login100-form-title p-b-73">
-                         Recuperacion de  contraseña.
+                         Recuperacion de contrasena.
                      </span>
                      <div class="login">
-                 <!-- <form name="form" > -->
+                     <!-- <form name="form"> -->
                      <div style="border-radius: 25px;"  class="wrap-input100 validate-input" data-validate = "Es necesario un usuario valido:UserSica99">
-                         <input  class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario." autocomplete="off" autofocus>
+                         <input style="font-size:17px;"  class="input100" type="text" name="usuario" id="usuario" placeholder="Digite su usuario." autocomplete="off" autofocus required>
                          <span class="focus-input100-1"></span>
                          <span class="focus-input100-2"></span>
                      </div>
                      <br>
-                     <div style="border-radius: 25px;" class="wrap-input100 rs1 validate-input" data-validate="La contraseña es Obligatoria">
-                         <p>Por favor digite su usuario, si el usuario es correcto se le enviará un correo electronico con su contrasena.</p>
+                     <div  data-validate="La contraseña es Obligatoria">
+                        <p>Si su usuario es correcto se le enviara un correo electronico con su contrasena. </p>
                      </div>
  
                      <div class="container-login100-form-btn m-t-20">
                          <button style="border-radius: 25px;"  class="login100-form-btn" onclick=go() name=enviar >
                              Enviar
                          </button>
+                         
                      </div>
  
                      <div class="text-center p-t-45 p-b-4">
                          
+ 
                          <a href="index.php" class="txt2 hov1">
                              Cancelar
                          </a>
@@ -139,7 +160,7 @@ function sweetConfirm(){
              </div>
      </div>
      </div>
-     </div>
+   
      <script src="../asset/js/sweetalert2.js"></script>
  <!--===============================================================================================-->
      <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -164,15 +185,16 @@ function sweetConfirm(){
  <?php
  function msg($texto)
  {
-     echo "<script type='text/javascript'>";
-     echo "alert('$texto');";
-     echo "</script>";
+    echo "<script type='text/javascript'>";
+    echo "sweetConfirm('$texto');";
+    //echo "document.location.href='materias.php';";
+    echo "</script>";
  }
  function msgError($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetError('$texto');";
-
+    //echo "document.location.href='materias.php';";
     echo "</script>";
 }
 function msgAdd($texto)
@@ -182,4 +204,21 @@ function msgAdd($texto)
     echo "</script>";
 }
 
+ ?>
+<?php
+ 
+ $nombre=$_SESSION["usuario"];
+ if ($_SESSION["logueado"]==TRUE) {
+    $tipos=$_SESSION["tipo"];
+     Header("Location: inicio.php?tipo=$tipos");
+ }else {
+     $errorLogin=$_GET["error"];
+     if($errorLogin=="login") {
+         $error="Usuario o contraseña Invalido";
+         msgError($error);
+      }else if($errorLogin=="loginInactivo"){
+         $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
+         msgError($error);
+      }
+ }
  ?>

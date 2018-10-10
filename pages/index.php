@@ -77,7 +77,7 @@ function sweetError(str){
          'success'
             )
          }
-</SCRIPT> 
+</script> 
   
  <body oncopy="return false" onpaste="return false">
      
