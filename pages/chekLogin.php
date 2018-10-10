@@ -1,7 +1,10 @@
 <?php
-	
+		include "EDE.php";	
 	      $loginNombre = $_POST["usuario"];
 		  $loginPassword =$_POST["pass"];
+			$loginPassword=EDE:: encriptar($loginPassword);//CODIGO AGREGADO PARA COMPROBAR LAS CADENAS ENCRIPTADAS
+
+		echo "mandado:".$loginPassword;
 		  $correcto=false;
 		  $activo=false;
 		  include "../config/conexion.php";
@@ -17,6 +20,8 @@
 			$apellido=$fila->capellido;
 			$permisoI=$fila->ep_inscripciones;
 			$permisoE=$fila->ep_estadisticas;
+			echo $passR;
+			echo "mandado:".$loginPassword;
 			if($passR==$loginPassword){
 			  $correcto=true;
 			}
