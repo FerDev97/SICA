@@ -124,7 +124,7 @@ $id  = $_REQUEST["id"];
                           <th>Apellidos</th>
                           <th>Cargo</th>
                           <th>Estado</th>
-                          <th>Permiso Administrador</th>
+                         
                           <th>Permiso Inscripcion</th>
 
                         </tr>
@@ -133,7 +133,7 @@ $id  = $_REQUEST["id"];
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario,tpermisos.ep_inscripciones,ep_administradores FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo INNER JOIN tpermisos ON tpermisos.efk_idusuario = tusuarios.eid_usuario ORDER BY eid_usuario");
+$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario,tpermisos.ep_inscripciones FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo INNER JOIN tpermisos ON tpermisos.efk_idusuario = tusuarios.eid_usuario ORDER BY eid_usuario");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -147,13 +147,7 @@ if ($result) {
              }else{
                 echo "<td>Inactivo</td>";
             }
-            if ($fila->ep_administradores==1) {
-                echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",1);><i class='fa fa-remove'></i>
-                </button></td>";
-            }else{
-                echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",2);><i class='fa fa-check'></i>
-                </button></td>";
-            }
+           
             if($fila->ep_inscripciones==1)
             {
                 echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",1);><i class='fa fa-remove'></i>
