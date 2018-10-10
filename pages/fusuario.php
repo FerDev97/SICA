@@ -249,6 +249,26 @@ function verificar(){
      <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Tipo</span>
       <select id="tipo"   class="select2 show-tick" style="width: 470px; font-size: 15px;margin-right:10px;margin-left:30px" name="tipo">
       <option value="">Seleccione tipo de usuario</option>
+      <?php
+                      include '../config/conexion.php';
+
+                      $result = $conexion->query("select * from tusuarios where etipo= '1'");
+                      if ($result) {
+
+                        while ($fila = $result->fetch_object()) {
+                          $id=$fila->id;
+                        }
+                        $row_cnt=mysqli_num_rows($result);
+                      }
+                      if($row_cnt==1){
+                        echo $id;
+                      }
+                          echo "<option value='".$fila->idp."'>".$fila->nombre."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
       <option value="1">Administrador</option>
       <option value="0">Docente</option>
        </select>
