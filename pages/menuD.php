@@ -34,7 +34,23 @@
    
                       </ul>
                     </li>
-                   
+                    <?php if($_SESSION["permiso"]==1){ ?>
+                    <li class="active ripple">
+                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  
+                  <ul class="nav nav-list tree">
+                      <li><a href="listacliente.php">Realizar inscripcion</a></li>
+                      <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
+                      <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                      <li><a href="listacliente.php">Estadisticas</a></li>
+                      
+                  </ul>
+                </li>
+                <?php
+                }
+                ?>
                     <!-- <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa-diamond fa"></span> Combos
