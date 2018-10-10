@@ -82,7 +82,7 @@ $id  = $_REQUEST["id"];
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Bienvenido</h3>
+                         <h3 class="animated fadeInLeft">Bienvenido a SICA <?php echo $_SESSION["nombre"]; ?></h3>
                         <p class="animated fadeInDown">
                          Santa Familia <span class="fa-angle-right fa"></span>La ciencia sin Dios es vana
                          
