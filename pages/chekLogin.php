@@ -2,7 +2,7 @@
 		include "EDE.php";	
 	      $loginNombre = $_POST["usuario"];
 		  $loginPassword =$_POST["pass"];
-			$loginPassword=EDE:: encriptar($loginPassword);//CODIGO AGREGADO PARA COMPROBAR LAS CADENAS ENCRIPTADAS
+		$loginPassword=EDE:: encriptar($loginPassword);//CODIGO AGREGADO PARA COMPROBAR LAS CADENAS ENCRIPTADAS
 
 		echo "mandado:".$loginPassword;
 		  $correcto=false;

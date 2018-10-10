@@ -68,6 +68,13 @@ $id  = $_REQUEST["id"];
 
 
         }
+        function guardar(){
+          if(document.getElementById('perIns').checked&&document.getElementById('perEst').checked){
+            document.permiso.submit();
+          }else{
+            alert("Complete los campos");
+          }
+        }
          function confirmar1(id)
         {
           if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
@@ -125,7 +132,7 @@ $id  = $_REQUEST["id"];
                           <th>Cargo</th>
                           <th>Estado</th>
                          
-                          <th>Permiso Inscripcion</th>
+                          <th>Permiso</th>
 
                         </tr>
                       </thead>
@@ -133,7 +140,7 @@ $id  = $_REQUEST["id"];
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario,tpermisos.ep_inscripciones FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo INNER JOIN tpermisos ON tpermisos.efk_idusuario = tusuarios.eid_usuario ORDER BY eid_usuario");
+$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario,tpermisos.ep_inscripciones FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo INNER JOIN tpermisos ON tpermisos.efk_idusuario = tusuarios.eid_usuario where ccargo ='Docente' ORDER BY eid_usuario");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -150,11 +157,19 @@ if ($result) {
            
             if($fila->ep_inscripciones==1)
             {
-                echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",1);><i class='fa fa-remove'></i>
-                </button></td>";
+                echo "<td style='text-align:center;'>
+                
+                <button align='center' type='button' class='btn btn-info btn-sm btn-round' data-toggle='modal' data-target='#modalPermiso'><i class='fa fa-eye'></i>
+                </button>
+                
+                
+                </td>";
             }else{
-               echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",2);><i class='fa fa-check'></i>
-                </button></td>";
+               echo "<td style='text-align:center;'>
+               <button align='center' type='button' class='btn btn-info btn-sm btn-round' data-toggle='modal' data-target='#modalPermiso'><i class='fa fa-eye'></i>
+               </button>
+               
+               </td>";
             }
              echo "</tr>";
             }
@@ -175,7 +190,53 @@ if ($result) {
           <!-- end: right menu -->
 
       </div>
+<!-- Modal de Grado-->
+<div class="modal fade" id="modalPermiso" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Cerrar</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Permisos Disponibles</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+            <form name="permiso" method="post">
+                <p class="statusMsg"></p>
+                  <!--aqui va el codigo-->
+                  <center>
+                  <div class="form-check">
+                    <input style="width:25px; height:25px;" type="checkbox" class="form-check-input" name="perIns" id="perIns">
+                    <label style="font-size:23px;" class="form-check-label" for="exampleCheck1">Permiso Temporal para Inscripcion</label>
+                  </div>
+                 <br>
+                  <div class="form-check">
+                  <input style="width:25px; height:25px; background: blue;" type="checkbox" class="form-check-input" name="perEst" id="perEst">
+                  <label style="font-size:23px;" class="form-check-label" for="exampleCheck1">Permiso Temporal para Estadisticas</label>
+                  </div>
+                  <br>
+                  </center>
+                 
+                   <center>
+                   <div class="input-group">
+                  <button title="Agrega Nuevo Grado al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" id="guardarG" name="guardarG" onclick="guardar();" data-dismiss="modal">
+                  Guardar</button>
+                  </div>
+                  </center>
+                 </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+  <!-- Fin Modal de Grado -->
       <!-- start: Mobile -->
      
    
