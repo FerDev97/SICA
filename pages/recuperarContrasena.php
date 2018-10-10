@@ -58,11 +58,13 @@ function go(){
                     if(response==""){
                         //alert("No existe ese correo.");
                         mailInexistente();
+                        document.getElementById("usuario").value="";
                     }else{
                         const ventana = window.open("envioemail.php?id="+response,"_blank");
                         setTimeout(function(){
                         ventana.close();
                         }, 10000); /* 5 Segundos(tiempo a esperar para que envie el mail)*/
+                        sweetGuardo("Se envio el correo correctamente.");
                     }
                 }
             }
