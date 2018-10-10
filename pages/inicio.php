@@ -1,14 +1,14 @@
 <?php
-session_start();
-if($_SESSION["logueado"] == TRUE) {
-$tipo  = $_REQUEST["tipo"];
-$id  = $_REQUEST["id"];
-?>
-<!DOCTYPE html>
-<?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE) {
+$nombre=$_SESSION["usuario"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -38,20 +38,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-        function verificar(){
-          if(document.getElementById('nombreempleado').value=="" ||
-            document.getElementById('apellidoempleado').value=="" ||
-            document.getElementById('duiempleado').value=="" ||
-            document.getElementById('nitempleado').value=="" ||
-            document.getElementById('cargoempleado').value==""){
-            alert("Complete los campos prueba");
-            
-          }else{
-            document.getElementById("bandera").value="add";
-            document.turismo.submit();
-          }
 
-        }
         function sweet(){
         swal({
   title: '¿Está seguro que desea continuar?',
@@ -516,7 +503,6 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
     echo "</script>";
 }
 } else {

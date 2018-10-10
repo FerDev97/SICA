@@ -143,7 +143,7 @@ function sweetConfirm(){
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista de Opciones de Bachillerato</h3>
+                        <h3 class="animated fadeInLeft">Lista de Opciones de Bachillerato Inactivas</h3>
                         <p class="animated fadeInDown">
                           tablas <span class="fa-angle-right fa"></span>Tabla
                         </p>
@@ -177,7 +177,7 @@ function sweetConfirm(){
                       </thead>
                       <tbody class="tabla_ajax">
 
-                      <?php include('tablaOpcCom.php') ?>
+                      <?php include('tablaOpcComIna.php') ?>
                       </tbody>
                         </table>
                       </div>
@@ -362,13 +362,19 @@ include "../config/conexion.php";
 
 $bandera = $_REQUEST["bandera"];
 $baccion = $_REQUEST["baccion"];
-
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='listaOpciones.php';";
+    echo "</script>";
+}
 
 if ($bandera == "desactivar") {
   $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Dato Activado");
+     msg("Dato Activado");
     } else {
         msg("No se desactivo el registro");
     }
@@ -377,7 +383,7 @@ if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Dato activado");
+    msg("Dato activado");
     } else {
       msg("No se activo el registro");
     }
@@ -397,15 +403,9 @@ if ($bandera == 'enviar') {
     echo "</script>";
     # code...
 }
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listaOpciones.php';";
-    echo "</script>";
-}
 
-} else {
+
+}else {
   header("Location: index.php");
   }
   

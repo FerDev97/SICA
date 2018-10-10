@@ -1,7 +1,16 @@
-<!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+$nombre=$_SESSION["usuario"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+
+?>
+<!DOCTYPE html>
+<?php
+
 $accion=$_REQUEST['accion'];
 if($accion=="guardarG")
 {
@@ -760,4 +769,10 @@ function mensajes($texto)
     echo "alert('$texto');";
     echo "</script>";
 }
+
+} else {
+  header("Location: index.php");
+  }
+  
+
 ?>

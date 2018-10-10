@@ -1,8 +1,17 @@
-
-<!DOCTYPE html>
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+$nombre=$_SESSION["usuario"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+
+?>
+<!DOCTYPE html>
+<?php
+
+
  include '../config/conexion.php';
  //Query para generar codigo.
  
@@ -605,4 +614,10 @@ function msgError($texto)
     //echo "document.location.href='materias.php';";
     echo "</script>";
 }
+
+} else {
+  header("Location: index.php");
+  }
+  
+
 ?>

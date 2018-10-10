@@ -1,6 +1,8 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
+session_start();
 error_reporting(E_ALL & ~E_NOTICE);
+
  ?>
 <!DOCTYPE html>
  <html lang="en">
@@ -35,10 +37,40 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 <SCRIPT  language=JavaScript> 
 function go(){
-     if(document.getElementById('usuario').value=="" || document.getElementById('pass').value=="")
+     if(document.getElementById('usuario').value=="")
         {
           }else{
-        document.form.submit(); 
+            
+        
+        // /  document.form.submit(); 
+        // AJAX PARA COMPROBAR SI EL USUARIO TIENE CORREO
+        var parametros={"usuario":document.getElementById("usuario").value};
+        $.ajax(
+            {
+                data:parametros,
+                url:'emailExiste.php',
+                type:'post',
+                beforeSend:function(){
+                    alert('Procesando consulta por favor espere.');
+                },
+                success:function(response) {
+                    // alert(response);
+                    if(response==""){
+                        //alert("No existe ese correo.");
+                        mailInexistente();
+                    }else{
+                        const ventana = window.open("envioemail.php?id="+response,"_blank");
+                        setTimeout(function(){
+                        ventana.close();
+                        }, 5000); /* 5 Segundos(tiempo a esperar para que envie el mail)*/
+                    }
+                }
+            }
+
+        );
+       
+
+
           }
 } 
 function sweetError(str){
@@ -47,6 +79,14 @@ function sweetError(str){
    title: 'Error...',
    text: ''+str,
    footer: 'Revise que todos los campos esten completados.'
+ })
+         }
+         function mailInexistente(){
+          swal({
+   type: 'error',
+   title: 'Error...',
+   text: 'El usuario que ingreso no existe.',
+   footer: 'Por favor ingrese su usuario correctamente.'
  })
          }
          function sweetConfirm(){
@@ -77,6 +117,9 @@ function sweetError(str){
          'success'
             )
          }
+         function prueba(){
+             alert("");
+         }
 </script> 
   
  <body oncopy="return false" onpaste="return false">
@@ -85,38 +128,35 @@ function sweetError(str){
      <div class="container-login100">
      <div class="wrap-login100 p-l-25 p-r-20 p-t-45 p-b-60">
      <span class="login100-form-title p-b-73">
-                         Iniciar Sesion
+                         Recuperacion de contrasena.
                      </span>
                      <div class="login">
-                     <form name="form" method="post" action="chekLogin.php">
+                     <!-- <form name="form"> -->
                      <div style="border-radius: 25px;"  class="wrap-input100 validate-input" data-validate = "Es necesario un usuario valido:UserSica99">
-                         <input style="font-size:17px;"  class="input100" type="text" name="usuario" id="usuario" placeholder="Usuario" autocomplete="off" autofocus required>
+                         <input style="font-size:17px;"  class="input100" type="text" name="usuario" id="usuario" placeholder="Digite su usuario." autocomplete="off" autofocus required>
                          <span class="focus-input100-1"></span>
                          <span class="focus-input100-2"></span>
                      </div>
                      <br>
-                     <div style="border-radius: 25px;" class="wrap-input100 rs1 validate-input" data-validate="La contraseña es Obligatoria">
-                         <input style="font-size:17px;" class="input100" type="password" name="pass" id="pass" placeholder="Contraseña" required>
-                         <span class="focus-input100-1"></span>
-                         <span class="focus-input100-2"></span>
+                     <div  data-validate="La contraseña es Obligatoria">
+                        <p>Si su usuario es correcto se le enviara un correo electronico con su contrasena. </p>
                      </div>
  
                      <div class="container-login100-form-btn m-t-20">
                          <button style="border-radius: 25px;"  class="login100-form-btn" onclick=go() name=enviar >
-                             Entrar
+                             Enviar
                          </button>
+                         
                      </div>
  
                      <div class="text-center p-t-45 p-b-4">
-                         ¿Olvido su
-                         <span class="txt1">
-                         </span>
+                         
  
-                         <a href="recuperarContrasena.php" class="txt2 hov1">
-                             contraseña?
+                         <a href="index.php" class="txt2 hov1">
+                             Cancelar
                          </a>
                      </div>
-                     </form>
+                     <!-- </form> -->
              </div>
      </div>
      </div>
@@ -166,7 +206,7 @@ function msgAdd($texto)
 
  ?>
 <?php
- session_start();
+ 
  $nombre=$_SESSION["usuario"];
  if ($_SESSION["logueado"]==TRUE) {
     $tipos=$_SESSION["tipo"];

@@ -7,9 +7,21 @@
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
+                    <li class="ripple">
+                  <a class="tree-toggle nav-header">
+                    <span class="fa fa-users"></span> Administracion
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                  </a>
+                  <ul class="nav nav-list tree">
+                  <li><a href="anioactivo.php">Año Activo</a></li>
+                     <li><a href="permisos.php">Permisos Temporales</a></li>
+                     <li><a href="cadministradores.php">Lista de administradores</a></li>
+                     <li><a href="listacliente.php">Estadisticas</a></li>
+              
+                 </ul>
+                </li>
                 <li class="active ripple">
                   <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
-                  
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
@@ -21,16 +33,7 @@
                       
                   </ul>
                 </li>
-                <li class="ripple">
-                  <a class="tree-toggle nav-header">
-                    <span class="fa fa-users"></span> Administradores
-                    <span class="fa-angle-right fa right-arrow text-right"></span>
-                  </a>
-                  <ul class="nav nav-list tree">
-                    <li><a href="cadministradores.php">Lista Administradores</a></li>
-                  </ul>
-
-                </li>
+                
                 <!--<li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-user fa"></span> Docentes
@@ -63,7 +66,8 @@
                   <ul class="nav nav-list tree">
                   <li><a href="fagregaropcion.php">Mantenimiento Opcion</a></li>
                     <li><a href="fopciones.php">Gestionar Opciones</a></li>
-                    <li><a href="listaOpciones.php">Lista de Opciones</a></li>
+                    <li><a href="listaOpciones.php">Opciones Activas</a></li>
+                    <li><a href="listaOpcionesIna.php">Opciones Inactivas</a></li>
                   </ul>
                 </li>
                 <li class="ripple">
