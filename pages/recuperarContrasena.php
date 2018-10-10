@@ -62,7 +62,7 @@ function go(){
                         const ventana = window.open("envioemail.php?id="+response,"_blank");
                         setTimeout(function(){
                         ventana.close();
-                        }, 5000); /* 5 Segundos(tiempo a esperar para que envie el mail)*/
+                        }, 10000); /* 5 Segundos(tiempo a esperar para que envie el mail)*/
                     }
                 }
             }
