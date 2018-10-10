@@ -1,12 +1,16 @@
 <?php 
 $iduser=$_REQUEST["id"];
+echo $iduser;
  include '../config/conexion.php';
 
-                      $result = $conexion->query("SELECT cnombre as nombre, capellido as apellido, cpass as contra ccorreo as correo, FROM tusuarios,tpersonal where eid_usuario='".$iduser."' and efk_personal=eid_personal");
+                      $result = $conexion->query("SELECT cnombre as nombre, capellido as apellido, cpass as contra, ccorreo as correo FROM tusuarios,tpersonal where eid_usuario='".$iduser."' and efk_personal=eid_personal");
                       if ($result) {
                             
                             while ($fila = $result->fetch_object()) { 
-                            $id=$fila->id;
+                            $nombre=$fila->nombre;
+                            $apellido=$fila->apellido;
+                            $contra=$fila->contra;
+                            $correo=$fila->correo;
                             }
                             $row_cnt = mysqli_num_rows($result);
                       }
@@ -70,13 +74,13 @@ $mail->setFrom('lasantafamiliaasv@gmail.com ','SICA');
 // Establecer una dirección alternativa de respuesta
 //$mail->addReplyTo('replyto@example.com ',' First Last ');
  // Establezca a quién se enviará el mensaje
-$mail->addAddress('fer.aravalo1997@gmail.com ','Jessi Rosale ');
+$mail->addAddress($correo,$nombre." ".$apellido);
 // Establecer la línea de asunto
 $mail->Subject = 'Recuperacion de contrasena.';
 // Lee un cuerpo de mensaje HTML de un archivo externo, convierte las imágenes referenciadas en incrustadas,
 // convertir HTML en un cuerpo alternativo básico de texto plano
 //$mail->msgHTML("<p>Esta es tu contrasena, porfavor guardala en un lugarseguro:hola", dirname(__FILE__));
-$mail->Body = "<b>Esta es tu contrasena, porfavor guardala en un lugarseguro:hola</b>";
+$mail->Body = "<p>Esta es tu contrasena, porfavor guardala en un lugarseguro:<b>".$contra."<b></p>";
 // Reemplazar el cuerpo de texto sin formato con uno creado manualmente
 $mail->AltBody = 'Esta es tu contrasena, porfavor guardala en un lugarseguro:hola';
 // enviar el mensaje, comprobar si hay errores
