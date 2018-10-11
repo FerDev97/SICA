@@ -131,16 +131,13 @@ $id  = $_REQUEST["id"];
                           <th>Apellidos</th>
                           <th>Cargo</th>
                           <th>Estado</th>
-                         
                           <th>Permiso</th>
-
                         </tr>
                       </thead>
                       <tbody>
-
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario,tpermisos.ep_inscripciones FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo INNER JOIN tpermisos ON tpermisos.efk_idusuario = tusuarios.eid_usuario where ccargo ='Docente' ORDER BY eid_usuario");
+$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo where etipo ='0' ORDER BY eid_usuario");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -154,23 +151,11 @@ if ($result) {
              }else{
                 echo "<td>Inactivo</td>";
             }
-           
-            if($fila->ep_inscripciones==1)
-            {
-                echo "<td style='text-align:center;'>
-                
+                echo "<td style='text-align:center;'>       
                 <button align='center' type='button' class='btn btn-info btn-sm btn-round' data-toggle='modal' data-target='#modalPermiso'><i class='fa fa-eye'></i>
                 </button>
-                
-                
                 </td>";
-            }else{
-               echo "<td style='text-align:center;'>
-               <button align='center' type='button' class='btn btn-info btn-sm btn-round' data-toggle='modal' data-target='#modalPermiso'><i class='fa fa-eye'></i>
-               </button>
-               
-               </td>";
-            }
+           
              echo "</tr>";
             }
         }
