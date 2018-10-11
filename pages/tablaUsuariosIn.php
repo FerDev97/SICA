@@ -7,11 +7,12 @@
 
                                 while($fila = $result->fetch_object()){
 
-                                    $consulta ="SELECT iestado, cdui, cnombre, capellido, eid_personal FROM tpersonal WHERE eid_personal = ".$fila->efk_personal;
+                                    $consulta ="SELECT tpersonal.iestado, tpersonal.cdui, tpersonal.cnombre, tpersonal.capellido, tcargos.eid_cargo, tcargos.ccargo FROM tpersonal 
+                                    INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo WHERE eid_personal = ".$fila->efk_personal;
                                     $resultado = $conexion->query($consulta);
-                                    $aux=$resultado->fetch_row();
+                                    $aux1=$resultado->fetch_row();
 
-                                    if($aux[0] == 0){//si el personal esta inactivo
+                                    if($aux1[0] == 0){//si el personal esta inactivo
 
                                         echo "<tr>";
                                             echo "<td width='200'>".$fila->cusuario."</td>";
@@ -24,12 +25,13 @@
                                                 echo "<td> DOCENTE </td>";
                                             }
                                             
-                                            echo "<td>".$aux[1]."</td>";
-                                            echo "<td>".$aux[2]."</td>";
-                                            echo "<td>".$aux[3]."</td>";
+                                            echo "<td>".$aux1[1]."</td>";
+                                            echo "<td>".$aux1[2]."</td>";
+                                            echo "<td>".$aux1[3]."</td>";
+                                            echo "<td>".$aux1[5]."</td>";
 
                                             $aux= "<button type=\"button\" class=\"btn btn-info btn-sm btn-round\" ";
-                                            $aux.="onclick=\"activar('".$aux[4]."')\";>";
+                                            $aux.="onclick=\"activar('".$aux1[4]."')\";>";
                                             $aux.="Activar</button>";
                                             echo "<td width='90'>";
                                             

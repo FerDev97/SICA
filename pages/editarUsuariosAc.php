@@ -14,6 +14,12 @@ $contra=EDE:: encriptar($contra);
 $mensaje = "";
 //FIN CODIGO DE ENCRIPTACION DE CONTRASENA
 
+//validando no mas de 3 admins
+$validaSql = "SELECT COUNT(etipo) FROM tusuarios WHERE etipo=1";
+$resultSet = $conexion->query($validaSql);
+$dato = $resultSet->fetch_row();
+
+if(($dato[0] < 3 && $tipo == 0) || ($dato[0] == 3 && $tipo ==0) || ($dato[0] < 3 && $tipo == 1)){
     if($opcion=="2"){
 
         $query = "SELECT * FROM tusuarios WHERE cusuario like '%".$usuario."%' OR cpass like '%".$contra."%' ;";
@@ -77,6 +83,10 @@ $mensaje = "";
             
         }
     }
+}else{
+
+    $mensaje="4";//ya se cuenta con 3 admins
+}
         
 echo $mensaje;
 

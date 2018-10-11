@@ -8,7 +8,7 @@
 
                                 while($fila = $result->fetch_object()){
 
-                                    $consulta ="SELECT tpersonal.iestado, tpersonal.cdui, tpersonal.cnombre, tpersonal.capellido, tcargos.eid_cargo FROM tpersonal 
+                                    $consulta ="SELECT tpersonal.iestado, tpersonal.cdui, tpersonal.cnombre, tpersonal.capellido, tcargos.eid_cargo, tcargos.ccargo FROM tpersonal 
                                     INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo WHERE eid_personal = ".$fila->efk_personal;
                                     $resultado = $conexion->query($consulta);
                                     $aux1=$resultado->fetch_row();
@@ -29,6 +29,7 @@
                                             echo "<td>".$aux1[1]."</td>";
                                             echo "<td>".$aux1[2]."</td>";
                                             echo "<td>".$aux1[3]."</td>";
+                                            echo "<td>".$aux1[5]."</td>";
 
                                             $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
                                             $aux.="onclick=\"editar('".$fila->eid_usuario."','".$fila->cusuario."','".$fila->cpass."','".$fila->etipo."','".$aux1[4]."')\";>";
