@@ -87,11 +87,11 @@ if(($dato[0] < 3 && $tipo == 0) || ($dato[0] == 3 && $tipo ==0) || ($dato[0] < 3
 
     if($dato[0] == 3 && $tipo == 1){
 
-        $query = "SELECT eid_usuario FROM tusuarios WHERE eid_usuario=$id";
+        $query = "SELECT eid_usuario, etipo FROM tusuarios WHERE eid_usuario=$id";
         $respuestas = $conexion->query($query);
         $data = $respuestas->fetch_row();
 
-            if($respuestas->num_rows != 0){
+            if($respuestas->num_rows != 0 && $data[1] == 1){
                             
                 
                 if($opcion=="2"){
