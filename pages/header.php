@@ -4,6 +4,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 
 $nombre=$_REQUEST["nombre"];
+$usuario=$_SESSION["usuario"];
 
 ?>
 <!-- start: Header -->
@@ -51,24 +52,65 @@ $nombre=$_REQUEST["nombre"];
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Perfil de Usuario: <?php echo $_SESSION["usuario"]; ?></h4>
+               
+                <?php
+                
+                   include "../config/conexion.php";
+                   $result = $conexion->query("SELECT tpersonal.cnombre,capellido,tusuarios.cusuario,etipo FROM tusuarios INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal where cusuario='$usuario'");
+                   if ($result) {
+                     while ($fila = $result->fetch_object()) {
+                      $apellido=$fila->capellido; 
+                      $nom=$fila->cnombre;
+                      $usua=$fila->cusuario;
+                      $tipo=$fila->etipo;
+                      }
+                    }
+                  ?>
+                <h4 class="modal-title" id="myModalLabel">Perfil de Usuario</h4>
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
                   <!--aqui va el codigo-->
                   <form id="insertarT">
+                  <center>
+                  <i style="font-size:75px" class="fa fa-user"></i>
+                  </center>
+                  
+                  <br><br>
+                  <label style="margin-left:75px; font-size:15px">Usuario:</label>
                   <div class="input-group" style="margin-left:75px">
-                  <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" placeholder="Nuevo tipo de Bachillerato" >
+                  
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" value="<?php echo $usua;?>" readonly>
+                  </div>
+                    <br>
+                    <label style="margin-left:75px; font-size:15px">Nombres:</label>
+                  <div class="input-group" style="margin-left:75px">
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" value="<?php echo $nom;?>" readonly>
                   </div>
                   <br>
-                   <center>
-                   <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" id="guardarT" name="guardarT" style="margin-left:0px;" class="btn btn-info" type="button" >
-                  Guardar</button>
+                  <label style="margin-left:75px; font-size:15px">Apellidos:</label>
+                  <div class="input-group" style="margin-left:75px">
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" value="<?php echo $apellido;?>" readonly>
                   </div>
-                  </center>
+                  <br>
+                  <label style="margin-left:75px; font-size:15px">Tipo de Usuario:</label>
+                  <?php
+                  if($tipo==1){?>
+                    <div class="input-group" style="margin-left:75px">
+                    <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" value="Administrador" readonly>
+                    </div>
+                  <?php
+                  }else if($tipo==0){
+                  ?>
+                  <div class="input-group" style="margin-left:75px">
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" value="Docente" readonly>
+                  </div>
+                  <?php
+                  }
+                  ?>
+                  <br>
+                  
                   </form>
             </div>
             <!-- Modal Footer -->
@@ -78,3 +120,11 @@ $nombre=$_REQUEST["nombre"];
         </div>
     </div>
 </div>
+<?php
+function mensajes($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "</script>";
+}
+?>
