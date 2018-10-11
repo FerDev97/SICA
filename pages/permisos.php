@@ -19,11 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
   <title>Asignar permisos | SICA</title>
-=======
-  <title>Permiso</title>
->>>>>>> 69d282e972f5d73e6000d3fd5aaa5a4caa8571ac
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -33,6 +29,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -142,32 +139,10 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
                         </tr>
                       </thead>
-                      <tbody>
-                      <?php
-include "../config/conexion.php";
-$result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tcargos.ccargo,tusuarios.cusuario,eid_usuario FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal INNER JOIN tcargos ON tpersonal.efk_idcargo = tcargos.eid_cargo where etipo ='0' ORDER BY eid_usuario");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-            echo "<td>" . $fila->cusuario. "</td>";
-            echo "<td>" . $fila->cnombre . "</td>";
-            echo "<td>" . $fila->capellido . "</td>";
-            echo "<td>" . $fila->ccargo . "</td>";
-       
-            if ($fila->iestado==1) {
-                echo "<td>Activo</td>";
-             }else{
-                echo "<td>Inactivo</td>";
-            }
-                echo "<td style='text-align:center;'>       
-                <button align='center' type='button' class='btn btn-info btn-sm btn-round' data-toggle='modal' data-target='#modalPermiso'><i class='fa fa-eye'></i>
-                </button>
-                </td>";
-           
-             echo "</tr>";
-            }
-        }
-?>
+                      <tbody class="tabla_ajax">
+
+                       <?php include('tablaPermisos.php') ?>
+
                       </tbody>
                         </table>
                       </div>
@@ -184,7 +159,7 @@ if ($result) {
 
       </div>
 <!-- Modal de Grado-->
-<div class="modal fade" id="modalPermiso" role="dialog">
+<div class="modal fade" id="modalPermiso">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -197,7 +172,8 @@ if ($result) {
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
-            <form name="permiso" method="post">
+            <form id="permisos">
+                <input type="hidden" id="id" value="">
                 <p class="statusMsg"></p>
                   <!--aqui va el codigo-->
                   <center>
@@ -215,7 +191,7 @@ if ($result) {
                  
                    <center>
                    <div class="input-group">
-                  <button title="Agrega Nuevo Grado al Sistema" style="margin-left:0px;" class="btn btn-info" type="button" id="guardarG" name="guardarG" onclick="guardar();" data-dismiss="modal">
+                  <button  style="margin-left:0px;" class="btn btn-info" type="button" id="guardar">
                   Guardar</button>
                   </div>
                   </center>
@@ -239,7 +215,7 @@ if ($result) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -254,67 +230,159 @@ if ($result) {
 <script type="text/javascript">
   $(document).ready(function(){
     $('#datatables-example').DataTable();
-  });
+
+    $("#guardar").on('click', function(){
+
+        var id = $("#id").val();
+        var perIns = 0;
+        var perEst = 0;
+
+        if($('#perIns').prop('checked')){
+          perIns = 1;
+        }
+        if($('#perEst').prop('checked')){
+          perEst = 1;
+        }
+
+        swal({
+            title: '¿Está seguro de realizar estos cambios?',
+            text: "",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Si, seguro'
+        }).then((result) => {
+            if (result.value) {
+
+                  $.ajax({
+                      type: 'post',
+                      url: 'editarPermisos.php',
+                      data: {id:id, perIns:perIns, perEst:perEst},
+                      success: function(respuesta) {
+                            
+                
+                          if(respuesta==1){
+                            
+                            $("#modalPermiso").modal('hide');
+                            sweetGuardo("Se asignó correctamente");
+                            $(".tabla_ajax").load("tablaPermisos.php"); 
+                            $('#datatables-example').DataTable();
+                              
+                          }
+                          if(respuesta==2){
+                            
+                            $("#modalito").modal('hide');
+                            sweetError("Error del servidor: No se modificaron los datos");
+                          }
+                          
+                          
+                          
+                      },
+                      error: function(respuesta){
+                        sweetError("Error en el servidor: "+respuesta); 
+                      }
+                  });//fin de ajax
+     
+            }
+        })
+
+        
+
+      return false;
+
+
+    });//fin del click
+  });//fin del ready
+
+  function editar(id, pinscripcion, pestadisticas){
+
+        if(pinscripcion == 1){
+          $('#perIns').prop('checked',true)
+        }else{
+          $('#perIns').prop('checked',false)
+        }
+        if(pestadisticas == 1){
+          $('#perEst').prop('checked',true)
+        }else{
+          $('#perEst').prop('checked',false)
+        }
+
+        $("#id").val(id);
+        $("#modalPermiso").modal();
+
+  }
+
+
+    
+            //SWEET ALERTS
+            function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡No sera posible revertir esta acción!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                swal(
+                                  '¡Exito!',
+                                  'La accion ha sido completada.',
+                                  'success'
+                                )
+                              }
+                        })
+                      }
+
+
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
+
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
+
+                  //SWEET ALERTS 
 </script>
 <!-- end: Javascript -->
 </body>
 </html>
-<?php
-
-include "../config/conexion.php";
-
-$bandera = $_REQUEST["bandera"];
-$baccion = $_REQUEST["baccion"];
-
-if ($bandera == "add") {
-    $consulta  = "INSERT INTO cliente VALUES('null','" . $nombrecliente . "','" . $apellidocliente . "','" . $duicliente . "','" . $telefonocliente . "','" . $direccioncliente . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == "desactivar") {
-  $consulta = "UPDATE tpersonal SET iestado = '0' WHERE eid_personal = '".$baccion."'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == "activar") {
-  $consulta = "UPDATE tpersonal SET iestado = '1' WHERE eid_personal = '".$baccion."'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM tpersonal where eid_personal='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == 'enviar') {
-    echo "<script type='text/javascript'>";
-    echo "document.location.href='editpersonal.php?id=" . $baccion . "';";
-    echo "</script>";
-    # code...
-}
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listapersonal.php';";
-    echo "</script>";
-}
-
-?>

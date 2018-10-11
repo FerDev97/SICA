@@ -374,7 +374,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                       url: 'editarUsuariosAc.php',
                       data: {id:id, nombre:nombre, contra:contra, tipo:tipo, opcion:opcion},
                       success: function(respuesta) {
-                            alert(""+respuesta);
+                            
                           if(respuesta==3){
                             sweetWar2("Estos datos ya existen");
                           }
