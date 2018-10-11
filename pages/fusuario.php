@@ -803,7 +803,3 @@ function msgError($texto)
 }
   
 ?>
-<?php
-
-
-?>
