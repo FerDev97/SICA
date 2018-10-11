@@ -125,7 +125,7 @@ $id  = $_REQUEST["id"];
                                                     <div id="div">
                                                         <div class="input-group " style="padding-bottom:10px;">
                                                           <span class="input-group-addon"><i class="fa fa-suitcase"></i></span>
-                                                          <select id="tipo"  class="form-control" name="tipo">
+                                                          <select id="tipo" name="tipo" class="form-control">
                                                             
                                                             <option value="1">Administrador</option>
                                                             <option value="0">Docente</option>
@@ -349,8 +349,8 @@ $id  = $_REQUEST["id"];
         var id = $('#id').val();
         var nombre = $('#usuario').val();
         var contra = $('#contrasena').val();
-        var contra = $('#contrasena2').val();
         var tipo = $('#tipo').val();
+        var opcion = $('input:radio[name=opcion]:checked').val();
 
 
         swal({
@@ -365,14 +365,14 @@ $id  = $_REQUEST["id"];
         }).then((result) => {
             if (result.value) {
 
-                  var todo = $("#modificar").serialize();
+                  //var todo = $("#modificar").serialize();
 
                   $.ajax({
                       type: 'post',
                       url: 'editarUsuariosAc.php',
-                      data: todo,
+                      data: {id:id, nombre:nombre, contra:contra, tipo:tipo, opcion:opcion},
                       success: function(respuesta) {
-
+                            alert(""+respuesta);
                           if(respuesta==3){
                             sweetWar2("Estos datos ya existen");
                           }

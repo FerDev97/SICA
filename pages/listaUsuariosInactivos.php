@@ -17,7 +17,7 @@ $id  = $_REQUEST["id"];
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lista de usuarios | SICA</title>
+  <title>Lista de usuarios inactivos| SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -394,66 +394,16 @@ $id  = $_REQUEST["id"];
 
       return false;
     });//fin del click
+
+    function activar(valor){
+        
+    }
     
   });//fin del ready
 
-  function editar(id, nombre, contra, tipo){
 
+  
       
-      $('#dia1').val(dia1);
-      $('#dia2').val(dia2);
-      $("#estado option[value="+estado+"]").prop("selected", true);
-      $("#bloque").val(horas);
-      $("#id").val(id);
-      $("#modalito").modal();
-      
-    }
-
-  function verificar(){
-       
-       var dato = $("#dia1").val();
-        if(dato == "Lunes"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Martes"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Miercoles"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Martes'>Martes</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Jueves"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Martes'>Martes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Viernes'>Viernes</option>");
-        }
-        if(dato == "Viernes"){
-          $("#dia2").empty();
-          $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
-          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
-          $("#dia2").append("<option value='Martes'>Martes</option>");
-          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
-          $("#dia2").append("<option value='Jueves'>Jueves</option>");
-        }
- 
-     }
 
             //SWEET ALERTS
                 function sweetConfirm(){

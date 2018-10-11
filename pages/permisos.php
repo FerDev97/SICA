@@ -17,7 +17,7 @@ $id  = $_REQUEST["id"];
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Asignar permisos | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -132,7 +132,7 @@ $id  = $_REQUEST["id"];
                           <th>Cargo</th>
                           <th>Estado</th>
                          
-                          <th>Permiso</th>
+                          <th>Permisos</th>
 
                         </tr>
                       </thead>
