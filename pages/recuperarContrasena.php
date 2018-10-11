@@ -51,7 +51,7 @@ function go(){
                 url:'emailExiste.php',
                 type:'post',
                 beforeSend:function(){
-                    alert('Procesando consulta por favor espere.');
+                   
                 },
                 success:function(response) {
                     // alert(response);
@@ -65,6 +65,7 @@ function go(){
                         ventana.close();
                         }, 5000); /* 5 Segundos(tiempo a esperar para que envie el mail)*/
                         sweetGuardo("Se envio el correo correctamente.");
+                        
                     }
                 }
             }
@@ -118,6 +119,7 @@ function sweetError(str){
         ''+str,
          'success'
             )
+            
          }
          function prueba(){
              alert("");
@@ -155,7 +157,7 @@ function sweetError(str){
                          
  
                          <a href="index.php" class="txt2 hov1">
-                             Cancelar
+                             Regresar
                          </a>
                      </div>
                      <!-- </form> -->
