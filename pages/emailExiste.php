@@ -6,7 +6,7 @@
    
                       include '../config/conexion.php';
 
-                      $result = $conexion->query("SELECT eid_usuario as id FROM tusuarios,tpersonal where cusuario='".$usuario."' and efk_personal=eid_personal");
+                      $result = $conexion->query("SELECT eid_usuario as id FROM tusuarios,tpersonal where cusuario='".$usuario."' and efk_personal=eid_personal and iestado='1'");
                       if ($result) {
                             
                             while ($fila = $result->fetch_object()) { 

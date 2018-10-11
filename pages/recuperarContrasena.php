@@ -88,8 +88,8 @@ function sweetError(str){
           swal({
    type: 'error',
    title: 'Error...',
-   text: 'El usuario que ingresó no existe.',
-   footer: 'Por favor ingrese su usuario correctamente.'
+   text: 'El usuario que ingresó no existe o esta inhabilitado.',
+   footer: 'Por favor ingrese su usuario correctamente o contacte al administrador.'
  })
          }
          function sweetConfirm(){
