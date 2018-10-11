@@ -3,6 +3,15 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+  $nombre=$_SESSION["usuario"];
+  $tipo  = $_REQUEST["tipo"];
+  $id  = $_REQUEST["id"];
+}else {
+  header("Location:inicio.php");
+}
+  
 ?>
 <html lang="en">
 <head>
@@ -231,13 +240,13 @@ function verificar(){
       <option value="valor">Seleccione personal</option>
       <?php
                       include '../config/conexion.php';
-
+                     
                       $result = $conexion->query("select p.eid_personal as idp, p.cnombre as nombre from tpersonal as p where iestado='1' AND p.eid_personal NOT IN (SELECT tusuarios.efk_personal from tusuarios)");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {
                           echo "<option value='".$fila->idp."'>".$fila->nombre."</option>";
-                         
+                          
                         
                            }
                       }
@@ -734,9 +743,20 @@ $contrasena        = $_REQUEST["contrasena1"];
 $personal          = $_REQUEST["personal"];
 $tipo              = $_REQUEST["tipo"];
 $contrasena=EDE:: encriptar($contrasena);
+$cargo=0;
+ $result2 = $conexion->query("select efk_idcargo as cargo from tpersonal where eid_personal=".$personal);
+                      if ($result2) {
 
-
-if ($bandera == "add") {
+                        while ($fila2 = $result2->fetch_object()) {
+                          $cargo=$fila2->cargo;
+                          
+                        
+                           }
+                      }
+if($cargo==1 && $tipo==0){
+  msgError("Lo sentimos pero la secretaria no puede tener un usuario de tipo docente.");
+}else{
+  if ($bandera == "add") {
   $query = "select cusuario FROM tusuarios WHERE cusuario like '%".$usuario."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
@@ -755,6 +775,9 @@ if ($bandera == "add") {
       msgError("Los datos que desea ingresar ya existen");
   }
 }
+}
+
+
 
 
 function msg($texto)
@@ -778,8 +801,5 @@ function msgError($texto)
     
     echo "</script>";
 }
-
-
   
-
 ?>

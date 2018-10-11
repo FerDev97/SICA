@@ -51,7 +51,7 @@ function go(){
                 url:'emailExiste.php',
                 type:'post',
                 beforeSend:function(){
-                    alert('Procesando consulta por favor espere.');
+                   
                 },
                 success:function(response) {
                     // alert(response);
@@ -64,7 +64,8 @@ function go(){
                         setTimeout(function(){
                         ventana.close();
                         }, 5000); /* 5 Segundos(tiempo a esperar para que envie el mail)*/
-                        sweetGuardo("Se envio el correo correctamente.");
+                        sweetGuardo("Se envío el correo correctamente.");
+                        
                     }
                 }
             }
@@ -87,8 +88,8 @@ function sweetError(str){
           swal({
    type: 'error',
    title: 'Error...',
-   text: 'El usuario que ingreso no existe.',
-   footer: 'Por favor ingrese su usuario correctamente.'
+   text: 'El usuario que ingresó no existe o esta inhabilitado.',
+   footer: 'Por favor ingrese su usuario correctamente o contacte al administrador.'
  })
          }
          function sweetConfirm(){
@@ -118,6 +119,7 @@ function sweetError(str){
         ''+str,
          'success'
             )
+            
          }
          function prueba(){
              alert("");
@@ -130,7 +132,7 @@ function sweetError(str){
      <div class="container-login100">
      <div class="wrap-login100 p-l-25 p-r-20 p-t-45 p-b-60">
      <span class="login100-form-title p-b-73">
-                         Recuperacion de contrasena.
+                         Recuperación de contrasena.
                      </span>
                      <div class="login">
                      <!-- <form name="form"> -->
@@ -141,7 +143,7 @@ function sweetError(str){
                      </div>
                      <br>
                      <div  data-validate="La contraseña es Obligatoria">
-                        <p>Si su usuario es correcto se le enviara un correo electronico con su contrasena. </p>
+                        <p>Si su usuario es correcto se le enviará un correo electronico con su contraseña. </p>
                      </div>
  
                      <div class="container-login100-form-btn m-t-20">
@@ -155,7 +157,7 @@ function sweetError(str){
                          
  
                          <a href="index.php" class="txt2 hov1">
-                             Cancelar
+                             Regresar
                          </a>
                      </div>
                      <!-- </form> -->
@@ -219,7 +221,7 @@ function msgAdd($texto)
          $error="Usuario o contraseña Invalido";
          msgError($error);
       }else if($errorLogin=="loginInactivo"){
-         $error="El usuario Esta inactivo.. Es necesario buscar ayuda con el administrador de SICA";
+         $error="El usuario está inactivo.. Es necesario buscar ayuda con el administrador de SICA";
          msgError($error);
       }
  }

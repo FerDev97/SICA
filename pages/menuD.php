@@ -41,7 +41,7 @@
                   </a>
                   
                   <ul class="nav nav-list tree">
-                      <li><a href="listacliente.php">Realizar inscripcion</a></li>
+                      <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
                       <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
                       <li><a href="listacliente.php">Estadisticas</a></li>
@@ -59,9 +59,9 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                    <li><a href="fusuario.php">Estadisitcas Generales</a></li>
-                    <li><a href="listaUsuariosActivos.php">Alumnos por Sexo</a></li>
-                    <li><a href="listaUsuariosInactivos.php">Aprobados y Reprobados</a></li>
+                    <li><a href="#">Estadisitcas Generales</a></li>
+                    <li><a href="#">Alumnos por Sexo</a></li>
+                    <li><a href="#">Aprobados y Reprobados</a></li>
                     
                   </ul>
 

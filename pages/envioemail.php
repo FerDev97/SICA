@@ -82,10 +82,10 @@ $mail->addAddress($correo,$nombre." ".$apellido);
 $mail->Subject = 'Recuperacion de contrasena.';
 // Lee un cuerpo de mensaje HTML de un archivo externo, convierte las imágenes referenciadas en incrustadas,
 // convertir HTML en un cuerpo alternativo básico de texto plano
-//$mail->msgHTML("<p>Esta es tu contrasena, porfavor guardala en un lugarseguro:hola", dirname(__FILE__));
-$mail->Body = "<p>Esta es tu contrasena, porfavor guardala en un lugarseguro:<b>".$contra."<b></p>";
+//$mail->msgHTML("<p>Esta es tu contraseña, porfavor guardala en un lugar seguro:hola", dirname(__FILE__));
+$mail->Body = "<p>Esta es tu contraseña, porfavor guardala en un lugar seguro:<b>".$contra."<b></p>";
 // Reemplazar el cuerpo de texto sin formato con uno creado manualmente
-$mail->AltBody = 'Esta es tu contrasena, porfavor guardala en un lugarseguro:hola';
+$mail->AltBody = 'Esta es tu contraseña, porfavor guardala en un lugar seguro:hola';
 // enviar el mensaje, comprobar si hay errores
 if (!$mail->send()) echo "Mailer Error: ";// . $mail->ErrorInfo;
 else echo "Mensaje enviado";
