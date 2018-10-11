@@ -10,8 +10,6 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 }else {
   header("Location:inicio.php");
 }
-  
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

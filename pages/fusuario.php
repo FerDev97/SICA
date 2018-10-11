@@ -789,7 +789,3 @@ function msgError($texto)
 }
   
 ?>
-<?php
-
-
-?>
