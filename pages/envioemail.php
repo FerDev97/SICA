@@ -79,7 +79,7 @@ $mail->setFrom('lasantafamiliaasv@gmail.com ','SICA');
  // Establezca a quién se enviará el mensaje
 $mail->addAddress($correo,$nombre." ".$apellido);
 // Establecer la línea de asunto
-$mail->Subject = 'Recuperación de contrasena.';
+$mail->Subject = 'Recuperacion de contrasena.';
 // Lee un cuerpo de mensaje HTML de un archivo externo, convierte las imágenes referenciadas en incrustadas,
 // convertir HTML en un cuerpo alternativo básico de texto plano
 //$mail->msgHTML("<p>Esta es tu contraseña, porfavor guardala en un lugar seguro:hola", dirname(__FILE__));
