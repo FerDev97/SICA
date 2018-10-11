@@ -3,7 +3,7 @@
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+if($_SESSION["logueado"] == TRUE) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
   $id  = $_REQUEST["id"];

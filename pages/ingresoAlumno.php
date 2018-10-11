@@ -2,8 +2,9 @@
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"]==1) {
   $nombre=$_SESSION["usuario"];
+  $perIns= $_SESSION["permisoI"];
   $tipo  =$_SESSION["tipo"];
   $id  = $_REQUEST["id"];
 }else {
@@ -16,7 +17,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turismo</title>
+  <title>Inscripcion</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -61,8 +62,14 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
    <?php include "header.php"?>
 
       <div class="container-fluid mimin-wrapper">
-
-          <?php include "menu.php";?>
+      <?php
+          if($perIns==1){
+            include "menuD.php";
+           
+          }else{
+            include "menu.php";
+          } ?>
+         
 
 
           <!-- start: Content -->
