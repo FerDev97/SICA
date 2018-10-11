@@ -1,11 +1,16 @@
+
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-if($_SESSION["logueado"] == TRUE) {
-$nombre=$_SESSION["usuario"];
-$tipo  =$_SESSION["tipo"];
-$id  = $_REQUEST["id"];
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+  $nombre=$_SESSION["usuario"];
+  $tipo  =$_SESSION["tipo"];
+  $id  = $_REQUEST["id"];
+}else {
+  header("Location:inicio.php");
+}
+  
 
 ?>
 <!DOCTYPE html>
@@ -847,9 +852,3 @@ $id  = $_REQUEST["id"];
 <!-- end: Javascript -->
 </body>
 </html>
-<?php
-} else {
-  header("Location: index.php");
-  }
-  
-?>

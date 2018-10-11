@@ -3,10 +3,12 @@
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
-$nombre=$_SESSION["usuario"];
-$tipo  = $_REQUEST["tipo"];
-$id  = $_REQUEST["id"];
-
+  $nombre=$_SESSION["usuario"];
+  $tipo  = $_REQUEST["tipo"];
+  $id  = $_REQUEST["id"];
+}else {
+  header("Location:inicio.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,7 @@ $id  = $_REQUEST["id"];
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Permiso</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -308,10 +310,5 @@ function msg($texto)
     echo "document.location.href='listapersonal.php';";
     echo "</script>";
 }
-
-} else {
-  header("Location: index.php");
-  }
-  
 
 ?>
