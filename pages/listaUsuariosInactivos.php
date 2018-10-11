@@ -75,7 +75,8 @@ $id  = $_REQUEST["id"];
                           <th>Tipo de usuario</th> 
                           <th>DUI</th>
                           <th>Nombre</th>
-                          <th>Apellido</th>            
+                          <th>Apellido</th>
+                          <th>Cargo</th>            
                           <th>Acciones</th>   
                                                  
                       </tr>

@@ -76,7 +76,8 @@ $id  = $_REQUEST["id"];
                           <th>Tipo de usuario</th> 
                           <th>DUI</th>
                           <th>Nombre</th>
-                          <th>Apellido</th>            
+                          <th>Apellido</th>
+                          <th>Cargo</th>            
                           <th>Acciones</th>  
                                                  
                       </tr>
@@ -390,7 +391,16 @@ $id  = $_REQUEST["id"];
                             $("#modalito").modal('hide');
                             sweetError("Error del servidor: No se modificaron los datos");
                           }
-                          
+                          if(respuesta == 4){
+
+                                swal({
+                                    type: 'warning',
+                                    title: 'No puede haber mas de 3 administradores!',
+                                    text: 'No puede registrar un nuevo administrador',
+                                    footer: 'Revise el tipo de usuario.'
+                                })
+
+                          }
                           
                           
                       },
@@ -560,9 +570,10 @@ $id  = $_REQUEST["id"];
     
   });//fin del ready
 
-  function editar(id, nombre, contra, tipo){
+  function editar(id, nombre, contra, tipo, cargo){
 
-    
+
+
       $('#id').val("");//limpio el formulario del modal
       $('#usuario').val("");
       $('#tipo').val("");
@@ -582,6 +593,20 @@ $id  = $_REQUEST["id"];
       $('#tipo').val(tipo);
       $("#modalito").modal();
       $("#guardar").prop("disabled",false);
+
+      
+      if(cargo == 1 && tipo == 1){// si es secretaria y admin
+        $('#tipo').prop("disabled",true);
+        
+      }else{
+        $('#tipo').prop("disabled",false);
+          if(cargo == 3 && tipo == 0){// si es de cargo docente y usuario docente
+            $('#tipo').prop("disabled",true);
+          }else{
+            $('#tipo').prop("disabled",false);
+          }
+      }
+      
 
       
     }
