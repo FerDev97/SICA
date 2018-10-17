@@ -16,7 +16,7 @@
                   <li><a href="anioactivo.php">Año Activo</a></li>
                      <li><a href="permisos.php">Permisos Temporales</a></li>
                      <li><a href="cadministradores.php">Lista de administradores</a></li>
-                     <li><a href="listacliente.php">Estadisticas</a></li>
+                   
               
                  </ul>
                 </li>
@@ -99,9 +99,9 @@
                   </a>
                   <ul class="nav nav-list tree">
                     <li><a href="fpersonal.php">Agregar Nuevo</a></li>
-                    <li><a href="listapersonal.php">Lista de Personal</a></li>
-                    <li><a href="listapersonalinactivo.php">Lista de Personal Inactivo</a></li>
-                    <li><a href="fcargo.php">Cargo</a></li>
+                    <li><a href="listapersonal.php">Personal Activo</a></li>
+                    <li><a href="listapersonalinactivo.php">Personal Inactivo</a></li>
+                    <li><a href="fcargo.php">Cargos</a></li>
                   </ul>
 
                 </li>
@@ -141,7 +141,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="lugar.php">Gestionar Seguridad</a></li>
+                        <li><a href="lugar.php">Bitacora</a></li>
+                        <li><a href="lugar.php">Backup</a></li>
                         
                       </ul>
                     </li>
