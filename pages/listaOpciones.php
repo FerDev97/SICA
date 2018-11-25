@@ -314,7 +314,7 @@ function sweetConfirm(){
         }
        
         var todo = $("#modificar").serialize();
-
+        
         $.ajax({
             type: 'post',
             url: 'editarOpcion.php',
