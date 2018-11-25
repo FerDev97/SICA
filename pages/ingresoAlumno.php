@@ -41,6 +41,37 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+      //Validacion Solo letras
+      function sololetras(e) {
+        key=e.keyCode || e.which;
+ 
+        teclado=String.fromCharCode(key).toLowerCase();
+ 
+        letras="qwertyuiopasdfghjklñzxcvbnm ";
+ 
+        especiales="8-37-38-46-164";
+ 
+        teclado_especial=false;
+ 
+        for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true;
+                break;
+            }
+        }
+ 
+        if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+        }
+    }
+    //Validacion Telefono
+    var nav4 = window.Event ? true : false;
+      function aceptNum(evt){
+        var key = nav4 ? evt.which : evt.keyCode;
+        return (key <= 13 || (key>= 48 && key <= 57));
+      }
+      //Fin Validacion Telefono
+     //Validacion Solo letras
         function verificar(){
           if(document.getElementById('nombreempleado').value=="" ||
             document.getElementById('apellidoempleado').value=="" ||
@@ -91,7 +122,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   <ul id="progressbar">
     <li class="active">Datos Personales</li>
     <li>Datos del responsable.</li>
-    <li>Informacion adicional.</li>
+    <li>Información adicional.</li>
   </ul>
   <!-- fieldsets -->
   <fieldset>
@@ -103,16 +134,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Codigo.">
+     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo.">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Nombre.">
+     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)">
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
-      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 264px; font-size: 15px" name="iddia">
+      <select id="departamentoa"  id="iddia" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
       <option value="">Seleccione Departamento</option>
       <option value="">San Salvador</option>
       <option value="">San Vicente</option>
@@ -133,11 +164,11 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       </div>
       <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccion"></textarea>
+      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direcciona" name="direcciona"></textarea>
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
-      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 240px; font-size: 15px" name="iddia">
+      <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
       <option value="">Medio de Transporte</option>
       <option value="">Autobus</option>
       <option value="">A pie</option>
@@ -147,7 +178,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
-      <select id="dia"  id="iddia" class="select2 show-tick" style="width: 242px; font-size: 15px" name="iddia">
+      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bchilleratoa">
       <option value="">Seleccione Opcion</option>
       <option value="">1° Año Bachillerato General</option>
       <option value="">2° Año Bachillerato General</option>
@@ -158,15 +189,15 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       </div>
       <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
-     <input id="codigom" type="number" class="form-control" name="codigom" placeholder="En que año estudio el grado anterior">
+     <input id="anteriora" type="text" class="form-control" name="anteriora" placeholder="En que año estudio el grado anterior">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="codigom" type="number" class="form-control" name="codigom" placeholder="Enfermedades que padece">
+     <input id="enfermedadesa" type="number" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="codigom" type="number" class="form-control" name="codigom" placeholder="Es alergico a">
+     <input id="alergiaa" type="number" class="form-control" name="alergiaa" placeholder="Es alergico a">
      </div>
       
  
@@ -180,11 +211,11 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     <!-- Finaliza col md 6 (derecha) -->
      <div class="col-md-6">
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="NIE.">
+     <input id="niea" type="text" class="form-control" name="niea" placeholder="NIE.">
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:25px;">
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Apellido.">
+     <input id="apellidoa" type="text" class="form-control" name="apellidoa" placeholder="Apellido." onkeypress="return sololetras(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      </div>
 
@@ -194,32 +225,32 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
      </div>
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="codigom" type="text" class="form-control" name="codigom" placeholder="Distancia en metros desde casa hasta el C.E.">
+     <input id="distanciaa" type="text" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="optradio">Si</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="optradio">No</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" id="parvularia">Si</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" id="parvularia">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
-     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="optradio">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">No</label>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" id="trabaja">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" id="trabaja">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
-     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="optradio">Rural</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">Urbana</label>
+     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" id="zonaa">Rural</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa"id="zonaa">Urbana</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
-     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="optradio">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="optradio">No</label>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" id="repitea">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" id="repitea">No</label>
      </div>
      </br>
      <div>
@@ -245,25 +276,180 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
-    <h2 class="fs-title">DATOS PERSONALES DEL PADRE DE FAMILIA.</h2>
-    <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su numero de telefónico por favor actualizarlo.</h3>
-    <input type="text" name="twitter" placeholder="Twitter" />
-    <input type="text" name="facebook" placeholder="Facebook" />
-    <input type="text" name="gplus" placeholder="Google Plus" />
+    <h2 class="fs-title">DATOS PERSONALES DE LOS PADRE DE FAMILIA O ENCARGADO.</h2>
+    <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su número de telefónico por favor actualizarlo.</h3>
+    <!-- Inicia col md 12 panel -->
+    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+      <!-- Inicia el col md 6 izquierda -->
+    
+    <div class="col-md-6">
+    <h3 class="fs-subtitle" >* DATOS  DEL PADRE.</h3>
+    <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <input id="nombrep" type="text" class="form-control" name="nombrep" placeholder="Nombre del padre." onkeypress="return sololetras(event)">
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+     <input id="lugarp" type="text" class="form-control" name="lugarp" placeholder="Lugar de Trabajo." >
+     </div>
+    <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     <input id="duip" type="text" class="form-control" name="duip" placeholder="DUI.">
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+     <input id="telefonocp" type="text" class="form-control" name="telefonocp" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+     <input id="telefonotp" type="text" class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+     <input id="celularp" type="text" class="form-control" name="celularp" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     </div>
+     
+     
+     
+
+      
+      <div class="input-group"style="padding-bottom:20px;">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccionp" name="direccionp"></textarea>
+      </div>
+      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
+      <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
+      <option value="">Matrimonio Religioso</option>
+      <option value="">Civil</option>
+      <option value="">Acompañados</option>
+      <option value="">Separados</option>
+      <option value="">Viudo/a</option>
+      </select>
+      </div>
+      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+     <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
+      <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
+      <option value="">Mamá</option>
+      <option value="">Papá</option>
+      <option value="">Mamá y Papá</option>
+      <option value="">Otro</option>
+      </select>
+      </div>
+      
+       </div>
+    <!-- Finaliza col md 6 -->
+    
+    <!-- Finaliza col md 6 (derecha) -->
+     <div class="col-md-6">
+     <h3 class="fs-subtitle" >* DATOS  DE LA MADRE.</h3>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de la madre." onkeypress="return sololetras(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="lugarm" type="text" class="form-control" name="lugarm" placeholder="Lugar de Trabajo.">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="oficiom" type="text" class="form-control" name="oficiom" placeholder="Profesión u oficio." onkeypress="return sololetras(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="duim" type="text" class="form-control" name="duim" placeholder="DUI">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="celularm" type="text" class="form-control" name="celularm" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+     </div>
+    
+     
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="miembrosm" type="text" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+     </div>
+     </br>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-asterisk"></i><span class="label label-default" style="width: 100px; font-size: 12px">Religión que profesan</span>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" id="religionm">Católica</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religionm" id="religionm">Otra</label>
+     </div>
+     </br>
+    
+     </br>
+ </div>
+    <!-- Finaliza col md 6 -->
+    </div>
+    <!-- Finaliza col md 12 panel body -->
+    
+    
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
     <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>
   
   <fieldset>
-    <h2 class="fs-title">Personal Details</h2>
-    <h3 class="fs-subtitle">We will never sell it</h3>
-    <input type="text" name="fname" placeholder="First Name" />
-    <input type="text" name="lname" placeholder="Last Name" />
-    <input type="text" name="phone" placeholder="Phone" />
+    <h2 class="fs-title">DETALLES</h2>
+    <h3 class="fs-subtitle" >Hermanos/as que estudien en el centro educativo.</h3>
+     <!-- Inicia el col md 6 izquierda -->
+    
+     <div class="col-md-6">
+    
+    <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <input id="nombreh1" type="text" class="form-control" name="nombreh1" placeholder="Nombre" onkeypress="return sololetras(event)">
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <input id="nombreh2" type="text" class="form-control" name="nombreh2" placeholder="Nombre" onkeypress="return sololetras(event)">
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <input id="nombreh3" type="text" class="form-control" name="nombreh3" placeholder="Nombre" onkeypress="return sololetras(event)">
+     </div>
+     </div>
+    <!-- Finaliza col md 6 -->
+    
+    <!-- Finaliza col md 6 (derecha) -->
+     <div class="col-md-6">
+     
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="gradoh1" type="text" class="form-control" name="gradoh1" placeholder="Grado">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="gradoh2" type="text" class="form-control" name="gradoh2" placeholder="Grado">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="gradoh3" type="text" class="form-control" name="gradoh3 " placeholder="Grado">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+     </div>
+     
+     
+     
+     
+     </br>
+    
+     </br>
+ </div>
+    <!-- Finaliza col md 6 -->
+    
+    
+    
+    
     </br>
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+    <input type="button" name="previous" class="previous action-button" value="Anterior" />
+    <input type="submit" name="submit" class="submit action-button" value="Guardar" />
   </fieldset>
 </form> 
             </div>

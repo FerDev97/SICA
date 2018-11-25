@@ -134,7 +134,7 @@ if(empty($anio))
               <input type="hidden" name="r" id="r" value="">
               <div class="col-md-12 top-20 padding-0">
 
-                 <div class="col-md-7">
+                 <div class="col-md-5">
                    <div class="col-md-12">
                    <div class="panel">
                      <div class="panel-heading"><h3>Ciclos Academicos</h3>
@@ -208,6 +208,54 @@ if(empty($anio))
                  </div>
                </div>
                </div>
+               
+    <!-- Inicio Formulario-->
+               <div class="col-md-6 panel panel-info">
+                    <div class="col-md-12 panel-heading">
+                      <h4>Formulario Año.</h4>
+                    </div>
+
+                    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                      <div class="col-md-12">
+                        <form class="cmxform" id="formcliente" method="post" action="">
+
+                          <div class="col-md-12">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <input id="año" type="text" class="form-control" name="año" placeholder="Digite año escolar." size="4" maxlength="4" onkeypress="return aceptNum(event)">
+                          </div>
+                         </br>
+                        <div class="input-group " style="padding-bottom:25px;">
+                         <i  class="fa fa-check-circle"></i><span class="label label-default" style="width: 20px; font-size: 15px">Estado</span>
+                        <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1">Activo</label>
+                        <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="0">Inactivo</label>
+                        </div>
+                        <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                        </div>
+                        </div>
+                        <!-- Div del span -->
+                          </div>
+                           <div class="col-md-12">
+                           <div class="col-md-3">
+                          </div>
+                            <div class="col-md-3">
+                            <br><b></b>
+                            <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
+                            </div>
+                            <div>
+                            <br><b></b>
+                            <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                            </div>
+                            </div>
+                           </div>
+                           </form>
+                           </div>
+                           </div>
+                           </div>
+                           
+    <!-- Fin Formulario-->
+               
 
 
 

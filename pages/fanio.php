@@ -251,27 +251,27 @@ error_reporting(E_ALL & ~E_NOTICE);
                             <br><b></b>
                             <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                             </div>
-                        </div>
-                        </div>
-                      </form>
+                            </div>
+                           </div>
+                           </form>
+                           </div>
+                           </div>
+                           </div>
+                           </form>
                       </div>
-                      </div>
-                      
-
-
-
-                      </div>
-                      </form>
                 </div>
-                </div>
+               </div>
               </div>
               </div>
-            </div>
+              
+              
+            
           <!-- end: content -->
           
 
 
       </div>
+      
 
       <!-- start: Mobile -->
       <div id="mimin-mobile" class="reverse">
