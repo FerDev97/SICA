@@ -13,7 +13,7 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                  <li><a href="anioactivo.php">Año Activo</a></li>
+                  <li><a href="fanio.php">Año Escolar Activo</a></li>
                      <li><a href="permisos.php">Permisos Temporales</a></li>
                      <li><a href="cadministradores.php">Lista de administradores</a></li>
                    

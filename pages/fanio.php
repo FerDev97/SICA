@@ -151,6 +151,17 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
     }
      //Validacion Solo letras
+     function confirmar(id)
+        {
+            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
+            document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+          }else
+          {
+            alert("No entra");
+          }
+        }
     
 
 
@@ -256,11 +267,87 @@ error_reporting(E_ALL & ~E_NOTICE);
                            </form>
                            </div>
                            </div>
+                           <!-- Inicio Tabla Año -->
+
+                           <div class="col-md-6">
+                   <div class="col-md-12">
+                   <div class="panel">
+                     <div class="panel-heading"><h3>Ciclos Academicos</h3>
+                       <?php
+                       include "../config/conexion.php";
+                       $result = $conexion->query("select * from tanio");
+                       if($result->num_rows<1){
+                         ?>
+
+                       <button type="button" class="btn-flip btn btn-gradient btn-primary" data-toggle='modal' data-target='#myModal'>
+                             <div class="flip">
+                               <div class="side">
+                                 Agregar Nuevo <span class="fa fa-edit"></span>
+                               </div>
+                               <div class="side back">
+                                 Continuar?
+
+                               </div>
+                             </div>
+                             <span class="icon"></span>
+                           </button>
+                           <?php
+                            }
+                             ?>
+                          </div>
+                     <div class="panel-body">
+                       <div class="responsive-table">
+                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0" >
+                       <thead>
+                         <tr>
+                             <th>Año</th>
+                            <th >Estado</th>
+                            <th style="width:30px;">Activar/Desactivar</th>
+
+
+                         </tr>
+                       </thead>
+                       <tbody>
+                       <?php
+ include "../config/conexion.php";
+ $result = $conexion->query("select * from tanio order by canio DESC");
+ if ($result) {
+     while ($fila = $result->fetch_object()) {
+         echo "<tr>";
+         echo "<td>" . $fila->canio . "</td>";
+
+        
+         if ($fila->iestado==1) {
+                      echo "<td>Activo</td>";
+                       echo "<td style='text-align:center;'>Ciclo actual.</td>";
+                   }else
+                    if ($fila->iestado==0) {
+
+                      echo "<td>Inactivo</td>";
+                     
+                      echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_anio . ");><i class='fa fa-check'></i>
+                         </button></td>";
+                   }
+         echo "</tr>";
+
+     }
+ }
+ ?>
+                       </tbody>
+                         </table>
+                       </div>
+                   </div>
+                 </div>
+               </div>
+               </div>
                            </div>
+                           
                            </form>
                       </div>
                 </div>
+                
                </div>
+               
               </div>
               </div>
               
@@ -674,6 +761,51 @@ if ($bandera == "add") {
       msgError("Los datos que desea ingresar ya existen");
   }
 }
+if ($bandera == "desactivar") {
+  $result2 = $conexion->query("select * from tanio");
+  if ($result2) {
+    while ($fila = $result2->fetch_object()) {
+      $idanio=$fila->idanio;
+      $consulta1 = "update tanio set iestado='1' where eid_anio=".$idanio;
+      $resultado = $conexion->query($consulta1);
+    }
+  }
+  $consulta4 = "update tanio set iestado='0' where eid_anio='".$baccion."'";
+    $resultado = $conexion->query($consulta4);
+    if ($resultado) {
+        //msg("Exito");
+        echo "<script type='text/javascript'>";
+        echo "alert('Exito');";
+        echo "document.location.href='fanio.php';";
+        echo "</script>";
+    } else {
+        msg("No Exito");
+    }
+}
+if ($bandera == "activar") {
+  $result2 = $conexion->query("select * from tanio");
+  if ($result2) {
+    while ($fila = $result2->fetch_object()) {
+      $idanio=$fila->idanio;
+      $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
+      $resultado = $conexion->query($consulta);
+    }
+  }
+
+  $consulta2 = "update tanio set iestado='0' where eid_anio=".$baccion;
+    $resultado = $conexion->query($consulta2);
+    if ($resultado) {
+
+      echo "<script type='text/javascript'>";
+      echo "alert('Exito');";
+      echo "document.location.href='fanio.php';";
+      echo "</script>";
+    } else {
+        msg("No Exito");
+    }
+
+}
+
 
 
 function msg($texto)
