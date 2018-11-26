@@ -3,19 +3,19 @@ var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
-$(".next").click(function() {
+$(".next").click(function form1() {
     // aqui va el codigo que se ejecuta al darle al boton siguiente
     verificarCamposObligatoriosPersonales();
+    // pasarSiguiente();
     if (animating) return false;
     animating = true;
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
-
     //activate next step on progressbar using the index of next_fs
     $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
     //show the next fieldset
     next_fs.show();
+
     //hide the current fieldset with style
     current_fs.animate({ opacity: 0 }, {
         step: function(now, mx) {
@@ -41,6 +41,13 @@ $(".next").click(function() {
         easing: 'easeInOutBack'
     });
 });
+
+function pasarSiguiente() {
+
+
+
+
+}
 
 $(".previous").click(function() {
     if (animating) return false;
@@ -78,5 +85,7 @@ $(".previous").click(function() {
 });
 
 $(".submit").click(function() {
+
+    alert("va a hacer submit");
     return false;
-})
+});

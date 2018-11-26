@@ -23,6 +23,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
 
   <!-- plugins -->
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/nouislider.min.css"/>
@@ -46,8 +47,10 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
        alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
         alert("Lo sentimos, este campo es obligatorio.");
+        return 0;
       }else{
          alert("nO ESTA VACIO");
+         return 1;
       }
     }
     </script>
@@ -71,7 +74,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
                 break;
             }
         }
- 
+
         if(letras.indexOf(teclado)==-1 && !teclado_especial){
             return false;
         }
@@ -139,7 +142,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
-    <h3 class="fs-subtitle">Informacion personal del alumno.</h3>
+    <h3 class="fs-subtitle">Informacion personal del alumno.<br>Los campos con un (*) son obligatorios.</h3>
     <!-- Inicia col md 12 panel -->
     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
       <!-- Inicia el col md 6 izquierda -->
@@ -284,7 +287,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     </div>
     <!-- Finaliza col md 12 panel body -->
     
-    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" value="Siguiente" />
+    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" onclick="form1()" value="Siguiente" />
     <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
@@ -482,7 +485,9 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 <script src="../asset/js/bootstrap.min.js"></script>
 
 
+
 <!-- plugins -->
+
 <script src="../asset/js/plugins/moment.min.js"></script>
 <script src="../asset/js/plugins/jquery.knob.js"></script>
 <script src="../asset/js/plugins/ion.rangeSlider.min.js"></script>
@@ -493,6 +498,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
 <script src="../asset/js/wizard.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- custom -->
