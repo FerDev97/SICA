@@ -6,8 +6,22 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
   $id  = $_REQUEST["id"];
+  $anio=$_REQUEST["anio"];
 }else {
   header("Location:inicio.php");
+}
+if(empty($anio))
+{
+
+}else
+{
+  $consulta  = "INSERT INTO tanio VALUES('".$anio."','0','-1','0')";
+  $resultado = $conexion->query($consulta);
+  if ($resultado) {
+      //msg("Exito");
+  } else {
+      //msg(mysqli_error($conexion));
+  }
 }
 
 
@@ -100,24 +114,8 @@ error_reporting(E_ALL & ~E_NOTICE);
 
       //SWEET ALERTS
 
-      //Validacion Correo Electronico
-      function validateMail(Correo)
-      {
-        //Creamos un objeto 
-        object=document.getElementById(Correo);
-        valueForm=object.value;
-        // Patron para el correo
-        var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-        if(valueForm.search(patron)==0)
-        {
-          //Mail correcto
-          object.style.color="#000";
-          return;
-          }
-          //Mail incorrecto
-          object.style.color="#f00";
-          }
-      // Fin Validacion Correo Electronico
+     
+     
 
       //Validacion Telefono
       var nav4 = window.Event ? true : false;
@@ -151,6 +149,13 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
     }
      //Validacion Solo letras
+     function validar()
+      {
+        var v=document.getElementById("anio").value;
+        if (v.length>4) {
+          document.getElementById("anio").value=v.slice(0,-1);
+        }
+      }
      function confirmar(id)
         {
             if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
@@ -738,8 +743,8 @@ include "../config/conexion.php";
 
 $bandera   = $_REQUEST["bandera"];
 $baccion   = $_REQUEST["baccion"];
-$año = $_REQUEST["año"];
-$estado     = $_REQUEST["estado"];
+$año       = $_REQUEST["año"];
+$estado    = $_REQUEST["estado"];
 
 
 if ($bandera == "add") {
@@ -770,7 +775,7 @@ if ($bandera == "desactivar") {
       $resultado = $conexion->query($consulta1);
     }
   }
-  $consulta4 = "update tanio set iestado='0' where eid_anio='".$baccion."'";
+  $consulta4 = "update tanio set iestado='0' WHERE eid_anio='".$baccion."'";
     $resultado = $conexion->query($consulta4);
     if ($resultado) {
         //msg("Exito");
@@ -792,7 +797,7 @@ if ($bandera == "activar") {
     }
   }
 
-  $consulta2 = "update tanio set iestado='0' where eid_anio=".$baccion;
+  $consulta2 = "update tanio set iestado='1' where eid_anio=".$baccion;
     $resultado = $conexion->query($consulta2);
     if ($resultado) {
 
