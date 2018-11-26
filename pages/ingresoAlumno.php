@@ -41,6 +41,33 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+
+
+      <!-- SCRIPTS DE SWEET ALERTS -->
+      <script>
+      function DatosIncompletos(){
+        swal({
+  title: '<strong>HTML <u>example</u></strong>',
+  type: 'info',
+  html:
+    'You can use <b>bold text</b>, ' +
+    '<a href="//github.com">links</a> ' +
+    'and other HTML tags',
+  showCloseButton: true,
+  showCancelButton: true,
+  focusConfirm: false,
+  confirmButtonText:
+    '<i class="fa fa-thumbs-up"></i> Great!',
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+  cancelButtonText:
+    '<i class="fa fa-thumbs-down"></i>',
+  cancelButtonAriaLabel: 'Thumbs down',
+})
+
+      }
+      
+      </script>
+      <!-- FIN SCRIPTS DE SWEET ALERTS -->
       <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
     <script>
     function verificarCamposObligatoriosPersonales(){
@@ -505,7 +532,6 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 <script src="../asset/js/main.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-
     $("#formcliente").validate({
       errorElement: "em",
       errorPlacement: function(error, element) {

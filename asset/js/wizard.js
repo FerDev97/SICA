@@ -87,5 +87,6 @@ $(".previous").click(function() {
 $(".submit").click(function() {
 
     alert("va a hacer submit");
+    DatosIncompletos();
     return false;
 });
