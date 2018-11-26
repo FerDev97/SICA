@@ -5,6 +5,7 @@ session_start();
 if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
+ 
   $id  = $_REQUEST["id"];
 }else {
   header("Location:inicio.php");
@@ -370,7 +371,7 @@ if ($result) {
                   <br>
                    <center>
                    <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema" data-dismiss="modal" style="margin-left:0px;" class="btn btn-info" type="button" id="guardarS" name="guardarS" >
+                  <button title="Agrega Nueva Opciones al Sistema" data-dismiss="modal" style="margin-left:0px;" class="btn btn-info" type="button" id="guardarS" name="guardarS" >
                   Guardar</button>
                   </div>
                   </center>
@@ -422,7 +423,7 @@ if ($result) {
                               <?php
                                   include('combotipo.php')?> 
                               </select>
-                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipo">Nuevo Tipo</button>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipob">Nuevo Tipo</button>
                     <br><br>
                         </div>
                      <div class="input-group"style="padding-bottom:0px;">
@@ -473,7 +474,7 @@ if ($result) {
 
   <!-- Fin Modal de opciones -->
    <!-- Modal de Tipo bachillerato-->
- <div class="modal fade" id="modalTipo" role="dialog">
+ <div class="modal fade" id="modalTipob" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
