@@ -5,6 +5,7 @@ session_start();
 if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
+  $ids  =$_SESSION["id"];
   $id  = $_REQUEST["id"];
 }else {
   header("Location:inicio.php");

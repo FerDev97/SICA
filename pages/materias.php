@@ -1,14 +1,14 @@
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
-//error_reporting(E_ALL & ~E_NOTICE);
-//session_start();
-//if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
- // $nombre=$_SESSION["usuario"];
-//  $tipo  =$_SESSION["tipo"];
-//  $id  = $_REQUEST["id"];
-//}else {
- // header("Location:inicio.php");
-//}
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
+  $nombre=$_SESSION["usuario"];
+  $tipo  =$_SESSION["tipo"];
+  $id  = $_REQUEST["id"];
+}else {
+  header("Location:inicio.php");
+}
 ?>
 <!DOCTYPE html>
 <?php
@@ -543,6 +543,8 @@ function sweetError(str){
 </html>
 <?php
 
+
+include "IB.php";
 include "../config/conexion.php";
 
 $bandera  = $_REQUEST["bandera"];
@@ -581,6 +583,7 @@ if ($bandera == "add") {
     
         //msg("Agrego pm.");
         //Query para agregar a la tabla de muchos a muchos.
+        IB:: insertar($_SESSION["id"],"Registró una nueva materia");
         msgAdd("Agrego una nueva materia.");
          } else {
         echo("Error pm:".mysqli_error($conexion));

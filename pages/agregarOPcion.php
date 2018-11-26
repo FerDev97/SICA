@@ -1,6 +1,7 @@
 <?php
+session_start();
 include "../config/conexion.php";
-
+include "IB.php";
 $accion =$_REQUEST['accion'];
 
 if($accion=="guardarOpc"){
@@ -15,6 +16,7 @@ $result = $conexion->query($query);
         $consulta  = "INSERT INTO topciones VALUES('null','" . $cupo . "','" .$opcion. "','" .$grado. "','" .$seccion. "','1')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
+             IB:: insertar($_SESSION["id"],"Registró una nueva Opcion de Bachillerato");
               $mensaje="Se agregaron los datos correctamente";
           } else {
               $mensaje="Error al insertar los datos";
@@ -34,6 +36,7 @@ echo $mensaje;
         $consulta  = "INSERT INTO tgrado VALUES('null','" . $grado . "')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
+            IB:: insertar($_SESSION["id"],"Registró un nuevo grado");
               $mensaje="Se agregaron los datos correctamente";
           } else {
               $mensaje="Error al insertar los datos";
@@ -55,6 +58,7 @@ echo $mensaje;
         $consulta  = "INSERT INTO ttipobachillerato VALUES('null','" . $tipo . "')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
+            IB:: insertar($_SESSION["id"],"Registró un nuevo tipo de bachillerato");
               $mensaje="Se agregaron los datos correctamente";
           } else {
               $mensaje="Error al insertar los datos";
@@ -79,6 +83,7 @@ echo $mensaje;
         $consulta  = "INSERT INTO tbachilleratos VALUES('null','" . $codigo . "','" .$nombre. "','" .$descripcion. "','" .$tipo. "','1')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
+            IB:: insertar($_SESSION["id"],"Registró un nuevo bachillerato");
               $mensaje="Se guardaron los datos correctamente";
           } else {
               $mensaje="Error al insertar los datos";
@@ -99,6 +104,7 @@ echo $mensaje;
         $consulta  = "INSERT INTO tsecciones VALUES('null','" . $seccion . "')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
+            IB:: insertar($_SESSION["id"],"Registró una nueva Seccion");
               $mensaje="Se agregaron los datos correctamente";
           } else {
               $mensaje="Error al insertar los datos";

@@ -1,5 +1,8 @@
-<?php
+<?
+session_start();
+
 include "../config/conexion.php";
+include "IB.php";
 
 $dia1 = $_POST['diaUno'];
 $dia2 = $_POST['diaDos'];
@@ -15,6 +18,7 @@ $fila=$result->fetch_row();
         $consulta  = "INSERT INTO thorarios VALUES('null','" .$dias. "','" . $bloque . "','".$activo."')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
+             IB:: insertar($_SESSION["id"],"Inserto un nuevo horario");
               $mensaje="1"; //los datos se agregaron correctamente
           } else {
               $mensaje="2";// Error: Los datos no se agregaron

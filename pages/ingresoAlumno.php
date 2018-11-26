@@ -40,6 +40,18 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+      <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
+    <script>
+    function verificarCamposObligatoriosPersonales(){
+       alert(document.getElementById("nombrea").value);
+      if(document.getElementById("nombrea").value==""){
+        alert("Lo sentimos, este campo es obligatorio.");
+      }else{
+         alert("nO ESTA VACIO");
+      }
+    }
+    </script>
+      <!-- fin SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
       <script type="text/javascript">
       //Validacion Solo letras
       function sololetras(e) {
@@ -272,7 +284,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     </div>
     <!-- Finaliza col md 12 panel body -->
     
-    <input type="button" name="next" class="next action-button btn btn-info btn-sm btn-round" value="Siguiente" />
+    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" value="Siguiente" />
     <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
@@ -481,6 +493,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
 <script src="../asset/js/wizard.js"></script>
+
 
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
