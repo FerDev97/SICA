@@ -318,14 +318,14 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
-    <h2 class="fs-title">DATOS PERSONALES DE LOS PADRE DE FAMILIA O ENCARGADO.</h2>
+    <h2 class="fs-title">DATOS PERSONALES DE LOS PADRE DE FAMILIA O RESPONSABLE.</h2>
     <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su número de telefónico por favor actualizarlo.</h3>
     <!-- Inicia col md 12 panel -->
     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
       <!-- Inicia el col md 6 izquierda -->
     
     <div class="col-md-6">
-    <h3 class="fs-subtitle" >* DATOS  DEL PADRE.</h3>
+    <h3 class="fs-subtitle" >* DATOS  DEL PADRE (Responsable masculino).</h3>
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      <input id="nombrep" type="text" class="form-control" name="nombrep" placeholder="Nombre del padre." onkeypress="return sololetras(event)">
@@ -384,7 +384,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     
     <!-- Finaliza col md 6 (derecha) -->
      <div class="col-md-6">
-     <h3 class="fs-subtitle" >* DATOS  DE LA MADRE.</h3>
+     <h3 class="fs-subtitle" >* DATOS  DE LA MADRE (Responsable femenino).</h3>
      <div class="input-group " style="padding-bottom:20px;">
      <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de la madre." onkeypress="return sololetras(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
