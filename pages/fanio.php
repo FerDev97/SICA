@@ -29,6 +29,7 @@ if(empty($anio))
 $hoy = getdate();
 $anioMayor=$hoy['year']-18;
 $anioMenor=$hoy['year']-61;
+
 $mes=sprintf("%02s",$hoy['mon']);
 $dia=sprintf("%02s",$hoy['mday']);
 
@@ -242,14 +243,10 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-12">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <input id="año" type="text" class="form-control" name="año" placeholder="Digite año escolar." size="4" maxlength="4" onkeypress="return aceptNum(event)">
+                              <input id="año" type="number" class="form-control" name="año" placeholder="Digite año escolar." size="4" maxlength="4" min="<?php echo $hoy['year']+1?>" onkeypress="return aceptNum(event)">
                           </div>
                          </br>
-                        <div class="input-group " style="padding-bottom:25px;">
-                         <i  class="fa fa-check-circle"></i><span class="label label-default" style="width: 20px; font-size: 15px">Estado</span>
-                        <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" id="activo" name="estado" value="1">Activo</label>
-                        <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" id="inactivo" name="estado" value="0">Inactivo</label>
-                        </div>
+                       
                         <div class="form-group">
                         <div class='input-group date' id='datetimepicker1'>
                         </div>
@@ -330,7 +327,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                       echo "<td>Inactivo</td>";
                      
-                      echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_anio . ");><i class='fa fa-check'></i>
+                      echo "<td style='text-align:center;'><button title='Activar este año.' align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_anio . ");><i class='fa fa-check'></i>
                          </button></td>";
                    }
          echo "</tr>";
@@ -751,7 +748,7 @@ if ($bandera == "add") {
   $query = "select canio FROM tanio WHERE canio like  '%".$año."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
-    $consulta  = "INSERT INTO tanio VALUES('null','" . $año . "','" . $estado . "')";
+    $consulta  = "INSERT INTO tanio VALUES('null','" . $año . "','0')";
       $resultado = $conexion->query($consulta);
         if ($resultado) {
            msgAdd("Agrego año exitosamente");
@@ -792,6 +789,11 @@ if ($bandera == "activar") {
   if ($result2) {
     while ($fila = $result2->fetch_object()) {
       $idanio=$fila->idanio;
+//CONSULTA PARA DESACTIVAR CUALQUIER AÑO
+      
+$consultaDesac = "update tanio set iestado='0' where iestado='1'";
+$resultadoDesac = $conexion->query($consultaDesac);
+
       $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
       $resultado = $conexion->query($consulta);
     }
