@@ -10,6 +10,8 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 }else {
   header("Location:inicio.php");
 }
+
+    $idAlumno = $_REQUEST["idA"];
 ?>
 <!DOCTYPE html>
 

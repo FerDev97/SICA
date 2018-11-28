@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Lista de alumnos</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -386,7 +386,7 @@ if ($bandera == "desaparecer") {
 }
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
-    echo "document.location.href='editarInscripcion.php?id=" . $baccion . "';";
+    echo "document.location.href='editarInscripcion.php?idA=" . $baccion . "';";
     echo "</script>";
     # code...
 }
