@@ -11,7 +11,8 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   header("Location:inicio.php");
 }
 
-    $idAlumno = $_REQUEST["idA"];
+  
+
 ?>
 <!DOCTYPE html>
 
@@ -65,13 +66,24 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     '<i class="fa fa-thumbs-down"></i>',
   cancelButtonAriaLabel: 'Thumbs down',
 })
+return 0;
 
       }
+       
+
+     
       
       </script>
       <!-- FIN SCRIPTS DE SWEET ALERTS -->
       <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
     <script>
+//Validaciones para registro del alumno
+function go(){
+  document.msform.submit(); 
+}
+
+
+
     function verificarCamposObligatoriosPersonales(){
        alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
@@ -161,16 +173,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
                   </div>
                 </div>
                <!-- multistep form -->
-<form id="msform">
+<form id="msform" name="msform" method="post" action="inscribir.php">
   <!-- progressbar -->
+  <center>
   <ul id="progressbar">
     <li class="active">Datos Personales</li>
     <li>Datos del responsable.</li>
-    <li>Información adicional.</li>
+    <li>Aceptacion de Terminos.</li>
   </ul>
-
-
-
+  </center>
+  
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
@@ -190,23 +202,23 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
-      <select id="departamentoa"  id="iddia" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
+      <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
       <option value="">Seleccione Departamento</option>
-      <option value="">San Salvador</option>
-      <option value="">San Vicente</option>
-      <option value="">San Miguel</option>
-      <option value="">Santa Ana</option>
-      <option value="">Chalatenango</option>
-      <option value="">Cabañas</option>
-      <option value="">Sonsonate</option>
-      <option value="">La Union</option>
-      <option value="">La Libertad</option>
-      <option value="">La Paz</option>
-      <option value="">Morazán</option>
-      <option value="">Usulutan</option>
-      <option value="">Santa Ana</option>
-      <option value="">Ahuachapán</option>
-      <option value="">Cuscatlán</option>
+      <option value="San Salvador">San Salvador</option>
+      <option value="San Vicente">San Vicente</option>
+      <option value="San Miguel">San Miguel</option>
+      <option value="Santa Ana">Santa Ana</option>
+      <option value="Chalatenango">Chalatenango</option>
+      <option value="Cabañas">Cabañas</option>
+      <option value="Sonsonate">Sonsonate</option>
+      <option value="La Union">La Union</option>
+      <option value="La Libertad">La Libertad</option>
+      <option value="La Paz">La Paz</option>
+      <option value="Morzán">Morazán</option>
+      <option value="Usulutan">Usulutan</option>
+      <option value="Santa Ana">Santa Ana</option>
+      <option value="Ahuachapán">Ahuachapán</option>
+      <option value="Cuscatlan">Cuscatlán</option>
       </select>
       </div>
       <div class="input-group"style="padding-bottom:20px;">
@@ -217,21 +229,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
       <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
       <option value="">Medio de Transporte</option>
-      <option value="">Autobus</option>
-      <option value="">A pie</option>
-      <option value="">Trans.Propio</option>
-      <option value="">Otro</option>
+      <option value="Autobus">Autobus</option>
+      <option value="A pie">A pie</option>
+      <option value="Trans.Propio">Trans.Propio</option>
+      <option value="Otro">Otro</option>
       </select>
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
-      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bchilleratoa">
+      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
       <option value="">Seleccione Opcion</option>
-      <option value="">1° Año Bachillerato General</option>
-      <option value="">2° Año Bachillerato General</option>
-      <option value="">1° Año Bachillerato Contador</option>
-      <option value="">2° Año Bachillerato Contador</option>
-      <option value="">3° Año Bachillerato Contador</option>
+      <?php include('comboopcion.php')?>
       </select>
       </div>
       <div class="input-group " style="padding-bottom:20px;">
@@ -272,39 +280,39 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
      </div>
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="distanciaa" type="text" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
+     <input id="distanciaa" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" id="parvularia">Si</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" id="parvularia">No</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="1" id="parvularia">Si</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="0" id="parvularia">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
-     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" id="trabaja">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" id="trabaja">No</label>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabaja">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
-     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" id="zonaa">Rural</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa"id="zonaa">Urbana</label>
+     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" value="1" id="zonaa">Rural</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa" value="0" id="zonaa">Urbana</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
-     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" id="repitea">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" id="repitea">No</label>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" value="1" id="repitea">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="0" id="repitea">No</label>
      </div>
      </br>
      <div>
      <i  class="glyphicon glyphicon-asterisk"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sacramentos</span>
-     <label class="checkbox-inline"style="margin-right:20px;margin-left:10px;font-size: 15px"><input type="checkbox" value="">Bautismo</label>
-     <label class="checkbox-inline"style="font-size: 15px"><input type="checkbox" value="">Confirmacion</label>
-     <label class="checkbox-inline"style="margin-right:20px;margin-left:67px;font-size: 15px"><input type="checkbox" value="">Primera Comunión</label>
+     <label class="checkbox-inline"style="margin-right:20px;margin-left:10px;font-size: 15px"><input type="checkbox" value="1" name="bautismo">Bautismo</label>
+     <label class="checkbox-inline"style="font-size: 15px"><input type="checkbox" value="1" name="confirmacion">Confirmacion</label>
+     <label class="checkbox-inline"style="margin-right:20px;margin-left:67px;font-size: 15px"><input type="checkbox" value="1" name="comunion">Primera Comunión</label>
      </div>
      </br>
 
@@ -319,7 +327,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     </div>
     <!-- Finaliza col md 12 panel body -->
     
-    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" onclick="form1()" value="Siguiente" />
+    <input type="button" name="siguiente" class="next action-button" onclick="form1()" value="Siguiente" />
     <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
@@ -367,20 +375,20 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
       <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
-      <option value="">Matrimonio Religioso</option>
-      <option value="">Civil</option>
-      <option value="">Acompañados</option>
-      <option value="">Separados</option>
-      <option value="">Viudo/a</option>
+      <option value="Matrimonio Religioso">Matrimonio Religioso</option>
+      <option value="Civil">Civil</option>
+      <option value="Acompañados">Acompañados</option>
+      <option value="Separados">Separados</option>
+      <option value="Viudo/a">Viudo/a</option>
       </select>
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
       <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
-      <option value="">Mamá</option>
-      <option value="">Papá</option>
-      <option value="">Mamá y Papá</option>
-      <option value="">Otro</option>
+      <option value="Mamá">Mamá</option>
+      <option value="Papá">Papá</option>
+      <option value="Mamá y Papá">Mamá y Papá</option>
+      <option value="Otro">Otro</option>
       </select>
       </div>
       
@@ -421,14 +429,14 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="miembrosm" type="text" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)">
+     <input id="miembrosm" type="number" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-asterisk"></i><span class="label label-default" style="width: 100px; font-size: 12px">Religión que profesan</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" id="religionm">Católica</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religionm" id="religionm">Otra</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="1" id="religionm">Católica</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="0" id="religionm">Otro</label>
      </div>
      </br>
     
@@ -441,63 +449,21 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" name="next" class="next action-button" value="Siguiente" />
+    <input type="button" name="siguiente" class="next action-button" onclick="form1()" value="Siguiente" />
   </fieldset>
-  
   <fieldset>
-    <h2 class="fs-title">DETALLES</h2>
-    <h3 class="fs-subtitle" >Hermanos/as que estudien en el centro educativo.</h3>
-     <!-- Inicia el col md 6 izquierda -->
+    <h2 class="fs-title">Terminos.</h2>
+    <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su número de telefónico por favor actualizarlo.</h3>
+    <!-- Inicia col md 12 panel -->
     
-     <div class="col-md-6">
-    
-    <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombreh1" type="text" class="form-control" name="nombreh1" placeholder="Nombre" onkeypress="return sololetras(event)">
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombreh2" type="text" class="form-control" name="nombreh2" placeholder="Nombre" onkeypress="return sololetras(event)">
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombreh3" type="text" class="form-control" name="nombreh3" placeholder="Nombre" onkeypress="return sololetras(event)">
-     </div>
-     </div>
-    <!-- Finaliza col md 6 -->
-    
-    <!-- Finaliza col md 6 (derecha) -->
-     <div class="col-md-6">
-     
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="gradoh1" type="text" class="form-control" name="gradoh1" placeholder="Grado">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="gradoh2" type="text" class="form-control" name="gradoh2" placeholder="Grado">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="gradoh3" type="text" class="form-control" name="gradoh3 " placeholder="Grado">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-     </div>
-     
-     
-     
-     
-     </br>
-    
-     </br>
- </div>
-    <!-- Finaliza col md 6 -->
-    
-    
+    <!-- Finaliza col md 12 panel body -->
     
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="submit" name="submit" class="submit action-button" value="Guardar" />
+    <input type="button" class="submit action-button" value="Guardar" />
   </fieldset>
+  
 </form> 
             </div>
           <!-- end: content -->
