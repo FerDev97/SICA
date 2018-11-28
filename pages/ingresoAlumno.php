@@ -70,6 +70,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <!-- FIN SCRIPTS DE SWEET ALERTS -->
       <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
     <script>
+//Validaciones para registro del alumno
+function go(){
+  document.msform.submit(); 
+  alert("llega a la funcion");
+  
+
+}
+
+
+
     function verificarCamposObligatoriosPersonales(){
        alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
@@ -159,7 +169,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
                   </div>
                 </div>
                <!-- multistep form -->
-<form id="msform">
+<form id="msform" name="msform" method="post" action="inscribir.php">
   <!-- progressbar -->
   <ul id="progressbar">
     <li class="active">Datos Personales</li>
@@ -185,23 +195,23 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
-      <select id="departamentoa"  id="iddia" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
+      <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
       <option value="">Seleccione Departamento</option>
-      <option value="">San Salvador</option>
-      <option value="">San Vicente</option>
-      <option value="">San Miguel</option>
-      <option value="">Santa Ana</option>
-      <option value="">Chalatenango</option>
-      <option value="">Cabañas</option>
-      <option value="">Sonsonate</option>
-      <option value="">La Union</option>
-      <option value="">La Libertad</option>
-      <option value="">La Paz</option>
-      <option value="">Morazán</option>
-      <option value="">Usulutan</option>
-      <option value="">Santa Ana</option>
-      <option value="">Ahuachapán</option>
-      <option value="">Cuscatlán</option>
+      <option value="San Salvador">San Salvador</option>
+      <option value="San Vicente">San Vicente</option>
+      <option value="San Miguel">San Miguel</option>
+      <option value="Santa Ana">Santa Ana</option>
+      <option value="Chalatenango">Chalatenango</option>
+      <option value="Cabañas">Cabañas</option>
+      <option value="Sonsonate">Sonsonate</option>
+      <option value="La Union">La Union</option>
+      <option value="La Libertad">La Libertad</option>
+      <option value="La Paz">La Paz</option>
+      <option value="Morzán">Morazán</option>
+      <option value="Usulutan">Usulutan</option>
+      <option value="Santa Ana">Santa Ana</option>
+      <option value="Ahuachapán">Ahuachapán</option>
+      <option value="Cuscatlan">Cuscatlán</option>
       </select>
       </div>
       <div class="input-group"style="padding-bottom:20px;">
@@ -212,21 +222,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
       <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
       <option value="">Medio de Transporte</option>
-      <option value="">Autobus</option>
-      <option value="">A pie</option>
-      <option value="">Trans.Propio</option>
-      <option value="">Otro</option>
+      <option value="Autobus">Autobus</option>
+      <option value="A pie">A pie</option>
+      <option value="Trans.Propio">Trans.Propio</option>
+      <option value="Otro">Otro</option>
       </select>
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
-      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bchilleratoa">
+      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
       <option value="">Seleccione Opcion</option>
-      <option value="">1° Año Bachillerato General</option>
-      <option value="">2° Año Bachillerato General</option>
-      <option value="">1° Año Bachillerato Contador</option>
-      <option value="">2° Año Bachillerato Contador</option>
-      <option value="">3° Año Bachillerato Contador</option>
+      <?php include('comboopcion.php')?>
       </select>
       </div>
       <div class="input-group " style="padding-bottom:20px;">
@@ -235,11 +241,11 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="enfermedadesa" type="number" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)">
+     <input id="enfermedadesa" type="text" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="alergiaa" type="number" class="form-control" name="alergiaa" placeholder="Es alergico a">
+     <input id="alergiaa" type="text" class="form-control" name="alergiaa" placeholder="Es alergico a">
      </div>
       
  
@@ -267,7 +273,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
      </div>
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="distanciaa" type="text" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
+     <input id="distanciaa" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
      </div>
      </br>
@@ -491,7 +497,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="submit" name="submit" class="submit action-button" value="Guardar" />
+    <input type="button" class="submit action-button" onclick=go() value="Guardar" />
   </fieldset>
 </form> 
             </div>
