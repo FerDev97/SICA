@@ -21,13 +21,14 @@
                  </ul>
                 </li>
                 <li class="active ripple">
-                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
                       <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
                       <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
                       <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
+                      <li><a href="busquedafamiliar.php">Búsqueda de Alumno por Familiar</a></li>
                       <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
                       <li><a href="listacliente.php">Estadisticas</a></li>
