@@ -172,6 +172,7 @@ function go(){
   <ul id="progressbar">
     <li class="active">Datos Personales</li>
     <li>Datos del responsable.</li>
+    <li>Aceptacion de Terminos.</li>
   </ul>
   </center>
   
@@ -278,33 +279,33 @@ function go(){
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="Si" id="parvularia">Si</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="No" id="parvularia">No</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="1" id="parvularia">Si</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="0" id="parvularia">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
-     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="Si" id="trabaja">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="No" id="trabaja">No</label>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabaja">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
-     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" value="Rural" id="zonaa">Rural</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa" value="Urbana" id="zonaa">Urbana</label>
+     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" value="1" id="zonaa">Rural</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa" value="0" id="zonaa">Urbana</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
-     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" value="Si" id="repitea">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="No" id="repitea">No</label>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" value="1" id="repitea">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="0" id="repitea">No</label>
      </div>
      </br>
      <div>
      <i  class="glyphicon glyphicon-asterisk"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sacramentos</span>
-     <label class="checkbox-inline"style="margin-right:20px;margin-left:10px;font-size: 15px"><input type="checkbox" value="">Bautismo</label>
-     <label class="checkbox-inline"style="font-size: 15px"><input type="checkbox" value="">Confirmacion</label>
-     <label class="checkbox-inline"style="margin-right:20px;margin-left:67px;font-size: 15px"><input type="checkbox" value="">Primera Comunión</label>
+     <label class="checkbox-inline"style="margin-right:20px;margin-left:10px;font-size: 15px"><input type="checkbox" value="1" name="bautismo">Bautismo</label>
+     <label class="checkbox-inline"style="font-size: 15px"><input type="checkbox" value="1" name="confirmacion">Confirmacion</label>
+     <label class="checkbox-inline"style="margin-right:20px;margin-left:67px;font-size: 15px"><input type="checkbox" value="1" name="comunion">Primera Comunión</label>
      </div>
      </br>
 
@@ -421,14 +422,14 @@ function go(){
     
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="miembrosm" type="text" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)">
+     <input id="miembrosm" type="number" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-asterisk"></i><span class="label label-default" style="width: 100px; font-size: 12px">Religión que profesan</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" id="religionm">Católica</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religionm" id="religionm">Otra</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="1" id="religionm">Católica</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="0" id="religionm">Otro</label>
      </div>
      </br>
     
@@ -441,9 +442,20 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
+    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" onclick="form1()" value="Siguiente" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Terminos.</h2>
+    <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su número de telefónico por favor actualizarlo.</h3>
+    <!-- Inicia col md 12 panel -->
+    
+    <!-- Finaliza col md 12 panel body -->
+    
+    
+    </br>
+    <input type="button" name="previous" class="previous action-button" value="Anterior" />
     <input type="button" class="submit action-button" onclick=go() value="Guardar" />
   </fieldset>
-  
   
 </form> 
             </div>
