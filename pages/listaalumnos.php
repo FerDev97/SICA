@@ -386,7 +386,7 @@ if ($bandera == "desaparecer") {
 }
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
-    echo "document.location.href='editpersonal.php?id=" . $baccion . "';";
+    echo "document.location.href='editarInscripcion.php?id=" . $baccion . "';";
     echo "</script>";
     # code...
 }
