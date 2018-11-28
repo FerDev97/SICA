@@ -812,7 +812,7 @@ if ($bandera == "activar") {
       $idanio=$fila->idanio;
 //CONSULTA PARA DESACTIVAR CUALQUIER AÑO
       
-$consultaDesac = "update tanio set iestado='0' where iestado='1'";
+$consultaDesac = "update tanio set iestado='0',  where iestado='1'";
 $resultadoDesac = $conexion->query($consultaDesac);
 
       $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
