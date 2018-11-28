@@ -769,7 +769,7 @@ if ($bandera == "add") {
   $query = "select canio FROM tanio WHERE canio like  '%".$año."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
-    $consulta  = "INSERT INTO tanio VALUES('null','" . $año . "','0')";
+    $consulta  = "INSERT INTO tanio VALUES('null','" . $año . "','0','0')";
       $resultado = $conexion->query($consulta);
         if ($resultado) {
            msgAdd("Agrego año exitosamente");
@@ -812,23 +812,21 @@ if ($bandera == "activar") {
       $idanio=$fila->idanio;
 //CONSULTA PARA DESACTIVAR CUALQUIER AÑO
       
-$consultaDesac = "update tanio set iestado='0',  where iestado='1'";
+$consultaDesac = "update tanio set iestado='0',eclausura='1'  where iestado='1'";
 $resultadoDesac = $conexion->query($consultaDesac);
 
-      $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
-      $resultado = $conexion->query($consulta);
+      // $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
+      // $resultado = $conexion->query($consulta);
     }
   }
-
   $consulta2 = "update tanio set iestado='1' where eid_anio=".$baccion;
     $resultado = $conexion->query($consulta2);
     if ($resultado) {
-
       echo "<script type='text/javascript'>";
       echo "alert('Exito');";
       echo "document.location.href='fanio.php';";
       echo "</script>";
-    } else {
+    } else { 
         msg("No Exito");
     }
 
