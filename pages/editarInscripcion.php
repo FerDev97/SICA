@@ -169,14 +169,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     <li>Información adicional.</li>
   </ul>
 
-          <?php
 
-              include "../config/conexion.php";
-              $result = $conexion->query("select eid_alumno,ccodigo ,cnie,cnombre,capellido,cdireccion,edepto,ffecha_nac, 
-              cllegada, cbachillerato, canterior, cenfermedades, calergia, cdistancia, iparvularia, itrabaja, izona, irepite, isacramento,
-              cnombrep, clugar_trabajop, cduip, ctelefonocp, ctelefonotp, ccelularp, cdireccionp, cestadocivilp, cconvive, cnombrem, clugar_trabajom,
-              cprofesionm, cduim, ctelefonocm, ctelefonotm, ccelularm, cmiembros, creligion from talumno where eid_alumno = ".$idAlumno);
-          ?>
 
   <!-- fieldsets -->
   <fieldset>
