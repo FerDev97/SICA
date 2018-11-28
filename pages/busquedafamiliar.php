@@ -144,9 +144,12 @@ if ($result) {
         echo "<td>" . $fila->masculino . "</td>";
         echo "<td>" . $fila->femenino . "</td>";
         
-        echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_alumno . ",1);><i class='fa fa-eye'></i>
-             </button></td>";
+       
+       echo"<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' data-toggle='modal' data-dismiss='modalForm' data-target='#modalTipo'><i class='fa fa-eye'></i>
+       </button></td> ";
         echo "</tr>";
+        
+        
 
     }
 }
@@ -167,6 +170,45 @@ if ($result) {
           <!-- end: right menu -->
 
       </div>
+      <!-- Modal de Tipo bachillerato-->
+ <div class="modal fade" id="modalTipo" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Datos Generales del Alumno.</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                  <!--aqui va el codigo-->
+                  <form id="insertarT">
+                  <div class="input-group" style="margin-left:75px">
+                  <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" placeholder="Nuevo tipo de Bachillerato" >
+                  </div>
+                  <br>
+                   <center>
+                   <div class="input-group">
+                  <button title="Agrega Nueva Opcionel al Sistema" id="guardarT" name="guardarT" style="margin-left:0px;" class="btn btn-info" type="button" >
+                  Guardar</button>
+                  </div>
+                  </center>
+                  </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Fin Modal de Tipo Bachillerato --> 
 
       <!-- start: Mobile -->
       <div id="mimin-mobile" class="reverse">
