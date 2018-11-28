@@ -394,7 +394,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listapersonal.php';";
+    echo "document.location.href='editarInscripcion.php';";
     echo "</script>";
 }
   
