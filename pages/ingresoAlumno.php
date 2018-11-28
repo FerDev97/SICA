@@ -377,10 +377,10 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
       <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
-      <option value="">Mamá</option>
-      <option value="">Papá</option>
-      <option value="">Mamá y Papá</option>
-      <option value="">Otro</option>
+      <option value="Mamá">Mamá</option>
+      <option value="Papá">Papá</option>
+      <option value="Mamá y Papá">Mamá y Papá</option>
+      <option value="Otro">Otro</option>
       </select>
       </div>
       

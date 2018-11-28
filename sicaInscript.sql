@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2018 a las 16:48:29
+-- Tiempo de generación: 28-11-2018 a las 16:59:01
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -47,7 +47,9 @@ CREATE TABLE `talumno` (
   `itrabaja` int(11) NOT NULL COMMENT '1=si 0=no',
   `izona` int(11) NOT NULL COMMENT '1=si 0=no',
   `irepite` int(11) NOT NULL COMMENT '1=si 0=no',
-  `isacramento` int(11) NOT NULL COMMENT '1=si 0=no',
+  `ibautizo` int(11) NOT NULL,
+  `icomunion` int(11) NOT NULL,
+  `iconfirma` int(11) NOT NULL,
   `cnombrep` varchar(50) NOT NULL,
   `clugar_trabajop` varchar(100) NOT NULL,
   `cduip` varchar(10) NOT NULL,
