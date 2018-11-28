@@ -63,8 +63,12 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     '<i class="fa fa-thumbs-down"></i>',
   cancelButtonAriaLabel: 'Thumbs down',
 })
+return 0;
 
       }
+       
+
+     
       
       </script>
       <!-- FIN SCRIPTS DE SWEET ALERTS -->
@@ -454,7 +458,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" class="submit action-button" onclick=go() value="Guardar" />
+    <input type="button" class="submit action-button" value="Guardar" />
   </fieldset>
   
 </form> 

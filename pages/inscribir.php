@@ -60,11 +60,8 @@ $religiionm  = $_POST['religiionm'];
 
 
 //odos llegan con exito 
-msg($bautizo);
-msg($confirmacion);
-msg($comunion);
-msg($miembrosm);
-msg($religiionm);
+msg("Exito");
+
 //msg($duim);
 
 //$consulta  = "INSERT INTO topciones VALUES('null','" . $cupo . "','" .$opcion. "','" .$grado. "','" .$seccion. "','1')";
@@ -80,7 +77,7 @@ msg($religiionm);
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-   // echo "document.location.href='ingresoAlumno.php';";
+    echo "document.location.href='ingresoAlumno.php';";
     echo "</script>";
 }
 
