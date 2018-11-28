@@ -121,8 +121,11 @@ error_reporting(E_ALL & ~E_NOTICE);
       //Validacion Telefono
       var nav4 = window.Event ? true : false;
       function aceptNum(evt){
+       
         var key = nav4 ? evt.which : evt.keyCode;
+       
         return (key <= 13 || (key>= 48 && key <= 57));
+        
       }
       //Fin Validacion Telefono
 
@@ -150,12 +153,12 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
     }
      //Validacion Solo letras
-     function validar()
+     function validarLongitud()
       {
-        var v=document.getElementById("anio").value;
-        if (v.length>4) {
-          document.getElementById("anio").value=v.slice(0,-1);
-        }
+        
+        var v=document.getElementById("año").value;
+        var tamanio=v.lenght;
+       alert(document.getElementById("año").value.lenght);
       }
      function confirmar(id)
         {
@@ -242,8 +245,8 @@ error_reporting(E_ALL & ~E_NOTICE);
 
                           <div class="col-md-12">
                           <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="año" type="number" class="form-control" name="año" placeholder="Digite año escolar." size="4" maxlength="4" min="<?php echo $hoy['year']+1?>" onkeypress="return aceptNum(event)">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                              <input id="año" type="number" class="form-control" data-mask="0000" name="año" placeholder="Digite año escolar." size="4" maxlength="4" value="<?php echo $hoy['year']?>" min="<?php echo $hoy['year']?>"  onkeypress="return aceptNum(event)">
                           </div>
                          </br>
                        
@@ -570,6 +573,7 @@ error_reporting(E_ALL & ~E_NOTICE);
     $('.mask-nit').mask('0000-000000-000-0');
     $('.mask-phone_with_ddd').mask('(00) 0000-0000');
     $('.mask-phone_us').mask('(000) 000-0000');
+    $('.anio').mask('0000');
     $('.mask-mixed').mask('AAA 000-S0S');
     $('.mask-cpf').mask('000.000.000-00', {reverse: true});
     $('.mask-money').mask('000.000.000.000.000,00', {reverse: true});

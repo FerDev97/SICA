@@ -73,9 +73,6 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 //Validaciones para registro del alumno
 function go(){
   document.msform.submit(); 
-  alert("llega a la funcion");
-  
-
 }
 
 
@@ -171,11 +168,13 @@ function go(){
                <!-- multistep form -->
 <form id="msform" name="msform" method="post" action="inscribir.php">
   <!-- progressbar -->
+  <center>
   <ul id="progressbar">
     <li class="active">Datos Personales</li>
     <li>Datos del responsable.</li>
-    <li>Información adicional.</li>
   </ul>
+  </center>
+  
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
@@ -279,26 +278,26 @@ function go(){
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" id="parvularia">Si</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" id="parvularia">No</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="Si" id="parvularia">Si</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="No" id="parvularia">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
-     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" id="trabaja">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" id="trabaja">No</label>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="Si" id="trabaja">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="No" id="trabaja">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
-     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" id="zonaa">Rural</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa"id="zonaa">Urbana</label>
+     <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" value="Rural" id="zonaa">Rural</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa" value="Urbana" id="zonaa">Urbana</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
-     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" id="repitea">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" id="repitea">No</label>
+     <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" value="Si" id="repitea">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="No" id="repitea">No</label>
      </div>
      </br>
      <div>
@@ -368,20 +367,20 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
       <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
-      <option value="">Matrimonio Religioso</option>
-      <option value="">Civil</option>
-      <option value="">Acompañados</option>
-      <option value="">Separados</option>
-      <option value="">Viudo/a</option>
+      <option value="Matrimonio Religioso">Matrimonio Religioso</option>
+      <option value="Civil">Civil</option>
+      <option value="Acompañados">Acompañados</option>
+      <option value="Separados">Separados</option>
+      <option value="Viudo/a">Viudo/a</option>
       </select>
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
       <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
-      <option value="">Mamá</option>
-      <option value="">Papá</option>
-      <option value="">Mamá y Papá</option>
-      <option value="">Otro</option>
+      <option value="Mamá">Mamá</option>
+      <option value="Papá">Papá</option>
+      <option value="Mamá y Papá">Mamá y Papá</option>
+      <option value="Otro">Otro</option>
       </select>
       </div>
       
@@ -442,63 +441,10 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" name="next" class="next action-button" value="Siguiente" />
-  </fieldset>
-  
-  <fieldset>
-    <h2 class="fs-title">DETALLES</h2>
-    <h3 class="fs-subtitle" >Hermanos/as que estudien en el centro educativo.</h3>
-     <!-- Inicia el col md 6 izquierda -->
-    
-     <div class="col-md-6">
-    
-    <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombreh1" type="text" class="form-control" name="nombreh1" placeholder="Nombre" onkeypress="return sololetras(event)">
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombreh2" type="text" class="form-control" name="nombreh2" placeholder="Nombre" onkeypress="return sololetras(event)">
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombreh3" type="text" class="form-control" name="nombreh3" placeholder="Nombre" onkeypress="return sololetras(event)">
-     </div>
-     </div>
-    <!-- Finaliza col md 6 -->
-    
-    <!-- Finaliza col md 6 (derecha) -->
-     <div class="col-md-6">
-     
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="gradoh1" type="text" class="form-control" name="gradoh1" placeholder="Grado">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="gradoh2" type="text" class="form-control" name="gradoh2" placeholder="Grado">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="gradoh3" type="text" class="form-control" name="gradoh3 " placeholder="Grado">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-     </div>
-     
-     
-     
-     
-     </br>
-    
-     </br>
- </div>
-    <!-- Finaliza col md 6 -->
-    
-    
-    
-    
-    </br>
-    <input type="button" name="previous" class="previous action-button" value="Anterior" />
     <input type="button" class="submit action-button" onclick=go() value="Guardar" />
   </fieldset>
+  
+  
 </form> 
             </div>
           <!-- end: content -->
