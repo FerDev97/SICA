@@ -29,10 +29,8 @@ if(empty($anio))
 $hoy = getdate();
 $anioMayor=$hoy['year']-18;
 $anioMenor=$hoy['year']-61;
-
 $mes=sprintf("%02s",$hoy['mon']);
 $dia=sprintf("%02s",$hoy['mday']);
-
 $fechamax=$anioMayor."-".$mes."-".$dia;
 $fechamin=$anioMenor."-".$mes."-".$dia;
 
@@ -109,7 +107,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   type: 'error',
   title: 'Error...',
   text: ''+str,
-  footer: 'Revise que todos los campos esten completados.'
+  footer: 'Revise que todos los campos esten completados correctamente.'
 })
         }
 
@@ -162,19 +160,31 @@ error_reporting(E_ALL & ~E_NOTICE);
       }
      function confirmar(id)
         {
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
+          swal({
+  title: 'Esta seguro que desea activar este anio?',
+  text: "Esto provacara que el anio actual se desactive y pase a ser clausurado!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, activar!',
+  cancelButtonText: 'Cancelar!'
+}).then((result) => {
+  if (result.value) {
+    swal(
+      'Activado!',
+      'El anio fue activado exitosamente.',
+      'success'
+    )
+    document.getElementById('bandera').value='activar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
+  }
+})
+
+
+         
         }
-    
-
-
-      
       
         function verificar(){
         var rb=document.getElementsByName('estado');
@@ -188,11 +198,14 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 			}
       
-          if(document.getElementById('año').value==""|| banderaRb ){
-
+          if(document.getElementById('año').value==""){
              sweetError("Complete los campos");
           }else{
-            if (document.getElementById('baccion').value!="") {
+            var fecha = new Date();
+            var ano = fecha.getFullYear();
+            var diferencia=document.getElementById('año').value-ano;
+            if(diferencia<2){
+                 if (document.getElementById('baccion').value!="") {
               document.getElementById('bandera').value='modificar';
               alert(document.getElementById('bandera').value);
               }else{
@@ -200,6 +213,10 @@ error_reporting(E_ALL & ~E_NOTICE);
             document.getElementById("bandera").value="add";
           }
             document.turismo.submit();
+            }else{
+              sweetError("El anio que desea inscribir no es valido.");
+            }
+           
           }
 
         }
@@ -830,7 +847,7 @@ function msgAdd($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
-    
+    echo "document.location.href='fanio.php';";
     echo "</script>";
 }
 function msgError($texto)
