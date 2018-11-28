@@ -27,6 +27,7 @@
                   <ul class="nav nav-list tree">
                       <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
                       <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
+                      <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
                       <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
                       <li><a href="listacliente.php">Estadisticas</a></li>
