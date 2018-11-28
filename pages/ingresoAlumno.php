@@ -11,6 +11,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   header("Location:inicio.php");
 }
 ?>
+<?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+  
+  }
+}
+ ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -194,7 +205,7 @@ function go(){
     <li>Aceptacion de Terminos.</li>
   </ul>
   </center>
-  
+  <input type="hidden" name="anio" value="<?php echo $anioActivo;?>"/>
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
@@ -439,7 +450,7 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonotm" type="text" data-mask="(00) 00000-0000" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
@@ -756,7 +767,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+   // echo "document.location.href='listaempleado.php';";
     echo "</script>";
 }
 

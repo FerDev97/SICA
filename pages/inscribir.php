@@ -55,16 +55,16 @@ $telefonotm  = $_POST['telefonotm'];
 $celularm  = $_POST['celularm'];
 $miembrosm  = $_POST['miembrosm'];
 $religiionm  = $_POST['religiionm'];
-//$anio=$_POST['anio'];
+$anio = $_POST['anio'];
 //Adicionales
 
 
 //odos llegan con exito 
 
+//msg($anio);
+//msg($anio);
 
-//msg($duim);
-
-$consulta  = "INSERT INTO talumno VALUES('null','" . $codigo  . "','" .$NIE. "','" .$nombre. "','" .$apellido. "','" .$direcc. "','" .$depart. "','" .$fecha. "','" .$llega. "','" .$bto. "','" .$anterior. "','" .$enfer. "','" .$alergia. "','" .$distancia. "','" .$parvu. "','" .$trabaja. "','" .$zona. "','" .$repite. "','" .$bautizo. "','" .$comunion. "','" .$confirmacion. "','" .$nombrep. "','" .$lugarp."','" .$duip. "','" .$housephonep. "','" .$workphonep. "','" .$smartphonep. "','" .$direccionp. "','" .$estado. "','" .$convive. "','" .$nombrem. "','" .$lugarm. "','" .$oficiom. "','" .$duim. "','" .$telefonocm. "','" .$telefonotm. "','" .$celularm. "','" .$miembrosm. "','" .$religiionm. "','1')";
+$consulta  = "INSERT INTO talumno VALUES('null','" . $codigo  . "','" .$NIE. "','" .$nombre. "','" .$apellido. "','" .$direcc. "','" .$depart. "','" .$fecha. "','" .$llega. "','" .$bto. "','" .$anterior. "','" .$enfer. "','" .$alergia. "','" .$distancia. "','" .$parvu. "','" .$trabaja. "','" .$zona. "','" .$repite. "','" .$bautizo. "','" .$comunion. "','" .$confirmacion. "','" .$nombrep. "','" .$lugarp."','" .$duip. "','" .$housephonep. "','" .$workphonep. "','" .$smartphonep. "','" .$direccionp. "','" .$estado. "','" .$convive. "','" .$nombrem. "','" .$lugarm. "','" .$oficiom. "','" .$duim. "','" .$telefonocm. "','" .$telefonotm. "','" .$celularm. "','" .$miembrosm. "','" .$religiionm. "','".$anio."')";
 $resultado = $conexion->query($consulta);
           if ($resultado) {
              IB:: insertar($_SESSION["id"],"Inscribio un nuevo alumno");
@@ -73,10 +73,10 @@ $resultado = $conexion->query($consulta);
              $mensaje="Error al insertar los datos";
           }
 
-          function msg($mensaje)
+function msg($mensaje)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
+    echo "alert('$mensaje');";
     echo "document.location.href='ingresoAlumno.php';";
     echo "</script>";
 }
