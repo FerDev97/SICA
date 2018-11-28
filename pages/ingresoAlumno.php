@@ -320,7 +320,7 @@ function go(){
     </div>
     <!-- Finaliza col md 12 panel body -->
     
-    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" onclick="form1()" value="Siguiente" />
+    <input type="button" name="siguiente" class="next action-button" onclick="form1()" value="Siguiente" />
     <!-- <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button> -->
   </fieldset>
   <fieldset>
@@ -442,7 +442,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" name="siguiente" class="next action-button btn btn-info btn-sm btn-round" onclick="form1()" value="Siguiente" />
+    <input type="button" name="siguiente" class="next action-button" onclick="form1()" value="Siguiente" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Terminos.</h2>
