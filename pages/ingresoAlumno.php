@@ -143,16 +143,16 @@ function go(){
       }if(document.getElementById("distanciaa").value==""){
         sweetError("Cuidado.! La distancias es obligatoria");
         return 0;
-      }if(document.getElementById("parvularia").checked==false){
+      }if(document.getElementById("parvularia").checked==false && document.getElementById("parvulari").checked==false){
         sweetError("Cuidado.! ¿El alumno estudio parvularia?");
         return 0;
-      }if(document.getElementById("trabajaa").checked==false){
+      }if(document.getElementById("trabajaa").checked==false && document.getElementById("trabaja").checked==false){
         sweetError("Cuidado.! ¿El alumno trabaja?");
         return 0;
-      }if(document.getElementById("zonaa").checked==false){
+      }if(document.getElementById("zonaa").checked==false && document.getElementById("zona").checked==false){
         sweetError("Cuidado.! ¿En que zona vive el alumno?");
         return 0;
-      }if(document.getElementById("repitea").checked==false){
+      }if(document.getElementById("repitea").checked==false && document.getElementById("repite").checked==false){
         sweetError("Cuidado.! ¿Repite año? es obligatorio?");
         return 0;
       }else{
@@ -194,7 +194,7 @@ function go(){
       }if(document.getElementById("telefonocp").value=="" && document.getElementById("telefonotp").value=="" && document.getElementById("celularp").value=="" && document.getElementById("telefonocm").value=="" && document.getElementById("telefonotm").value=="" && document.getElementById("celularm").value==""){
         sweetError("Cuidado.! Para la inscripcion es necesario un numero de telefono");
         return 0;
-      }if(document.getElementById("religionm").checked==false){
+      }if(document.getElementById("religionm").checked==false && document.getElementById("religion").checked==false){
         sweetError("Cuidado.! ¿La religion que profesa? es obligatorio?");
         return 0;
       }else{
@@ -400,25 +400,25 @@ function go(){
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
      <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="1" id="parvularia">Si</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="0" id="parvularia">No</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="0" id="parvulari">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
      <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabajaa">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabajaa">No</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
      <label class="radio-inline" style="margin-right:55px;margin-left:42px; font-size: 15px"><input type="radio" name="zonaa" value="1" id="zonaa">Rural</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa" value="0" id="zonaa">Urbana</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="zonaa" value="0" id="zona">Urbana</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
      <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" value="1" id="repitea">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="0" id="repitea">No</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="0" id="repite">No</label>
      </div>
      </br>
      <div>
@@ -551,7 +551,7 @@ function go(){
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-asterisk"></i><span class="label label-default" style="width: 100px; font-size: 12px">Religión que profesan</span>
      <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="1" id="religionm">Católica</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="0" id="religionm">Otro</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="religiionm" value="0" id="religion">Otro</label>
      </div>
      </br>
     
