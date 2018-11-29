@@ -118,7 +118,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     '<i class="fa fa-thumbs-down"></i>',
   cancelButtonAriaLabel: 'Thumbs down',
 })
-return 0;
+return 1;
 
       }
        
@@ -225,7 +225,8 @@ function go(){
                   </div>
                 </div>
                <!-- multistep form -->
-<form id="msform" name="msform" method="post" action="inscribir.php">
+<form id="msform" name="msform" method="post" action="editDatosInscripcion.php">
+  <input type="hidden" id="idA" name="idA" value="<?php echo $idAlumno; ?>">
   <!-- progressbar -->
   <center>
   <ul id="progressbar">
@@ -234,11 +235,7 @@ function go(){
     <li>Aceptacion de Terminos.</li>
   </ul>
   </center>
-
-    <?php
-
- 
-    ?>      
+     
 
   <!-- fieldsets -->
   <fieldset>
@@ -250,7 +247,7 @@ function go(){
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>">
+     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>" readonly>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -260,7 +257,22 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
       <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
-      <option value="<?php echo $departR;?>"><?php echo $departR;?></option>
+      <?php
+         $deptos = array('San Salvador', 'San Vicente', 'San Miguel', 'Santa Ana', 'Chalatenango',
+          'Cabañas', 'Sonsonate', 'La Union', 'La Libertad', 'La Paz', 'Morzán', 'Usulutan', 'Santa Ana',
+        'Ahuachapán', 'Cuscatlan');
+
+         foreach ($deptos as $depto) {
+
+          if($depto == $departR){
+            echo "<option value=".$depto." selected >".$depto."</option>";
+          }else{
+           echo "<option value=".$depto.">".$depto."</option>";
+          }
+         }
+      
+      ?>
+      
       <!---<option value="">Seleccione Departamento</option>
       <option value="San Salvador">San Salvador</option>
       <option value="San Vicente">San Vicente</option>
@@ -286,7 +298,20 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
       <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
-      <option value="<?php echo $llegadaR;?>"><?php echo $direccionAR;?></option>
+      <?php
+         $medios = array('Autobus', 'A pie', 'Trans. Propio', 'Otro');
+
+         foreach ($medios as $medio) {
+
+          if($medio == $llegadaR){
+            echo "<option value=".$medio." selected >".$medio."</option>";
+          }else{
+           echo "<option value=".$medio.">".$medio."</option>";
+          }
+         }
+      
+      ?>
+      
       <!--<option value="">Medio de Transporte</option>
       <option value="Autobus">Autobus</option>
       <option value="A pie">A pie</option>
@@ -298,7 +323,20 @@ function go(){
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
       <option value="">Seleccione Opcion</option>
-          <option value="">
+      <?php  
+      include "../config/conexion.php";
+      $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
+      if ($result) {
+          while ($fila = $result->fetch_object()) {
+
+            if($bachilleratoR == $fila->eid_opcion){
+              echo "<option value=".$fila->eid_opcion." selected >".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+            }else{
+              echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+            }
+          }
+      }
+      ?>
       </select>
       </div>
       <div class="input-group " style="padding-bottom:20px;">
@@ -407,21 +445,21 @@ function go(){
      <?php
 
           if($bautizoR == 1){
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo' checked >Bautismo</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo' id='bautismo' checked >Bautismo</label>";
           }else{
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo'>Bautismo</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='' name='bautismo' id='bautismo' >Bautismo</label>";
           }
 
           if($comunionR == 1){
-              echo "<label class='checkbox-inline' style='font-size: 15px'><input type='checkbox' value='1' name='confirmacion' checked >Confirmacion</label>";
+              echo "<label  class='checkbox-inline' style='font-size: 15px'><input name='confirma' type='checkbox' value='1' checked='checked' />Confirmacion</label>";
           }else{
-            echo "<label class='checkbox-inline' style='font-size: 15px'><input type='checkbox' value='1' name='confirmacion'>Confirmacion</label>";
+            echo "<label class='checkbox-inline' style='font-size: 15px'><input name='confirma' type='checkbox' value='' />Confirmacion</label>";
           }
 
           if($confirmaR == 1){
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input type='checkbox' value='1' name='comunion' checked >Primera Comunión</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input name='comunion'  type='checkbox' value='1' checked='checked' />Primera Comunión</label>";
           }else{
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input type='checkbox' value='1' name='comunion'> Primera Comunión</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input name='comunion'  type='checkbox' value='' /> Primera Comunión</label>";
           }
 
      
@@ -489,7 +527,20 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
       <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
-      <option value="<?php echo $estadoCivil; ?>"><?php echo $estadoCivil; ?></option>
+      <?php
+         $estados = array('Matrimonio Religioso', 'Acompañados', 'Separados', 'Viudo/a');
+
+         foreach ($estados as $estado) {
+
+          if($estado == $estadoCivil){
+            echo "<option value=".$estado." selected >".$estado."</option>";
+          }else{
+           echo "<option value=".$estado.">".$estado."</option>";
+          }
+         }
+      
+      ?>
+      
       <!--<option value="Matrimonio Religioso">Matrimonio Religioso</option>
       <option value="Civil">Civil</option>
       <option value="Acompañados">Acompañados</option>
@@ -500,7 +551,20 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
       <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
-      <option value="<?php echo $convive; ?>"><?php echo $convive; ?></option>
+      <?php
+         $conviveDatos = array('Mamá', 'Papá', 'Mamá y Papá', 'Otro');
+
+         foreach ($conviveDatos as $con) {
+
+          if($con == $convive){
+            echo "<option value=".$con." selected >".$con."</option>";
+          }else{
+           echo "<option value=".$con.">".$con."</option>";
+          }
+         }
+      
+      ?>
+      
       <!--<option value="Mamá">Mamá</option>
       <option value="Papá">Papá</option>
       <option value="Mamá y Papá">Mamá y Papá</option>
@@ -587,7 +651,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" class="submit action-button" value="Guardar" />
+    <input type="button" class="submit action-button" value="Editar" />
   </fieldset>
   
 </form> 
