@@ -96,34 +96,32 @@ if($result)
                   </ul>
 
                 </li>-->
-                
+                <?php 
+                      if($clausurado==0){
+                      ?>
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa fa-graduation-cap"></span> Opciones
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                  <?php 
-                      if($clausurado==0){
-                      ?>
+                 
                   <li><a href="fagregaropcion.php">Mantenimiento Opcion</a></li>
                     <li><a href="fopciones.php">Gestionar Opciones</a></li>
                     <li><a href="listaOpciones.php">Opciones Activas</a></li>
                     <li><a href="listaOpcionesIna.php">Opciones Inactivas</a></li>
-                    <?php 
-                      }
-                      ?>
+               
                   </ul>
                 </li>
+              
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa fa-book"></span> Materias
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
+                 
                   <ul class="nav nav-list tree">
-                  <?php 
-                      if($clausurado==0){
-                      ?>
+                 
                     <li><a href="materias.php">Agregar Nuevo</a></li>
                     <li><a href="cmaterias.php">Lista de materias</a></li>
                     <li class="ripple">
@@ -134,17 +132,13 @@ if($result)
                           <ul class="nav nav-list sub-tree">
                             <li><a href="horarioGeneral.php">Agregar horario</a></li>
                             <li><a href="listaHorarios.php">Lista de horarios</a></li>    
-                            <?php 
-                      }
-                      ?>             
+                                 
                           </ul>
                     </li>
                   </ul>
 
                 </li>
-                <?php 
-                      if($clausurado==0){
-                      ?>
+                
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-users fa"></span> Personal
@@ -158,9 +152,7 @@ if($result)
                   </ul>
 
                 </li>
-                <?php 
-                      }
-                      ?>
+               
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-user fa"></span> Usuarios
@@ -172,6 +164,9 @@ if($result)
                     <li><a href="listaUsuariosInactivos.php">Usuarios Inactivos</a></li>
                     
                   </ul>
+                  <?php 
+                      }
+                      ?>
 
                 </li>
                 <li class="ripple">

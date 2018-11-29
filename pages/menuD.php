@@ -5,7 +5,7 @@ if($result)
 {
   while ($fila=$result->fetch_object()) {
     $anioActivo=$fila->eid_anio;
-  
+    $clausurado=$fila->eclausura;
   }
 }
  ?>
@@ -39,22 +39,39 @@ if($result)
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
+                      <?php 
+                      if($clausurado==0){
+                      ?>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
                         <li><a href="listabus.php">Boleta de notas</a></li>
+                        <?php 
+                      }
+                      ?>
                         <li><a href="listabus.php">Estadisticas</a></li>
    
                       </ul>
                     </li>
                     <?php if($_SESSION["permisoI"]==1){ ?>
+                     
                     <li class="active ripple">
                   <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   
                   <ul class="nav nav-list tree">
+                  <?php 
+                      if($clausurado==0){
+                      ?>
                       <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
                       <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                      <?php 
+                      }
+                      ?>
+
+                  
+                      <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
+                      <li><a href="busquedafamiliar.php">Búsqueda de Alumno por Familiar</a></li>
                       <li><a href="listacliente.php">Estadisticas</a></li>
                       
                   </ul>
