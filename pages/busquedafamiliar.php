@@ -9,6 +9,15 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 }else {
   header("Location:inicio.php");
 }
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+    $clausurado=$fila->eclausura;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -134,7 +143,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select talumno.eid_alumno, talumno.ccodigo as codigo ,CONCAT (talumno.cnombre,' ',talumno.capellido)  as nombre , talumno.cnombrep as masculino,talumno.ccelularp as celularp, talumno.cnombrem as femenino ,talumno.ccelularm as celularm from talumno  order by nombre");
+$result = $conexion->query("select talumno.eid_alumno, talumno.ccodigo as codigo ,CONCAT (talumno.cnombre,' ',talumno.capellido)  as nombre , talumno.cnombrep as masculino,talumno.ccelularp as celularp, talumno.cnombrem as femenino ,talumno.ccelularm as celularm from talumno where talumno.anio='".$anioActivo."'  order by nombre");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";

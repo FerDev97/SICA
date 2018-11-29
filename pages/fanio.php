@@ -164,19 +164,19 @@ error_reporting(E_ALL & ~E_NOTICE);
      function confirmar(id)
         {
           swal({
-  title: 'Esta seguro que desea activar este anio?',
-  text: "Esto provacara que el anio actual se desactive y pase a ser clausurado!",
+  title: '¿Está seguro que desea activar este año?',
+  text: "¡Esto provacara que el año actual se desactive y si este no ha sido clausurado pasara a estarlo!",
   type: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Si, activar!',
-  cancelButtonText: 'Cancelar!'
+  confirmButtonText: '¡Si, activar!',
+  cancelButtonText: '¡Cancelar!'
 }).then((result) => {
   if (result.value) {
     swal(
       'Activado!',
-      'El anio fue activado exitosamente.',
+      'El año fue activado exitosamente.',
       'success'
     )
     document.getElementById('bandera').value='activar';
