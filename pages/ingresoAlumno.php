@@ -14,7 +14,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 ?>
 <?php
 include "../config/conexion.php";
-$result = $conexion->query("select * from tanio where iestado=1");
+$result = $conexion->query("select * from tanio where iestado=1 ");
 if($result)
 {
   while ($fila=$result->fetch_object()) {
@@ -27,7 +27,7 @@ if($result)
 include '../config/conexion.php';
 //Query para generar codigo.
 
-                 $resultc = $conexion->query("select eid_alumno as id from talumno");
+                 $resultc = $conexion->query("select eid_alumno as id from talumno order by eid_alumno ASC");
                      if ($resultc) {
 
                        while ($filac = $resultc->fetch_object()) {
