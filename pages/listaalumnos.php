@@ -375,7 +375,7 @@ if ($bandera == 'enviar') {
 }
 if ($bandera == 'enviar1') {
   echo "<script type='text/javascript'>";
-  echo "document.location.href='editarInscripcion.php?idA=" . $baccion . "';";
+  echo "document.location.href='verInscripcion.php?idA=" . $baccion . "';";
   echo "</script>";
   # code...
 }
