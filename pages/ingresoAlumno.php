@@ -10,6 +10,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 }else {
   header("Location:inicio.php");
 }
+
 ?>
 <?php
 include "../config/conexion.php";
@@ -22,6 +23,20 @@ if($result)
   }
 }
  ?>
+ <?php
+include '../config/conexion.php';
+//Query para generar codigo.
+
+                 $resultc = $conexion->query("select eid_alumno as id from talumno");
+                     if ($resultc) {
+
+                       while ($filac = $resultc->fetch_object()) {
+                         $temp=$filac->id;
+                        
+                          }
+                     }   
+                     $codigo=sprintf("%03s",$temp+1);           
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -90,10 +105,7 @@ return 1;
   text: ''+str,
   footer: 'Revise que todos los campos esten completados.'
 })
-        }
-       
-     
-      
+        } 
       </script>
       <!-- FIN SCRIPTS DE SWEET ALERTS -->
       <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
@@ -105,7 +117,7 @@ function go(){
     function verificarCamposObligatoriosPersonales(){
        alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
-        alert("Lo sentimos, este campo es obligatorio.");
+        sweetGuardo("Lo sentimos, este campo es obligatorio.");
         return 0;
       }else{
          alert("nO ESTA VACIO");
@@ -208,17 +220,17 @@ function go(){
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo.">
+     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigo; ?>" readonly>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)">
+     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" required>
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
       <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
-      <option value="">Seleccione Departamento</option>
+      <option selected hidden>Seleccione Departamento</option>
       <option value="San Salvador">San Salvador</option>
       <option value="San Vicente">San Vicente</option>
       <option value="San Miguel">San Miguel</option>
@@ -243,7 +255,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
       <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
-      <option value="">Medio de Transporte</option>
+      <option selected hidden>Medio de Transporte</option>
       <option value="Autobus">Autobus</option>
       <option value="A pie">A pie</option>
       <option value="Trans.Propio">Trans.Propio</option>
@@ -253,7 +265,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
-      <option value="">Seleccione Opcion</option>
+      <option selected hidden>Seleccione Opcion</option>
       <?php  
       include "../config/conexion.php";
       $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
@@ -289,7 +301,7 @@ function go(){
     <!-- Finaliza col md 6 (derecha) -->
      <div class="col-md-6">
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="niea" type="text" class="form-control" name="niea" placeholder="NIE.">
+     <input id="niea" type="text" class="form-control" data-mask="0000000" name="niea" placeholder="NIE.">
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:25px;">
@@ -298,12 +310,12 @@ function go(){
      </div>
 
      <div class="input-group " style="padding-bottom:30px;">
-     <input id="fecha" type="date" class="form-control" name="fecha" >
+     <input id="fecha" type="date" class="form-control" name="fecha" min="1950-01-01" max="2005-12-31">
      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
      </div>
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="distanciaa" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
+     <input id="distanciaa" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E." min="1" max="100000">
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
      </div>
      </br>
@@ -372,19 +384,19 @@ function go(){
      </div>
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="duip" type="text" class="form-control" name="duip" placeholder="DUI.">
+     <input id="duip" type="text" data-mask="00000000-0"  class="form-control" name="duip" placeholder="DUI.">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-     <input id="telefonocp" type="text" class="form-control" name="telefonocp" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonocp" type="text" data-mask="000000000000"  class="form-control" name="telefonocp" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-     <input id="telefonotp" type="text" class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonotp" type="text" data-mask="20000000"  class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-     <input id="celularp" type="text" class="form-control" name="celularp" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="celularp" type="text" class="form-control" data-mask="00000000"  name="celularp" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      </div>
      
      
@@ -434,15 +446,15 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="duim" type="text" class="form-control" name="duim" placeholder="DUI">
+     <input id="duim" type="text" data-mask="00000000-0"  class="form-control" name="duim" placeholder="DUI">
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="mask-telefono" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonotm" type="text" data-mask="(00) 00000-0000" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
@@ -452,7 +464,7 @@ function go(){
     
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="miembrosm" type="number" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)">
+     <input id="miembrosm" type="number" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)" min="1" max="30">
      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
      </div>
      </br>
@@ -727,7 +739,7 @@ if ($bandera == "add") {
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
+    echo "sweetGuardo('$texto');";
    // echo "document.location.href='listaempleado.php';";
     echo "</script>";
 }
