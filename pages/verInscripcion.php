@@ -137,12 +137,12 @@ function go(){
 
 
     function verificarCamposObligatoriosPersonales(){
-       alert(document.getElementById("nombrea").value);
+       //alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
-        alert("Lo sentimos, este campo es obligatorio.");
+        //alert("Lo sentimos, este campo es obligatorio.");
         return 0;
       }else{
-         alert("nO ESTA VACIO");
+         //alert("nO ESTA VACIO");
          return 1;
       }
     }
@@ -186,7 +186,7 @@ function go(){
             document.getElementById('duiempleado').value=="" ||
             document.getElementById('nitempleado').value=="" ||
             document.getElementById('cargoempleado').value==""){
-            alert("Complete los campos prueba");
+            //alert("Complete los campos prueba");
             
           }else{
             document.getElementById("bandera").value="add";
@@ -250,16 +250,16 @@ function go(){
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>">
+     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>"disabled>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" value="<?php echo $nombreAR;?>">
+     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" value="<?php echo $nombreAR;?>" disabled>
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
-      <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
+      <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa" disabled>
       <option value="<?php echo $departR;?>"><?php echo $departR;?></option>
       <!---<option value="">Seleccione Departamento</option>
       <option value="San Salvador">San Salvador</option>
@@ -281,11 +281,11 @@ function go(){
       </div>
       <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direcciona" name="direcciona"><?php echo $direccionAR;?></textarea>
+      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direcciona" name="direcciona" disabled><?php echo $direccionAR;?></textarea>
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
-      <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
+      <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa" disabled>
       <option value="<?php echo $llegadaR;?>"><?php echo $direccionAR;?></option>
       <!--<option value="">Medio de Transporte</option>
       <option value="Autobus">Autobus</option>
@@ -296,22 +296,22 @@ function go(){
       </div>
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
-      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
+      <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa" disabled>
       <option value="">Seleccione Opcion</option>
           <option value="">
       </select>
       </div>
       <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
-     <input id="anteriora" value="<?php echo $anteriorR;?>" type="text" class="form-control" name="anteriora" placeholder="En que año estudio el grado anterior">
+     <input id="anteriora" value="<?php echo $anteriorR;?>" type="text" class="form-control" name="anteriora" placeholder="En que año estudio el grado anterior" disabled>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="enfermedadesa" value="<?php echo $enfermedadesR;?>" type="text" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)">
+     <input id="enfermedadesa" value="<?php echo $enfermedadesR;?>" type="text" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)" disabled>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="alergiaa" value="<?php echo $alergiaR;?>" type="text" class="form-control" name="alergiaa" placeholder="Es alergico a">
+     <input id="alergiaa" value="<?php echo $alergiaR;?>" type="text" class="form-control" name="alergiaa" placeholder="Es alergico a" disabled>
      </div>
       
  
@@ -325,21 +325,21 @@ function go(){
     <!-- Finaliza col md 6 (derecha) -->
      <div class="col-md-6">
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="niea" value="<?php echo $nieR;?>" type="text" class="form-control" name="niea" placeholder="NIE.">
+     <input id="niea" value="<?php echo $nieR;?>" type="text" class="form-control" name="niea" placeholder="NIE." disabled>
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:25px;">
-     <input id="apellidoa" value="<?php echo $apellidoAR;?>" type="text" class="form-control" name="apellidoa" placeholder="Apellido." onkeypress="return sololetras(event)">
+     <input id="apellidoa" value="<?php echo $apellidoAR;?>" type="text" class="form-control" name="apellidoa" placeholder="Apellido." onkeypress="return sololetras(event)" disabled>
      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      </div>
 
      <div class="input-group " style="padding-bottom:30px;">
-     <input id="fecha" value="<?php echo $fechaNacR;?>" type="date" class="form-control" name="fecha" >
+     <input id="fecha" value="<?php echo $fechaNacR;?>" type="date" class="form-control" name="fecha" disabled >
      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
      </div>
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="distanciaa" value="<?php echo $distanciaR;?>" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E.">
+     <input id="distanciaa" value="<?php echo $distanciaR;?>" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E." disabled>
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
      </div>
      </br>
@@ -347,11 +347,11 @@ function go(){
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
      <?php
           if($parvulariaR == 1){
-              echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia' checked >Si</label>";
-              echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia'>No</label>";
+              echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia' checked disabled>Si</label>";
+              echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia' disabled>No</label>";
           }else{
-            echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia'>Si</label>";
-            echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia' checked >No</label>";
+            echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia'disabled>Si</label>";
+            echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia' checked disabled>No</label>";
           }
      
      ?>
@@ -361,11 +361,11 @@ function go(){
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
      <?php
           if($trabajaR == 1){
-              echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja' checked >Si</label>";
-              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='trabajaa' value='0' id='trabaja'>No</label>";
+              echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja' checked disabled>Si</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='trabajaa' value='0' id='trabaja'disabled>No</label>";
           }else{
-            echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja'>Si</label>";
-              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='trabajaa' value='0' id='trabaja' checked >No</label>";
+            echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja' disabled>Si</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='trabajaa' value='0' id='trabaja' checked disabled>No</label>";
           }
      
      ?>
@@ -376,11 +376,11 @@ function go(){
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
      <?php
           if($trabajaR == 1){
-              echo "<label class='radio-inline' style='margin-right:55px;margin-left:42px; font-size: 15px'><input type='radio' name='zonaa' value='1' id='zonaa' checked >Rural</label>";
-              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='zonaa' value='0' id='zonaa'>Urbana</label>";
+              echo "<label class='radio-inline' style='margin-right:55px;margin-left:42px; font-size: 15px'><input type='radio' name='zonaa' value='1' id='zonaa' checked disabled>Rural</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='zonaa' value='0' id='zonaa' disabled>Urbana</label>";
           }else{
-            echo "<label class='radio-inline' style='margin-right:55px;margin-left:42px; font-size: 15px'><input type='radio' name='zonaa' value='1' id='zonaa'>Rural</label>";
-            echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='zonaa' value='0' id='zonaa' checked >Urbana</label>";
+            echo "<label class='radio-inline' style='margin-right:55px;margin-left:42px; font-size: 15px'><input type='radio' name='zonaa' value='1' id='zonaa' disabled>Rural</label>";
+            echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='zonaa' value='0' id='zonaa' checked disabled>Urbana</label>";
           }
      
      ?>
@@ -391,11 +391,11 @@ function go(){
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
      <?php
           if($repite == 1){
-              echo "<label class='radio-inline' style='margin-right:78px;margin-left:68px; font-size: 15px'><input type='radio' name='repitea' value='1' id='repitea' checked >Si</label>";
-              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='repitea' value='0' id='repitea'>No</label>";
+              echo "<label class='radio-inline' style='margin-right:78px;margin-left:68px; font-size: 15px'><input type='radio' name='repitea' value='1' id='repitea' checked disabled >Si</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='repitea' value='0' id='repitea'disabled>No</label>";
           }else{
-            echo "<label class='radio-inline' style='margin-right:78px;margin-left:68px; font-size: 15px'><input type='radio' name='repitea' value='1' id='repitea'>Si</label>";
-              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='repitea' value='0' id='repitea' checked >No</label>";
+            echo "<label class='radio-inline' style='margin-right:78px;margin-left:68px; font-size: 15px'><input type='radio' name='repitea' value='1' id='repitea' disabled>Si</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='repitea' value='0' id='repitea' checked disabled>No</label>";
           }
      
      ?>
@@ -407,21 +407,21 @@ function go(){
      <?php
 
           if($bautizoR == 1){
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo' checked >Bautismo</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo' checked disabled >Bautismo</label>";
           }else{
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo'>Bautismo</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:10px;font-size: 15px'><input type='checkbox' value='1' name='bautismo'disabled>Bautismo</label>";
           }
 
           if($comunionR == 1){
-              echo "<label class='checkbox-inline' style='font-size: 15px'><input type='checkbox' value='1' name='confirmacion' checked >Confirmacion</label>";
+              echo "<label class='checkbox-inline' style='font-size: 15px'><input type='checkbox' value='1' name='confirmacion' checked disabled>Confirmacion</label>";
           }else{
-            echo "<label class='checkbox-inline' style='font-size: 15px'><input type='checkbox' value='1' name='confirmacion'>Confirmacion</label>";
+            echo "<label class='checkbox-inline' style='font-size: 15px'><input type='checkbox' value='1' name='confirmacion'disabled>Confirmacion</label>";
           }
 
           if($confirmaR == 1){
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input type='checkbox' value='1' name='comunion' checked >Primera Comunión</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input type='checkbox' value='1' name='comunion' checked disabled>Primera Comunión</label>";
           }else{
-            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input type='checkbox' value='1' name='comunion'> Primera Comunión</label>";
+            echo "<label class='checkbox-inline' style='margin-right:20px;margin-left:67px;font-size: 15px'><input type='checkbox' value='1' name='comunion'disabled> Primera Comunión</label>";
           }
 
      

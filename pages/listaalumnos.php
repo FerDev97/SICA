@@ -134,7 +134,13 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->bachillerato . "</td>";
+        $result2 = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1  and topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
+if ($result2) {
+    while ($fila2 = $result2->fetch_object()) {
+      echo "<td>" . $fila2->cgrado ." ".$fila2->cnombe." ".$fila2->cseccion."</td>";
+    }
+  }
+        
         echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_alumno . ");><i class='fa fa-eye'></i>
              </button></td>";
         echo "</tr>";
@@ -375,7 +381,7 @@ if ($bandera == 'enviar') {
 }
 if ($bandera == 'enviar1') {
   echo "<script type='text/javascript'>";
-  echo "document.location.href='editarInscripcion.php?idA=" . $baccion . "';";
+  echo "document.location.href='verInscripcion.php?idA=" . $baccion . "';";
   echo "</script>";
   # code...
 }
