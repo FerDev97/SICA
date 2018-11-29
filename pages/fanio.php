@@ -15,9 +15,12 @@ if(empty($anio))
 
 }else
 {
+  include "../config/conexion.php";
+ include "IB.php";
   $consulta  = "INSERT INTO tanio VALUES('".$anio."','0','-1','0')";
   $resultado = $conexion->query($consulta);
   if ($resultado) {
+    IB:: insertar($_SESSION["id"],"Registró un nuevo año");
       //msg("Exito");
   } else {
       //msg(mysqli_error($conexion));
@@ -161,19 +164,19 @@ error_reporting(E_ALL & ~E_NOTICE);
      function confirmar(id)
         {
           swal({
-  title: 'Esta seguro que desea activar este anio?',
-  text: "Esto provacara que el anio actual se desactive y pase a ser clausurado!",
+  title: '¿Está seguro que desea activar este año?',
+  text: "¡Esto provacara que el año actual se desactive y si este no ha sido clausurado pasara a estarlo!",
   type: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Si, activar!',
-  cancelButtonText: 'Cancelar!'
+  confirmButtonText: '¡Si, activar!',
+  cancelButtonText: '¡Cancelar!'
 }).then((result) => {
   if (result.value) {
     swal(
       'Activado!',
-      'El anio fue activado exitosamente.',
+      'El año fue activado exitosamente.',
       'success'
     )
     document.getElementById('bandera').value='activar';
@@ -263,7 +266,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-12">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                              <input id="año" type="number" class="form-control" data-mask="0000" name="año" placeholder="Digite año escolar." size="4" maxlength="4" value="<?php echo $hoy['year']?>" min="<?php echo $hoy['year']?>"  onkeypress="return aceptNum(event)">
+                              <input id="año" type="number" class="form-control" data-mask="0000" name="año" placeholder="Digite año escolar." size="4" maxlength="4" value="<?php echo $hoy['year']?>" min="<?php echo $hoy['year']?>" max="<?php echo $hoy['year']+1?>"  onkeypress="return aceptNum(event)">
                           </div>
                          </br>
                        
@@ -805,14 +808,25 @@ if ($bandera == "desactivar") {
         msg("No Exito");
     }
 }
+
+
 if ($bandera == "activar") {
   $result2 = $conexion->query("select * from tanio");
   if ($result2) {
     while ($fila = $result2->fetch_object()) {
       $idanio=$fila->idanio;
 //CONSULTA PARA DESACTIVAR CUALQUIER AÑO
-      
-$consultaDesac = "update tanio set iestado='0',eclausura='1'  where iestado='1'";
+$result3 = $conexion->query("select * from tanio where eid_anio=".$baccion);
+if ($result3) {
+  while ($fila3 = $result3->fetch_object()) {
+      $eclausura=$fila3->eclausura;
+  } 
+}
+if ($eclausura==0) {
+  $consultaDesac = "update tanio set iestado='0',eclausura='1'  where iestado='1'";
+}else{
+  $consultaDesac = "update tanio set iestado='0' where iestado='1'";
+}
 $resultadoDesac = $conexion->query($consultaDesac);
 
       // $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
@@ -823,7 +837,7 @@ $resultadoDesac = $conexion->query($consultaDesac);
     $resultado = $conexion->query($consulta2);
     if ($resultado) {
       echo "<script type='text/javascript'>";
-      echo "alert('Exito');";
+     // echo "alert('Exito');";
       echo "document.location.href='fanio.php';";
       echo "</script>";
     } else { 

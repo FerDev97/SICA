@@ -9,6 +9,15 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 }else {
   header("Location:inicio.php");
 }
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+    $clausurado=$fila->eclausura;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,10 +124,12 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno  order by nombre");
+$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."'  order by codigo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
+       
+        if($clausurado==0){
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")';>
@@ -128,13 +139,30 @@ if ($result) {
             </button>
             </div>
         </td>";
+        }else{
+          echo "<td>
+          <div class='col-md-2' style='margin-top:1px'>
+            <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")'; disabled>
+            <div>
+              <span>Editar</span>
+            </div>
+            </button>
+            </div>
+        </td>";
+        }
         //echo "<tr>";
         //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        echo "<td>" . $fila->bachillerato . "</td>";
+        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE topciones.eestado=1 and topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
+if ($result2) {
+    while ($fila2 = $result2->fetch_object()) {
+      echo "<td>" . $fila2->cgrado ." ".$fila2->cnombe." ".$fila2->cseccion."</td>";
+    }
+  }
+        
         echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_alumno . ");><i class='fa fa-eye'></i>
              </button></td>";
         echo "</tr>";
@@ -375,7 +403,7 @@ if ($bandera == 'enviar') {
 }
 if ($bandera == 'enviar1') {
   echo "<script type='text/javascript'>";
-  echo "document.location.href='editarInscripcion.php?idA=" . $baccion . "';";
+  echo "document.location.href='verInscripcion.php?idA=" . $baccion . "';";
   echo "</script>";
   # code...
 }

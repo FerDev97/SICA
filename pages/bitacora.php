@@ -172,7 +172,7 @@ function sweetConfirm(){
                           <th>Apellido</th>
                           <th>Fecha de Accion</th>
                           <th>Descripcion</th>
-                          <th>Observar</th> 
+                          <!--<th>Observar</th>--> 
                         </tr>
                       </thead>
                       <tbody class="tabla_ajax">
@@ -195,8 +195,8 @@ if ($result) {
         echo "<td>" . $fila->cdescripcion . "</td>";
        
            //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
-          echo "<td style='text-align:center;'><button title='Observar el registro' align='center' type='button' class='btn btn-default' onclick=confirmarAct(" . $fila->eid_bitacora . ",1);><i class='fa fa-eye'></i>
-             </button></td>";
+         // echo "<td style='text-align:center;'><button title='Observar el registro' align='center' type='button' class='btn btn-default' onclick=confirmarAct(" . $fila->eid_bitacora . ",1);><i class='fa fa-eye'></i>
+           //  </button></td>";
        
        
        
