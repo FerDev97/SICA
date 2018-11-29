@@ -1,3 +1,14 @@
+<?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+    $clausurado=$fila->eclausura;
+  }
+}
+ ?>
 <!-- start:Left Menu -->
             <div id="left-menu">
               <div class="sub-left-menu scroll">
@@ -26,11 +37,23 @@
                   </a>
                   <ul class="nav nav-list tree">
                       <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
+                      <?php 
+                      if($clausurado==0){
+                      ?>
                       <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
+                      <?php 
+                      }
+                      ?>
                       <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
                       <li><a href="busquedafamiliar.php">Búsqueda de Alumno por Familiar</a></li>
+                      <?php 
+                      if($clausurado==0){
+                      ?>
                       <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                      <?php 
+                      }
+                      ?>
                       <li><a href="listacliente.php">Estadisticas</a></li>
                       
                   </ul>
@@ -41,11 +64,24 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
+                      <?php 
+                      if($clausurado==0){
+                      ?>
                       <li><a href="listabus.php">Gestion de Periodos</a></li>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
+                       
                         <li><a href="listabus.php">Boleta de notas</a></li>
+                        <?php 
+                      }
+                      ?>
                         <li><a href="listabus.php">Estadisticas</a></li>
+                        <?php 
+                      if($clausurado==0){
+                      ?>
                         <li><a href="listabus.php">Cierre de Sistema</a></li>
+                        <?php 
+                      }
+                      ?>
                       </ul>
                     </li>
                 
@@ -67,10 +103,16 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
+                  <?php 
+                      if($clausurado==0){
+                      ?>
                   <li><a href="fagregaropcion.php">Mantenimiento Opcion</a></li>
                     <li><a href="fopciones.php">Gestionar Opciones</a></li>
                     <li><a href="listaOpciones.php">Opciones Activas</a></li>
                     <li><a href="listaOpcionesIna.php">Opciones Inactivas</a></li>
+                    <?php 
+                      }
+                      ?>
                   </ul>
                 </li>
                 <li class="ripple">
@@ -79,6 +121,9 @@
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
+                  <?php 
+                      if($clausurado==0){
+                      ?>
                     <li><a href="materias.php">Agregar Nuevo</a></li>
                     <li><a href="cmaterias.php">Lista de materias</a></li>
                     <li class="ripple">
@@ -88,12 +133,18 @@
                           </a>
                           <ul class="nav nav-list sub-tree">
                             <li><a href="horarioGeneral.php">Agregar horario</a></li>
-                            <li><a href="listaHorarios.php">Lista de horarios</a></li>                 
+                            <li><a href="listaHorarios.php">Lista de horarios</a></li>    
+                            <?php 
+                      }
+                      ?>             
                           </ul>
                     </li>
                   </ul>
 
                 </li>
+                <?php 
+                      if($clausurado==0){
+                      ?>
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-users fa"></span> Personal
@@ -107,6 +158,9 @@
                   </ul>
 
                 </li>
+                <?php 
+                      }
+                      ?>
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                     <span class="fa-user fa"></span> Usuarios
