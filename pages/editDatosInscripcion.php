@@ -26,19 +26,19 @@ $trabaja = $_POST['trabajaa'];
 $zona = $_POST['zonaa'];
 $repite = $_POST['repitea'];
 
-if($_POST['bautismo']=="" || $_POST["confirma"]== null){
+if($_POST['bautismo']==""){
   $bautizo = 0;
 }else{
   $bautizo = $_POST['bautismo'];
 }
 
-if($_POST["confirma"]=="" || $_POST["confirma"]== null){
+if($_POST["confirma"]==""){
   $confirmacion = 0;
 }else{
   $confirmacion = $_POST["confirma"];
 }
 
-if($_POST["comunion"]=="" || $_POST["comunion"]== null){
+if($_POST["comunion"]==""){
   $comunion = 0;
 }else{
     $comunion = $_POST["comunion"];
@@ -69,8 +69,8 @@ $consulta  = "UPDATE talumno SET ccodigo='".$codigo. "', cnie='" .$NIE. "', cnom
     capellido='" .$apellido. "', cdireccion='" .$direcc. "', edepto='" .$depart. "', ffecha_nac='" .$fecha. "',
     cllegada='" .$llega. "', cbachillerato='" .$bto. "', canterior='" .$anterior. "', cenfermedades='" .$enfer. "',
     calergia='" .$alergia. "', cdistancia='" .$distancia. "', iparvularia='" .$parvu. "', itrabaja='" .$trabaja. "',
-    izona='" .$zona. "', irepite='" .$repite. "', ibautizo='" .$bautizo. "', icomunion'" .$comunion. "', iconfirma='" .$confirmacion. "',
-    cnombrep='" .$nombrep. "', clugar_trabajop='" .$lugarp."', cduip='" .$duip. "', ctelefonocp'" .$housephonep. "',
+    izona='" .$zona. "', irepite='" .$repite. "', ibautizo='" .$bautizo. "', icomunion='" .$comunion. "', iconfirma='" .$confirmacion. "',
+    cnombrep='" .$nombrep. "', clugar_trabajop='" .$lugarp."', cduip='" .$duip. "', ctelefonocp='" .$housephonep. "',
     ctelefonotp='" .$workphonep. "', ccelularp='" .$smartphonep. "', cdireccionp='" .$direccionp. "', cestadocivilp='" .$estado. "',
     cconvive='" .$convive. "', cnombrem='" .$nombrem. "', clugar_trabajom='" .$lugarm. "', cprofesionm='" .$oficiom. "',
     cduim='" .$duim. "', ctelefonocm='" .$telefonocm. "', ctelefonotm='" .$telefonotm. "', ccelularm='" .$celularm. "',

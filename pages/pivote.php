@@ -119,22 +119,8 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   cancelButtonAriaLabel: 'Thumbs down',
 })
 return 1;
-}
-function sweetGuardo(str){
-          swal(
-  ''+str,
-  'Inscripcion SICA',
-  'success'
-)
-        }
-        function sweetError(str){
-         swal({
-  type: 'error',
-  title: ''+str,
-  text: 'inscripcion SICA',
-  footer: 'Revise que todos los campos esten completados.'
-})
-        } 
+
+      }
        
 
      
@@ -151,12 +137,12 @@ function go(){
 
 
     function verificarCamposObligatoriosPersonales(){
-       
+       alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
         alert("Lo sentimos, este campo es obligatorio.");
         return 0;
       }else{
-         
+         alert("nO ESTA VACIO");
          return 1;
       }
     }
@@ -427,7 +413,7 @@ function go(){
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
      <?php
-          if($zonaR == 1){
+          if($trabajaR == 1){
               echo "<label class='radio-inline' style='margin-right:55px;margin-left:42px; font-size: 15px'><input type='radio' name='zonaa' value='1' id='zonaa' checked >Rural</label>";
               echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='zonaa' value='0' id='zonaa'>Urbana</label>";
           }else{
