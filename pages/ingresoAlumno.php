@@ -11,6 +11,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   header("Location:inicio.php");
 }
 ?>
+<?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+  
+  }
+}
+ ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -63,11 +74,24 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     '<i class="fa fa-thumbs-down"></i>',
   cancelButtonAriaLabel: 'Thumbs down',
 })
-return 0;
-
+return 1;
       }
+      function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
        
-
      
       
       </script>
@@ -78,9 +102,6 @@ return 0;
 function go(){
   document.msform.submit(); 
 }
-
-
-
     function verificarCamposObligatoriosPersonales(){
        alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
@@ -112,7 +133,6 @@ function go(){
                 break;
             }
         }
-
         if(letras.indexOf(teclado)==-1 && !teclado_especial){
             return false;
         }
@@ -137,14 +157,12 @@ function go(){
             document.getElementById("bandera").value="add";
             document.turismo.submit();
           }
-
         }
       </script>
 </head>
 
 <body id="mimin" class="dashboard">
    <?php include "header.php"?>
-
       <div class="container-fluid mimin-wrapper">
       <?php
           if($perIns==1){
@@ -179,7 +197,7 @@ function go(){
     <li>Aceptacion de Terminos.</li>
   </ul>
   </center>
-  
+  <input type="hidden" name="anio" value="<?php echo $anioActivo;?>"/>
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
@@ -236,7 +254,15 @@ function go(){
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
       <option value="">Seleccione Opcion</option>
-      <?php include('comboopcion.php')?>
+      <?php  
+      include "../config/conexion.php";
+      $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
+      if ($result) {
+          while ($fila = $result->fetch_object()) {
+           echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+         }
+      }
+      ?>
       </select>
       </div>
       <div class="input-group " style="padding-bottom:20px;">
@@ -416,7 +442,7 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonotm" type="text" data-mask="(00) 00000-0000" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
@@ -524,7 +550,6 @@ function go(){
         direccioncliente: "Digita tu direcci&oacuten"
       }
     });
-
     // propose username by combining first- and lastname
     $("#username").focus(function() {
       var firstname = $("#firstname").val();
@@ -533,8 +558,6 @@ function go(){
         this.value = firstname + "." + lastname;
       }
     });
-
-
     $('.mask-dui').mask('00000000-0');
     $('.mask-codigo').mask('AA000');
     $('.mask-time').mask('00:00:00');
@@ -569,16 +592,12 @@ function go(){
       }
     });
     $('.mask-selectonfocus').mask("00/00/0000", {selectOnFocus: true});
-
     var options =  {onKeyPress: function(cep, e, field, options){
       var masks = ['00000-000', '0-00-00-00'];
       mask = (cep.length>7) ? masks[1] : masks[0];
       $('.mask-crazy_cep').mask(mask, options);
     }};
-
     $('.mask-crazy_cep').mask('00000-000', options);
-
-
     var options2 =  {
       onComplete: function(cep) {
         alert('CEP Completed!:' + cep);
@@ -595,9 +614,7 @@ function go(){
         console.log ("Digit: ", error.v, " is invalid for the position: ", error.p, ". We expect something like: ", error.e);
       }
     };
-
     $('.mask-cep_with_callback').mask('00000-000', options2);
-
     var SPMaskBehavior = function (val) {
       return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
@@ -606,11 +623,7 @@ function go(){
         field.mask(SPMaskBehavior.apply({}, arguments), options);
       }
     };
-
     $('.mask-sp_celphones').mask(SPMaskBehavior, spOptions);
-
-
-
     var slider = document.getElementById('noui-slider');
     noUiSlider.create(slider, {
       start: [20, 80],
@@ -620,7 +633,6 @@ function go(){
         'max': 100
       }
     });
-
     var slider = document.getElementById('noui-range');
     noUiSlider.create(slider, {
                         start: [ 20, 80 ], // Handle start position
@@ -639,18 +651,13 @@ function go(){
                           density: 2
                         }
                       });
-
-
-
     $(".select2-A").select2({
       placeholder: "Select a state",
       allowClear: true
     });
-
     $(".select2-B").select2({
       tags: true
     });
-
     $("#range1").ionRangeSlider({
       type: "double",
       grid: true,
@@ -659,19 +666,15 @@ function go(){
       from: -500,
       to: 500
     });
-
     $('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true});
     $('.date').bootstrapMaterialDatePicker({ weekStart : 0, time: false});
     $('.time').bootstrapMaterialDatePicker({ date: false,format:'HH:mm',animation:true});
     $('.datetime').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',animation:true});
     $('.date-fr').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER'});
     $('.min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
-
-
     $(".dial").knob({
       height:80
     });
-
     $('.dial1').trigger(
      'configure',
      {
@@ -682,22 +685,18 @@ function go(){
        "skin":"tron"
      }
      );
-
     $('.dial2').trigger(
      'configure',
      {
-
        "width":80,
        "fgColor":"#FF6656",
        "skin":"tron",
        "cursor":true
      }
      );
-
     $('.dial3').trigger(
      'configure',
      {
-
        "width":80,
        "fgColor":"#27C24C",
      }
@@ -708,9 +707,7 @@ function go(){
 </body>
 </html>
 <?php
-
 include "../config/conexion.php";
-
 $bandera           = $_REQUEST["bandera"];
 $nombreempleado    = $_REQUEST["nombreempleado"];
 $apellidoempleado  = $_REQUEST["apellidoempleado"];
@@ -718,7 +715,6 @@ $duiempleado       = $_REQUEST["duiempleado"];
 $nitempleado       = $_REQUEST["nitempleado"];
 $cargoempleado     = $_REQUEST["cargoempleado"];
 $idagenciaempleado = $_REQUEST["idagenciaempleado"];
-
 if ($bandera == "add") {
     $consulta  = "INSERT INTO empleado VALUES('null','" . $nombreempleado . "','" . $apellidoempleado . "','" . $duiempleado . "','" . $nitempleado . "','" . $cargoempleado . "','" . $idagenciaempleado . "')";
     $resultado = $conexion->query($consulta);
@@ -728,15 +724,12 @@ if ($bandera == "add") {
         msg("No Exito");
     }
 }
-
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+   // echo "document.location.href='listaempleado.php';";
     echo "</script>";
 }
-
   
-
 ?>
