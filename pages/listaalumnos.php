@@ -45,29 +45,12 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
           document.getElementById('baccion').value=id;
          document.turismo.submit();
         }
-        function confirmar(id,op)
+        function confirmar(id)
         {
-          if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
-
+          
+          document.getElementById('bandera').value='enviar1';
+          document.getElementById('baccion').value=id;
+         document.turismo.submit();
 
         }
          function confirmar1(id)
@@ -152,7 +135,7 @@ if ($result) {
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
         echo "<td>" . $fila->bachillerato . "</td>";
-        echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_personal . ",1);><i class='fa fa-eye'></i>
+        echo "<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_alumno . ");><i class='fa fa-eye'></i>
              </button></td>";
         echo "</tr>";
 
@@ -389,6 +372,12 @@ if ($bandera == 'enviar') {
     echo "document.location.href='editarInscripcion.php?idA=" . $baccion . "';";
     echo "</script>";
     # code...
+}
+if ($bandera == 'enviar1') {
+  echo "<script type='text/javascript'>";
+  echo "document.location.href='editarInscripcion.php?idA=" . $baccion . "';";
+  echo "</script>";
+  # code...
 }
 function msg($texto)
 {
