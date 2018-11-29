@@ -270,7 +270,7 @@ function go(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Inscripcion</h3>
+                         <h3 class="animated fadeInLeft">Realizar Inscripcion</h3>
                         <p class="animated fadeInDown">
                           Ficha de inscripcion.
                         </p>
@@ -803,6 +803,8 @@ function go(){
 $guardo  = $_REQUEST["guardo"];
 if($guardo==1){
 msg("Los datos fueron almacenados con exito");
+}else if($guardo==2){
+  msg("EL NIE ya existe");
 }
 
 function msg($texto)

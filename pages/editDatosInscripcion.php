@@ -77,7 +77,7 @@ $consulta  = "UPDATE talumno SET ccodigo='".$codigo. "', cnie='" .$NIE. "', cnom
     cmiembros='" .$miembrosm. "', creligion='" .$religiionm. "' WHERE eid_alumno='".$idA."' ";
 $resultado = $conexion->query($consulta);
           if ($resultado) {
-             IB:: insertar($_SESSION["id"],"Se editó la inscripcion del alumno: ".$codigo);
+             IB:: insertar($_SESSION["id"],"Se editó la inscripcion del alumno: ");
               $mensaje="Se editaron los datos correctamente";
           } else {
              $mensaje="Error al editar los datos ";

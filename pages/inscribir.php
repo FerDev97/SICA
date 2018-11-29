@@ -59,6 +59,9 @@ $anio=$_POST['anio'];
 //Adicionales
 
 //odos llegan con exito 
+$query = "SELECT cnie FROM talumno WHERE cnie like '%".$NIE."';";
+$result = $conexion->query($query);
+    if($result->num_rows == 0||$NIE==""){
 $consulta  = "INSERT INTO talumno VALUES('null','" .$codigo. "','" .$NIE. "','" .$nombre. "','" .$apellido. "','" .$direcc. "','" .$depart. "','" .$fecha. "','" .$llega. "','" .$bto. "','" .$anterior. "','" .$enfer. "','" .$alergia. "','" .$distancia. "','" .$parvu. "','" .$trabaja. "','" .$zona. "','" .$repite. "','" .$bautizo. "','" .$comunion. "','" .$confirmacion. "','" .$nombrep. "','" .$lugarp."','" .$duip. "','" .$housephonep. "','" .$workphonep. "','" .$smartphonep. "','" .$direccionp. "','" .$estado. "','" .$convive. "','" .$nombrem. "','" .$lugarm. "','" .$oficiom. "','" .$duim. "','" .$telefonocm. "','" .$telefonotm. "','" .$celularm. "','" .$miembrosm. "','" .$religiionm. "','" .$anio. "')";
 $resultado = $conexion->query($consulta);
           if ($resultado) {
@@ -68,5 +71,10 @@ $resultado = $conexion->query($consulta);
           } else {
              $mensaje="Error al insertar los datos";
           }
+        }else{
+
+          $mensaje="El alumno con NIE ya esta inscrito";
+          header('Location: ingresoAlumno.php?guardo=2');
+      }
           
 ?>
