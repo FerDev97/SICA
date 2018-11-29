@@ -11,6 +11,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   header("Location:inicio.php");
 }
 ?>
+<?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+  
+  }
+}
+ ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -63,9 +74,24 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
     '<i class="fa fa-thumbs-down"></i>',
   cancelButtonAriaLabel: 'Thumbs down',
 })
-return 0;
+return 1;
 
       }
+      function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
        
 
      
@@ -179,7 +205,7 @@ function go(){
     <li>Aceptacion de Terminos.</li>
   </ul>
   </center>
-  
+  <input type="hidden" name="anio" value="<?php echo $anioActivo;?>"/>
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
@@ -236,7 +262,15 @@ function go(){
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
       <option value="">Seleccione Opcion</option>
-      <?php include('comboopcion.php')?>
+      <?php  
+      include "../config/conexion.php";
+      $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
+      if ($result) {
+          while ($fila = $result->fetch_object()) {
+           echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+         }
+      }
+      ?>
       </select>
       </div>
       <div class="input-group " style="padding-bottom:20px;">
@@ -416,7 +450,7 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonotm" type="text" data-mask="(00) 00000-0000" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
@@ -733,7 +767,7 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "alert('$texto');";
-    echo "document.location.href='listaempleado.php';";
+   // echo "document.location.href='listaempleado.php';";
     echo "</script>";
 }
 
