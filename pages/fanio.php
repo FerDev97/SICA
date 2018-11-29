@@ -15,9 +15,12 @@ if(empty($anio))
 
 }else
 {
+  include "../config/conexion.php";
+ include "IB.php";
   $consulta  = "INSERT INTO tanio VALUES('".$anio."','0','-1','0')";
   $resultado = $conexion->query($consulta);
   if ($resultado) {
+    IB:: insertar($_SESSION["id"],"Registró un nuevo año");
       //msg("Exito");
   } else {
       //msg(mysqli_error($conexion));
