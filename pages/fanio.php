@@ -263,7 +263,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                           <div class="col-md-12">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                              <input id="año" type="number" class="form-control" data-mask="0000" name="año" placeholder="Digite año escolar." size="4" maxlength="4" value="<?php echo $hoy['year']?>" min="<?php echo $hoy['year']?>"  onkeypress="return aceptNum(event)">
+                              <input id="año" type="number" class="form-control" data-mask="0000" name="año" placeholder="Digite año escolar." size="4" maxlength="4" value="<?php echo $hoy['year']?>" min="<?php echo $hoy['year']?>" max="<?php echo $hoy['year']+1?>"  onkeypress="return aceptNum(event)">
                           </div>
                          </br>
                        
@@ -834,7 +834,7 @@ $resultadoDesac = $conexion->query($consultaDesac);
     $resultado = $conexion->query($consulta2);
     if ($resultado) {
       echo "<script type='text/javascript'>";
-      echo "alert('Exito');";
+     // echo "alert('Exito');";
       echo "document.location.href='fanio.php';";
       echo "</script>";
     } else { 

@@ -115,7 +115,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno  order by nombre");
+$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno  order by codigo");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
