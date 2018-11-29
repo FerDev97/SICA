@@ -131,9 +131,9 @@ $(".previous").click(function() {
 
 $(".submit").click(function() {
 
-    var result = DatosIncompletos();
-    if (result == 1) {
+    //var result = DatosIncompletos();
+    //if (result == 1) {
         go();
-    }
+    //}
 
 });

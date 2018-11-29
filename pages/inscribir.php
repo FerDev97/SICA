@@ -64,17 +64,9 @@ $resultado = $conexion->query($consulta);
           if ($resultado) {
              IB:: insertar($_SESSION["id"],"Inscribio un nuevo alumno");
               $mensaje="Se agregaron los datos correctamente";
-  
+              header('Location: ingresoAlumno.php?guardo=1');
           } else {
              $mensaje="Error al insertar los datos";
           }
-          msg($mensaje);
-  
-          function msg($mensaje)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$mensaje');";
-    echo "document.location.href='listaalumnos.php';";
-    echo "</script>";
-}
+          
 ?>

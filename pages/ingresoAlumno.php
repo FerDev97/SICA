@@ -93,8 +93,8 @@ return 1;
       }
       function sweetGuardo(str){
           swal(
-  'Exito!',
   ''+str,
+  'Inscripcion SICA',
   'success'
 )
         }
@@ -291,7 +291,7 @@ function go(){
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
-    <h3 class="fs-subtitle">Informacion personal del alumno.<br>Los campos con un (*) son obligatorios.</h3>
+    <h3 class="fs-subtitle">Informacion personal del alumno.<br>Inscripcion SICA.</h3>
     <!-- Inicia col md 12 panel -->
     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
       <!-- Inicia el col md 6 izquierda -->
@@ -302,7 +302,7 @@ function go(){
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" required>
+     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre*" onkeypress="return sololetras(event)" required>
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
@@ -799,23 +799,12 @@ function go(){
 </body>
 </html>
 <?php
-include "../config/conexion.php";
-$bandera           = $_REQUEST["bandera"];
-$nombreempleado    = $_REQUEST["nombreempleado"];
-$apellidoempleado  = $_REQUEST["apellidoempleado"];
-$duiempleado       = $_REQUEST["duiempleado"];
-$nitempleado       = $_REQUEST["nitempleado"];
-$cargoempleado     = $_REQUEST["cargoempleado"];
-$idagenciaempleado = $_REQUEST["idagenciaempleado"];
-if ($bandera == "add") {
-    $consulta  = "INSERT INTO empleado VALUES('null','" . $nombreempleado . "','" . $apellidoempleado . "','" . $duiempleado . "','" . $nitempleado . "','" . $cargoempleado . "','" . $idagenciaempleado . "')";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
+
+$guardo  = $_REQUEST["guardo"];
+if($guardo==1){
+msg("Los datos fueron almacenados con exito");
 }
+
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
