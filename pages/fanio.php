@@ -805,14 +805,25 @@ if ($bandera == "desactivar") {
         msg("No Exito");
     }
 }
+
+
 if ($bandera == "activar") {
   $result2 = $conexion->query("select * from tanio");
   if ($result2) {
     while ($fila = $result2->fetch_object()) {
       $idanio=$fila->idanio;
 //CONSULTA PARA DESACTIVAR CUALQUIER AÑO
-      
-$consultaDesac = "update tanio set iestado='0',eclausura='1'  where iestado='1'";
+$result3 = $conexion->query("select * from tanio where eid_anio=".$baccion);
+if ($result3) {
+  while ($fila3 = $result3->fetch_object()) {
+      $eclausura=$fila3->eclausura;
+  } 
+}
+if ($eclausura==0) {
+  $consultaDesac = "update tanio set iestado='0',eclausura='1'  where iestado='1'";
+}else{
+  $consultaDesac = "update tanio set iestado='0' where iestado='1'";
+}
 $resultadoDesac = $conexion->query($consultaDesac);
 
       // $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
