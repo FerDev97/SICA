@@ -1,3 +1,14 @@
+<?php
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+  
+  }
+}
+ ?>
 <!-- start:Left Menu -->
 <div id="left-menu">
               <div class="sub-left-menu scroll">
