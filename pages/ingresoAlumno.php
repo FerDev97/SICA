@@ -568,7 +568,7 @@ function go(){
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Terminos.</h2>
-    <h3 class="fs-subtitle">Es obligatorio colocar un número de telefono fijo ya sea de casa o de trabajo;si cambia su número de telefónico por favor actualizarlo.</h3>
+    <h3 class="fs-subtitle">Recordarle que al realizar la inscripción usted está aceptando todos los compromisos y lineamientos establecidos por la institucion, el incumplimiento de estos dará lugar a recomendar al final de año el cambio de ambiente escolar, evitando así posibles demandas.</h3>
     <!-- Inicia col md 12 panel -->
     
     <!-- Finaliza col md 12 panel body -->
