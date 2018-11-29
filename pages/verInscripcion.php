@@ -194,6 +194,7 @@ function go(){
           }
 
         }
+        
        
       </script>
 </head>
@@ -588,7 +589,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" class="submit action-button" value="Cerrar"/>
+    <input type="button" class="submit action-button" value="Cerrar" disabled/>
   </fieldset>
   
 </form> 

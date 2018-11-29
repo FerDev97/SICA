@@ -123,16 +123,18 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                           <th>Codigo</th>
                           <th>Nombre</th>
                           <th>Padre(Responsable masculino)</th>
+                          <th>Celular</th>
                           <th>Madre(Responsable femenino)</th>
+                          <th>Celular</th>
                           
-                          <th>Ver</th>
+                          
                          </tr>
                       </thead>
                       <tbody>
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select talumno.eid_alumno, talumno.ccodigo as codigo ,CONCAT (talumno.cnombre,' ',talumno.capellido)  as nombre , talumno.cnombrep as masculino, talumno.cnombrem as femenino from talumno  order by nombre");
+$result = $conexion->query("select talumno.eid_alumno, talumno.ccodigo as codigo ,CONCAT (talumno.cnombre,' ',talumno.capellido)  as nombre , talumno.cnombrep as masculino,talumno.ccelularp as celularp, talumno.cnombrem as femenino ,talumno.ccelularm as celularm from talumno  order by nombre");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -142,11 +144,13 @@ if ($result) {
         //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->masculino . "</td>";
+        echo "<td>" . $fila->celularp. "</td>";
         echo "<td>" . $fila->femenino . "</td>";
+        echo "<td>" . $fila->celularm. "</td>";
         
        
-       echo"<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' data-toggle='modal' data-dismiss='modalForm' data-target='#modalTipo'><i class='fa fa-eye'></i>
-       </button></td> ";
+      // echo"<td style='text-align:center;'><button align='center' type='button' class='btn btn-default' data-toggle='modal' data-dismiss='modalForm' data-target='#modalTipo'><i class='fa fa-eye'></i>
+       //</button></td> ";
         echo "</tr>";
         
         
