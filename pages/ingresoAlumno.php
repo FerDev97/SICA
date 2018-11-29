@@ -101,8 +101,8 @@ return 1;
         function sweetError(str){
          swal({
   type: 'error',
-  title: 'Error...',
-  text: ''+str,
+  title: ''+str,
+  text: 'inscripcion SICA',
   footer: 'Revise que todos los campos esten completados.'
 })
         } 
@@ -115,12 +115,90 @@ function go(){
   document.msform.submit(); 
 }
     function verificarCamposObligatoriosPersonales(){
-       alert(document.getElementById("nombrea").value);
+       //alert(document.getElementById("nombrea").value);
       if(document.getElementById("nombrea").value==""){
-        sweetGuardo("Lo sentimos, este campo es obligatorio.");
+        sweetError("Cuidado.! El Nombre es obligatorio");
+        return 0;
+      }if(document.getElementById("apellidoa").value==""){
+        sweetError("Cuidado.! El Apellido es obligatorio");
+        return 0;
+      }if(document.getElementById("departamentoa").value=="Seleccione Departamento"){
+        sweetError("Cuidado.! El Departamento es obligatorio");
+        return 0;
+      }if(document.getElementById("fecha").value==""){
+        sweetError("Cuidado.! La fecha de nacimiento es obligatoria");
+        return 0;
+      }if(document.getElementById("direcciona").value==""){
+        sweetError("Cuidado.! La direccion es obligatoria");
+        return 0;
+      }if(document.getElementById("llegadaa").value=="Medio de Transporte"){
+        sweetError("Cuidado.! El medio de transporte es obligatorio");
+        return 0;
+      }if(document.getElementById("bachilleratoa").value=="Seleccione Opcion"){
+        sweetError("Cuidado.! La opción de Bachillerato es Obligatoria");
+        return 0;
+      }if(document.getElementById("anteriora").value==""){
+        sweetError("Cuidado.! El año anterior cursado es obligatorio");
+        return 0;
+      }if(document.getElementById("distanciaa").value==""){
+        sweetError("Cuidado.! La distancias es obligatoria");
+        return 0;
+      }if(document.getElementById("parvularia").checked==false){
+        sweetError("Cuidado.! ¿El alumno estudio parvularia?");
+        return 0;
+      }if(document.getElementById("trabajaa").checked==false){
+        sweetError("Cuidado.! ¿El alumno trabaja?");
+        return 0;
+      }if(document.getElementById("zonaa").checked==false){
+        sweetError("Cuidado.! ¿En que zona vive el alumno?");
+        return 0;
+      }if(document.getElementById("repitea").checked==false){
+        sweetError("Cuidado.! ¿Repite año? es obligatorio?");
         return 0;
       }else{
-         alert("nO ESTA VACIO");
+         //alert("nO ESTA VACIO");
+         return 1;
+      }
+      if(document.getElementById("nombrep").checked==""){
+        sweetError("Cuidado.! Nombre del padre es obligatorio");
+        return 0;
+      }else{
+         //alert("nO ESTA VACIO");
+         return 1;
+      }
+    }
+    function verificarCamposObligatoriosResponsables(){
+       
+      if(document.getElementById("nombrep").value==""){
+        sweetError("Cuidado.! Nombre del Padre es obligatorio");
+        return 0;
+      }if(document.getElementById("duip").value==""){
+        sweetError("Cuidado.! El DUI del Padre es obligatorio");
+        return 0;
+      }if(document.getElementById("duim").value==""){
+        sweetError("Cuidado.! El DUI de la Madre es obligatorio");
+        return 0;
+      }
+      if(document.getElementById("nombrem").value==""){
+        sweetError("Cuidado.! Nombre de la Madre es obligatorio");
+        return 0;
+      }if(document.getElementById("direccionp").value==""){
+        sweetError("Cuidado.! La direccion es obligatoria");
+        return 0;
+      }if(document.getElementById("estadop").value=="Seleccione"){
+        sweetError("Cuidado.! El estado civil de los padres es obligatorio");
+        return 0;
+      }if(document.getElementById("convivea").value=="Seleccione"){
+        sweetError("Cuidado.! Campo de convive con.. es obligatorio");
+        return 0;
+      }if(document.getElementById("telefonocp").value=="" && document.getElementById("telefonotp").value=="" && document.getElementById("celularp").value=="" && document.getElementById("telefonocm").value=="" && document.getElementById("telefonotm").value=="" && document.getElementById("celularm").value==""){
+        sweetError("Cuidado.! Para la inscripcion es necesario un numero de telefono");
+        return 0;
+      }if(document.getElementById("religionm").checked==false){
+        sweetError("Cuidado.! ¿La religion que profesa? es obligatorio?");
+        return 0;
+      }else{
+         //alert("nO ESTA VACIO");
          return 1;
       }
     }
@@ -230,7 +308,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
       <select id="departamentoa" class="select2 show-tick" style="width: 264px; font-size: 15px" name="departamentoa">
-      <option selected hidden>Seleccione Departamento</option>
+      <option value="Seleccione Departamento" selected hidden>Seleccione Departamento</option>
       <option value="San Salvador">San Salvador</option>
       <option value="San Vicente">San Vicente</option>
       <option value="San Miguel">San Miguel</option>
@@ -255,7 +333,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
       <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
-      <option selected hidden>Medio de Transporte</option>
+      <option value="Medio de Transporte" selected hidden>Medio de Transporte</option>
       <option value="Autobus">Autobus</option>
       <option value="A pie">A pie</option>
       <option value="Trans.Propio">Trans.Propio</option>
@@ -265,7 +343,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
-      <option selected hidden>Seleccione Opcion</option>
+      <option value="Seleccione Opcion" selected hidden>Seleccione Opcion</option>
       <?php  
       include "../config/conexion.php";
       $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
@@ -327,8 +405,8 @@ function go(){
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
-     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabaja">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabajaa">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabajaa">No</label>
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
@@ -410,6 +488,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
       <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
+      <option value="Seleccione" selected hidden>Seleccione</option>
       <option value="Matrimonio Religioso">Matrimonio Religioso</option>
       <option value="Civil">Civil</option>
       <option value="Acompañados">Acompañados</option>
@@ -420,6 +499,7 @@ function go(){
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
       <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
+      <option value="Seleccione" selected hidden>Seleccione</option>
       <option value="Mamá">Mamá</option>
       <option value="Papá">Papá</option>
       <option value="Mamá y Papá">Mamá y Papá</option>
@@ -450,7 +530,7 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="mask-telefono" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
@@ -484,7 +564,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" name="siguiente" class="next action-button" onclick="form1()" value="Siguiente" />
+    <input type="button" name="siguiente" class="nextr action-button" onclick="form1()" value="Siguiente" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Terminos.</h2>
