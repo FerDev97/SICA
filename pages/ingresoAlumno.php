@@ -35,7 +35,7 @@ include '../config/conexion.php';
                         
                           }
                      }   
-                     $codigo=sprintf("%03s",$temp+1);           
+                     $codigo=sprintf("%04s",$temp+1);           
 ?>
 <!DOCTYPE html>
 
