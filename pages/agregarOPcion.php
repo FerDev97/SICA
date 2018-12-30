@@ -3,7 +3,7 @@ session_start();
 include "../config/conexion.php";
 include "IB.php";
 $accion =$_REQUEST['accion'];
-
+msg($accion);
 if($accion=="guardarOpc"){
 $cupo   = $_POST['cupo'];
 $opcion   = $_POST['opc'];
@@ -44,18 +44,18 @@ echo $mensaje;
         
     }else{
 
-        $mensaje="Los datos que desea ingresar ya existen: ";
+        $mensaje="Los datos que desea ingresar ya existen";
     }
         
     echo $mensaje;
 
 
 }else if($accion=="guardarTipo"){
-    $tipo   = $_POST['tipom'];
-    $query = "SELECT ctipo FROM ttipobachillerato WHERE ctipo like '%".$tipo."';";
+    $tipoo   = $_POST['tipomo'];
+    $query = "SELECT ctipo FROM ttipobachillerato WHERE ctipo like '%".$tipoo."';";
     $result = $conexion->query($query);
     if($result->num_rows == 0){
-        $consulta  = "INSERT INTO ttipobachillerato VALUES('null','" . $tipo . "')";
+        $consulta  = "INSERT INTO ttipobachillerato VALUES('null','" . $tipoo . "')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
             IB:: insertar($_SESSION["id"],"Registró un nuevo tipo de bachillerato");
@@ -66,9 +66,8 @@ echo $mensaje;
         
     }else{
 
-        $mensaje="Los datos que desea ingresar ya existen: ";
+        $mensaje="Los datos que desea ingresar ya existen";
     }
-        
     echo $mensaje;
 
 
@@ -119,6 +118,12 @@ echo $mensaje;
 
 
 }
-
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
 ?>
 

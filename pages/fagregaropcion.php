@@ -143,7 +143,7 @@ if ($result) {
         function confirmarAct(id,op)
         {
           if (op==1) {
-            if (sweetConfirm("Desactivar")==true) {
+            if (confirm("Desactivar")==true) {
             document.getElementById('bandera').value='desactivar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
@@ -164,6 +164,8 @@ if ($result) {
           }
          
         }
+       
+
       </script>
 </head>
 
@@ -202,7 +204,7 @@ if ($result) {
                           <div class="col-md-12">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  <input style="width:250px;" id="codigoo" type="text" class="form-control" name="codigoo" placeholder="Codigo">
+                                  <input style="width:250px;" id="codigoo" type="text" class="form-control" name="codigoo" placeholder="Codigo" readonly>
                                   
                               </div>  
                               <br>
@@ -221,7 +223,7 @@ if ($result) {
                                   include('combotipo.php')?>
 
                               </select>
-                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipo">Nuevo Tipo</button>
+                              <button   style="margin-left:16px;" class="btn btn-info" type="button" data-toggle="modal" data-dismiss="modalForm" data-target="#modalTipoo">Nuevo Tipo</button>
                                 <br><br>
                                 </div>
                                 </div>
@@ -303,7 +305,7 @@ if ($result) {
 
       </div>
       <!-- Modal de Tipo bachillerato-->
- <div class="modal fade" id="modalTipo" role="dialog">
+ <div class="modal fade" id="modalTipoo" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -318,10 +320,10 @@ if ($result) {
             <div class="modal-body">
                 <p class="statusMsg"></p>
                   <!--aqui va el codigo-->
-                  <form id="insertarT">
+                  <form id="insertarTi">
                   <div class="input-group" style="margin-left:75px">
                   <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                  <input id="tipom" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipom" placeholder="Nuevo tipo de Bachillerato" >
+                  <input id="tipomo" type="text" style="width: 400px; font-size: 15px;" class="form-control" name="tipomo" placeholder="Nuevo tipo de Bachillerato" >
                   </div>
                   <br>
                    <center>
@@ -349,126 +351,52 @@ if ($result) {
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">Modificar Opcion</h4>
                                       </div>
-                                      <div class="modal-body col-md-12">
-                                          <form id="modificar" >
+                                      
+                                          <form id="modificarOpc">
+                                          <input type="hidden" name="id" id="id">
+                                          <div class="modal-body col-md-6">
                                           <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
-                            </div>
-                            <br>
+                                          </div>
+                            
                             <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                            <div class="modal-body col-md-6">
                            <input id="nombre" type="text" style="width: 300px; font-size: 15px" class="form-control" name="nombre" placeholder="Nombre de Opcion">
-                            </div>
+                            </div> </div>
                             <br>
+                            <div class="modal-body col-md-6">
                             <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
-                              <select id="tipo" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipo">
+                              <select id="tipo" class="select2 show-tick" style="width: 290px; font-size: 15px" name="tipo">
                               <option value="tipo">Tipo</option>
                               <?php
                                   include('combotipo.php')?> 
-                              </select>
-                              
-                    <br><br>
+                              </select>    
+                           <br>
                         </div>
-                     <div class="input-group"style="padding-bottom:0px;">
-                          <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descrip" placeholder="Descripcion" id="descrip"></textarea>
-                    </div> 
+                        </div>
+                        <div class="input-group">
+                        <div class="modal-body col-md-8">
+                          <textarea style="width: 400px" rows="3" size="80" value="" class="form-control" name="descrip" placeholder="Descripcion" id="descrip"></textarea>
+                     </div>
+                     </div>
+                      
+                        
                     <br>         
-                                        <br><br><br><br><br><br><br><br><br><br>
-                                      
-                                      <div class="modal-footer">
+                                        <br>
+                                        <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                         <button id="guardarB" type="button" class="btn btn-primary">Guardar Cambios</button>
                                       </div>
+                                      
+                                      
                                       </form>
+                                    
                                     </div><!-- /.modal-content -->
+                                    
                                   </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
           <!--MODAL-->
-  <!-- Modal de opciones-->
-  <div class="modal fade" id="modalForm" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Forumulario de Nueva Opcion de Bachillerato</h4>
-            </div>
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <p class="statusMsg"></p>
-                  <!--aqui va el codigo-->
-                  <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                           <form id="modificar">
-                           <input id="codigo" type="text" style="width: 300px; font-size: 15px" class="form-control" name="codigo" placeholder="Codigo" readonly>
-                            </div>
-                            <br>
-                            <div class="input-group">
-                           <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-                           <input id="nombre" type="text" style="width: 300px; font-size: 15px" class="form-control" name="nombre" placeholder="Nombre de Opcion">
-                            </div>
-                            <br>
-                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 15px">Tipo Bachillerato:</span>
-                              <select id="tipo" class="select2 show-tick" style="width: 230px; font-size: 15px" name="tipo">
-                              <option value="tipo">Tipo</option>
-                              <?php
-                                  include('combotipo.php')?> 
-                              </select>
-                              
-                    <br><br>
-                        </div>
-                     <div class="input-group"style="padding-bottom:0px;">
-                          <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                          <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descrip" placeholder="Descripcion" id="descrip"></textarea>
-                    </div> 
-                    <br>         
-                    <center>
-                   <div class="input-group">
-                  <button title="Agrega Nueva Opcionel al Sistema"  style="margin-left:0px;" class="btn btn-info" type="button" id="guardarB" name="guardarB">
-                  Modificar</button>
-
-                  <button style="margin-left:15px" type="button" class="btn" data-dismiss="modal">Cerrar</button>
-                  </div>
-                  </center>
-                  </form>
-                  <br>
-                 <!-- <center><h4>Registro</h4></center>
-                  
-                  <div class="modal-body">
-                <p class="statusMsg"></p>-->
-                 <!-- <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                    
-                      <th>Codigo</th>
-                      <th>Nombre</th>
-                      <th>Tipo</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tablaopc">
-                  <?php
-                                //  include('tablaModalOpc.php')?> 
-      </tbody>
-        </table>-->
-            </div>
-
-
-
-            </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-  <!-- Fin Modal de opciones -->
+  
 
       <!-- start: Mobile -->
       
@@ -531,18 +459,30 @@ if ($result) {
 
      });//fin del click
     });//fin del ready
+    $(document).ready(function () {
+                $("#nombrem").keyup(function () {
+                 
+                    var value = $(this).val();
+                    $cod = value.substr(0, 3).toUpperCase();
+                    if (value != "") {
+                        var numero = Math.floor(Math.random() * (999 - 100)) + 100;
+                        $codigo = $cod + numero;
+                        $("#codigoo").val($codigo);
+                    } else {
+                        $("#codigoo").val("");
+                    }
 
+                });
+            });
  //Ajax para Guardar Tipo
  $(document).ready(function(){
   $('#guardarT').on('click',function(){
-        var grado = $('#tipom').val();
-       
-
-        if(grado == ""){
+        var grado = $('#tipomo').val();
+        if(grado ==""){
           sweetError("Por favor.. llene correctamente los datos");
             return false;
         }
-        var todo = $("#insertarT").serialize();
+        var todo = $("#insertarTi").serialize();
 
         $.ajax({
             type: 'post',
@@ -601,7 +541,7 @@ $(document).ready(function(){
         }
       
        
-        var todo = $("#modificar").serialize();
+        var todo = $("#modificarOpc").serialize();
 
         $.ajax({
             type: 'post',
@@ -609,23 +549,21 @@ $(document).ready(function(){
             data: todo,
             success: function(respuesta) {
              
-                $("#tipo option[value=0]").prop("selected",true);
-                $("#descrip").val(0);
-                $("#nombre").val(0);
-                $("#codigo").val(0);
+               // $("#tipo option[value=0]").prop("selected",true);
+               // $("#descrip").val(0);
+               // $("#nombre").val(0);
+               // $("#codigo").val(0);
                 $("#modalito").modal('hide');
                 sweetGuardo(respuesta);
-                $("#tabla_ajax").load("tablaOpciones.php");
-                $('#datatables-example').DataTable();
+                $(".tabla_ajax").load("tablaOpciones.php"); 
+             
             },
             error: function(respuesta){
               alert("Error en el servidor: "+respuesta); 
             }
         });//fin de ajax
-
       return false;
     });//fin del click
-    
   });//fin del ready
 
 
@@ -664,16 +602,10 @@ function msgError($texto)
     echo "</script>";
 }
 
-include "../config/conexion.php";
 
+include "../config/conexion.php";
 $bandera      = $_REQUEST["bandera"];
 $baccion      = $_REQUEST["baccion"];
-$nivelcuenta  = $_REQUEST["nivelcuenta"];
-$nombrecuenta = $_REQUEST["nombrecuenta"];
-$codigocuenta = $_REQUEST["codigocuenta"];
-$tipocuenta   = $_REQUEST["tipocuenta"];
-$saldocuenta  = $_REQUEST["saldocuenta"];
-$r            = $_REQUEST["r"];
 
 if ($bandera == "desactivar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
@@ -693,33 +625,8 @@ if ($bandera == "desactivar") {
     }
 }
 
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM catalogo where idcatalogo='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == "modificar") {
-    $consulta  = "UPDATE catalogo set codigocuenta='" . $codigocuenta . "',nombrecuenta='" . $nombrecuenta . "',tipocuenta='" . $tipocuenta . "',saldo='" . $saldocuenta . "',r='" . $r . "',nivel='" . $nivel . "' where idcatalogo='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-      echo "<script type='text/javascript'>";
-      echo "alert('$texto');";
-      echo "document.location.href='cuenta.php';";
-      echo "</script>";
-    } else {
-        msg("No Exito");
-    }
-}
-if ($bandera == 'enviar') {
-    echo "<script type='text/javascript'>";
-    echo "document.location.href='cuenta.php?id=" . $baccion . "';";
-    echo "</script>";
-    # code...
-}
+
+
 
 
 ?>
