@@ -28,6 +28,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
+      <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
   <!-- end: Css -->
 
@@ -38,6 +39,67 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+       function sweetConfirm(id){
+        swal({
+  title: '¿Está seguro que desea activar a esta persona?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+     document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+  }
+})
+        }
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar a esta persona?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+      document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.turismo.submit();
+
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+          
+  'Exito!',
+  ''+str,
+  'success'
+);
+document.location.href='listapersonal.php';
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
+      //SWEET ALERTS
         function modify(id)
         {
           //alert("entra");
@@ -48,24 +110,13 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
         function confirmar(id,op)
         {
           if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
+            sweetConfirm2(id);
+           
+          
           }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
+            sweetConfirm(id);
+           
+       
           }
 
 
@@ -334,7 +385,7 @@ if ($result) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -407,9 +458,10 @@ if ($bandera == 'enviar') {
 function msg($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listapersonal.php';";
+    echo "setTimeout(sweetGuardo('$texto'),3000);";
+    
     echo "</script>";
+
 }
 
   
