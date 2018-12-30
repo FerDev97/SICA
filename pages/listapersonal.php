@@ -38,6 +38,45 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+       function sweetConfirm(){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    )
+  }
+})
+        }
+
+
+        function sweetGuardo(str){
+          swal(
+  'Exito!',
+  ''+str,
+  'success'
+)
+        }
+        function sweetError(str){
+         swal({
+  type: 'error',
+  title: 'Error...',
+  text: ''+str,
+  footer: 'Revise que todos los campos esten completados.'
+})
+        }
+
+      //SWEET ALERTS
         function modify(id)
         {
           //alert("entra");
