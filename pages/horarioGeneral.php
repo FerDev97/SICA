@@ -865,11 +865,15 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                     else if(respuesta == 2){
                       sweetError("Error: Los datos no se agregaron");
                     }else{
-                      var vector = respuesta.split("/");//datos
-                      if(vector[4]==0){
+
+                      var vector = respuesta.split("/");
+                      
+                      if(vector[4] == 0){
+                        
                         $("#id").val(vector[1]);
                         $("#estado").val(1);//estado activo
                         $("#modalito").modal();
+
                       }else{
                         sweetInfo("Ya existe","El registro que desea ingresar ya existe y está ACTIVO");
                       }
