@@ -94,7 +94,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                                 <div class="input-group " style="padding-bottom:10px;">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                   <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()">
-                                    <option value="0">Seleccione un dia</option>
+                                    <option value="0" selected hidden >Seleccione un dia</option>
                                     <option value="Lunes">Lunes</option>
                                     <option value="Martes">Martes</option>
                                     <option value="Miercoles">Miercoles</option>
@@ -108,7 +108,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                               <div class="input-group " style="padding-bottom:10px;">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                                 <select id="bloque"  class="form-control" name="bloque" >
-                                  <option value="0">Seleccione un bloque</option>
+                                  <option value="0" selected hidden >Seleccione un bloque</option>
                                   <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
                                   <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
                                   <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
@@ -124,7 +124,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                           <div class="input-group " style="padding-bottom:10px;">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <select id="dia2"  class="form-control" name="diaDos">
-                              <option value="0">Seleccione otro dia</option>                                                                          
+                              <option value="0" selected="true" hidden="hidden" >Seleccione otro dia</option>                                                                          
                               <option value="Martes">Martes</option>
                               <option value="Miercoles">Miercoles</option>
                               <option value="Jueves">Jueves</option>
@@ -140,7 +140,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                           <div class="col-md-2">
                           <br><br>
                               
-                              <input type="reset" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
+                              <input type="reset" name="next" id="reset" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                           </div>
     
                         </div>
@@ -865,11 +865,15 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                     else if(respuesta == 2){
                       sweetError("Error: Los datos no se agregaron");
                     }else{
-                      var vector = respuesta.split("/");//datos
-                      if(vector[4]==0){
+
+                      var vector = respuesta.split("/");
+                      
+                      if(vector[4] == 0){
+                        
                         $("#id").val(vector[1]);
                         $("#estado").val(1);//estado activo
                         $("#modalito").modal();
+
                       }else{
                         sweetInfo("Ya existe","El registro que desea ingresar ya existe y está ACTIVO");
                       }
@@ -928,7 +932,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       var dato = $("#dia1").val();
        if(dato == "Lunes"){
          $("#dia2").empty();
-         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+         $("#dia2").append("<option value='0' hidden >Seleccione otro dia</option>");
          $("#dia2").append("<option value='Martes' selected='selected'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -936,7 +940,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
        }
        if(dato == "Martes"){
          $("#dia2").empty();
-         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+         $("#dia2").append("<option value='0' hidden >Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -944,7 +948,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
        }
        if(dato == "Miercoles"){
          $("#dia2").empty();
-         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+         $("#dia2").append("<option value='0' hidden >Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Jueves'>Jueves</option>");
@@ -952,7 +956,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
        }
        if(dato == "Jueves"){
          $("#dia2").empty();
-         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+         $("#dia2").append("<option value='0' hidden >Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
@@ -960,7 +964,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
        }
        if(dato == "Viernes"){
          $("#dia2").empty();
-         $("#dia2").append("<option value='0'>Seleccione otro dia</option>");
+         $("#dia2").append("<option value='0' hidden >Seleccione otro dia</option>");
          $("#dia2").append("<option value='Lunes' selected='selected'>Lunes</option>");
          $("#dia2").append("<option value='Martes'>Martes</option>");
          $("#dia2").append("<option value='Miercoles'>Miercoles</option>");
@@ -968,7 +972,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
        }
 
     }
-    
+
+     $('#reset').on('click', function(){
+
+         $("#dia2").empty();
+         $("#dia2").append("<option value='0' selected hidden >Seleccione otro dia</option>");
+         $("#dia2").append("<option value='Martes'>Lunes</option>");
+         $("#dia2").append("<option value='Miercoles'>Martes</option>");
+         $("#dia2").append("<option value='Jueves'>Miercoles</option>");
+         $("#dia2").append("<option value='Viernes'>Jueves</option>");
+
+     }); 
 
    $(".select2-A").select2({
       placeholder: "Seleccione un dia o varios! ",
