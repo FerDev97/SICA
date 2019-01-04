@@ -801,8 +801,9 @@ if ($bandera == "add") {
   }else{
     msgError("Se ha exedido el numero maximo de directores");
 }
+ //la  query de subdirectora
   }else if($cargo==4){
-      //la  query de subdirectora
+     
     $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
     $result = $conexion->query($query);
     msg($cargo);
@@ -818,8 +819,19 @@ if ($bandera == "add") {
         msgError("Se ha exedido el numero maximo de subdirectores");
     }
   }else{
-      msgError("El DUI o NIT ya existen");
+    // codigo para que agregue
+    $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
+    $resultado = $conexion->query($consulta);
+      if ($resultado) {
+         msgAdd("Agrego personal exitosamente");
+      } else {
+          msgError("Error al insertar los datos");
+      }
+
+    
   }
+}else{
+  msgError("El DUI o CORREO ya existen");
 }
 }
 
