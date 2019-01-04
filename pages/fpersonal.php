@@ -784,21 +784,46 @@ if ($bandera == "add") {
   $query = "select cdui,ccorreo FROM tpersonal WHERE cdui like '%".$dui."%' OR ccorreo like '%".$correo."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
+    //la query de director
+    if($cargo==2){
+      $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
+  $result = $conexion->query($query);
+  msg($cargo);
+  if($result->num_rows < 1 ){
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
-      $resultado = $conexion->query($consulta);
-        if ($resultado) {
-           msgAdd("Agrego personal exitosamente");
-        } else {
-           
-            msgError("Error al insertar los datos");
-        }
-      
-  }else{
+    $resultado = $conexion->query($consulta);
+      if ($resultado) {
+         msgAdd("Agrego personal exitosamente");
+      } else {
+          msgError("Error al insertar los datos");
+      }
 
-      
-      msgError("Los datos que desea ingresar ya existen");
+  }else{
+    msgError("Se ha exedido el numero maximo de directores");
+}
+  }else if($cargo==4){
+      //la  query de subdirectora
+    $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
+    $result = $conexion->query($query);
+    msg($cargo);
+    if($result->num_rows < 2){
+      $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
+      $resultado = $conexion->query($consulta);
+  if ($resultado) {
+     msgAdd("Agrego personal exitosamente");
+  } else {
+      msgError("Error al insertar los datos");
+  }
+ }else{
+        msgError("Se ha exedido el numero maximo de subdirectores");
+    }
+  }else{
+      msgError("El DUI o NIT ya existen");
   }
 }
+}
+
+
 
 
 function msg($texto)
