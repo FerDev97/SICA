@@ -561,6 +561,12 @@ if ($bandera == "add") {
   $query = "select efk_idopcion,efk_idhorario FROM tmaterias WHERE efk_idopcion like '%".$opcion."%' AND efk_idhorario like '%".$horario."%';";
   $result = $conexion->query($query);
   if($result->num_rows == 0){
+    // CODDIGO PARA EVITAR QUE SE LE ASIGNE UNA CLASE A UN DOCENTE A LA MISMA HORA
+     $quer2 = "select * from tmaterias, tpersonal_materia WHERE tmaterias.efk_idhorario='".$horario."' and tpersonal_materia.efk_idmateria=tmaterias.eid_materia and tpersonal_materia.efk_idpersonal='".$docente."'";
+    $result2 = $conexion->query($quer2);
+    if($result2->num_rows == 0){
+
+
        $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
@@ -592,6 +598,10 @@ if ($bandera == "add") {
         echo("Error materia:".mysqli_error($conexion));
     }
   }else{
+     $mensaje="El docente seleccionado ya tiene una materia asignada a esa hora. ";
+    msgError($mensaje);
+  }
+}else{
      $mensaje="El horario que desea agregar ya existe. ";
     msgError($mensaje);
   }
