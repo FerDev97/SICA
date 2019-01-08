@@ -85,6 +85,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
                       <div class="col-md-12">
                         <form id="insertar">
+                            <!--Componentes ocultos para capturar el id y el estado del horario-->
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="estado" name="estado" value="">
                           <div class="col-md-6">
@@ -92,8 +93,9 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                             
                               
                                 <div class="input-group " style="padding-bottom:10px;">
+                                <!--Lista de valores con los dias de la semana-->
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                  <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()">
+                                  <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()"> 
                                     <option value="0" selected hidden >Seleccione un dia</option>
                                     <option value="Lunes">Lunes</option>
                                     <option value="Martes">Martes</option>
@@ -106,6 +108,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                               <br>
                               <br>
                               <div class="input-group " style="padding-bottom:10px;">
+                              <!--Lista de bloques de horarios-->
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                                 <select id="bloque"  class="form-control" name="bloque" >
                                   <option value="0" selected hidden >Seleccione un bloque</option>
@@ -122,6 +125,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                         <div class="col-md-6">
                           <br><br>
                           <div class="input-group " style="padding-bottom:10px;">
+                          <!--Segunda lista de valores con los dias de la semana-->
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <select id="dia2"  class="form-control" name="diaDos">
                               <option value="0" selected="true" hidden="hidden" >Seleccione otro dia</option>                                                                          
@@ -134,12 +138,13 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                           <div class="col-md-2">
                             
                               <br><br>
+                              <!--Boton de guardado-->
                                <input type="button" name="guardar" id="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />                         
                           </div>
                           <div class="col-md-2"></div>
                           <div class="col-md-2">
                           <br><br>
-                              
+                              <!--Boton de guardado-->
                               <input type="reset" name="next" id="reset" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
                           </div>
     
@@ -929,7 +934,8 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
     function verificar(){
        
-      var dato = $("#dia1").val();
+       //Captura del dia seleccionado de la primera lista
+      var dato = $("#dia1").val();//Segun sea el dia seleccionado, en la segunda lista no debe aparecer
        if(dato == "Lunes"){
          $("#dia2").empty();
          $("#dia2").append("<option value='0' hidden >Seleccione otro dia</option>");

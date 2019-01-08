@@ -31,7 +31,7 @@
                                             echo "<td>".$aux1[5]."</td>";
 
                                             $aux= "<button type=\"button\" class=\"btn btn-info btn-sm btn-round\" ";
-                                            $aux.="onclick=\"activar('".$aux1[4]."')\";>";
+                                            $aux.="onclick=\"activar('".$fila->efk_personal."')\";>";
                                             $aux.="Activar</button>";
                                             echo "<td width='90'>";
                                             
