@@ -162,6 +162,19 @@ function sweetConfirm(){
                     <div class="panel-heading"><h3>Registro</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
+                      <label for="" style="font-size:15px;">Selecciones opcion de filtrado</label>
+                      <form class="form-inline" method="get">
+				              <div class="form-group">
+					                    <select name="filter" class="form-control" onchange="form.submit()">
+					                    	<option value="0">Filtros de datos de empleados</option>
+						                    <?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL);  ?>
+					                    	<option value="1" <?php if($filter == 'Tetap'){ echo 'selected'; } ?>>Usuario</option>
+						                    <option value="2" <?php if($filter == 'Kontrak'){ echo 'selected'; } ?>>Fecha</option>
+                                            <option value="3" <?php if($filter == 'Outsourcing'){ echo 'selected'; } ?>>Tipo de Usuario</option>
+					                    </select>
+			                    	</div>
+		                    	</form>
+                              <BR></BR>
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>

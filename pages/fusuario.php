@@ -241,7 +241,7 @@ function verificar(){
       <?php
                       include '../config/conexion.php';
                      
-                      $result = $conexion->query("select p.eid_personal as idp, p.cnombre as nombre from tpersonal as p where iestado='1' AND p.eid_personal NOT IN (SELECT tusuarios.efk_personal from tusuarios)");
+                      $result = $conexion->query("select p.eid_personal as idp,CONCAT (p.cnombre,' ',p.capellido) as nombre from tpersonal as p where iestado='1' AND p.eid_personal NOT IN (SELECT tusuarios.efk_personal from tusuarios)");
                       if ($result) {
 
                         while ($fila = $result->fetch_object()) {

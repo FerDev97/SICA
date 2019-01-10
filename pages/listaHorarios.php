@@ -382,7 +382,9 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                   $("#modalito").modal('hide');
                   sweetError("Error del servidor: No se modificaron los datos");
                 }
-                
+                if(respuesta==4){
+                  sweetInfo("Horario Asignado!","No se puede cambiar el estado de este horario");
+                }
                 
                 
             },

@@ -177,7 +177,7 @@ if ($result) {
                            <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-clipboard"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Grado: </span>
                               <select id="grado" class="select2 show-tick" style="width: 350px; font-size: 15px" name="gradom">
-                              <option value="grado">Grado</option>
+                              <option value="grado" hidden selected>Grado</option>
                                <?php include('combogrado.php')?>
                               </select>
                               <button title="Agrega Nuevo Grado el Sistema" style="margin-left:19px; size:40px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalGrado">+</button>
@@ -186,7 +186,7 @@ if ($result) {
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
                               <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc" onchange="verificar()">
-                              <option value="opcion">Opcion</option>
+                              <option value="opcion" hidden selected>Opcion</option>
                               <?php include('comboopcion.php')?>
                               </select>
                               <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
@@ -194,7 +194,7 @@ if ($result) {
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
                               <select id="seccion" class="select2 show-tick" style="width: 350px; font-size: 15px" name="seccion">
-                              <option value="seccion">Seccion</option>
+                              <option value="seccion" hidden selected>Seccion</option>
                               <?php include('comboseccion.php')?>
                               </select>
                               <button   style="margin-left:16px; border-radius: 50px 20px" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">+</button>
