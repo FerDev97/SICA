@@ -113,6 +113,10 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
 
         }
+        function reporte(){
+          id=document.getElementById("op").value;
+          window.open("reporteMateriasActivas.php?id="+id, '_blank');
+        }
       
       </script>
 </head>
@@ -153,7 +157,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                        
                          
                              <h5 class="col-md-4">Opción: 
-                                  <select class="select2-A">  
+                                  <select id="op" name="op" class="select2-A">  
                                    <?php
                       include '../config/conexion.php';
                       $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
@@ -175,7 +179,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                                   
 
                                   <a class="btn btn-outline btn-default" >
-                                      <i class="fa fa-print fa-lg"></i><br>Reporte 
+                                      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
                                     </a>
                                     
                                   
