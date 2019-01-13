@@ -33,7 +33,7 @@ if(empty($_REQUEST)){
     INNER JOIN tmaterias ON talum_mat_not.efk_idmateria = tmaterias.eid_materia
     INNER JOIN tnotas ON talum_mat_not.efk_idnota = tnotas.eid_notas
     INNER JOIN tperiodos ON tnotas.efk_idperiodo = tperiodos.eid_periodo
-    WHERE tmaterias.eid_materia = $idMateria";
+    WHERE tmaterias.eid_materia = $idMateria AND tperiodos.estado = 1";
 
     $result = $conexion->query($consulta);
 

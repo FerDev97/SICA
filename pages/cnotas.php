@@ -8,6 +8,7 @@ include "../config/conexion.php" ;
 
 //datos para llenar los componentes del header de la tabla
 $idPersonalDocente;
+$idPersonalAdmin;
 $nombre2;
 $apellido2;
 $nombreCompleto;
@@ -100,7 +101,76 @@ if($_SESSION["logueado"] == TRUE) {
               $datosGrado=array_unique($datosGrado);  
 
 
-        }else{
+        }else{// si es un usuario Administrador hara la siguientes consultas
+
+              $consulta3="SELECT
+              tusuarios.eid_usuario,
+              tusuarios.cusuario,
+              tpersonal.eid_personal,
+              tpersonal.cnombre,
+              tpersonal.capellido
+              FROM
+              tusuarios
+              INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal
+              WHERE
+              tusuarios.eid_usuario = $id ";
+              $resultado = $conexion->query($consulta3);
+              
+              $aux=$resultado->fetch_row();
+
+              $idPersonalAdmin=$aux[2];//se recupera eid_personal asociado al usuario logueado
+              $nombre2=$aux[3];
+              $apellido2=$aux[4];
+
+              $nombreCompleto="$nombre2 $apellido2";
+
+
+              //Obteniendo los datos para los combobox del header de la tabla
+
+              $consulta4="SELECT
+              tbachilleratos.cnombe as nombreBach,
+              tbachilleratos.eid_bachillerato as idBach,
+              tsecciones.cseccion as seccion,
+              tgrado.cgrado as grado,
+              tgrado.eid_grado as idGrado,
+              tsecciones.eid_seccion as idSeccion,
+              tmaterias.eid_materia as idMateria,
+              tmaterias.cnombre as materia,
+              tpersonal.cnombre as docente,
+              tpersonal.capellido
+              FROM
+              tbachilleratos
+              INNER JOIN topciones ON topciones.efk_bto = tbachilleratos.eid_bachillerato
+              INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion
+              INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado
+              INNER JOIN tmaterias ON tmaterias.efk_idopcion = topciones.eid_opcion
+              INNER JOIN tpersonal_materia ON tpersonal_materia.efk_idmateria = tmaterias.eid_materia
+              INNER JOIN tpersonal ON tpersonal_materia.efk_idpersonal = tpersonal.eid_personal";
+              $result = $conexion->query($consulta4);
+              $cont = 0;
+              while($fila = $result->fetch_object()){
+
+                  $idBach[$cont]=$fila->idBach;
+                  $nombreBach[$cont]=$fila->nombreBach;
+
+                  $idSeccion[$cont]=$fila->idSeccion;
+                  $seccion[$cont]=$fila->seccion;
+
+                  $idGrado[$cont]=$fila->idGrado;
+                  $grado[$cont]=$fila->grado;
+
+                  $cont++;
+              }
+
+              $datosBach=array_combine($idBach, $nombreBach); //Crea array asociativo 
+              $datosBach=array_unique($datosBach);            //Elimina duplicados
+              
+              $datosSeccion=array_combine($idSeccion, $seccion);  
+              $datosSeccion=array_unique($datosSeccion);            
+
+              $datosGrado=array_combine($idGrado, $grado); 
+              $datosGrado=array_unique($datosGrado); 
+
 
         }
 
@@ -177,7 +247,22 @@ if($_SESSION["logueado"] == TRUE) {
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                  <div class="panel-heading col-md-12" > <h5> DOCENTE: <?php echo $nombreCompleto ?></h5></div>
+                  <div class="panel-heading col-md-12" > 
+
+                        <?php
+
+                            echo "<h5>"; 
+                            
+                              if($_SESSION["tipo"] == 0){
+                                  echo "DOCENTE: $nombreCompleto";
+                              }else{
+                                  echo "ADMINISTRADOR: $nombreCompleto";
+                              }
+                            
+                            echo "</h5>";
+                        ?>
+
+                  </div>
                     <div class="panel-heading col-md-12">
                        
                            <h5 class="col-md-2">Grado: <br>
