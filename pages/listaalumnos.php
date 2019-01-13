@@ -75,6 +75,9 @@ if($result)
           }
 
         }
+        function reporte(){
+          window.open("reporteInsSex.php",'_blank');
+        }
 
       </script>
 </head>
@@ -106,7 +109,16 @@ if($result)
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista</h3></div>
+                    <div class="panel-heading"><h3>Lista de Alumnos</h3>
+                    
+
+                                  <a class="btn btn-outline btn-default" >
+                                      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                                    </a>
+                                    
+                             
+                    </div>
+
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
