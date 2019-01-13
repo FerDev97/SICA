@@ -363,10 +363,12 @@ function go(){
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
      <input id="enfermedadesa" type="text" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)">
      </div>
-     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-     <input id="alergiaa" type="text" class="form-control" name="alergiaa" placeholder="Es alergico a">
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
+     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabajaa">Si</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
      </div>
+    
       
  
 
@@ -397,17 +399,7 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
      </div>
      </br>
-     <div class="input-group " style="padding-bottom:25px;">
-     <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="1" id="parvularia">Si</label>
-     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="0" id="parvulari">No</label>
-     </div>
      </br>
-     <div class="input-group " style="padding-bottom:25px;">
-     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Trabaja</span>
-     <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabajaa">Si</label>
-     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
-     </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
      <i  class="glyphicon glyphicon-tree-deciduous"></i><span class="label label-default" style="width: 20px; font-size: 15px">Zona donde vive</span>
@@ -416,11 +408,22 @@ function go(){
      </div>
      </br>
      <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="1" id="parvularia">Si</label>
+     <label class="radio-inline" style="width: 100px; font-size: 15px"><input type="radio" name="parvularia" value="0" id="parvulari">No</label>
+     </div>
+     </br>
+     <div class="input-group " style="padding-bottom:25px;">
      <i  class="fa fa-repeat"></i><span class="label label-default" style="width: 20px; font-size: 15px">Repite Grado</span>
      <label class="radio-inline" style="margin-right:78px;margin-left:68px; font-size: 15px"><input type="radio" name="repitea" value="1" id="repitea">Si</label>
      <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="repitea" value="0" id="repite">No</label>
      </div>
-     </br>
+     
+    <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+     <input id="alergiaa" type="text" class="form-control" name="alergiaa" placeholder="Es alergico a">
+     </div>
+    
      <div>
      <i  class="glyphicon glyphicon-asterisk"></i><span class="label label-default" style="width: 20px; font-size: 15px">Sacramentos</span>
      <label class="checkbox-inline"style="margin-right:20px;margin-left:10px;font-size: 15px"><input type="checkbox" value="1" name="bautismo">Bautismo</label>
@@ -453,38 +456,42 @@ function go(){
     <div class="col-md-6">
     <h3 class="fs-subtitle" >* DATOS  DEL PADRE (Responsable masculino).</h3>
     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombrep" type="text" class="form-control" name="nombrep" placeholder="Nombre del padre." onkeypress="return sololetras(event)">
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-     <input id="lugarp" type="text" class="form-control" name="lugarp" placeholder="Lugar de Trabajo." >
-     </div>
-    <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      <input id="duip" type="text" data-mask="00000000-0"  class="form-control" name="duip" placeholder="DUI.">
      </div>
+    <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     <input id="nombrep" type="text" class="form-control" name="nombrep" placeholder="Nombre del padre." onkeypress="return sololetras(event)">
+     </div>
+     <div class="input-group"style="padding-bottom:20px;">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+      <textarea rows="1" size="10" value="" class="form-control" placeholder="Dirección" id="direccionp" name="direccionp"></textarea>
+      </div>
+    
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      <input id="telefonocp" type="text" data-mask="000000000000"  class="form-control" name="telefonocp" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-     <input id="telefonotp" type="text" data-mask="20000000"  class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
      <input id="celularp" type="text" class="form-control" data-mask="00000000"  name="celularp" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
      </div>
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+     <input id="lugarp" type="text" class="form-control" name="lugarp" placeholder="Lugar de Trabajo." >
+     </div>
+
+     <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+     <input id="telefonotp" type="text" data-mask="20000000"  class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     </div>
+    
      
      
      
 
       
-      <div class="input-group"style="padding-bottom:20px;">
-      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccionp" name="direccionp"></textarea>
-      </div>
+     
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
       <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
@@ -514,8 +521,20 @@ function go(){
      <div class="col-md-6">
      <h3 class="fs-subtitle" >* DATOS  DE LA MADRE (Responsable femenino).</h3>
      <div class="input-group " style="padding-bottom:20px;">
+     <input id="duim" type="text" data-mask="00000000-0"  class="form-control" name="duim" placeholder="DUI">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
      <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de la madre." onkeypress="return sololetras(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+     </div>
+     <div class="input-group " style="padding-bottom:20px;">
+     <input id="celularm" type="text" class="form-control" name="celularm" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
+     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
      <input id="lugarm" type="text" class="form-control" name="lugarm" placeholder="Lugar de Trabajo.">
@@ -526,21 +545,10 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="duim" type="text" data-mask="00000000-0"  class="form-control" name="duim" placeholder="DUI">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-     </div>
-     <div class="input-group " style="padding-bottom:20px;">
      <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)">
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
-     <div class="input-group " style="padding-bottom:20px;">
-     <input id="celularm" type="text" class="form-control" name="celularm" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)">
-     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-     </div>
+    
     
      
      <div class="input-group " style="padding-bottom:20px;">

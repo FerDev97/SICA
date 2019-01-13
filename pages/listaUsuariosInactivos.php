@@ -98,75 +98,25 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
             </div>
 
           <!-- end: content -->
-          <!--MODAL-->
-               <div class="modal fade" id="modalito">
+          <div class="modal fade" id="modalito">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Modificar horario</h4>
+                                        <h4 class="modal-title">¿Activar este usuario?</h4>
                                       </div>
                                       <div class="modal-body col-md-12">
-                                          <form id="modificar" >
-                                          <input type="hidden" id="id" name="id" value="">
-                                                  <div class="col-md-6">
-                                                        <br>
-                            
-                              
-                                                        <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                          <select id="dia1"  class="form-control" name="diaUno" onchange="verificar()">
-                                                            <option value="0">Seleccione un dia</option>
-                                                            <option value="Lunes">Lunes</option>
-                                                            <option value="Martes">Martes</option>
-                                                            <option value="Miercoles">Miercoles</option>
-                                                            <option value="Jueves">Jueves</option>
-                                                            <option value="Viernes">Viernes</option>
-                                                          </select>
-                                                        </div>
-                                                      
-                                                          <br>
-                                                          
-                                                        <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                                          <select id="bloque"  class="form-control" name="bloque" >
-                                                            <option value="0">Seleccione un bloque</option>
-                                                            <option value="7:00 AM - 10:00 AM">7:00 AM - 10:00 AM</option>
-                                                            <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
-                                                            <option value="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</option>
-                                                            <option value="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</option>
-                                                                    
-                                                          </select>
-                                                        </div>
-                                                  </div>
-                                                  <div class="col-md-6">
-                                                        <br>
-                                                        <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                          <select id="dia2"  class="form-control" name="diaDos">
-                                                            <option value="0">Seleccione otro dia</option>                                                                          
-                                                            <option value="Martes">Martes</option>
-                                                            <option value="Miercoles">Miercoles</option>
-                                                            <option value="Jueves">Jueves</option>
-                                                            <option value="Viernes">Viernes</option>
-                                                          </select>
-                                                      </div>
-                                                      <br>
-                                                        <div class="input-group " style="padding-bottom:10px;">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle"></i></span>
-                                                          <select id="estado"  class="form-control" name="estado">
-                                                            <option value="1">ACTIVO</option>                                                                          
-                                                            <option value="0">INACTIVO</option>        
-                                                          </select>
-                                                      </div>
-                                                  </div>
-                                          
+                                          <p style="text-align:center;">
+                                          <input id="idpersonal" type="hidden" value="">
+                                              Al activar este usuario se activará el registro del personal asociado
+                                              ¿Desea activarlo?
+                                          </p>
                                       </div>
-                                        <br><br><br><br><br><br><br><br><br><br>
+                                        <br><br><br>
                                       
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button id="guardar" type="button" class="btn btn-primary">Guardar Cambios</button>
+                                        <button id="activar" type="button" class="btn btn-primary">Activar</button>
                                       </div>
                                       </form>
                                     </div><!-- /.modal-content -->
@@ -339,49 +289,31 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   $(document).ready(function(){
     $('#datatables-example').DataTable();
 
-    $("#guardar").on('click',function(){
+    $("#activar").on('click',function(){
 
-        var dia1 = $('#dia1').val();
-        var dia2 = $('#dia2').val();
-        var bloque = $('#bloque').val();
+        var idpersonal = $('#idpersonal').val();
+       
 
-        if(dia1 == "0"){
-            sweetWar("No selecciono un dia");
+        if(idpersonal == ""){
+            sweetWar("Error al activar este usuario");
             return false;
         }
-        if(dia2 == "0"){
-            sweetWar("No selecciono un dia");
-            return false;
-        }
-        if(bloque == "0"){
-            sweetWar("No selecciono un bloque");
-            return false;
-        }
-
-        var todo = $("#modificar").serialize();
-
+       
         $.ajax({
             type: 'post',
-            url: 'editarHorario.php',
-            data: todo,
+            url: 'activarUsuario.php',
+            data: {idp:idpersonal},
             success: function(respuesta) {
 
-                if(respuesta==3){
-                  sweetWar2("Estos datos ya existen");
-                }
                 if(respuesta==1){
-                  $("#dia1 option[value=0]").prop("selected",true);
-                  $("#dia2 option[value=0]").prop("selected",true);
-                  $("#bloque option[value=0]").prop("selected",true);
+                  $("#idpersonal").val("");                 
                   $("#modalito").modal('hide');
-                  sweetGuardo("Se modificó correctamente");
-                  $(".tabla_ajax").load("tablaHorarios.php"); 
-                  $('#datatables-example').DataTable();
+                  sweetGuardo("Se activó correctamente el usuario y personal asociado");
+                  $(".tabla_ajax").load("tablaUsuariosIn.php"); 
+                  
                 }
                 if(respuesta==2){
-                  $("#dia1 option[value=0]").prop("selected",true);
-                  $("#dia2 option[value=0]").prop("selected",true);
-                  $("#bloque option[value=0]").prop("selected",true);
+                  $("#idpersonal").val(""); 
                   $("#modalito").modal('hide');
                   sweetError("Error del servidor: No se modificaron los datos");
                 }
@@ -397,13 +329,14 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       return false;
     });//fin del click
 
-    function activar(valor){
-        
-    }
+   
     
   });//fin del ready
 
-
+ function activar(valor){
+        $("#idpersonal").val(valor);
+        $("#modalito").modal();
+    }
   
       
 
