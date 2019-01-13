@@ -67,6 +67,10 @@ $resultado = $conexion->query($consulta);
           if ($resultado) {
              IB:: insertar($_SESSION["id"],"Inscribio un nuevo alumno");
               $mensaje="Se agregaron los datos correctamente";
+              //Parte para agregar las materias asociadas a la opcion elegida
+
+
+            //Parte para agregar las materias asociadas a la opcion elegida
               header('Location: ingresoAlumno.php?guardo=1');
           } else {
              $mensaje="Error al insertar los datos";

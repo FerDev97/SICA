@@ -3,13 +3,113 @@
 //Codigo que muestra solo los errores exceptuando los notice.
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
+
+include "../config/conexion.php" ; 
+
+//datos para llenar los componentes del header de la tabla
+$idPersonalDocente;
+$nombre2;
+$apellido2;
+$nombreCompleto;
+$idBach=array();
+$nombreBach=array();
+$idSeccion=array();
+$seccion=array();
+$idGrado=array();
+$grado=array();
+
+$datosBach=array();
+$datosSeccion=array();
+$datosGrado=array();
+
 if($_SESSION["logueado"] == TRUE) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
-  $id  = $_REQUEST["id"];
+  $id  = $_SESSION["id"];
+
+        
+        if($tipo == 0){ // si es un usuario tipo docente hara las siguientes consultas
+
+              $consulta1="SELECT
+              tusuarios.eid_usuario,
+              tusuarios.cusuario,
+              tpersonal.eid_personal,
+              tpersonal.cnombre,
+              tpersonal.capellido
+              FROM
+              tusuarios
+              INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal
+              WHERE
+              tusuarios.eid_usuario = $id ";
+              $resultado = $conexion->query($consulta1);
+              
+              $aux=$resultado->fetch_row();
+
+              $idPersonalDocente=$aux[2];//se recupera eid_personal asociado al usuario logueado
+              $nombre2=$aux[3];
+              $apellido2=$aux[4];
+
+              $nombreCompleto="$nombre2 $apellido2";
+              
+              //Obteniendo los datos para los combobox del header de la tabla
+
+              $consulta2="SELECT
+              tbachilleratos.cnombe as nombreBach,
+              tbachilleratos.eid_bachillerato as idBach,
+              tsecciones.cseccion as seccion,
+              tgrado.cgrado as grado,
+              tgrado.eid_grado as idGrado,
+              tsecciones.eid_seccion as idSeccion,
+              tmaterias.eid_materia as idMateria,
+              tmaterias.cnombre as materia,
+              tpersonal.cnombre as docente,
+              tpersonal.capellido
+              FROM
+              tbachilleratos
+              INNER JOIN topciones ON topciones.efk_bto = tbachilleratos.eid_bachillerato
+              INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion
+              INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado
+              INNER JOIN tmaterias ON tmaterias.efk_idopcion = topciones.eid_opcion
+              INNER JOIN tpersonal_materia ON tpersonal_materia.efk_idmateria = tmaterias.eid_materia
+              INNER JOIN tpersonal ON tpersonal_materia.efk_idpersonal = tpersonal.eid_personal
+              WHERE
+              tpersonal.eid_personal = $idPersonalDocente ";
+              $result = $conexion->query($consulta2);
+              $cont = 0;
+              while($fila = $result->fetch_object()){
+
+                  $idBach[$cont]=$fila->idBach;
+                  $nombreBach[$cont]=$fila->nombreBach;
+
+                  $idSeccion[$cont]=$fila->idSeccion;
+                  $seccion[$cont]=$fila->seccion;
+
+                  $idGrado[$cont]=$fila->idGrado;
+                  $grado[$cont]=$fila->grado;
+
+                  $cont++;
+              }
+
+              $datosBach=array_combine($idBach, $nombreBach); //Crea array asociativo 
+              $datosBach=array_unique($datosBach);            //Elimina duplicados
+              
+              $datosSeccion=array_combine($idSeccion, $seccion);  
+              $datosSeccion=array_unique($datosSeccion);            
+
+              $datosGrado=array_combine($idGrado, $grado); 
+              $datosGrado=array_unique($datosGrado);  
+
+
+        }else{
+
+        }
+
+
+
 }else {
   header("Location:inicio.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,20 +141,7 @@ if($_SESSION["logueado"] == TRUE) {
       <![endif]-->
       <script type="text/javascript">
 
-          function activar(){
-
-            document.getElementById('oculto').style.display = 'block';
-            document.getElementById('botonOculto').style.display = 'block';
-            document.getElementById('botonActivo').style.display = 'none';
-            document.getElementById('nota').disabled = false;
-          }
-          function desactivar(){
-            
-            document.getElementById('oculto').style.display = 'none';
-            document.getElementById('botonOculto').style.display = 'none';
-            document.getElementById('botonActivo').style.display = 'block';
-            document.getElementById('nota').disabled = true;
-          }
+         
       </script>
 </head>
 
@@ -90,44 +177,61 @@ if($_SESSION["logueado"] == TRUE) {
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
+                  <div class="panel-heading col-md-12" > <h5> DOCENTE: <?php echo $nombreCompleto ?></h5></div>
                     <div class="panel-heading col-md-12">
                        
-                         
-                             <h5 class="col-md-4">Opcion asignada: 
-                                  <select class="select2-A">  
-                                    <option value="1">Bachillerato general</option>
-                                    <option value="2">Bachillerato contador</option>
+                           <h5 class="col-md-2">Grado: <br>
+                                  <select id="grado" class="form-control">  
+                                    <option value="0" selected hidden>Seleccione</option>
+                                    <?php
+                                        foreach ($datosGrado as $id => $grado) {
+                                          echo "<option value=".$id.">".$grado."</option>";
+                                        }
+                                    
+                                    ?>
+                                    
+                                  </select>
+                            </h5> 
+                             <h5 class="col-md-3">Bachillerato: <br>
+                                  <select id="bach" class="form-control"> 
+                                  <option value="0" selected hidden>Seleccione</option> 
+                                  <?php
+                                        foreach ($datosBach as $idBach => $bach) {
+                                          echo "<option value=".$idBach.">".$bach."</option>";
+                                        }
+                                    
+                                    ?>
                                     
                                   </select>
                                 </h5> 
-                                <h5 class="col-md-2">Seccion: 
-                                    <select class="select2-A">  
-                                      <option value="1">A</option>
-                                      <option value="4">D</option>
+                                <h5 class="col-md-2">Seccion: <br>
+                                    <select id="seccion" class="form-control">
+                                    <option value="0" selected hidden>Seleccione</option>  
+                                      <?php
+                                          foreach ($datosSeccion as $idSec => $seccion) {
+                                            echo "<option value=".$idSec.">".$seccion."</option>";
+                                          }
+                                      
+                                      ?>
                                     </select>
                                 </h5>
                                 
-                                <h5 class="col-md-4">Materia: 
-                                    <select class="select2-A">  
-                                      <option value="1">Matematica</option>
-                                      <option value="4">Sociales</option>
+                                <h5 class="col-md-4">Materia: <br>
+                                
+                                    <select id="materia" class="form-control mat">  
+                                    <option value="0" selected hidden>Seleccione</option> 
+                                      <?php include "comboMaterias.php"; ?>
                                     </select>
                                 </h5>
                                 
-                                <div  class="col-md-2"id="botonActivo" > 
+                               <div  class="col-md-1"id="botonFiltrar" > 
                                   
-                                <a class="btn btn-outline btn-default" onclick="activar()">
-                                      <i class="fa fa-edit fa-lg"></i><br>Asignar notas
+                                <a class="btn btn-outline btn-default">
+                                      <i class="fa fa-search fa-lg"></i><br>Filtrar
                                     </a>
                                  
                                 </div>
-                                <div  class="col-md-2" style='display:none;' id="botonOculto"> 
-                                  
-                                <a class="btn btn-outline btn-default" onclick="desactivar()">
-                                      <i class="fa fa-list fa-lg"></i><br>Solo lectura
-                                    </a>
-                                 
-                                </div>
+                                
                                                                                     
                     </div>
                     <div class="panel-body">
@@ -143,53 +247,24 @@ if($_SESSION["logueado"] == TRUE) {
                                                   
                         </tr>
                         <tr>
-                            <th>N°</th>
-                            <th>NOMBRES</th>
+                            <th width='10'>CODIGO</th>
+                            <th>NOMBRE DEL ALUMNO</th>
                             <th>35%</th>
                             <th>35%</th>
                             <th>30%</th>
                             <th>Rec.</th>
-                            <th>Prom.</th>  
+                            <th>Prom.</th>
+                            <th>Accion</th>  
                         </tr>
                       </thead>
-                      <tbody>
-                          <tr>
-                              <td>1</td>
-                              <td>Alfaro Vergara, Sofia Noemi</td>
-                              <td style="text-align:center;">
-                                  <input id="nota" type="text" class="form-control" value="0.0" style="width:60px; border:none;" disabled>
-                              </td>
-                              <td style="text-align:center;">
-                                  <input id="nota" type="text" class="form-control" value="0.0" style="width:60px; border:none;" disabled>
-                              </td>
-                              <td style="text-align:center;">
-                                  <input id="nota" type="text" class="form-control" value="0.0" style="width:60px; border:none;" disabled>
-                              </td>
-                              <td style="text-align:center;">
-                                  <input id="nota" type="text" class="form-control" value="0.0" style="width:60px; border:none;" disabled>
-                              </td>
-                              <td style="text-align:center;">
-                                  <input id="nota" type="text" class="form-control" value="1.0" style="width:60px; border:none;" disabled>
-                              </td>
-                                
-                            </tr>
+                      <tbody class="tabla_ajax">
+                          
+                          <?php include "tablaNotas.php";?>
                             
                       </tbody>
-                      <tfoot>
-                        <td  style="text-align:center;" colspan=7>
-                              <div style='display:none;' id="oculto">
-                                  
-
-                                  <a class="btn btn-outline btn-default" >
-                                      <i class="fa fa-upload fa-lg"></i><br>Actualizar notas
-                                    </a>
-                                    
-                                  
-                              </div>
-                        </td>
-                      </tfoot>
-                      </table>
-                      </div>
+                      
+                    </table>
+                  </div>
                   </div>
                 </div>
               </div>  
@@ -839,12 +914,132 @@ if($_SESSION["logueado"] == TRUE) {
 <script type="text/javascript">
   $(document).ready(function(){
     $('#datatables-example').DataTable();
-  });
 
-   $(".select2-A").select2({
-      placeholder: "Seleccione bachillerato",
-      allowClear: true
-    });
+    
+      $("#seccion").on('change', function(){
+
+          var grado   = $("#grado").val();
+          var bach    = $("#bach").val();
+          var seccion = $("#seccion").val();
+
+          if(grado == 0){
+            return false;
+          }
+          if(bach == 0){
+            return false;
+          }
+          if(seccion == 0){
+            return false;
+          }
+
+          $.ajax({
+                  type: 'post',
+                  url: 'obtenerOpcion.php',
+                  data: {grado:grado, bach:bach, seccion:seccion},
+                  success: function(respuesta) {
+                      if(respuesta != 0){
+                        $(".mat").load("comboMaterias.php?id="+respuesta);
+                      }else{
+                        alert("Seleccione correctamente los campos");
+                      }           
+                                        
+                  },
+                  error: function(respuesta){
+                    sweetError("Error en el servidor: "+respuesta); 
+                  }
+            });//fin de ajax*/
+
+
+      });//cambio de combo seccion
+
+      $("#grado").on('change', function(){
+
+        var grado   = $("#grado").val();
+        var bach    = $("#bach").val();
+        var seccion = $("#seccion").val();
+          
+         if(grado == 0){
+            return false;
+          }
+          if(bach == 0){
+            return false;
+          }
+          if(seccion == 0){
+            return false;
+          }
+
+
+        $.ajax({
+                type: 'post',
+                url: 'obtenerOpcion.php',
+                data: {grado:grado, bach:bach, seccion:seccion},
+                success: function(respuesta) {
+                    if(respuesta != 0){
+                      $(".mat").load("comboMaterias.php?id="+respuesta);
+                    }else{
+                      alert("Seleccione correctamente los campos");
+                    }           
+                                      
+                },
+                error: function(respuesta){
+                  sweetError("Error en el servidor: "+respuesta); 
+                }
+          });//fin de ajax*/
+
+
+      });//cambio de combo grado
+
+       $("#bach").on('change', function(){
+
+        var grado   = $("#grado").val();
+        var bach    = $("#bach").val();
+        var seccion = $("#seccion").val();
+
+          if(grado == 0){
+            return false;
+          }
+          if(bach == 0){
+            return false;
+          }
+          if(seccion == 0){
+            return false;
+          }
+          
+        $.ajax({
+                type: 'post',
+                url: 'obtenerOpcion.php',
+                data: {grado:grado, bach:bach, seccion:seccion},
+                success: function(respuesta) {
+                    if(respuesta != 0){
+                      $(".mat").load("comboMaterias.php?id="+respuesta);
+                    }else{
+                      alert("Seleccione correctamente los campos");
+                    }           
+                                      
+                },
+                error: function(respuesta){
+                  sweetError("Error en el servidor: "+respuesta); 
+                }
+          });//fin de ajax*/
+
+
+      });//cambio de combo seccion
+
+      $("#botonFiltrar").on("click", function(){
+
+           var idMateria = $("#materia").val();
+
+          
+           $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria);
+           
+
+      });
+
+
+  });//fin de ready
+
+  
+      
 
 </script>
 <!-- end: Javascript -->
