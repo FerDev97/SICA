@@ -122,6 +122,9 @@ function go(){
       }if(document.getElementById("apellidoa").value==""){
         sweetError("Cuidado.! El Apellido es obligatorio");
         return 0;
+      }if(document.getElementById("sexo").checked==false && document.getElementById("sex").checked==false){
+        sweetError("Cuidado.! Seleccione Sexo del Alumno");
+        return 0;
       }if(document.getElementById("departamentoa").value=="Seleccione Departamento"){
         sweetError("Cuidado.! El Departamento es obligatorio");
         return 0;
@@ -304,6 +307,11 @@ function go(){
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre*" onkeypress="return sololetras(event)" required>
      </div>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Sexo</span>
+     <label class="radio-inline" style="margin-right:34px;margin-left:80px; font-size: 15px"><input type="radio" name="sexo" value="0" id="sexo">Masculino</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="sexo" value="1" id="sex">Femenino</label>
+     </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Nacio en: </span>
@@ -369,6 +377,7 @@ function go(){
      <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
      </div>
     
+    
       
  
 
@@ -390,10 +399,11 @@ function go(){
      </div>
 
      <div class="input-group " style="padding-bottom:30px;">
+     <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Fecha de nacimiento: </span>
      <input id="fecha" type="date" class="form-control" name="fecha" min="1950-01-01" max="2005-12-31">
      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
      </div>
-     
+     <br><br>
      <div class="input-group " style="padding-bottom:20px;">
      <input id="distanciaa" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E." min="1" max="100000">
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
