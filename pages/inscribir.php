@@ -56,14 +56,14 @@ $telefonotm  = $_POST['telefonotm'];
 $celularm  = $_POST['celularm'];
 $miembrosm  = $_POST['miembrosm'];
 $religiionm  = $_POST['religiionm'];
-$anio=$_POST['anio'];
-//Adicionales
 
+//Adicionales
+$anio=$_POST['anio'];
 //odos llegan con exito 
 $query = "SELECT cnie FROM talumno WHERE cnie like '%".$NIE."';";
 $result = $conexion->query($query);
     if($result->num_rows == 0||$NIE==""){
-$consulta  = "INSERT INTO talumno VALUES('null','" .$codigo. "','" .$NIE. "','" .$nombre. "','" .$apellido. "','" .$sexo. "','" .$direcc. "','" .$depart. "','" .$fecha. "','" .$llega. "','" .$bto. "','" .$anterior. "','" .$enfer. "','" .$alergia. "','" .$distancia. "','" .$parvu. "','" .$trabaja. "','" .$zona. "','" .$repite. "','" .$bautizo. "','" .$comunion. "','" .$confirmacion. "','" .$nombrep. "','" .$lugarp."','" .$duip. "','" .$housephonep. "','" .$workphonep. "','" .$smartphonep. "','" .$direccionp. "','" .$estado. "','" .$convive. "','" .$nombrem. "','" .$lugarm. "','" .$oficiom. "','" .$duim. "','" .$telefonocm. "','" .$telefonotm. "','" .$celularm. "','" .$miembrosm. "','" .$religiionm. "','" .$anio. "')";
+$consulta  = "INSERT INTO talumno VALUES('null','" .$codigo. "','" .$NIE. "','" .$nombre. "','" .$apellido. "','" .$sexo. "','" .$direcc. "','" .$depart. "','" .$fecha. "','" .$llega. "','" .$bto. "','" .$anterior. "','" .$enfer. "','" .$alergia. "','" .$distancia. "','" .$parvu. "','" .$trabaja. "','" .$zona. "','" .$repite. "','" .$bautizo. "','" .$comunion. "','" .$confirmacion. "','" .$nombrep. "','" .$lugarp."','" .$duip. "','" .$housephonep. "','" .$workphonep. "','" .$smartphonep. "','" .$direccionp. "','" .$estado. "','" .$convive. "','" .$nombrem. "','" .$lugarm. "','" .$oficiom. "','" .$duim. "','" .$telefonocm. "','" .$telefonotm. "','" .$celularm. "','" .$miembrosm. "','" .$religiionm. "')";
 $resultado = $conexion->query($consulta);
           if ($resultado) {
              IB:: insertar($_SESSION["id"],"Inscribio un nuevo alumno");
