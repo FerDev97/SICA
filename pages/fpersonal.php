@@ -293,27 +293,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                               </div> 
                               <br>
                               
-                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-     <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="cargo"   class="select2 show-tick" style="width: 495px; font-size: 15px" name="cargo">
-      <option value="">Seleccione Cargo</option>
-      <?php
+                    <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                          <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
+                          <select id="cargo"   class="select2 show-tick" style="width: 495px; font-size: 15px" name="cargo">
+                          <option value="">Seleccione Cargo</option>
+                          <?php
                       include '../config/conexion.php';
-
                       $result = $conexion->query("select eid_cargo as id,ccargo as nombre FROM tcargos");
                       if ($result) {
-
                         while ($fila = $result->fetch_object()) {
                           echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                         
-                        
                            }
                       }
                        ?>
                        </select>
-                              
-      
-      </div>
+                </div>
       
       <br>
       <div class="input-group " style="padding-bottom:25px;">

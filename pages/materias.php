@@ -58,7 +58,20 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-      
+      function recuperarDocentes(id){
+        
+        $.ajax({
+                data:  id, //datos que se envian a traves de ajax
+                url:   'recuperarDocentes.php', //archivo que recibe la peticion
+                type:  'post', //método de envio
+                beforeSend: function () {
+                        // $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                        $("#personal").html(response);
+                }
+        });
+}
       //SWEET ALERTS
       function sweetConfirm(){
         swal({
@@ -213,7 +226,7 @@ function sweetError(str){
                             <span class="label label-default" style="width: 500px; font-size: 20px">Horario <i class="glyphicon glyphicon-dashboard"></i></span>
                             
                             
-                              <select id="horario"   class="select2 show-tick" style="width: 455px; font-size: 15px" name="horario">
+                              <select id="horario"   class="select2 show-tick" style="width: 455px; font-size: 15px" name="horario" onchange="recuperarDocentes()">
                               <option value="">Seleccione Horario</option>
                                <?php
                       include '../config/conexion.php';
@@ -236,22 +249,8 @@ function sweetError(str){
                             
                             </div>
                                             
-                            <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
-                              <select id="docente"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="docente">
-                              <option value="">Seleccione Docente</option>
-                               <?php
-                      include '../config/conexion.php';
-                      $result = $conexion->query("select p.eid_personal as id, p.cnombre as nombre, p.capellido as apellido from tpersonal as p, tcargos as c where p.efk_idcargo=c.eid_cargo and c.ccargo='Docente' and p.iestado='1'");
-                      if ($result) {
-
-                        while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                         
-                           }
-                      }
-                       ?>
-                                       
-                              </select>
+                            <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;" id="personal">
+                              
                             </div>
                            <div class="form-group form-animate-text" style="margin-top:38px !important;margin-bottom:38px !important;">
                               <select id="opcion"   class="select2 show-tick" style="width: 568px; font-size: 15px" name="opcion">
