@@ -39,7 +39,12 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
 </head>
-
+<script>
+function go(){
+  alert("llega");
+  // document.msform.submit(); 
+}
+</script>
 <body id="mimin" class="dashboard">
       <!-- comienzo: Header -->
       <?php
@@ -84,7 +89,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                                   <a class="btn btn-outline btn-default"style=" margin-right:30px;margin-left:0px;font-size: 15px; align:right;" >
                                       <i class="fa fa-print fa-lg"></i><br>Reporte 
                                     </a>
-                                    <a class="btn btn-outline btn-default" style="font-size: 15px">
+                                    <a class="btn btn-outline btn-default" onclick="go();" style="font-size: 15px">
                                       <i class="fa fa-user-plus"></i><br>Nuevo 
                                     </a>
                                     
@@ -101,59 +106,79 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                         <tr>
                           <th>CODIGO</th>
                           <th>NOMBRE</th>
-                          <th>DIRECCIÓN</th>
-                          <th>ESTADO</th>
+                       
                           <th>ACCIONES</th>                         
                         </tr>
                       </thead>
                       <tbody>
-                          <tr>
-                              <td>RR15067</td>
-                              <td>Jessica Abigail Rosales Rodriguez</td>
-                              <td>San Vicente,Municipio San Esteban Catarina,Ba Concepción</td>
-                              <td bgcolor="#dff8e7">Activa</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round " data-toggle="modal" data-target=".bs-example-modal-lg">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-exclamation-sign"></span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>HA15019</td>
-                                <td>Fernando Josue Hernandez Arevalo</td>
-                                <td>San Vicente,Barrio el Santuario,pasaje Zelaya,casa n°2</td>
-                                <td bgcolor="#dff8e7">Activa</td>
-                                <td style="text-align:center;">
-                                    <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                    <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button> 
-                                    <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-exclamation-sign"></span></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                           <td>RR15067</td>
-                              <td>Kevin Alexander Jovel Arevalo</td>
-                              <td>San Vicente,Municipio San Sebastian</td>
-                              <td bgcolor="">Inactiva</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-check"></span></span></button>
-                                </td>
-                            </tr>
-                            <td>RR15067</td>
-                              <td>Walter Alexander Fernandez Caramo</td>
-                              <td>San Cayetano,Istepeque, San Vicente</td>
-                              <td bgcolor="">Inactiva</td>
-                              <td style="text-align:center;">
-                                  <button type="button" class="btn btn-info btn-sm btn-round">Ver detalle</button>
-                                  <button type="button" class="btn btn-warning btn-sm btn-round">Modificar</button>
-                                  <button type="button" class="btn btn-danger btn-sm btn-round" title="Dar de baja."><span class="glyphicon glyphicon-check"></span></span></button>
-                                </td>
-                            </tr>
+                      <?php
+include "../config/conexion.php";
+$result = $conexion->query("SELECT
+tmaterias.cnombre,
+tbachilleratos.cnombe,
+topciones.eid_opcion,
+tsecciones.cseccion,
+tmaterias.eid_materia
+FROM
+topciones
+INNER JOIN tmaterias ON tmaterias.efk_idopcion = topciones.eid_opcion
+INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato
+INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion
+where eid_opcion='1'");
+ 
+
+if ($result) {
+    while ($fila = $result->fetch_object()) {
+        echo "<tr>";   
+        echo "<td>" . $fila->cnombre . "</td>";
+        echo "<td>" . $fila->eid_opcion . "</td>";
+       $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
+       $aux.="onclick=\"editar('".$fila->eid_opcion."','".$fila->efk_grado."','".$fila->efk_bto."','".$fila->efk_seccion."','".$fila->ecupo_maximo."')\";>";
+       $aux.="Modificar</button>";
+       echo "<td width='90'>";
+     
+       echo $aux;
                                 
-                                
+        echo "</tr>";
+        $consulta  = "INSERT INTO tnotas VALUES('null',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ')";
+ $resultado = $conexion->query($consulta);
+   if ($resultado) {
+    $result2 = $conexion->query("SELECT tnotas.eid_notas FROM tnotas order by eid_notas asc ");
+  if ($result2) {
+      while ($fila1 = $result2->fetch_object()) {
+        $idnota=$fila1->eid_notas;
+        msg($idnota);
+        
+      }
+      $consulta = "INSERT INTO talum_mat_not VALUES('null','1','" . $fila->eid_materia. "','" .$idnota. "','1')";
+        $resultado = $conexion->query($consulta);
+                  if ($resultado) {
+                      // IB:: insertar($_SESSION["id"],"Inscribio un nuevo alumno");
+                      $mensaje="Se agregaron los datos correctamente";
+                      msg($mensaje);
+                      //Parte para agregar las materias asociadas a la opcion elegida
+                      // header('Location: ingresoAlumno.php?guardo=1');
+                  } else {
+                     $mensaje="Error al insertar los datos";
+                     msg($mensaje);
+                  }
+    } 
+   } else {
+       $mensaje="Error al insertar los datos";
+       msg($mensaje);
+   }
+     
+    }
+}
+?>
+
                       </tbody>
+                         
                         </table>
+                        <div class="input-group " style="padding-bottom:20px;">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
+     <input id="anteriora" type="text" class="form-control" name="anteriora" placeholder="En que año estudio el grado anterior" value="<?php echo $idnota;?>">
+     </div>
                       </div>
                   </div>
                 </div>
@@ -815,3 +840,12 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 <!-- end: Javascript -->
 </body>
 </html>
+<?php
+function msg($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "alert('$texto');";
+
+    echo "</script>";
+}
+?>
