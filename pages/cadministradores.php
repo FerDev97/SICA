@@ -113,6 +113,7 @@ function go(){
                       <tbody>
                       <?php
 include "../config/conexion.php";
+
 $result = $conexion->query("SELECT
 tmaterias.cnombre,
 tbachilleratos.cnombe,

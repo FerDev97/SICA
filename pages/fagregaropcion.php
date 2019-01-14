@@ -217,7 +217,7 @@ if ($result) {
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 12px">Tipo Bachillerato:</span>
                               <select id="tipob" class="select2 show-tick ajaxtipo" style="width: 200px; font-size: 15px" name="tipob">
-                              <option value="tipo">Tipo</option>
+                              <option value="tipo" selcted hidden>Tipo</option>
 
                                 <?php
                                   include('combotipo.php')?>
