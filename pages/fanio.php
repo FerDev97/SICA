@@ -47,7 +47,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Año</title>
+  <title>Año Activo | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -240,7 +240,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Año</h3>
+                         <h3 class="animated fadeInLeft">Año Escolar Activo</h3>
                         <p class="animated fadeInDown">
                           Año <span class="fa-angle-right fa"></span>Datos del Año Escolar.
                         </p>
@@ -256,7 +256,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <div class="col-md-12">
                   <div class="col-md-6 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario Año.</h4>
+                      <h4>Ingrese Nuevo Año.</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -297,7 +297,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <div class="col-md-6">
                    <div class="col-md-12">
                    <div class="panel">
-                     <div class="panel-heading"><h3>Ciclos Academicos</h3>
+                     <div class="panel-heading"><h3>Años Academicos</h3>
                        <?php
                        include "../config/conexion.php";
                        $result = $conexion->query("select * from tanio");

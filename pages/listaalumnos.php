@@ -28,7 +28,7 @@ if($result)
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lista de alumnos</title>
+  <title>Alumnos Inscritos | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -140,7 +140,6 @@ $result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-       
         if($clausurado==0){
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
@@ -171,7 +170,7 @@ if ($result) {
         $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE topciones.eestado=1 and topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
 if ($result2) {
     while ($fila2 = $result2->fetch_object()) {
-      echo "<td>" . $fila2->cgrado ." ".$fila2->cnombe." ".$fila2->cseccion."</td>";
+      echo "<td>" . $fila2->cgrado ." ° ".$fila2->cnombe." ' ".$fila2->cseccion." '</td>";
     }
   }
         

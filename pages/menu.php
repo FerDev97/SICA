@@ -20,7 +20,7 @@ if($result)
                     </li>
                     <li class="ripple">
                   <a class="tree-toggle nav-header">
-                    <span class="fa fa-users"></span> Administracion
+                    <span class="fa fa-users"></span> Administración
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
@@ -40,7 +40,7 @@ if($result)
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
+                      <li><a href="ingresoAlumno.php">Realizar inscripción</a></li>
                       <?php 
                       }
                       ?>
