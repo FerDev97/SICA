@@ -41,7 +41,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <![endif]-->
       <script> 
        //SWEET ALERTS
-      function sweetConfirm(){
+      function sweetConfirm(id,op){
         swal({
   title: '¿Está seguro que desea continuar?',
   text: "¡No sera posible revertir esta acción!",
@@ -53,11 +53,44 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   cancelButtonText:'Cancelar',
 }).then((result) => {
   if (result.value) {
+    
+   
     swal(
       '¡Exito!',
       'La accion ha sido completada.',
       'success'
-    )
+    );
+    document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.turismo.submit();
+    
+  }
+})
+        }
+         function sweetConfirm2(id,op){
+        swal({
+  title: '¿Está seguro que desea continuar?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+   
+    swal(
+      '¡Exito!',
+      'La accion ha sido completada.',
+      'success'
+    );
+     document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+    
   }
 })
         }
@@ -90,24 +123,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
         {
           if (op==1)
            {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) 
+            if (sweetConfirm(id,op)) 
             {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.turismo.submit();
-            }else
-            {
-                alert("No entra");
+            
             }
           }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
+            if (sweetConfirm2(id,op)) {
+           
           }else
             {
-            alert("No entra");
+           
              }
           }
 
@@ -304,18 +329,18 @@ if ($bandera == "desactivar") {
   $consulta = "UPDATE tmaterias SET estado = '0' WHERE eid_materia = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+        // msg("Exito");
     } else {
-        msg("No Exito");
+        // msg("No Exito");
     }
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE tmaterias SET estado = '1' WHERE eid_materia = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+        // msg("Exito");
     } else {
-        msg("No Exito");
+        // msg("No Exito");
     }
 }
 

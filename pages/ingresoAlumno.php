@@ -22,6 +22,18 @@ if($result)
   
   }
 }
+$result = $conexion->query("SELECT
+talumno.eid_alumno
+FROM
+talumno ORDER BY eid_alumno asc");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $ida=$fila->eid_alumno;
+  
+  }
+}
+
  ?>
  <?php
 include '../config/conexion.php';
@@ -43,7 +55,7 @@ include '../config/conexion.php';
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inscripcion</title>
+  <title>Realizar Inscripción | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -291,6 +303,7 @@ function go(){
   </ul>
   </center>
   <input type="hidden" name="anio" value="<?php echo $anioActivo;?>"/>
+  <input type="hidden" name="ida" value="<?php echo $ida+1;?>"/>
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>

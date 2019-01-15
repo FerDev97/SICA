@@ -36,7 +36,7 @@ if ($result) {
   <meta name="keyword" content="">
   <meta name="viewport" content="width=devi
   ce-width, initial-scale=1">
-  <title>SICA-Opciones</title>
+  <title>Gestionar Opciones | SICA</title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
@@ -147,7 +147,7 @@ if ($result) {
                     <div class="col-md-12">
                         <h3 class="animated fadeInLeft">Gestionar Opciones</h3>
                         <p class="animated fadeInDown">
-                          SICA <span class="fa-angle-right fa"></span> Datos del Opcion de Bachillerato.
+                          SICA <span class="fa-angle-right fa"></span> Datos del Opción de Bachillerato.
                         </p>
                     </div>
                   </div>
@@ -158,9 +158,9 @@ if ($result) {
               <input type="hidden" name="aux" id="aux" value="<?php echo $aux; ?>">
               <input type="hidden" name="r" id="r" value="">
               <div class="col-md-12">
-                  <div class="col-md-6 panel panel-info">
+                  <div class="col-md-12 panel panel-info" style="text-align:center">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario De Nueva Opcion de Bachillerato</h4>
+                      <h4>Formulario de nueva Opción de Bachillerato</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -184,29 +184,29 @@ if ($result) {
                               </div>
                             
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-                             <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opcion </span>
+                             <i  class="fa fa-book"></i><span class="label label-default" style="width: 100px; font-size: 15px; margin-right:13px">Opción: </span>
                               <select  id="opc" class="select2 show-tick" style="width: 350px; font-size: 15px" name="opc" onchange="verificar()">
-                              <option value="opcion" hidden selected>Opcion</option>
+                              <option value="opcion" hidden selected>Opción</option>
                               <?php include('comboopcion.php')?>
                               </select>
                               <button title="Agrega Nueva Opcionel al Sistema" style="margin-left:19px;" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalForm">+</button>
                               </div>
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Seccion:</span>
+                             <i  class="fa fa-users"></i><span class="label label-default" style="width: 100px; font-size: 15px">Sección:</span>
                               <select id="seccion" class="select2 show-tick" style="width: 350px; font-size: 15px" name="seccion">
-                              <option value="seccion" hidden selected>Seccion</option>
+                              <option value="seccion" hidden selected>Sección</option>
                               <?php include('comboseccion.php')?>
                               </select>
                               <button   style="margin-left:16px; border-radius: 50px 20px" class="btn btn-info" type="button" data-toggle="modal" data-target="#modalSeccion">+</button>
                               </br>
-                              </br>
-                              </br>
-                              <div class="input-group col-md-6">
+                              
+                             
+                           
+                          </div> 
+                          <div class="input-group col-md-3" style="margin-left:530px">
                               <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
                                <input id="cupo" type="number" class="form-control mask-cupo" name="cupo" placeholder="Cupo Maximo" min="1" max="50">
                            </div>
-                           
-                          </div> 
                         </div>
                                <div class="col-md-12">
                                 <div class="col-md-3"></div>
@@ -215,7 +215,7 @@ if ($result) {
                               <br><b></b>
                               <input type="button" id="guardar" name="guardar" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
                               </div>
-                          <div>
+                          <div class="col-md-3">
                             <br><b></b>
                           
                             <input type="reset" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
@@ -231,59 +231,6 @@ if ($result) {
                   
 
 
-                <div class="col-md-6">
-                  <div class="col-md-12">
-                  <div class="panel">
-                  <div class="panel-heading"><h3>Lista de Opciones de Bachillerato Activas</h3></div>
-                    <div class="panel-body">
-                      <div class="responsive-table">
-                      <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          
-                          <th>Codigo</th>
-                          <th>Opcion</th>
-                          <th>Tipo</th>
-                          <th>Descripcion</th>
-                         
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
-include "../config/conexion.php";
-$result = $conexion->query("select * from tbachilleratos where eestado='1' order by eid_bachillerato");
-if ($result) {
-    while ($fila = $result->fetch_object()) {
-        echo "<tr>";
-        
-        //echo "<tr>";
-        //echo "<td><img src='img/modificar.png' style='width:30px; height:30px' onclick=modify(".$fila->idasignatura.",'".$fila->codigo."','".$fila->nombre."');></td>";
-        //echo "<td><img src='img/eliminar.png' style='width:30px; height:30px' onclick=elyminar(".$fila->idasignatura.",'".$fila->nombre."');></td>";
-        echo "<td>" . $fila->ccodigo . "</td>";
-        echo "<td>" . $fila->cnombe . "</td>";
-        if(eestado=='1'){
-          echo "<td>Activo</td>";
-        }else{
-          echo "<td>Inactivo</td>";
-        }
-        echo "<td>" . $fila->cdescripcion . "</td>";
-        
-
-        
-
-        
-        echo "</tr>";
-
-    }
-}
-?>
-                      </tbody>
-                        </table>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              </div>
 
 
                 </form>
@@ -722,6 +669,8 @@ $(document).ready(function(){
 
 </script>
 <!-- end: Javascript -->
+
 </body>
+
 </html>
 

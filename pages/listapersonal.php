@@ -134,6 +134,12 @@ document.location.href='listapersonal.php';
           }
 
         }
+        function reporte(){
+          window.open("reportePerAct.php",'_blank');
+        }
+        function reporte1(){
+          window.open("reporteCarDo.php",'_blank');
+        }
 
       </script>
 </head>
@@ -165,7 +171,18 @@ document.location.href='listapersonal.php';
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista</h3></div>
+                    <div class="panel-heading col-md-12"><h3 class="col-md-4">Lista</h3>
+                    <span class="col-md-6"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Personal Activo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte1();" title="Docentes"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    </div>
+                    
+                  </div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">

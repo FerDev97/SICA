@@ -20,13 +20,13 @@ if($result)
                     </li>
                     <li class="ripple">
                   <a class="tree-toggle nav-header">
-                    <span class="fa fa-users"></span> Administracion
+                    <span class="fa fa-users"></span> Administración
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
                   <li><a href="fanio.php">Año Escolar Activo</a></li>
                      <li><a href="permisos.php">Permisos Temporales</a></li>
-                     <li><a href="cadministradores.php">Lista de administradores</a></li>
+                     <!-- <li><a href="cadministradores.php">Lista de administradores</a></li> -->
                    
               
                  </ul>
@@ -36,11 +36,11 @@ if($result)
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                      <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
+                      <li><a href="gestionarInscripcion.php">Gestionar proceso</a></li>
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
+                      <li><a href="ingresoAlumno.php">Realizar inscripción</a></li>
                       <?php 
                       }
                       ?>
@@ -67,7 +67,7 @@ if($result)
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="listabus.php">Gestion de Periodos</a></li>
+                      <li><a href="fperiodo.php">Gestion de Periodos</a></li>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
                        
                         <li><a href="listabus.php">Boleta de notas</a></li>

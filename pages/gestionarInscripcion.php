@@ -15,16 +15,7 @@ if(empty($anio))
 
 }else
 {
-  include "../config/conexion.php";
- include "IB.php";
-  $consulta  = "INSERT INTO tanio VALUES('".$anio."','0','-1','0')";
-  $resultado = $conexion->query($consulta);
-  if ($resultado) {
-    IB:: insertar($_SESSION["id"],"Registró un nuevo año");
-      //msg("Exito");
-  } else {
-      //msg(mysqli_error($conexion));
-  }
+
 }
 
 
@@ -47,7 +38,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Año Activo | SICA</title>
+  <title>Gestionar Inscripción | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -164,8 +155,8 @@ error_reporting(E_ALL & ~E_NOTICE);
      function confirmar(id)
         {
           swal({
-  title: '¿Está seguro que desea activar este año?',
-  text: "¡Esto provacara que el año actual se desactive y si este no ha sido clausurado pasara a estarlo!",
+  title: '¿Está seguro que desea activar este perido?',
+  text: "¡Esto provacara que el periodo actual se desactive!",
   type: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
@@ -176,7 +167,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   if (result.value) {
     swal(
       'Activado!',
-      'El año fue activado exitosamente.',
+      'El periodo fue activado exitosamente.',
       'success'
     )
     document.getElementById('bandera').value='activar';
@@ -240,74 +231,39 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Año Escolar Activo</h3>
+                         <h3 class="animated fadeInLeft">Inscripción</h3>
                         <p class="animated fadeInDown">
-                          Año <span class="fa-angle-right fa"></span>Datos del Año Escolar.
+                          Periodo <span class="fa-angle-right fa"></span> de Inscripción.
                         </p>
                     </div>
                   </div>
                 </div>
                 <div class="form-element">
-                
+              
                 <form id="turismo" name="turismo" action="" method="post">
                 <input type="hidden" name="bandera" id="bandera">
                 <input type="hidden" id="baccion" name="baccion">
                
                 <div class="col-md-12">
-                  <div class="col-md-6 panel panel-info">
-                    <div class="col-md-12 panel-heading">
-                      <h4>Ingrese Nuevo Año.</h4>
-                    </div>
-
-                    <div class="col-md-12 panel-body" style="padding-bottom:30px;">
-                      <div class="col-md-12">
-                        <form class="cmxform" id="formcliente" method="post" action="">
-
-                          <div class="col-md-12">
-                          <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                              <input id="año" type="number" class="form-control" data-mask="0000" name="año" placeholder="Digite año escolar." size="4" maxlength="4" value="<?php echo $hoy['year']?>" min="<?php echo $hoy['year']?>" max="<?php echo $hoy['year']+1?>"  onkeypress="return aceptNum(event)">
-                          </div>
-                         </br>
-                       
-                        <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                        </div>
-                        </div>
-                        <!-- Div del span -->
-                          </div>
-                           <div class="col-md-12">
-                           <div class="col-md-3">
-                          </div>
-                            <div class="col-md-3">
-                            <br><b></b>
-                            <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
-                            </div>
-                            <div>
-                            <br><b></b>
-                            <input type="button" name="next" class="next action-button btn btn-danger btn-sm btn-round" style="font-size:20px;" value="Cancelar" />
-                            </div>
-                            </div>
-                           </div>
-                           </form>
-                           </div>
-                           </div>
+                  
                            <!-- Inicio Tabla Año -->
-
-                           <div class="col-md-6">
+                        
+                         
+                           <div class="col-md-9">
                    <div class="col-md-12">
                    <div class="panel">
-                     <div class="panel-heading"><h3>Años Academicos</h3>
+                  
+                     <div class="panel-heading"><h3>Gestionar Proceso de Inscripción</h3>
                        <?php
                        include "../config/conexion.php";
-                       $result = $conexion->query("select * from tanio");
+                       $result = $conexion->query("select * from tperiodos");
                        if($result->num_rows<1){
                          ?>
 
                        <button type="button" class="btn-flip btn btn-gradient btn-primary" data-toggle='modal' data-target='#myModal'>
                              <div class="flip">
                                <div class="side">
-                                 Agregar Nuevo <span class="fa fa-edit"></span>
+                                 Habilitar<span class="fa fa-edit"></span>
                                </div>
                                <div class="side back">
                                  Continuar?
@@ -319,56 +275,22 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <?php
                             }
                              ?>
+                            
                           </div>
                      <div class="panel-body">
                        <div class="responsive-table">
-                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0" >
-                       <thead>
-                         <tr>
-                             <th>Año</th>
-                            <th >Estado</th>
-                            <th style="width:30px;">Activar/Desactivar</th>
-
-
-                         </tr>
-                       </thead>
-                       <tbody>
-                       <?php
- include "../config/conexion.php";
- $result = $conexion->query("select * from tanio order by canio DESC");
- if ($result) {
-     while ($fila = $result->fetch_object()) {
-         echo "<tr>";
-         echo "<td>" . $fila->canio . "</td>";
-
-        
-         if ($fila->iestado==1) {
-                      echo "<td>Activo</td>";
-                       echo "<td style='text-align:center;'>Ciclo actual.</td>";
-                   }else
-                    if ($fila->iestado==0) {
-
-                      echo "<td>Inactivo</td>";
-                     
-                      echo "<td style='text-align:center;'><button title='Activar este año.' align='center' type='button' class='btn btn-default' onclick=confirmar(" . $fila->eid_anio . ");><i class='fa fa-check'></i>
-                         </button></td>";
-                   }
-         echo "</tr>";
-
-     }
- }
- ?>
-                       </tbody>
-                         </table>
+           
                        </div>
                    </div>
                  </div>
                </div>
                </div>
+        
                            </div>
                            
                            </form>
                       </div>
+            
                 </div>
                 
                </div>
@@ -811,34 +733,27 @@ if ($bandera == "desactivar") {
 
 
 if ($bandera == "activar") {
-  $result2 = $conexion->query("select * from tanio");
+  $result2 = $conexion->query("select * from tperiodos");
   if ($result2) {
     while ($fila = $result2->fetch_object()) {
       $idanio=$fila->idanio;
 //CONSULTA PARA DESACTIVAR CUALQUIER AÑO
-$result3 = $conexion->query("select * from tanio where eid_anio=".$baccion);
-if ($result3) {
-  while ($fila3 = $result3->fetch_object()) {
-      $eclausura=$fila3->eclausura;
-  } 
-}
-if ($eclausura==0) {
-  $consultaDesac = "update tanio set iestado='0',eclausura='1'  where iestado='1'";
-}else{
-  $consultaDesac = "update tanio set iestado='0' where iestado='1'";
-}
+$result3 = $conexion->query("select * from tperiodos where eid_periodo=".$baccion);
+
+  $consultaDesac = "update tperiodos set estado='0' where estado='1'";
+
 $resultadoDesac = $conexion->query($consultaDesac);
 
       // $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
       // $resultado = $conexion->query($consulta);
     }
   }
-  $consulta2 = "update tanio set iestado='1' where eid_anio=".$baccion;
+  $consulta2 = "update tperiodos set estado='1' where eid_periodo=".$baccion;
     $resultado = $conexion->query($consulta2);
     if ($resultado) {
       echo "<script type='text/javascript'>";
      // echo "alert('Exito');";
-      echo "document.location.href='fanio.php';";
+      echo "document.location.href='fperiodo.php';";
       echo "</script>";
     } else { 
         msg("No Exito");
