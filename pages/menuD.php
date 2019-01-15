@@ -47,14 +47,14 @@ if($result)
                         <?php 
                       }
                       ?>
-                        <li><a href="listabus.php">Estadisticas</a></li>
+                        <li><a href="listabus.php">Estadísticas</a></li>
    
                       </ul>
                     </li>
                     <?php if($_SESSION["permisoI"]==1){ ?>
                      
                     <li class="active ripple">
-                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   
@@ -62,8 +62,8 @@ if($result)
                   <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
-                      <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
+                      <li><a href="ingresoAlumno.php">Realizar inscripción</a></li>
+                      <li><a href="listacliente.php">Comprobante de inscripción</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
                       <?php 
                       }
@@ -72,7 +72,7 @@ if($result)
                   
                       <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
                       <li><a href="busquedafamiliar.php">Búsqueda de Alumno por Familiar</a></li>
-                      <li><a href="listacliente.php">Estadisticas</a></li>
+                      <li><a href="listacliente.php">Estadísticas</a></li>
                       
                   </ul>
                 </li>
@@ -83,11 +83,11 @@ if($result)
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                 
-                    <span class="fa-book fa "></span> Estadisticas
+                    <span class="fa-book fa "></span> Estadísticas
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                    <li><a href="#">Estadisitcas Generales</a></li>
+                    <li><a href="#">Estadísticas Generales</a></li>
                     <li><a href="#">Alumnos por Sexo</a></li>
                     <li><a href="#">Aprobados y Reprobados</a></li>
                     

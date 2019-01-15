@@ -49,7 +49,7 @@ if($result)
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
+                      <li><a href="listacliente.php">Comprobante de inscripción</a></li>
                       <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
                       <?php 
                       }
@@ -67,7 +67,7 @@ if($result)
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="fperiodo.php">Gestion de Periodos</a></li>
+                      <li><a href="fperiodo.php">Gestión de Periodos</a></li>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
                        
                         <li><a href="listabus.php">Boleta de notas</a></li>
@@ -106,7 +106,7 @@ if($result)
                   </a>
                   <ul class="nav nav-list tree">
                  
-                  <li><a href="fagregaropcion.php">Mantenimiento Opcion</a></li>
+                  <li><a href="fagregaropcion.php">Mantenimiento Opción</a></li>
                     <li><a href="fopciones.php">Gestionar Opciones</a></li>
                     <li><a href="listaOpciones.php">Opciones Activas</a></li>
                     <li><a href="listaOpcionesIna.php">Opciones Inactivas</a></li>
@@ -130,8 +130,8 @@ if($result)
                             <span class="fa-angle-right fa right-arrow text-right"></span>
                           </a>
                           <ul class="nav nav-list sub-tree">
-                            <li><a href="horarioGeneral.php">Agregar horario</a></li>
-                            <li><a href="listaHorarios.php">Lista de horarios</a></li>    
+                            <li><a href="horarioGeneral.php">Agregar Horario</a></li>
+                            <li><a href="listaHorarios.php">Lista de Horarios</a></li>    
                                  
                           </ul>
                     </li>
@@ -172,11 +172,11 @@ if($result)
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                 
-                    <span class="fa-book fa "></span> Estadisticas
+                    <span class="fa-book fa "></span> Estadísticas
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                    <li><a href="fusuario.php">Estadisitcas Generales</a></li>
+                    <li><a href="fusuario.php">Estadísitcas Generales</a></li>
                     <li><a href="listaUsuariosActivos.php">Alumnos por Sexo</a></li>
                     <li><a href="listaUsuariosInactivos.php">Aprobados y Reprobados</a></li>
                     
@@ -192,7 +192,7 @@ if($result)
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="bitacora.php">Bitacora</a></li>
+                        <li><a href="bitacora.php">Bitácora</a></li>
                         <li><a href="lugar.php">Backup</a></li>
                         
                       </ul>

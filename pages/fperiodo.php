@@ -38,7 +38,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Año</title>
+  <title>Gestión de periodo | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -231,7 +231,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Periodo</h3>
+                         <h3 class="animated fadeInLeft">Gestión de Periodos</h3>
                         <p class="animated fadeInDown">
                           Periodo <span class="fa-angle-right fa"></span>control de periodo activo.
                         </p>

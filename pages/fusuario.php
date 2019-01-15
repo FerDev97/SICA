@@ -17,7 +17,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Usuario</title>
+  <title>Agregar nuevo Usuario | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -210,7 +210,7 @@ function verificar(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Usuario</h3>
+                         <h3 class="animated fadeInLeft">Agregar nuevo Usuario</h3>
                         <p class="animated fadeInDown">
                           Usuario <span class="fa-angle-right fa"></span>Datos del Usuario.
                         </p>

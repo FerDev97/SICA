@@ -207,7 +207,7 @@ if($_SESSION["logueado"] == TRUE) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Notas | SICA</title>
+  <title>Registro de Notas | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -253,9 +253,9 @@ if($_SESSION["logueado"] == TRUE) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">CUADRO DE REGISTRO DE EVALUACION</h3>
+                        <h3 class="animated fadeInLeft">Registro de Notas</h3>
                         <p class="animated fadeInDown">
-                          Notas <span class="fa-angle-right fa"></span> Complejo Educativo "La Santa Familia"
+                          Notas <span class="fa-angle-right fa"></span> Complejo Educativo Catolico "La Santa Familia"
                         </p>
                     </div>
                   </div>

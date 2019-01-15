@@ -46,7 +46,7 @@ if ($result) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SICA-Opciones</title>
+  <title>Mantenimiento Opciones | SICA</title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
@@ -179,9 +179,9 @@ if ($result) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Mantenimiento Opcion</h3>
+                        <h3 class="animated fadeInLeft">Mantenimiento Opción</h3>
                         <p class="animated fadeInDown">
-                          SICA <span class="fa-angle-right fa"></span> Datos de Opcion.
+                          SICA <span class="fa-angle-right fa"></span> Datos de Opción.
                         </p>
                     </div>
                   </div>
@@ -194,7 +194,7 @@ if ($result) {
               <div class="col-md-12">
                   <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario de Opcion</h4>
+                      <h4>Formulario de Opción</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -210,7 +210,7 @@ if ($result) {
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de Opcion">
+                              <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de Opción">
                               </div>
                               <br>
                               <div class="input-group">
@@ -229,7 +229,7 @@ if ($result) {
                                 </div>
                                 <div class="input-group"style="padding-bottom:0px;">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                                    <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descripcion" placeholder="Descripcion" id="descripcion"></textarea>
+                                    <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descripcion" placeholder="Descripción" id="descripcion"></textarea>
                                 </div> 
                         </div>
                                <div class="col-md-12">

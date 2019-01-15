@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Lista Personal Inactivo | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -157,7 +157,7 @@ document.location.href='listapersonal.php';
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista Personal</h3>
+                        <h3 class="animated fadeInLeft">Lista Personal Inactivo</h3>
                         <p class="animated fadeInDown">
                           Tabla <span class="fa-angle-right fa"></span> Tabla de Datos
                         </p>

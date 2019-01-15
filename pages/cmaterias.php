@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Materias|SICA</title>
+  <title>Lista Materias|SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -218,17 +218,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>CODIGO</th>
-                          <th>NOMBRE</th>
-                          <th>DOCENTE</th>
-                          <th>ESTADO</th>
-                          <th>ACCIONES</th>                         
+                          <th>Codigo</th>
+                          <th>Nombre</th>
+                          <th>Docente</th>
+                          <th>Estado</th>
+                          <th>Acciones</th>                         
                         </tr>
                       </thead>
                       <tbody>
                      <?php
                       include "../config/conexion.php";
-                      $result = $conexion->query("select m.eid_materia as id, m.cnombre as materia,m.estado as estado, p.cnombre as docente FROM tmaterias as m, tpersonal as p,tpersonal_materia as pm WHERE p.eid_personal=pm.efk_idpersonal and m.eid_materia=pm.efk_idmateria");
+                      $result = $conexion->query("select m.eid_materia as id, m.cnombre as materia,m.estado as estado, p.cnombre as docente,p.capellido as apellido FROM tmaterias as m, tpersonal as p,tpersonal_materia as pm WHERE p.eid_personal=pm.efk_idpersonal and m.eid_materia=pm.efk_idmateria");
                       if ($result) {
                           while ($fila = $result->fetch_object()) {
                             echo "<tr>";
@@ -242,7 +242,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                                </div>
                               </td>";
                              echo "<td>" . $fila->materia . "</td>";
-                             echo "<td>" . $fila->docente . "</td>";
+                             echo "<td>" . $fila->docente . "   " . $fila->apellido . "</td>";
        
                                if ($fila->estado==1) {
                               echo "<td>Activo</td>";
