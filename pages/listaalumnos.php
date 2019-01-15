@@ -167,7 +167,7 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE topciones.eestado=1 and topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
+        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE  topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
 if ($result2) {
     while ($fila2 = $result2->fetch_object()) {
       echo "<td>" . $fila2->cgrado ." ° ".$fila2->cnombe." ' ".$fila2->cseccion." '</td>";
