@@ -332,7 +332,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       </script>
 </head>
 
-<body id="mimin" class="dashboard">
+<body id="mimin" class="dashboard" onload="prueba()">
    <?php include "header.php"?>
 
       <div class="container-fluid mimin-wrapper">
@@ -369,27 +369,6 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="panel">
                   
                      <div class="panel-heading"><h3>Periodos Académicos</h3>
-                       <?php
-                       include "../config/conexion.php";
-                       $result = $conexion->query("select * from tperiodos");
-                       if($result->num_rows<1){
-                         ?>
-
-                       <button type="button" class="btn-flip btn btn-gradient btn-primary" onclick="prueba()">
-                             <div class="flip">
-                               <div class="side">
-                                 Agregar Nuevo <span class="fa fa-edit"></span>
-                               </div>
-                               <div class="side back">
-                                 Continuar?
-
-                               </div>
-                             </div>
-                             <span class="icon"></span>
-                           </button>
-                           <?php
-                            }
-                             ?>
                           </div>
                      <div class="panel-body">
                        <div id="chart_div"></div>
@@ -402,27 +381,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="panel">
                   
                      <div class="panel-heading"><h3>Periodos Académicos</h3>
-                       <?php
-                       include "../config/conexion.php";
-                       $result = $conexion->query("select * from tperiodos");
-                       if($result->num_rows<1){
-                         ?>
-
-                       <button type="button" class="btn-flip btn btn-gradient btn-primary" onclick="prueba()">
-                             <div class="flip">
-                               <div class="side">
-                                 Agregar Nuevo <span class="fa fa-edit"></span>
-                               </div>
-                               <div class="side back">
-                                 Continuar?
-
-                               </div>
-                             </div>
-                             <span class="icon"></span>
-                           </button>
-                           <?php
-                            }
-                             ?>
+                      
                           </div>
                      <div class="panel-body">
                        <div id="chart_div2"></div>
@@ -442,27 +401,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="panel">
                   
                      <div class="panel-heading"><h3>Periodos Académicos</h3>
-                       <?php
-                       include "../config/conexion.php";
-                       $result = $conexion->query("select * from tperiodos");
-                       if($result->num_rows<1){
-                         ?>
-
-                       <button type="button" class="btn-flip btn btn-gradient btn-primary" onclick="prueba()">
-                             <div class="flip">
-                               <div class="side">
-                                 Agregar Nuevo <span class="fa fa-edit"></span>
-                               </div>
-                               <div class="side back">
-                                 Continuar?
-
-                               </div>
-                             </div>
-                             <span class="icon"></span>
-                           </button>
-                           <?php
-                            }
-                             ?>
+                      
                           </div>
                      <div class="panel-body">
                        <div id="chart_div3"></div>
@@ -475,27 +414,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="panel">
                   
                      <div class="panel-heading"><h3>Periodos Académicos</h3>
-                       <?php
-                       include "../config/conexion.php";
-                       $result = $conexion->query("select * from tperiodos");
-                       if($result->num_rows<1){
-                         ?>
-
-                       <button type="button" class="btn-flip btn btn-gradient btn-primary" onclick="prueba()">
-                             <div class="flip">
-                               <div class="side">
-                                 Agregar Nuevo <span class="fa fa-edit"></span>
-                               </div>
-                               <div class="side back">
-                                 Continuar?
-
-                               </div>
-                             </div>
-                             <span class="icon"></span>
-                           </button>
-                           <?php
-                            }
-                             ?>
+                     
                           </div>
                      <div class="panel-body">
                        <div id="chart_div4"></div>
@@ -514,10 +433,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                </div>
                
               </div>
-              </div>
-              
-              
-            
+              </div>                                     
           <!-- end: content -->
           
 
