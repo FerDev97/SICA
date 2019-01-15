@@ -192,7 +192,7 @@ if ($result) {
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th></th>
+                          
                           
                           <th>Nombre</th>
                           
@@ -206,15 +206,7 @@ $result = $conexion->query("SELECT eid_cargo,ccargo as cargo FROM tcargos");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td >
-          <div class='col-md-2' style='margin-top:1px' >
-            <button class='btn ripple-infinite btn-round btn-warning'   onclick='modify(" . $fila->eid_cargo. ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+       
         
        
         echo "<td>" . $fila->cargo. "</td>";

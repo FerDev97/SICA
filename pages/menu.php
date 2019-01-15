@@ -169,20 +169,7 @@ if($result)
                       ?>
 
                 </li>
-                <li class="ripple">
-                  <a class="tree-toggle nav-header">
-                
-                    <span class="fa-book fa "></span> Estadísticas
-                    <span class="fa-angle-right fa right-arrow text-right"></span>
-                  </a>
-                  <ul class="nav nav-list tree">
-                    <li><a href="fusuario.php">Estadísitcas Generales</a></li>
-                    <li><a href="listaUsuariosActivos.php">Alumnos por Sexo</a></li>
-                    <li><a href="listaUsuariosInactivos.php">Aprobados y Reprobados</a></li>
-                    
-                  </ul>
-
-                </li>
+               
                 
                      
                     <li class="ripple">
