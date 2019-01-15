@@ -78,6 +78,10 @@ if($result)
         function reporte(){
           window.open("reporteInsSex.php",'_blank');
         }
+        function reporte1(){
+          id=document.getElementById("op").value;
+          window.open("reporteOP.php?id="+id, '_blank');
+        }
 
       </script>
 </head>
@@ -109,15 +113,33 @@ if($result)
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista de Alumnos</h3>
-                    
+                  <div class="panel-heading col-md-12"><h5 class="col-md-4">Opción: 
+                                  <select id="op" name="op" class="select2-A">  
+                                   <?php
+                      include '../config/conexion.php';
+                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
+                      if ($result) {
 
-                                  <a class="btn btn-outline btn-default" >
-                                      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
-                                    </a>
-                                    
-                             
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                                  </select>
+                                </h5> 
+                    <span class="col-md-6"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Estadistico por sexo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte1();" title="Estadistico por opción"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
                     </div>
+                    
+                  </div>
 
                     <div class="panel-body">
                       <div class="responsive-table">
