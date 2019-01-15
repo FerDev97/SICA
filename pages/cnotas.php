@@ -253,7 +253,7 @@ if($_SESSION["logueado"] == TRUE) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">CUADRO DE REGISTRO DE EVALUACION</h3>
+                        <h3 class="animated fadeInLeft">CUADRO DE REGISTRO DE EVALUACIÓN</h3>
                         <p class="animated fadeInDown">
                           Notas <span class="fa-angle-right fa"></span> Complejo Educativo "La Santa Familia"
                         </p>
@@ -306,7 +306,7 @@ if($_SESSION["logueado"] == TRUE) {
                                     
                                   </select>
                                 </h5> 
-                                <h5 class="col-md-2">Seccion: <br>
+                                <h5 class="col-md-2">Sección: <br>
                                     <select id="seccion" class="form-control">
                                     <option value="0" selected hidden>Seleccione</option>  
                                       <?php
@@ -344,7 +344,7 @@ if($_SESSION["logueado"] == TRUE) {
                         <tr>
                           <td colspan=2 style="text-align:center;"><strong>NOMINA DE ALUMNOS</strong></td>
                           <td colspan=5 style="text-align:center;">
-                            <strong>PERIODO ACTIVO: <?php echo $periodoActivo; ?>° </strong>
+                            <strong>PERIODO ACTIVO: <?php echo $periodoActivo; ?>° PERIODO </strong>
                             <input id="periodo" type="hidden" value="<?php echo $periodoActivo; ?>">                          
                           </td> 
                                                   
@@ -997,6 +997,65 @@ if($_SESSION["logueado"] == TRUE) {
       </button>
        <!-- fin: Menu laterla izquierdo para mobil -->
 
+       <!--MODAL-->
+       <div class="modal fade" id="modalito">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Asignación de notas</h4>
+                                      </div>
+                                      <div class="modal-body col-md-12">
+                                                <form id="asignarnotas" >
+                                                <input type="hidden" id="idMateria" name="idMateria" value="">
+                                                <input type="hidden" id="idAlumno" name="idAlumno" value="">
+                                                <input type="hidden" id="idNotas" name="idNotas" value="">
+
+                                                      <table class="table table-bordered">
+                                                          <caption><strong><p id="titulo2"></p></strong></caption>
+                                                          <thead>
+                                                            <tr><th scope="col" colspan="6"><p id="titulo1"></p></th></tr>
+                                                            <tr>
+                                                              <th scope="col" width="140" >PERIODO</th>
+                                                              <th scope="col" width="107">Nota 1: 35%</th>
+                                                              <th scope="col" width="107">Nota 2: 35%</th>
+                                                              <th scope="col" width="107">Nota 3: 30%</th>
+                                                              <th scope="col" width="107">Recuperación</th>
+                                                              <th scope="col" width="107">Promedio</th>
+                                                              
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            <tr>
+                                                              <th scope="row"><p id="periodoAc"></p></th>
+                                                              <td> <input id="n1" type="text" style="width:80px; height:30px;"> </td>
+                                                              <td><input id="n2" type="text" style="width:80px; height:30px;"></td>
+                                                              <td><input id="n3" type="text" style="width:80px; height:30px;"></td>
+                                                              <td><input id="rec" type="text" style="width:80px; height:30px;"></td>
+                                                              <td><input id="pro" type="text" style="width:80px; height:30px;" disabled></td>
+                                                            </tr>
+                                                            
+                                                        
+                          
+                                                          </tbody>
+                                                        </table>
+                                                  
+                                                    
+    
+                                                </form>
+                                      </div>
+                                      <br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                      
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button id="asignarNotas" type="button" class="btn btn-primary">Asignar notas</button>
+                                      </div>
+                                      
+                                    </div><!-- /.modal-content -->
+                                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+          <!--MODAL-->
+
 <!-- start: Javascript -->
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
@@ -1131,15 +1190,85 @@ if($_SESSION["logueado"] == TRUE) {
       $("#botonFiltrar").on("click", function(){
 
            var idMateria = $("#materia").val();
+           var periodoAct = $("#periodo").val();
 
           
-           $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria);
+           $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct);
            
+
+      });
+
+      $("#asignarNotas").on('click', function(){
+
+          var idnotas=$("#idNotas").val();
+          var idAlumno=$("#idAlumno").val();
+          var idMateria=$("#idMateria").val();
+          var nota1=$("#n1").val();
+          var nota2=$("#n2").val();
+          var nota3=$("#n3").val();
+          var rec=$("#rec").val();
+          var pro=$("#pro").val();
+          var periodoAct = $("#periodo").val();
+
+          if(nota1 == ""){
+              return false;
+          }
+          if(nota2 == ""){
+              return false;
+          }
+          if(nota3 == ""){
+            return false;
+          }   
+
+          $.ajax({
+                type: 'post',
+                url: 'asignarNotas.php',
+                data: {idnotas:idnotas, idAlumno:idAlumno, idMateria:idMateria, nota1:nota1, nota2:nota2, nota3:nota3, rec:rec, pro:pro, periodoAct:periodoAct},
+                success: function(respuesta) {
+                    if(respuesta != 0){
+
+                      $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct);
+                    
+                    }else{
+                      alert("Seleccione correctamente los campos");
+                    }           
+                                      
+                },
+                error: function(respuesta){
+                  sweetError("Error en el servidor: "+respuesta); 
+                }
+          });//fin de ajax*/      
 
       });
 
 
   });//fin de ready
+
+function asignar(idalumno,idmateria, idnotas, nota1, nota2, nota3, rec, prom, nombreAl, nombreMat){
+
+      var promedio = 0.0;
+      var periodo= $("#periodo").val();
+      $("#idAlumno").val(idalumno);
+      $("#idMateria").val(idmateria);
+      $("#idNotas").val(idnotas);
+
+      if(rec == 0 || rec ==0.00){
+          promedio = ((nota1 + nota2 + nota3)/3); 
+      }else{
+          promedio = ((nota1 + nota2 + nota3 + rec)/4);
+      }
+
+      $("#n1").val(nota1);
+      $("#n2").val(nota2);
+      $("#n3").val(nota3);
+      $("#rec").val(rec);
+      $("#pro").val(promedio);
+      $("#periodoAc").text(periodo);
+      $("#titulo1").text("MATERIA: "+nombreMat);
+      $("#titulo2").text("ALUMNO: "+nombreAl);
+
+      $("#modalito").modal();
+}
 
   
       
