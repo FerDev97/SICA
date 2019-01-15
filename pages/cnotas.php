@@ -23,6 +23,7 @@ $datosBach=array();
 $datosSeccion=array();
 $datosGrado=array();
 
+
 if($_SESSION["logueado"] == TRUE) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
@@ -173,6 +174,22 @@ if($_SESSION["logueado"] == TRUE) {
 
 
         }
+
+          //obteniendo el periodo activo
+
+          $periodoActivo;
+
+          $consulta5="SELECT
+          tperiodos.eid_periodo,
+          tperiodos.enum,
+          tperiodos.estado
+          FROM
+          tperiodos
+          WHERE tperiodos.estado = 1 ";
+          $respuesta = $conexion->query($consulta5);
+          $registro=$respuesta->fetch_row();
+          $periodoActivo = $registro[1];
+
 
 
 
@@ -327,7 +344,8 @@ if($_SESSION["logueado"] == TRUE) {
                         <tr>
                           <td colspan=2 style="text-align:center;"><strong>NOMINA DE ALUMNOS</strong></td>
                           <td colspan=5 style="text-align:center;">
-                            <strong>PERIODO ACTIVO: 1° PERIODO </strong>                          
+                            <strong>PERIODO ACTIVO: <?php echo $periodoActivo; ?>° </strong>
+                            <input id="periodo" type="hidden" value="<?php echo $periodoActivo; ?>">                          
                           </td> 
                                                   
                         </tr>
