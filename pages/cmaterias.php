@@ -139,12 +139,13 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
         }
         function reporte(){
-          id=document.getElementById("op").value;
-          window.open("reporteMateriasActivas.php?id="+id, '_blank');
+          var cont = "<?php echo $_GET['ide'];?>"; 
+       
+          window.open("reporteMateriasActivas.php?id="+cont, '_blank');
         }
         function filtrar(){
-          id=document.getElementById("op").value;
-          $("#ide").val(id);
+          ide=document.getElementById("op").value;
+          $("#ide").val(ide);
           document.form.submit();
         }
       

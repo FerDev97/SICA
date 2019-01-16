@@ -84,8 +84,9 @@ if($result)
           document.form.submit();
         }
         function reporte1(){
-          id=document.getElementById("op").value;
-          window.open("reporteOP.php?id="+id, '_blank');
+          var cont = "<?php echo $_GET['ide'];?>"; 
+        
+          window.open("reporteOP.php?id="+cont, '_blank');
         }
 
       </script>
