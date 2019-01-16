@@ -218,6 +218,7 @@ if($_SESSION["logueado"] == TRUE) {
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/select2.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -1028,26 +1029,28 @@ if($_SESSION["logueado"] == TRUE) {
                                                           <tbody>
                                                             <tr>
                                                               <th scope="row"><p id="periodoAc"></p></th>
-                                                              <td> <input id="n1" type="text" style="width:80px; height:30px;"> </td>
-                                                              <td><input id="n2" type="text" style="width:80px; height:30px;"></td>
-                                                              <td><input id="n3" type="text" style="width:80px; height:30px;"></td>
-                                                              <td><input id="rec" type="text" style="width:80px; height:30px;"></td>
+                                                              <td> <input id="n1" type="text" style="width:80px; height:30px;" onkeypress="return NumCheck(event, this)"> </td>
+                                                              <td><input id="n2" type="text" style="width:80px; height:30px;" onkeypress="return NumCheck(event, this)" ></td>
+                                                              <td><input id="n3" type="text" style="width:80px; height:30px;" onkeypress="return NumCheck(event, this)"></td>
+                                                              <td><input id="rec" type="text" style="width:80px; height:30px;" onkeypress="return NumCheck(event, this)"></td>
                                                               <td><input id="pro" type="text" style="width:80px; height:30px;" disabled></td>
                                                             </tr>
                                                             
                                                         
                           
                                                           </tbody>
+                                                          <tfoot>
+                                                            <td colspan="6"><p id="error"></p></td>
+                                                          </tfoot>
                                                         </table>
-                                                  
-                                                    
-    
+                                                      
+                                                      
                                                 </form>
                                       </div>
                                       <br><br><br><br><br><br><br><br><br><br><br><br><br>
                                       
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button id="cancelar" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                         <button id="asignarNotas" type="button" class="btn btn-primary">Asignar notas</button>
                                       </div>
                                       
@@ -1060,7 +1063,7 @@ if($_SESSION["logueado"] == TRUE) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -1202,7 +1205,7 @@ if($_SESSION["logueado"] == TRUE) {
 
           var idnotas=$("#idNotas").val();
           var idAlumno=$("#idAlumno").val();
-          var idMateria=$("#idMateria").val();
+          var idMateria=$("#materia").val();
           var nota1=$("#n1").val();
           var nota2=$("#n2").val();
           var nota3=$("#n3").val();
@@ -1218,60 +1221,373 @@ if($_SESSION["logueado"] == TRUE) {
           }
           if(nota3 == ""){
             return false;
-          }   
+          }
 
-          $.ajax({
-                type: 'post',
-                url: 'asignarNotas.php',
-                data: {idnotas:idnotas, idAlumno:idAlumno, idMateria:idMateria, nota1:nota1, nota2:nota2, nota3:nota3, rec:rec, pro:pro, periodoAct:periodoAct},
-                success: function(respuesta) {
-                    if(respuesta != 0){
 
-                      $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct);
-                    
+          swal({
+                      title: '¿Está seguro que desea realizar estos cambios?',
+                      text: "¡Se actualizaran las notas!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                
+                                $.ajax({
+                                      type: 'post',
+                                      url: 'asignarNotas.php',
+                                      data: {idnotas:idnotas, idAlumno:idAlumno, idMateria:idMateria, nota1:nota1, nota2:nota2, nota3:nota3, rec:rec, pro:pro, periodoAct:periodoAct},
+                                      success: function(respuesta) {
+                                          if(respuesta != "0"){
+                                            
+                                            $("#idAlumno").val("");
+                                            $("#idMateria").val("");
+                                            $("#idNotas").val("");
+
+                                            $("#n1").val("");
+                                            $("#n2").val("");
+                                            $("#n3").val("");
+                                            $("#rec").val("");
+                                            $("#pro").val("");
+                                            
+                                            $("#titulo1").text("");
+                                            $("#titulo2").text("");
+
+                                            $("#modalito").modal('hide');
+
+                                          $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct);
+                                            sweetGuardo("Notas actualizadas correctamente");
+                                          }else{
+                                            sweetError("Error al actualizar las notas");
+                                          }           
+                                                            
+                                      },
+                                      error: function(respuesta){
+                                        sweetError("Error en el servidor: "+respuesta); 
+                                      }
+                                });//fin de ajax*/  
+
+                              }//fin de if sweet
+                        })   
+
+              
+
+      });
+
+      $("#cancelar").on('click', function(){
+
+              $("#idAlumno").val("");
+              $("#idMateria").val("");
+              $("#idNotas").val("");
+              $("#n1").val("");
+              $("#n2").val("");
+              $("#n3").val("");
+              $("#rec").val("");
+              $("#pro").val("");
+              $("#error").text("");                          
+              $("#titulo1").text("");
+              $("#titulo2").text("");
+      });
+
+      $("#n1").keyup(function(){
+
+              var valor1 = parseFloat($("#n1").val());
+              var valor2 = parseFloat($("#n2").val());
+              var valor3 = parseFloat($("#n3").val());
+              var valor4 = parseFloat($("#rec").val());
+
+              if(valor1 !="" || valor1 == 0 || valor1 == 0.00){
+
+                  if((valor1 >= 0 || valor1 >= 0.00) && (valor1 <= 10 || valor1 <= 10.00) &&
+                  (valor2 >= 0 || valor2 >= 0.00) && (valor2 <= 10 || valor2 <= 10.00) &&
+                  (valor3 >= 0 || valor3 >= 0.00) && (valor3 <= 10 || valor3 <= 10.00) &&
+                  (valor4 >= 0 || valor4 >= 0.00) && (valor4 <= 10 || valor4 <= 10.00)){
+
+                        var promedio;
+                        if(valor4>0 || valor4 > 0.00){
+                            promedio=((valor1 + valor2 + valor3 + valor4)/4);
+                            promedio= promedio.toFixed(2);
+                            $("#pro").val(promedio);
+                            $("#asignarNotas").prop("disabled",false);
+                            $("#error").text("");
+                        }else{
+                            promedio=((valor1 + valor2 + valor3)/3);
+                            promedio= promedio.toFixed(2);
+                            $("#pro").val(promedio);
+                            $("#asignarNotas").prop("disabled",false);
+                            $("#error").text("");
+                        }
+
+                  }else{
+                        //desactivar boton de modal y mostrar mensaje
+                        $("#error").text("Formato no valido: rango de nota 0 - 10").css("color","red");
+                        $("#asignarNotas").prop("disabled",true);
+                  }
+              }else{
+                  //desactivar boton de modal
+                  $("#error").text("Campo vacio: rango de nota 0 - 10").css("color","red");
+                  $("#asignarNotas").prop("disabled",true);
+              }
+      });
+      $("#n2").keyup(function(){
+
+          var valor1 = parseFloat($("#n1").val());
+          var valor2 = parseFloat($("#n2").val());
+          var valor3 = parseFloat($("#n3").val());
+          var valor4 = parseFloat($("#rec").val());
+
+          if(valor2 !="" || valor2 == 0 || valor2 == 0.00){
+
+              if((valor1 >= 0 || valor1 >= 0.00) && (valor1 <= 10 || valor1 <= 10.00) &&
+              (valor2 >= 0 || valor2 >= 0.00) && (valor2 <= 10 || valor2 <= 10.00) &&
+              (valor3 >= 0 || valor3 >= 0.00) && (valor3 <= 10 || valor3 <= 10.00) &&
+              (valor4 >= 0 || valor4 >= 0.00) && (valor4 <= 10 || valor4 <= 10.00)){
+
+                    var promedio;
+                    if(valor4>0 || valor4 > 0.00){
+                        promedio=((valor1 + valor2 + valor3 + valor4)/4);
+                        promedio= promedio.toFixed(2);
+                        $("#pro").val(promedio);
+                        $("#asignarNotas").prop("disabled",false);
+                        $("#error").text("");
                     }else{
-                      alert("Seleccione correctamente los campos");
-                    }           
-                                      
-                },
-                error: function(respuesta){
-                  sweetError("Error en el servidor: "+respuesta); 
-                }
-          });//fin de ajax*/      
+                        promedio=((valor1 + valor2 + valor3)/3);
+                        promedio= promedio.toFixed(2);
+                        $("#pro").val(promedio);
+                        $("#asignarNotas").prop("disabled",false);
+                        $("#error").text("");
+                    }
 
+              }else{
+                    //desactivar boton de modal y mostrar mensaje
+                    $("#error").text("Formato no valido: rango de nota 0 - 10").css("color","red");
+                    $("#asignarNotas").prop("disabled",true);
+              }
+          }else{
+              //desactivar boton de modal
+              $("#error").text("Campo vacio: rango de nota 0 - 10").css("color","red");
+              $("#asignarNotas").prop("disabled",true);
+          }
+      });
+
+      $("#n3").keyup(function(){
+
+            var valor1 = parseFloat($("#n1").val());
+            var valor2 = parseFloat($("#n2").val());
+            var valor3 = parseFloat($("#n3").val());
+            var valor4 = parseFloat($("#rec").val());
+
+            if(valor3 !="" || valor3 == 0 || valor3 == 0.00){
+
+                if((valor1 >= 0 || valor1 >= 0.00) && (valor1 <= 10 || valor1 <= 10.00) &&
+                (valor2 >= 0 || valor2 >= 0.00) && (valor2 <= 10 || valor2 <= 10.00) &&
+                (valor3 >= 0 || valor3 >= 0.00) && (valor3 <= 10 || valor3 <= 10.00) &&
+                (valor4 >= 0 || valor4 >= 0.00) && (valor4 <= 10 || valor4 <= 10.00)){
+
+                      var promedio;
+                      if(valor4>0 || valor4 > 0.00){
+                          promedio=((valor1 + valor2 + valor3 + valor4)/4);
+                          promedio= promedio.toFixed(2);
+                          $("#pro").val(promedio);
+                          $("#asignarNotas").prop("disabled",false);
+                          $("#error").text("");
+                      }else{
+                          promedio=((valor1 + valor2 + valor3)/3);
+                          promedio= promedio.toFixed(2);
+                          $("#pro").val(promedio);
+                          $("#asignarNotas").prop("disabled",false);
+                          $("#error").text("");
+                      }
+
+                }else{
+                      //desactivar boton de modal y mostrar mensaje
+                      $("#error").text("Formato no valido: rango de nota 0 - 10").css("color","red");
+                      $("#asignarNotas").prop("disabled",true);
+                }
+            }else{
+                //desactivar boton de modal
+                $("#error").text("Campo vacio: rango de nota 0 - 10").css("color","red");
+                $("#asignarNotas").prop("disabled",true);
+            }
+      });
+
+      $("#rec").keyup(function(){
+
+          var valor1 = parseFloat($("#n1").val());
+          var valor2 = parseFloat($("#n2").val());
+          var valor3 = parseFloat($("#n3").val());
+          var valor4 = parseFloat($("#rec").val());
+
+          if(valor4 !="" || valor4 == 0 || valor4 == 0.00){
+
+              if((valor1 >= 0 || valor1 >= 0.00) && (valor1 <= 10 || valor1 <= 10.00) &&
+              (valor2 >= 0 || valor2 >= 0.00) && (valor2 <= 10 || valor2 <= 10.00) &&
+              (valor3 >= 0 || valor3 >= 0.00) && (valor3 <= 10 || valor3 <= 10.00) &&
+              (valor4 >= 0 || valor4 >= 0.00) && (valor4 <= 10 || valor4 <= 10.00)){
+
+                    var promedio;
+                    if(valor4>0 || valor4 > 0.00){
+                        promedio=((valor1 + valor2 + valor3 + valor4)/4);
+                        promedio= promedio.toFixed(2);
+                        $("#pro").val(promedio);
+                        $("#asignarNotas").prop("disabled",false);
+                        $("#error").text("");
+                    }else{
+                        promedio=((valor1 + valor2 + valor3)/3);
+                        promedio= promedio.toFixed(2);
+                        $("#pro").val(promedio);
+                        $("#asignarNotas").prop("disabled",false);
+                        $("#error").text("");
+                    }
+
+              }else{
+                    //desactivar boton de modal y mostrar mensaje
+                    $("#error").text("Formato no valido: rango de nota 0 - 10").css("color","red");
+                    $("#asignarNotas").prop("disabled",true);
+              }
+          }else{
+              //desactivar boton de modal
+              $("#error").text("Campo vacio: rango de nota 0 - 10").css("color","red");
+              $("#asignarNotas").prop("disabled",true);
+          }
       });
 
 
   });//fin de ready
 
-function asignar(idalumno,idmateria, idnotas, nota1, nota2, nota3, rec, prom, nombreAl, nombreMat){
+function asignar(idalumno,idmateria, idnotas, nota1, nota2, nota3, rec, prom, nombreAl,apellidoAl, nombreMat){
 
-      var promedio = 0.0;
       var periodo= $("#periodo").val();
+      var nombreCompleto= apellidoAl+", "+nombreAl;
       $("#idAlumno").val(idalumno);
       $("#idMateria").val(idmateria);
       $("#idNotas").val(idnotas);
-
-      if(rec == 0 || rec ==0.00){
-          promedio = ((nota1 + nota2 + nota3)/3); 
-      }else{
-          promedio = ((nota1 + nota2 + nota3 + rec)/4);
-      }
 
       $("#n1").val(nota1);
       $("#n2").val(nota2);
       $("#n3").val(nota3);
       $("#rec").val(rec);
-      $("#pro").val(promedio);
+      $("#pro").val(prom);
       $("#periodoAc").text(periodo);
       $("#titulo1").text("MATERIA: "+nombreMat);
-      $("#titulo2").text("ALUMNO: "+nombreAl);
+      $("#titulo2").text("ALUMNO: "+nombreCompleto);
 
       $("#modalito").modal();
 }
 
+//para validar input text con decimales
+function NumCheck(e, field) {
+  key = e.keyCode ? e.keyCode : e.which
+  // backspace
+  if (key == 8) return true
+  // 0-9
+  if (key > 47 && key < 58) {
+    if (field.value == "") return true
+    regexp = /.[0-9]{2}$/
+    return !(regexp.test(field.value))
+  }
+  // .
+  if (key == 46) {
+    if (field.value == "") return false
+    regexp = /^[0-9]+$/
+    return regexp.test(field.value)
+  }
+  // other key| llamada: onkeypress="return NumCheck(event, this)"
+  return false
+ 
+}
+/*var notas = document.getElementsByClassName("nota"); 
+
+var onNotaInput = function (event) {
+  var regexp = new RegExp("[^0-9]", "g");
+  var value = event.target.value.replace(regexp, "");
+  value = parseInt(value) / 10;
+  if (value >= event.target.min && value <= event.target.max) {
+    event.target.dataset.value = value;
+  } else {
+    value = parseFloat(event.target.dataset.value);
+  }
+  if (isNaN(value)) {
+    value = 0;
+  }
+
+  event.target.value = value.toLocaleString(undefined, { minimumFractionDigits: 1 });
+};
+
+[].forEach.call(notas, function (nota) {
+  nota.addEventListener("input", onNotaInput);
+});*/
+//para validar input text con decimales
   
-      
+  //SWEET ALERTS
+  function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡No sera posible revertir esta acción!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                swal(
+                                  '¡Exito!',
+                                  'La accion ha sido completada.',
+                                  'success'
+                                )
+                              }
+                        })
+                      }
+
+
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
+
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
+
+                  //SWEET ALERTS     
 
 </script>
 <!-- end: Javascript -->

@@ -11,7 +11,7 @@ if(empty($_REQUEST)){
 
     $idMateria=$_REQUEST["idMateria"];
     $periodoActivo = $_REQUEST["periodo"];
-    $aux;
+    $aux="";
 
     $consulta="SELECT
     talumno.eid_alumno as idAlumno,
@@ -71,7 +71,7 @@ if(empty($_REQUEST)){
                     $aux= "<button type=\"button\" class=\"btn btn-info btn-sm btn-round\" ";
                     $aux.="onclick=\"asignar('".$fila->idAlumno."','".$fila->idMateria."','".$fila->idnotas."',
                     '".$fila->dnota1p1."','".$fila->dnota2p1."','".$fila->dnota3p1."',
-                    '".$fila->drecuperacionp1."','".$fila->dpromediop1."','".$fila->nombre."',
+                    '".$fila->drecuperacionp1."','".$fila->dpromediop1."','".$fila->nombre."','".$fila->apellido."',
                     '".$fila->nombreMat."')\";>";
                     $aux.="Asignar notas</button>";
 
@@ -86,7 +86,7 @@ if(empty($_REQUEST)){
                     $aux= "<button type=\"button\" class=\"btn btn-info btn-sm btn-round\" ";
                     $aux.="onclick=\"asignar('".$fila->idAlumno."','".$fila->idMateria."','".$fila->idnotas."',
                     '".$fila->dnota1p2."','".$fila->dnota2p2."','".$fila->dnota3p2."',
-                    '".$fila->drecuperacionp2."','".$fila->dpromediop2."','".$fila->nombre."',
+                    '".$fila->drecuperacionp2."','".$fila->dpromediop2."','".$fila->nombre."','".$fila->apellido."',
                     '".$fila->nombreMat."')\";>";
                     $aux.="Asignar notas</button>";
 
@@ -101,7 +101,7 @@ if(empty($_REQUEST)){
                     $aux= "<button type=\"button\" class=\"btn btn-info btn-sm btn-round\" ";
                     $aux.="onclick=\"asignar('".$fila->idAlumno."','".$fila->idMateria."','".$fila->idnotas."',
                     '".$fila->dnota1p3."','".$fila->dnota2p3."','".$fila->dnota3p3."',
-                    '".$fila->drecuperacionp3."','".$fila->dpromediop3."','".$fila->nombre."',
+                    '".$fila->drecuperacionp3."','".$fila->dpromediop3."','".$fila->nombre."','".$fila->apellido."',
                     '".$fila->nombreMat."')\";>";
                     $aux.="Asignar notas</button>";
 
@@ -116,7 +116,7 @@ if(empty($_REQUEST)){
                     $aux= "<button type=\"button\" class=\"btn btn-info btn-sm btn-round\" ";
                     $aux.="onclick=\"asignar('".$fila->idAlumno."','".$fila->idMateria."','".$fila->idnotas."',
                     '".$fila->dnota1p4."','".$fila->dnota2p4."','".$fila->dnota3p4."',
-                    '".$fila->drecuperacionp4."','".$fila->dpromediop4."','".$fila->nombre."',
+                    '".$fila->drecuperacionp4."','".$fila->dpromediop4."','".$fila->nombre."','".$fila->apellido."',
                     '".$fila->nombreMat."')\";>";
                     $aux.="Asignar notas</button>";
             }
