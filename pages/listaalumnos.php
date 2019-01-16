@@ -78,6 +78,11 @@ if($result)
         function reporte(){
           window.open("reporteInsSex.php",'_blank');
         }
+        function filtrar(){
+          id=document.getElementById("op").value;
+          $("#ide").val(id);
+          document.form.submit();
+        }
 
       </script>
 </head>
@@ -102,6 +107,11 @@ if($result)
                     </div>
                   </div>
               </div>
+              <form id="form" name="form" action="" method="GET">
+<div class="input-group " style="padding-bottom:20px;">
+  <input id="ide" type="hidden" class="form-control" name="ide" placeholder="En que año estudio el grado anterior" value="<?php echo $idnota;?>">
+  </div>
+  </form>
               <form id="turismo" name="turismo" action="" method="post">
               <input type="hidden" name="bandera" id="bandera">
               <input type="hidden" name="baccion" id="baccion">
@@ -110,11 +120,33 @@ if($result)
                 <div class="col-md-12">
                   <div class="panel">
                     <div class="panel-heading"><h3>Lista de Alumnos</h3>
-                    
+                    <h5 class="col-md-4">Filtrado por Opción: 
+                                  <select id="op" name="op" class="select2-A" onchange="filtrar()">  
+                                   <?php
+                      include '../config/conexion.php';
+                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
+                      if ($result) {
+                        echo "<option value='".$fila->id."'>Seleccione</option>";
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->grado." ° ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                                  </select>
+                                </h5> 
+                                <span class="col-md-6"></span>
 
-                                  <a class="btn btn-outline btn-default" >
-                                      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
-                                    </a>
+
+  
+
+  <a class="btn btn-outline btn-default" >
+      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+    </a>
+    
+  
+
                                     
                              
                     </div>
@@ -136,7 +168,12 @@ if($result)
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."'  order by codigo");
+if(!isset($_GET['ide'])){
+$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."' order by codigo");
+}if(isset($_GET['ide'])){
+  $ide=$_GET['ide'];
+  $result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."' and talumno.cbachillerato='".$ide."'  order by codigo");
+}
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
