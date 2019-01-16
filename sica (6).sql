@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-01-2019 a las 21:47:57
+-- Tiempo de generación: 16-01-2019 a las 21:58:41
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -83,18 +83,6 @@ INSERT INTO `talumno` (`eid_alumno`, `ccodigo`, `cnie`, `cnombre`, `capellido`, 
 (4, '0004', '3447398', 'Jessica Mariela', 'Alfaro Palacios', 1, 'casa #24 San Bartolo', 'San Miguel', '2000-05-04', 'Trans.Propio', 5, '2017', 'nada', 'nada', '600', 1, 1, 1, 1, 0, 0, 0, 'hkjhkhk', '', '32398789-7', '87987987', '', '78789787', 'hjkhkj', 'Matrimonio Religioso', 'PapÃ¡', '', '', '', '', '', '', '', 8, 1, 1),
 (5, '', '7979797', 'Maria Auxiliadora', 'Alfaro Martinez', 1, 'Colonia Soyla', 'San', '2003-04-02', 'A', 5, '2017', 'nada', 'nada', '600', 0, 0, 1, 0, 1, 0, 0, 'hkhkh', '', '77979797-9', '79879879', '', '', 'hkjhkjh', 'AcompaÃ±ados', 'MamÃ¡', '', '', '', '', '', '', '', 7, 1, 1),
 (6, '0006', '3248784', 'Jessica Marianela', 'Alvarex Abarca', 0, 'sadjkasjd', 'Santa Ana', '2005-04-02', 'A pie', 5, '2017', 'sjdkls', 'nada', '600', 1, 1, 1, 0, 0, 0, 0, 'khkjhkjhkj', '', '79879879-8', '79798798', '', '', 'hkjhjkhkj', 'Civil', 'MamÃ¡ y PapÃ¡', '', '', '', '', '', '', '', 7, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `talumno_responsable`
---
-
-CREATE TABLE `talumno_responsable` (
-  `id_ar` int(11) NOT NULL,
-  `efk_alumno` int(11) NOT NULL,
-  `efk_responsable` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -373,6 +361,16 @@ INSERT INTO `thorarios` (`eid_horario`, `cdia`, `chora`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tinscribir`
+--
+
+CREATE TABLE `tinscribir` (
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tmaterias`
 --
 
@@ -572,34 +570,6 @@ INSERT INTO `tpersonal_materia` (`eid_pm`, `efk_idpersonal`, `efk_idmateria`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tresponsable`
---
-
-CREATE TABLE `tresponsable` (
-  `eid_responsable` int(11) NOT NULL,
-  `cnombrep` varchar(50) NOT NULL,
-  `cduip` varchar(10) NOT NULL,
-  `clugar_trabajop` varchar(100) NOT NULL,
-  `ctel_casap` varchar(8) NOT NULL,
-  `ctel_trabajop` varchar(8) NOT NULL,
-  `ccelularp` varchar(8) NOT NULL,
-  `cdirecccionp` varchar(200) NOT NULL,
-  `cestado_civil` varchar(50) NOT NULL,
-  `cconvive` varchar(50) NOT NULL,
-  `cnombrem` varchar(50) NOT NULL,
-  `clugar_trabajo` varchar(50) NOT NULL,
-  `cprofesion` varchar(50) NOT NULL,
-  `cduim` varchar(10) NOT NULL,
-  `ctel_casam` varchar(8) NOT NULL,
-  `ctel_trabajom` varchar(8) NOT NULL,
-  `ccelularm` varchar(8) NOT NULL,
-  `imiembros` int(11) NOT NULL,
-  `ireligion` int(11) NOT NULL COMMENT '1=catolico 0=otra'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tsecciones`
 --
 
@@ -674,14 +644,6 @@ INSERT INTO `tusuarios` (`eid_usuario`, `cusuario`, `cpass`, `etipo`, `efk_perso
 ALTER TABLE `talumno`
   ADD PRIMARY KEY (`eid_alumno`),
   ADD KEY `fk_opcion` (`cbachillerato`) USING BTREE;
-
---
--- Indices de la tabla `talumno_responsable`
---
-ALTER TABLE `talumno_responsable`
-  ADD PRIMARY KEY (`id_ar`),
-  ADD KEY `fkalumnos` (`efk_alumno`),
-  ADD KEY `fkresponsable` (`efk_responsable`);
 
 --
 -- Indices de la tabla `talum_mat_not`
@@ -783,12 +745,6 @@ ALTER TABLE `tpersonal_materia`
   ADD KEY `fk_materia` (`efk_idmateria`);
 
 --
--- Indices de la tabla `tresponsable`
---
-ALTER TABLE `tresponsable`
-  ADD PRIMARY KEY (`eid_responsable`);
-
---
 -- Indices de la tabla `tsecciones`
 --
 ALTER TABLE `tsecciones`
@@ -816,11 +772,6 @@ ALTER TABLE `tusuarios`
 --
 ALTER TABLE `talumno`
   MODIFY `eid_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT de la tabla `talumno_responsable`
---
-ALTER TABLE `talumno_responsable`
-  MODIFY `id_ar` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `talum_mat_not`
 --
@@ -887,11 +838,6 @@ ALTER TABLE `tpersonal`
 ALTER TABLE `tpersonal_materia`
   MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT de la tabla `tresponsable`
---
-ALTER TABLE `tresponsable`
-  MODIFY `eid_responsable` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `tsecciones`
 --
 ALTER TABLE `tsecciones`
@@ -915,13 +861,6 @@ ALTER TABLE `tusuarios`
 --
 ALTER TABLE `talumno`
   ADD CONSTRAINT `fkop` FOREIGN KEY (`cbachillerato`) REFERENCES `topciones` (`eid_opcion`);
-
---
--- Filtros para la tabla `talumno_responsable`
---
-ALTER TABLE `talumno_responsable`
-  ADD CONSTRAINT `fkalumnos` FOREIGN KEY (`efk_alumno`) REFERENCES `talumno` (`eid_alumno`),
-  ADD CONSTRAINT `fkresponsable` FOREIGN KEY (`efk_responsable`) REFERENCES `tresponsable` (`eid_responsable`);
 
 --
 -- Filtros para la tabla `talum_mat_not`
