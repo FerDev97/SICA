@@ -19,6 +19,7 @@ if($result)
 {
   while ($fila=$result->fetch_object()) {
     $anioActivo=$fila->eid_anio;
+    $anio=$fila->canio;
   
   }
 }
@@ -128,6 +129,8 @@ function go(){
 }
     function verificarCamposObligatoriosPersonales(){
        //alert(document.getElementById("nombrea").value);
+       var cont = "<?php echo $anio;?>"; 
+   
       if(document.getElementById("nombrea").value==""){
         sweetError("Cuidado.! El Nombre es obligatorio");
         return 0;
@@ -153,7 +156,10 @@ function go(){
         sweetError("Cuidado.! La opción de Bachillerato es Obligatoria");
         return 0;
       }if(document.getElementById("anteriora").value==""){
-        sweetError("Cuidado.! El año anterior cursado es obligatorio");
+        sweetError("Cuidado.! El campo año anterior es obligatorio");
+        return 0;
+      }if(document.getElementById("anteriora").value>=cont || document.getElementById("anteriora").value<2000){
+        sweetError("Cuidado.! ¿ Estas seguro del año anterior cursado?");
         return 0;
       }if(document.getElementById("distanciaa").value==""){
         sweetError("Cuidado.! La distancias es obligatoria");
@@ -184,20 +190,14 @@ function go(){
     }
     function verificarCamposObligatoriosResponsables(){
        
-      if(document.getElementById("nombrep").value==""){
-        sweetError("Cuidado.! Nombre del Padre es obligatorio");
+      if(document.getElementById("nombrep").value=="" && document.getElementById("nombrem").value==""){
+        sweetError("Cuidado.! Es obligatorio el registro de almenos un encargado");
         return 0;
-      }if(document.getElementById("duip").value==""){
-        sweetError("Cuidado.! El DUI del Padre es obligatorio");
-        return 0;
-      }if(document.getElementById("duim").value==""){
-        sweetError("Cuidado.! El DUI de la Madre es obligatorio");
+      }if(document.getElementById("duip").value=="" && document.getElementById("duim").value==""){
+        sweetError("Cuidado.! Es necesario el registro del DUI de almenos un encargado");
         return 0;
       }
-      if(document.getElementById("nombrem").value==""){
-        sweetError("Cuidado.! Nombre de la Madre es obligatorio");
-        return 0;
-      }if(document.getElementById("direccionp").value==""){
+     if(document.getElementById("direccionp").value==""){
         sweetError("Cuidado.! La direccion es obligatoria");
         return 0;
       }if(document.getElementById("estadop").value=="Seleccione"){

@@ -9,6 +9,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 }else {
   header("Location:inicio.php");
 }
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1 ");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+    $anio=$fila->canio;
+  
+  }
+}
 ?>
 <!DOCTYPE html>
 <?php
@@ -31,7 +41,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Materias</title>
+  <title>Agregar Nueva Materia | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -174,7 +184,7 @@ function sweetError(str){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Materias</h3>
+                         <h3 class="animated fadeInLeft">Agregar Nueva Materia</h3>
                         <p class="animated fadeInDown">
                           Materia <span class="fa-angle-right fa"></span>Datos de la materia.
                         </p>
@@ -566,7 +576,7 @@ if ($bandera == "add") {
     if($result2->num_rows == 0){
 
 
-       $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
+       $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1','" . $anioActivo . "')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.

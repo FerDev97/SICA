@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SICA-Bitacora</title>
+  <title>Bitácora  | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -145,7 +145,7 @@ function sweetConfirm(){
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Bitacora</h3>
+                        <h3 class="animated fadeInLeft">Bitácora</h3>
                         <p class="animated fadeInDown">
                           tablas <span class="fa-angle-right fa"></span>Tabla
                         </p>
@@ -159,19 +159,56 @@ function sweetConfirm(){
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Registro</h3></div>
+                    <div class="panel-heading"><h3>Registro de Bitácora</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <label for="" style="font-size:15px;">Selecciones opcion de filtrado</label>
                       <form class="form-inline" method="get">
 				              <div class="form-group">
+                      <div class="col-md-3">
 					                    <select name="filter" class="form-control" onchange="form.submit()">
-					                    	<option value="0">Filtros de datos de empleados</option>
+					                    	<option value="0">Filtros</option>
 						                    <?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL);  ?>
 					                    	<option value="1" <?php if($filter == 'Tetap'){ echo 'selected'; } ?>>Usuario</option>
 						                    <option value="2" <?php if($filter == 'Kontrak'){ echo 'selected'; } ?>>Fecha</option>
                                             <option value="3" <?php if($filter == 'Outsourcing'){ echo 'selected'; } ?>>Tipo de Usuario</option>
 					                    </select>
+                              </div>
+                              <div class="col-md-3">
+					                    <select name="filter" class="form-control" onchange="form.submit()">
+					                    	<option value="0">Usuarios</option>
+						                    <?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL);  ?>
+					                    	<option value="1" <?php if($filter == 'Tetap'){ echo 'selected'; } ?>>Kevin</option>
+						                    <option value="2" <?php if($filter == 'Kontrak'){ echo 'selected'; } ?>>Alex</option>
+                                            <option value="3" <?php if($filter == 'Outsourcing'){ echo 'selected'; } ?>>Jessica</option>
+					                    </select>
+                              </div>
+                             
+                              <div class="col-md-3">
+                              
+                              <div class="input-group ">
+                             
+                                 <input id="fecha" type="date" class="form-control" name="fecha" min="1950-01-01" max="2005-12-31">
+    
+                               </div>
+                               </div>
+                               <div  class="col-md-1"id="botonFiltrar" > 
+                                  
+                                <a class="btn btn-outline btn-default">
+                                      <i class="fa fa-search fa-lg"></i><br>Filtrar
+                                    </a>
+                                 
+                                </div>
+                                <div class="col-md-2">
+                                  
+
+                                  <a class="btn btn-outline btn-default" >
+                                      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                                    </a>
+                                    
+                                  
+                               </div>
+                               <br><br>
 			                    	</div>
 		                    	</form>
                               <BR></BR>

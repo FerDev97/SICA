@@ -31,7 +31,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Agregar nuevo Personal | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -218,7 +218,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Personal</h3>
+                         <h3 class="animated fadeInLeft"> Agregar nuevo Personal</h3>
                         <p class="animated fadeInDown">
                           Personal <span class="fa-angle-right fa"></span>Datos del Personal.
                         </p>

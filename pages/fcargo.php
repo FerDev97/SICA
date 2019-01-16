@@ -34,7 +34,7 @@ if ($result) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cargo</title>
+  <title>Cargos | SICA </title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
   <!-- plugins -->
@@ -132,7 +132,7 @@ if ($result) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Cargo</h3>
+                        <h3 class="animated fadeInLeft">Cargos</h3>
                         <p class="animated fadeInDown">
                           Cargos <span class="fa-angle-right fa"></span> Datos del Cargo.
                         </p>
@@ -147,7 +147,7 @@ if ($result) {
               <div class="col-md-12">
                   <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario Personal.</h4>
+                      <h4>Formulario Cargos.</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -186,13 +186,13 @@ if ($result) {
                 <div class="col-md-7">
                   <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista De Cargo</h3></div>
+                    <div class="panel-heading"><h3>Lista de Cargos</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th></th>
+                          
                           
                           <th>Nombre</th>
                           
@@ -206,15 +206,7 @@ $result = $conexion->query("SELECT eid_cargo,ccargo as cargo FROM tcargos");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-        echo "<td >
-          <div class='col-md-2' style='margin-top:1px' >
-            <button class='btn ripple-infinite btn-round btn-warning'   onclick='modify(" . $fila->eid_cargo. ")';>
-            <div>
-              <span>Editar</span>
-            </div>
-            </button>
-            </div>
-        </td>";
+       
         
        
         echo "<td>" . $fila->cargo. "</td>";

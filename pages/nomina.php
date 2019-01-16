@@ -28,7 +28,7 @@ if($result)
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alumnos Inscritos | SICA</title>
+  <title>Nomina de Alumnos | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -75,9 +75,7 @@ if($result)
           }
 
         }
-        function reporte(){
-          window.open("reporteInsSex.php",'_blank');
-        }
+        
         function filtrar(){
           id=document.getElementById("op").value;
           $("#ide").val(id);
@@ -86,7 +84,7 @@ if($result)
         function reporte1(){
           var cont = "<?php echo $_GET['ide'];?>"; 
         
-          window.open("reporteOP.php?id="+cont, '_blank');
+          window.open("reporteNo.php?id="+cont, '_blank');
         }
 
       </script>
@@ -105,7 +103,7 @@ if($result)
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista de Alumnos Inscritos</h3>
+                        <h3 class="animated fadeInLeft">Nomina de Alumnos Inscritos</h3>
                         <p class="animated fadeInDown">
                           Tabla <span class="fa-angle-right fa"></span> Tabla de Datos
                         </p>
@@ -124,7 +122,7 @@ if($result)
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista de Alumnos</h3>
+                    <div class="panel-heading"><h3>Nomina de Alumnos</h3>
                     <h5 class="col-md-4">Filtrado por Opción: 
                                   <select id="op" name="op" class="select2-A" onchange="filtrar()">  
                                    <?php
@@ -143,11 +141,9 @@ if($result)
                                 </h5> 
                                 <span class="col-md-6"></span>
                     <div class="col-md-2">
+                    
                     <a class="btn btn-outline btn-default" >
-                    <span onclick="reporte();" title="Estadistico por sexo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
-                    </a>
-                    <a class="btn btn-outline btn-default" >
-                    <span onclick="reporte1();" title="Estadistico por opción"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    <span onclick="reporte1();" title="Nomina por opción"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
                     </a>
                     </div>
     
@@ -190,7 +186,7 @@ if ($result) {
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")';>
             <div>
-              <span>Modificar</span>
+              <span>Editar</span>
             </div>
             </button>
             </div>
@@ -200,7 +196,7 @@ if ($result) {
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")'; disabled>
             <div>
-              <span>Modificar</span>
+              <span>Editar</span>
             </div>
             </button>
             </div>

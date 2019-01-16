@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Materias|SICA</title>
+  <title>Lista Materias|SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -139,8 +139,14 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
         }
         function reporte(){
-          id=document.getElementById("op").value;
-          window.open("reporteMateriasActivas.php?id="+id, '_blank');
+          var cont = "<?php echo $_GET['ide'];?>"; 
+       
+          window.open("reporteMateriasActivas.php?id="+cont, '_blank');
+        }
+        function filtrar(){
+          ide=document.getElementById("op").value;
+          $("#ide").val(ide);
+          document.form.submit();
         }
       
       </script>
@@ -149,9 +155,15 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 <body id="mimin" class="dashboard">
 <form id="turismo" name="turismo" action="" method="post">
 <input type="hidden" name="bandera" id="bandera">
-              <input type="hidden" name="baccion" id="baccion">
+<input type="hidden" name="baccion" id="baccion">
+
 
 </form>
+<form id="form" name="form" action="" method="GET">
+<div class="input-group " style="padding-bottom:20px;">
+  <input id="ide" type="hidden" class="form-control" name="ide" placeholder="En que año estudio el grado anterior" value="<?php echo $idnota;?>">
+  </div>
+  </form>
       <!-- comienzo: Header -->
         <?php
         include "header.php";
@@ -179,17 +191,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                 <div class="col-md-12">
                   <div class="panel">
                     <div class="panel-heading col-md-12">
-                       
+                    
                          
-                             <h5 class="col-md-4">Opción: 
-                                  <select id="op" name="op" class="select2-A">  
+                             <h5 class="col-md-4">Filtrado por Opción: 
+                                  <select id="op" name="op" class="select2-A" onchange="filtrar()">  
                                    <?php
                       include '../config/conexion.php';
                       $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
                       if ($result) {
-
+                        echo "<option value='".$fila->id."'>Seleccione</option>";
                         while ($fila = $result->fetch_object()) {
-                          echo "<option value='".$fila->id."'>".$fila->grado." anio ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                          echo "<option value='".$fila->id."'>".$fila->grado." ° ".$fila->nombre." seccion ".$fila->seccion."</option>";
                          
                         
                            }
@@ -197,7 +209,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                        ?>
                                   </select>
                                 </h5> 
-                                
+                              
                                 <span class="col-md-6"></span>
 
                                 <div class="col-md-2">
@@ -218,17 +230,24 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>CODIGO</th>
-                          <th>NOMBRE</th>
-                          <th>DOCENTE</th>
-                          <th>ESTADO</th>
-                          <th>ACCIONES</th>                         
+                          <th>Codigo</th>
+                          <th>Nombre</th>
+                          <th>Docente</th>
+                          <th>Estado</th>
+                          <th>Acciones</th>                         
                         </tr>
                       </thead>
                       <tbody>
                      <?php
                       include "../config/conexion.php";
-                      $result = $conexion->query("select m.eid_materia as id, m.cnombre as materia,m.estado as estado, p.cnombre as docente FROM tmaterias as m, tpersonal as p,tpersonal_materia as pm WHERE p.eid_personal=pm.efk_idpersonal and m.eid_materia=pm.efk_idmateria");
+                      if(!isset($_GET['ide'])){
+                        $result = $conexion->query("select m.eid_materia as id, m.cnombre as materia,m.estado as estado, p.cnombre as docente,p.capellido as apellido FROM tmaterias as m, tpersonal as p,tpersonal_materia as pm WHERE p.eid_personal=pm.efk_idpersonal and m.eid_materia=pm.efk_idmateria");
+                      }if(isset($_GET['ide'])){
+                        $ide=$_GET['ide'];
+                        $result = $conexion->query("select m.ccodigo as codigo,. m.eid_materia as id, m.cnombre as materia,m.estado as estado,m.efk_idopcion as op,p.cnombre as docente, h.cdia as dia,h.chora as hora FROM tmaterias as m, tpersonal as p,tpersonal_materia as pm,thorarios as h WHERE p.eid_personal=pm.efk_idpersonal and m.eid_materia=pm.efk_idmateria and h.eid_horario=m.efk_idhorario and m.efk_idopcion=".$ide);
+                      }
+
+                     
                       if ($result) {
                           while ($fila = $result->fetch_object()) {
                             echo "<tr>";
@@ -242,7 +261,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                                </div>
                               </td>";
                              echo "<td>" . $fila->materia . "</td>";
-                             echo "<td>" . $fila->docente . "</td>";
+                             echo "<td>" . $fila->docente . "   " . $fila->apellido . "</td>";
        
                                if ($fila->estado==1) {
                               echo "<td>Activo</td>";
@@ -267,6 +286,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                                    
                       </tbody>
                         </table>
+                       
                       </div>
                   </div>
                 </div>
