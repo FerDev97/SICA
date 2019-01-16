@@ -178,7 +178,6 @@ function sweetConfirm(){
                         </tr>
                       </thead>
                       <tbody class="tabla_ajax">
-
                       <?php include('tablaOpcComIna.php') ?>
                       </tbody>
                         </table>
