@@ -54,7 +54,7 @@ if($result)
                       <?php 
                       }
                       ?>
-                      <li><a href="listacliente.php">Estadisticas</a></li>
+                      <li><a href="graficas.php">Estadisticas</a></li>
                       
                   </ul>
                 </li>

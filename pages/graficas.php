@@ -238,7 +238,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
+        var options = {'title':'Alumnos inscritos por opción.',
                        'width':500,
                        'is3D':true,
                        'height':300};
@@ -491,7 +491,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="col-md-12">
                    <div class="panel">
                   
-                     <div class="panel-heading"><h3>Periodos Académicos</h3>
+                     <div class="panel-heading"><h3>Alumnos inscritos por opción.</h3>
                      
                           </div>
                      <div class="panel-body">
