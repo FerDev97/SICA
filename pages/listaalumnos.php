@@ -190,7 +190,7 @@ if ($result) {
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")';>
             <div>
-              <span>Editar</span>
+              <span>Modificar</span>
             </div>
             </button>
             </div>
@@ -200,7 +200,7 @@ if ($result) {
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")'; disabled>
             <div>
-              <span>Editar</span>
+              <span>Modificar</span>
             </div>
             </button>
             </div>

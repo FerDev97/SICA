@@ -66,9 +66,19 @@ if ($result) {
 <script type="text/javascript">
      
       //SWEET ALERTS
-      function sweetConfirm(str){
+      if (op==1) {
+            sweetConfirm2(id);
+           
+          
+          }else{
+            sweetConfirm(id);
+           
+       
+          }
+        }
+        function sweetConfirm(id){
         swal({
-  title: ''+str,
+  title: '¿Está seguro que desea activar a esta persona?',
   text: "¡No sera posible revertir esta acción!",
   type: 'warning',
   showCancelButton: true,
@@ -78,12 +88,31 @@ if ($result) {
   cancelButtonText:'Cancelar',
 }).then((result) => {
   if (result.value) {
-    swal(
-      '¡Exito!',
-      'La accion ha sido completada.',
-      'success'
-    )
-    return true;
+    
+     document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+  }
+})
+        }
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar a esta persona?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+      document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+
+            document.turismo.submit();
+
   }
 })
         }
