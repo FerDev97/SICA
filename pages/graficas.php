@@ -21,12 +21,30 @@ if(empty($anio))
 
 
 $hoy = getdate();
+$anio=$hoy['year'];
 $anioMayor=$hoy['year']-18;
 $anioMenor=$hoy['year']-61;
 $mes=sprintf("%02s",$hoy['mon']);
 $dia=sprintf("%02s",$hoy['mday']);
 $fechamax=$anioMayor."-".$mes."-".$dia;
 $fechamin=$anioMenor."-".$mes."-".$dia;
+// CONSULTA PARA GRAFICA POR SEXO
+ include '../config/conexion.php';
+   $total=0;
+   $masculino=0;
+   $femenino=0;
+                      $result = $conexion->query("select sexo, count(sexo) as total from talumno group by sexo having count(sexo)>1");
+                      if ($result) {
+                          while ($fila = $result->fetch_object()) {
+                              if($fila->sexo==0){
+                                $masculino=$fila->total;
+
+                              }else{
+                                $femenino=$fila->total;
+                              } 
+                          }
+                        }
+//Alumnos por edad.
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +76,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   <link href="../asset/css/style.css" rel="stylesheet">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-
+        // var masculino = <?php echo $masculino; ?>;
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
@@ -76,20 +94,18 @@ error_reporting(E_ALL & ~E_NOTICE);
       function drawChart() {
 
         // Create the data table.
+        
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          ['Masculino', <?php echo $masculino; ?>],
+          ['Femenino', <?php echo $femenino; ?>],
         ]);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
+        var options = {'title':'Alumnos Inscritos Por Sexo',
+                       'width':500,
                        'is3D':true,
                        'height':300};
 
@@ -97,24 +113,37 @@ error_reporting(E_ALL & ~E_NOTICE);
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+     
       function drawChart2() {
-
+       
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+             <?php 
+        include '../config/conexion.php';
+        $total=0;
+        $masculino=0;
+        $femenino=0;
+                      $result = $conexion->query("SELECT year(ffecha_nac) as anio, count(YEAR(ffecha_nac)) as cantidad FROM `talumno` GROUP BY year(ffecha_nac)");
+                      if ($result) {
+                          while ($fila = $result->fetch_object()) {
+                              $edad=$anio-($fila->anio);
+                              echo "['".$edad." años.', ".$fila->cantidad."],";
+                          }
+                        }
+//Alumnos por edad.
+
+        
+        ?>
+      
         ]);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
+        var options = {'title':'Alumnos inscritos por edad.',
                         'is3D':true,
-                       'width':400,
+                       'width':500,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
@@ -128,16 +157,32 @@ error_reporting(E_ALL & ~E_NOTICE);
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+           <?php 
+        include '../config/conexion.php';
+        $total=0;
+        $masculino=0;
+        $femenino=0;
+                      $result = $conexion->query("SELECT irepite as repite, count(ffecha_nac) as cantidad FROM `talumno` GROUP BY irepite");
+                      if ($result) {
+                          while ($fila = $result->fetch_object()) {
+                              if($fila->repite==0){
+                                echo "['No repite.', ".$fila->cantidad."],";
+                              }else{
+                                echo "['Si repite.', ".$fila->cantidad."],";
+                              }
+                              
+                          }
+                        }
+//Alumnos por edad.
+
+        
+        ?>
+      
         ]);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
+        var options = {'title':'Alumnos que repiten año.',
+                       'width':500,
                        'is3D':true,
                        'height':300};
 
@@ -152,16 +197,49 @@ error_reporting(E_ALL & ~E_NOTICE);
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+    
+          <?php 
+        include '../config/conexion.php';
+        $total=0;
+        $masculino=0;
+        $femenino=0;
+                      $result = $conexion->query("SELECT cbachillerato as op, count(cnombre) as cantidad FROM talumno GROUP BY cbachillerato");
+                      if ($result) {
+                          while ($fila = $result->fetch_object()) {
+
+                             
+                      $result2 = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo and op.eid_opcion=".$fila->op);
+                      if ($result2) {
+
+                        while ($fila2 = $result2->fetch_object()) {
+                         
+                             $op=$fila2->grado." anio ".$fila2->nombre." seccion ".$fila2->seccion;
+                             echo "['".$op."', ".$fila->cantidad."],";
+                           }
+                      }else{
+                              echo "['Error',0],";
+                           }
+
+
+
+
+
+                               
+                              
+                              
+                          }
+                        }
+//Alumnos por edad.
+
+        
+        ?>
+      
         ]);
+
 
         // Set chart options
         var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
+                       'width':500,
                        'is3D':true,
                        'height':300};
 
@@ -368,7 +446,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="col-md-12">
                    <div class="panel">
                   
-                     <div class="panel-heading"><h3>Periodos Académicos</h3>
+                     <div class="panel-heading"><h3>Alumnos inscritos por sexo.</h3>
                           </div>
                      <div class="panel-body">
                        <div id="chart_div"></div>
@@ -380,7 +458,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="col-md-12">
                    <div class="panel">
                   
-                     <div class="panel-heading"><h3>Periodos Académicos</h3>
+                     <div class="panel-heading"><h3>Alumnos inscritos por edad.</h3>
                       
                           </div>
                      <div class="panel-body">
@@ -400,7 +478,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                    <div class="col-md-12">
                    <div class="panel">
                   
-                     <div class="panel-heading"><h3>Periodos Académicos</h3>
+                     <div class="panel-heading"><h3>Alumnos que repiten año.</h3>
                       
                           </div>
                      <div class="panel-body">
