@@ -83,6 +83,10 @@ if($result)
           $("#ide").val(id);
           document.form.submit();
         }
+        function reporte1(){
+          id=document.getElementById("op").value;
+          window.open("reporteOP.php?id="+id, '_blank');
+        }
 
       </script>
 </head>
@@ -137,19 +141,22 @@ if($result)
                                   </select>
                                 </h5> 
                                 <span class="col-md-6"></span>
-
-
-  
-
-  <a class="btn btn-outline btn-default" >
-      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
-    </a>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Estadistico por sexo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte1();" title="Estadistico por opción"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    </div>
     
   
-
+<br> <br> <br>  <br>
                                     
                              
-                    </div>
+                 
+                    
+                  </div>
 
                     <div class="panel-body">
                       <div class="responsive-table">
@@ -204,7 +211,7 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE topciones.eestado=1 and topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
+        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE  topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
 if ($result2) {
     while ($fila2 = $result2->fetch_object()) {
       echo "<td>" . $fila2->cgrado ." ° ".$fila2->cnombe." ' ".$fila2->cseccion." '</td>";
