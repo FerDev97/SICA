@@ -84,7 +84,7 @@ if($result)
         function reporte1(){
           var cont = "<?php echo $_GET['ide'];?>"; 
         
-          window.open("reporteOP.php?id="+cont, '_blank');
+          window.open("reporteNo.php?id="+cont, '_blank');
         }
 
       </script>
