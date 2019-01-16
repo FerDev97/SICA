@@ -254,11 +254,7 @@ if($_SESSION["logueado"] == TRUE) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-<<<<<<< HEAD
-                        <h3 class="animated fadeInLeft">CUADRO DE REGISTRO DE EVALUACIÓN</h3>
-=======
                         <h3 class="animated fadeInLeft">Registro de Notas</h3>
->>>>>>> 85831894c1965085f54930efacc3fcf38044141a
                         <p class="animated fadeInDown">
                           Notas <span class="fa-angle-right fa"></span> Complejo Educativo Catolico "La Santa Familia"
                         </p>
