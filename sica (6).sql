@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-01-2019 a las 21:18:56
+-- Tiempo de generación: 16-01-2019 a las 21:47:57
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -299,7 +299,9 @@ INSERT INTO `tbitacora` (`eid_bitacora`, `efk_idusuario`, `dtfecha`, `cdescripci
 (109, 13, '2019-01-16 13:51:39', 'Inscribio un nuevo alumno'),
 (110, 13, '2019-01-16 13:57:23', 'RegistrÃ³ una nueva materia'),
 (111, 13, '2019-01-16 13:58:58', 'Inscribio un nuevo alumno'),
-(112, 13, '2019-01-16 14:01:58', 'Se editÃ³ la inscripcion del alumno: ');
+(112, 13, '2019-01-16 14:01:58', 'Se editÃ³ la inscripcion del alumno: '),
+(113, 13, '2019-01-16 14:32:29', 'RegistrÃ³ una nueva materia'),
+(114, 13, '2019-01-16 14:47:08', 'RegistrÃ³ una nueva Opcion de Bachillerato');
 
 -- --------------------------------------------------------
 
@@ -381,21 +383,23 @@ CREATE TABLE `tmaterias` (
   `cdescripcion` varchar(200) NOT NULL,
   `efk_idopcion` int(11) NOT NULL,
   `efk_idhorario` int(11) NOT NULL,
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL,
+  `anio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tmaterias`
 --
 
-INSERT INTO `tmaterias` (`eid_materia`, `ccodigo`, `cnombre`, `cdescripcion`, `efk_idopcion`, `efk_idhorario`, `estado`) VALUES
-(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 6, 1),
-(8, '002', 'Lenguaje y Literatura', 'Esta es una materia sobre lectura.', 1, 2, 1),
-(9, '009', 'Sociales', 'Historia de el salvador', 2, 1, 1),
-(10, '010', 'Manejo Softwar', 'Aqui se usa word.', 2, 2, 1),
-(11, '011', 'Turismo', 'fotografia', 1, 5, 1),
-(12, '011', 'Ingles', 'segundo idioma', 2, 5, 1),
-(13, '013', 'Herramientas de Productividad', 'nada', 5, 5, 1);
+INSERT INTO `tmaterias` (`eid_materia`, `ccodigo`, `cnombre`, `cdescripcion`, `efk_idopcion`, `efk_idhorario`, `estado`, `anio`) VALUES
+(1, '001', 'Matematicas', 'Esta es una materia llena de numeros.', 1, 6, 1, 1),
+(8, '002', 'Lenguaje y Literatura', 'Esta es una materia sobre lectura.', 1, 2, 1, 1),
+(9, '009', 'Sociales', 'Historia de el salvador', 2, 1, 1, 1),
+(10, '010', 'Manejo Softwar', 'Aqui se usa word.', 2, 2, 1, 1),
+(11, '011', 'Turismo', 'fotografia', 1, 5, 1, 1),
+(12, '011', 'Ingles', 'segundo idioma', 2, 5, 1, 1),
+(13, '013', 'Herramientas de Productividad', 'nada', 5, 5, 1, 1),
+(14, '014', 'Moral y Civica', 'descripcion moral y civica', 3, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -453,21 +457,23 @@ CREATE TABLE `topciones` (
   `efk_grado` int(11) NOT NULL,
   `efk_seccion` int(11) NOT NULL,
   `eestado` int(11) NOT NULL,
-  `inscritos` int(11) NOT NULL
+  `inscritos` int(11) NOT NULL,
+  `anio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `topciones`
 --
 
-INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`, `inscritos`) VALUES
-(1, 56, 1, 1, 1, 1, 4),
-(2, 59, 3, 1, 1, 0, 1),
-(3, 60, 7, 1, 1, 1, 0),
-(4, 60, 1, 2, 1, 1, 0),
-(5, 59, 1, 5, 1, 1, 1),
-(7, 60, 9, 2, 1, 1, 0),
-(8, 60, 9, 1, 3, 1, 0);
+INSERT INTO `topciones` (`eid_opcion`, `ecupo_maximo`, `efk_bto`, `efk_grado`, `efk_seccion`, `eestado`, `inscritos`, `anio`) VALUES
+(1, 56, 1, 1, 1, 1, 4, 1),
+(2, 59, 3, 1, 1, 0, 1, 1),
+(3, 60, 7, 1, 1, 1, 0, 1),
+(4, 60, 1, 2, 1, 1, 0, 1),
+(5, 59, 1, 5, 1, 1, 1, 1),
+(7, 60, 9, 2, 1, 1, 0, 1),
+(8, 60, 9, 1, 3, 1, 0, 1),
+(9, 50, 10, 1, 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -560,7 +566,8 @@ INSERT INTO `tpersonal_materia` (`eid_pm`, `efk_idpersonal`, `efk_idmateria`) VA
 (4, 8, 10),
 (5, 4, 11),
 (6, 4, 12),
-(7, 11, 13);
+(7, 11, 13),
+(8, 10, 14);
 
 -- --------------------------------------------------------
 
@@ -833,7 +840,7 @@ ALTER TABLE `tbachilleratos`
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
-  MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 --
 -- AUTO_INCREMENT de la tabla `tcargos`
 --
@@ -853,7 +860,7 @@ ALTER TABLE `thorarios`
 -- AUTO_INCREMENT de la tabla `tmaterias`
 --
 ALTER TABLE `tmaterias`
-  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `eid_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `tnotas`
 --
@@ -863,7 +870,7 @@ ALTER TABLE `tnotas`
 -- AUTO_INCREMENT de la tabla `topciones`
 --
 ALTER TABLE `topciones`
-  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `eid_opcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tperiodos`
 --
@@ -878,7 +885,7 @@ ALTER TABLE `tpersonal`
 -- AUTO_INCREMENT de la tabla `tpersonal_materia`
 --
 ALTER TABLE `tpersonal_materia`
-  MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `eid_pm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `tresponsable`
 --

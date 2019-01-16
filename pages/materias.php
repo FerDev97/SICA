@@ -9,6 +9,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 }else {
   header("Location:inicio.php");
 }
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1 ");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+    $anio=$fila->canio;
+  
+  }
+}
 ?>
 <!DOCTYPE html>
 <?php
@@ -566,7 +576,7 @@ if ($bandera == "add") {
     if($result2->num_rows == 0){
 
 
-       $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1')";
+       $consulta  = "INSERT INTO tmaterias VALUES('null','" . $codigom . "','" . $nombrem . "','" . $descripcionm . "','" . $opcion . "','" . $horario . "','1','" . $anioActivo . "')";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
         //Bloque para agarrar el ID de la ultima materia ingresada.
