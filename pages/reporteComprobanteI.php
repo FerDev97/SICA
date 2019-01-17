@@ -13,7 +13,7 @@ class myPDF extends FPDF{
 
                         while ($fila2 = $result2->fetch_object()) {
                          
-                             $op=$fila2->grado." anio ".$fila2->nombre." seccion ".$fila2->seccion;
+                            //  $op=$fila2->grado." anio ".$fila2->nombre." seccion ".$fila2->seccion;
                         
                            }
                       }else{

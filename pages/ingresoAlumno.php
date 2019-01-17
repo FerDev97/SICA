@@ -832,8 +832,11 @@ function go(){
 <?php
 
 $guardo  = $_REQUEST["guardo"];
+$ida  = $_REQUEST["ida"];
+$idop  = $_REQUEST["idop"];
 if($guardo==1){
 msg("Los datos fueron almacenados con exito");
+redir($ida,$idop);
 }else if($guardo==2){
   msg("EL NIE ya existe");
 }
@@ -842,7 +845,16 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
+    
    // echo "document.location.href='listaempleado.php';";
+    echo "</script>";
+}
+function redir($ida,$idop)
+{
+    echo "<script type='text/javascript'>";
+    // echo "sweetGuardo('$texto');";
+    
+    echo "window.open('reporteComprobanteI.php?id=".$ida."&idop=".$idop."','_blank');";
     echo "</script>";
 }
   
