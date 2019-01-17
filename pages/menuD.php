@@ -43,6 +43,7 @@ if($result)
                       if($clausurado==0){
                       ?>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
+                        <li><a href="notasParciales.php">Notas Parciales</a></li>
                         <li><a href="listabus.php">Boleta de notas</a></li>
                         <?php 
                       }
