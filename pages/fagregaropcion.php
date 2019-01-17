@@ -66,58 +66,7 @@ if ($result) {
 <script type="text/javascript">
      
       //SWEET ALERTS
-      if (op==1) {
-            sweetConfirm2(id);
-           
-          
-          }else{
-            sweetConfirm(id);
-           
-       
-          }
-        }
-        function sweetConfirm(id){
-        swal({
-  title: '¿Está seguro que desea activar a esta persona?',
-  text: "¡No sera posible revertir esta acción!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Continuar',
-  cancelButtonText:'Cancelar',
-}).then((result) => {
-  if (result.value) {
-    
-     document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
-  }
-})
-        }
-         function sweetConfirm2(id){
-        swal({
-  title: '¿Está seguro que desea desactivar a esta persona?',
-  text: "¡No sera posible revertir esta acción!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Continuar',
-  cancelButtonText:'Cancelar',
-}).then((result) => {
-  if (result.value) {
-    
-      document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-
-            document.turismo.submit();
-
-  }
-})
-        }
-
-
+     
         function sweetGuardo(str){
           swal(
   'Exito!',
@@ -157,41 +106,58 @@ if ($result) {
           document.getElementById('nombre').value="";
          document.location.href='fcargo.php?id='+id;
         }
-         function confirmar(id)
-        {
-          if (sweetConfirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            //alert(id);
-            document.turismo.submit();
-          }else
-          {
-            alert("Error al borrar.");
-          }
-        }
+        
         function confirmarAct(id,op)
         {
           if (op==1) {
-            if (confirm("Desactivar")==true) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
-            }else{
-              sweetGuardo("EL archivo no se desactivo");
-            }
-          }else if (op==2){
-            if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
+            sweetConfirm2(id);
+           
+          
           }else{
-              sweetGuardo("EL archivo no se Activo");
-            }
-          }else
-          {
-            alert("No entra");
+            sweetConfirm(id);
+           
+       
           }
-         
+        }
+        function sweetConfirm(id){
+        swal({
+  title: '¿Está seguro que desea activar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+     document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+  }
+})
+        }
+        
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+    document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+
+  }
+})
         }
        
 
@@ -305,6 +271,7 @@ if ($result) {
                       <?php include('tablaOpciones.php') ?>
                       </tbody>
                         </table>
+
                       </div>
                   </div>
                 </div>

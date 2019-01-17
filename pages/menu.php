@@ -75,13 +75,7 @@ if($result)
                       }
                       ?>
                         <li><a href="listabus.php">Estadisticas</a></li>
-                        <?php 
-                      if($clausurado==0){
-                      ?>
-                        <li><a href="listabus.php">Cierre de Sistema</a></li>
-                        <?php 
-                      }
-                      ?>
+                      
                       </ul>
                     </li>
                 

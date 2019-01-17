@@ -41,26 +41,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script type="text/javascript">
 
 //SWEET ALERTS
-function sweetConfirm(){
-        swal({
-  title: '¿Está seguro que desea continuar?',
-  text: "¡No sera posible revertir esta acción!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Continuar',
-  cancelButtonText:'Cancelar',
-}).then((result) => {
-  if (result.value) {
-    swal(
-      '¡Exito!',
-      'La accion ha sido completada.',
-      'success'
-    )
-  }
-})
-        }
+
 
 
         function sweetGuardo(str){
@@ -102,30 +83,53 @@ function sweetConfirm(){
         }
         function confirmarAct(id,op)
         {
-          //alert("entra");
-          
           if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
+            sweetConfirm2(id);
 
-            document.turismo.submit();
-          }else
-          {
-            //("No entra");
-          }
           }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
+            sweetConfirm(id);
+
+          }
+        }
+        function sweetConfirm(id){
+        swal({
+  title: '¿Está seguro que desea activar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+     document.getElementById('bandera').value='activar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
+  }
+})
+        }
+        
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+    document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
 
-
+  }
+})
         }
 
 
