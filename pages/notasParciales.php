@@ -234,6 +234,9 @@ if($_SESSION["logueado"] == TRUE) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+       function reporte(){
+          window.open("reporteBO.php",'_blank');
+        }
 
          
       </script>
@@ -371,6 +374,10 @@ if($_SESSION["logueado"] == TRUE) {
                           <td colspan=1 style="text-align:center;">
                             <strong> PROM </strong>
                                                       
+                          </td>
+                          <td colspan=1 style="text-align:center;">
+                            <strong> BOLETA </strong>
+                                                      
                           </td>   
                                                   
                         </tr>
@@ -397,7 +404,8 @@ if($_SESSION["logueado"] == TRUE) {
                             <th>nota 3</th>
                             <th>Rec.</th>
                             <th>Prom.</th>
-                            <th>Final</th>  
+                            <th>Final</th> 
+                            <th>Boleta de Notas</th>  
                         </tr>
                       </thead>
                       <tbody class="tabla_ajax">
