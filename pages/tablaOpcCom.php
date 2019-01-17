@@ -1,6 +1,17 @@
 <?php
 include "../config/conexion.php";
-$result = $conexion->query("SELECT tsecciones.cseccion,topciones.eestado,eid_opcion,ecupo_maximo,efk_bto,efk_grado,efk_seccion,tbachilleratos.cnombe,ccodigo,tgrado.cgrado,ttipobachillerato.ctipo FROM topciones INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo where tbachilleratos.eestado='1' and topciones.eestado='1' ORDER BY eid_grado");
+$result = $conexion->query("SELECT
+tgrado.cgrado,
+tbachilleratos.cnombe,ccodigo,
+tsecciones.cseccion,
+ttipobachillerato.ctipo,
+topciones.eestado,eid_opcion
+FROM
+topciones
+INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado
+INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato
+INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion
+INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo where topciones.eestado='1' and tbachilleratos.eestado='1' ORDER BY eid_grado");
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";

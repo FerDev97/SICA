@@ -1,6 +1,5 @@
 <?php 
 
-
 require "fpdf.php";
 
 class myPDF extends FPDF{
@@ -38,7 +37,7 @@ class myPDF extends FPDF{
         $this->Cell(195,10,utf8_decode("Correo electrónico: cec.la_santafamilia@hotmail.com"),0,0,"C");
         $this->Ln();
         $this->SetFont("Arial","B",13);
-        $this->Cell(195,5,utf8_decode("Listado de alumnos en el sistema para: ".$op),0,0,"C");
+        $this->Cell(195,5,utf8_decode("Nomina de alumnos en el sistema para: ".$op),0,0,"C");
         $this->Ln();
     }
     function footer(){
@@ -65,20 +64,11 @@ class myPDF extends FPDF{
  
 
     function viewTable(){
-        include "../config/conexion.php";
-$result = $conexion->query("select * from tanio where iestado=1");
-if($result)
-{
-  while ($fila=$result->fetch_object()) {
-    $anioActivo=$fila->eid_anio;
-    $clausurado=$fila->eclausura;
-  }
-}
         $id=$_REQUEST["id"];
  
         $this->SetFont("Times","",11);
                          include '../config/conexion.php';
-                      $result = $conexion->query("select a.cnie as nie,a.cnombre as nombre,a.capellido as apellido,a.sexo as sexo,a.cbachillerato as op FROM talumno as a WHERE  a.anio='".$anioActivo."' and a.cbachillerato=".$id);
+                      $result = $conexion->query("select a.cnie as nie,a.cnombre as nombre,a.capellido as apellido,a.sexo as sexo,a.cbachillerato as op FROM talumno as a WHERE a.cbachillerato=".$id);
                       if ($result) {
                           while ($fila = $result->fetch_object()) {                                          
                               

@@ -50,7 +50,7 @@ if($result)
                       if($clausurado==0){
                       ?>
                       <li><a href="listacliente.php">Comprobante de inscripción</a></li>
-                      <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                      <li><a href="nomina.php">Emitir Nomina de alumnos</a></li>
                       <?php 
                       }
                       ?>
@@ -75,13 +75,7 @@ if($result)
                       }
                       ?>
                         <li><a href="listabus.php">Estadisticas</a></li>
-                        <?php 
-                      if($clausurado==0){
-                      ?>
-                        <li><a href="listabus.php">Cierre de Sistema</a></li>
-                        <?php 
-                      }
-                      ?>
+                      
                       </ul>
                     </li>
                 

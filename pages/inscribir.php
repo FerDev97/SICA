@@ -95,8 +95,6 @@ if ($resultC) {
       INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato
       INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion
       where eid_opcion='" .$bto. "'");
-       
-      
       if ($result) {
           while ($fila = $result->fetch_object()) {
             //en base al numero de materias recorridas se crea un nuevo registro en tnotas
@@ -134,7 +132,12 @@ if ($resultC) {
          }
            
           }
-      }
+      }else{
+      
+        $mensaje="Esta Opcion no tiene materias Asignadas";
+          header('Location: ingresoAlumno.php?guardo=2');
+          }
+
                  
                   }else{
       

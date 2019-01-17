@@ -10,6 +10,16 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 }else {
   header("Location:inicio.php");
 }
+include "../config/conexion.php";
+$result = $conexion->query("select * from tanio where iestado=1 ");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $anioActivo=$fila->eid_anio;
+    $anio=$fila->canio;
+  
+  }
+}
 ?>
 <?php
 
@@ -206,6 +216,10 @@ if ($result) {
                           <div class="input-group col-md-3" style="margin-left:530px">
                               <span class="input-group-addon"><i class="class=fas fa-list-ol"></i></span>
                                <input id="cupo" type="number" class="form-control mask-cupo" name="cupo" placeholder="Cupo Maximo" min="1" max="50">
+                           </div>
+                           <div class="input-group col-md-3" style="margin-left:530px">
+                            
+                               <input id="anio" type="hidden" class="form-control mask-cupo" name="anio" placeholder="Cupo Maximo" min="1" max="50" value="<?php echo $anioActivo;?>">
                            </div>
                         </div>
                                <div class="col-md-12">

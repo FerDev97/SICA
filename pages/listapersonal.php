@@ -173,12 +173,12 @@ document.location.href='listapersonal.php';
                   <div class="panel">
                     <div class="panel-heading col-md-12"><h3 class="col-md-4">Lista</h3>
                     <span class="col-md-6"></span>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                     <a class="btn btn-outline btn-default" >
-                    <span onclick="reporte();" title="Personal Activo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    <span onclick="reporte();" title="Personal Activo"><i class="fa fa-print fa-lg"></i><br>Reporte Personal </span>
                     </a>
                     <a class="btn btn-outline btn-default" >
-                    <span onclick="reporte1();" title="Docentes"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    <span onclick="reporte1();" title="Docentes"><i class="fa fa-print fa-lg"></i><br>Reporte Docentes </span>
                     </a>
                     </div>
                     
