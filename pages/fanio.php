@@ -281,7 +281,20 @@ error_reporting(E_ALL & ~E_NOTICE);
                           </div>
                             <div class="col-md-3">
                             <br><b></b>
-                            <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
+                            <?php 
+                            $res = $conexion->query("select enum from tperiodos where estado=1");
+  if ($res) {
+    while ($f = $res->fetch_object()) {
+        if ($f->enum==4) {
+          echo ' <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" title="Aun no es el periodo para clausurar." />';
+        }else{
+           echo ' <input disabled="true" type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />';
+        }
+    }
+  }
+
+                            ?>
+                          
                             </div>
                             <div>
                             <br><b></b>
