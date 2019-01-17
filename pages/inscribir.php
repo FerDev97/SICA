@@ -118,7 +118,7 @@ if ($resultC) {
                             //Si todo ese desvergue esta bien WTF.!!
                             IB:: insertar($_SESSION["id"],"Inscribio un nuevo alumno");
                             $mensaje="Se agregaron los datos correctamente";
-                           header('Location: ingresoAlumno.php?guardo=1');   
+                           header('Location: ingresoAlumno.php?guardo=1&ida='.$ida.'&idop='.$bto);   
                           } else {
                             $mensaje="Error al insertar los datos";
                           }

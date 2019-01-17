@@ -5,20 +5,7 @@ require "fpdf.php";
 class myPDF extends FPDF{
     
     function header(){
-          $id=$_REQUEST["id"];
-
-                      include '../config/conexion.php';
-                      $result2 = $conexion->query("select a.cnombre as nombre,a.capellido as apellido from talumno as a where a.eid_alumno=".$id);
-                      if ($result2) {
-
-                        while ($fila2 = $result2->fetch_object()) {
-                         
-                            //  $op=$fila2->grado." anio ".$fila2->nombre." seccion ".$fila2->seccion;
-                        
-                           }
-                      }else{
-                               echo "Error";
-                           }
+          
         $this->Image("../asset/img/logo.png",5,7,30);
         $this->Image("../asset/img/fondo.png",180,6,23);
         $this->SetFont("Arial","B",14);
@@ -36,7 +23,7 @@ class myPDF extends FPDF{
         $this->Cell(195,10,utf8_decode("Correo electrónico: cec.la_santafamilia@hotmail.com"),0,0,"C");
         $this->Ln();
         $this->SetFont("Arial","B",13);
-        $this->Cell(195,5,utf8_decode("Listado de materias activas en el sistema para: ".$op),0,0,"C");
+        $this->Cell(195,5,utf8_decode("Reporte de opciones de bachillerato activas "),0,0,"C");
         $this->Ln();
     }
     function footer(){
@@ -52,30 +39,50 @@ class myPDF extends FPDF{
     function headerTable(){
         $this->Ln();
         $this->SetFont("Times","B",11);
-        $this->Cell(12,10,"Codigo",1,0,"C");
-        $this->Cell(45,10,"Nombre",1,0,"C");
-        $this->Cell(60,10,"Docente",1,0,"C");
-        $this->Cell(40,10,"Dia",1,0,"C");
-        $this->Cell(40,10,"Hora",1,0,"C");
+        $this->Cell(40,10,"Codigo",1,0,"C");
+        $this->Cell(20,10,"Grado",1,0,"C");
+        $this->Cell(65,10,"Nombre",1,0,"C");
+        $this->Cell(50,10,"Tipo",1,0,"C");
+        $this->Cell(20,10,"Seccion",1,0,"C");
+        
         // $this->Cell(20,10,"Estado",1,0,"C");
         $this->Ln();
     }
  
 
     function viewTable(){
-        $id=$_REQUEST["id"];
- 
+       $total=0;
         $this->SetFont("Times","",11);
                          include '../config/conexion.php';
-                      $result = $conexion->query("select m.ccodigo as codigo,. m.eid_materia as id, m.cnombre as materia,m.estado as estado,m.efk_idopcion as op,p.cnombre as docente, h.cdia as dia,h.chora as hora FROM tmaterias as m, tpersonal as p,tpersonal_materia as pm,thorarios as h WHERE p.eid_personal=pm.efk_idpersonal and m.eid_materia=pm.efk_idmateria and h.eid_horario=m.efk_idhorario and m.efk_idopcion=".$id);
+                      $result = $conexion->query("SELECT
+                      tgrado.cgrado,
+                      tbachilleratos.cnombe,ccodigo,
+                      tsecciones.cseccion,
+                      ttipobachillerato.ctipo,
+                      topciones.eestado,eid_opcion
+                      FROM
+                      topciones
+                      INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado
+                      INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato
+                      INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion
+                      INNER JOIN ttipobachillerato ON tbachilleratos.efk_tipo = ttipobachillerato.eid_tipo where topciones.eestado='1' and tbachilleratos.eestado='1' ORDER BY eid_grado");
                       if ($result) {
-                          while ($fila = $result->fetch_object()) {                                          
+                          while ($fila = $result->fetch_object()) {
                               
-                              $this->Cell(12,8,$fila->codigo,1,0,"C");
-                              $this->Cell(45,8,$fila->materia,1,0,"C"); 
-                              $this->Cell(60,8,$fila->docente,1,0,"C");                            
-                              $this->Cell(40,8,$fila->dia,1,0,"C");
-                              $this->Cell(40,8,$fila->hora,1,0,"C");
+                            $this->Cell(40,8,$fila->ccodigo,1,0,"L");
+                            $this->Cell(20,8,$fila->cgrado,1,0,"L");
+                            $this->Cell(65,8,$fila->cnombe,1,0,"L");
+                            $this->Cell(50,8,$fila->ctipo ,1,0,"L");
+                            $this->Cell(20,8,$fila->cseccion ,1,0,"L");
+
+
+                              
+                                
+
+                              
+                              
+                              
+                             
                             //    if ($fila->estado==1) {
                             //     $this->Cell(20,8,"Activa",1,0,"C");
                             //   }else{
@@ -84,6 +91,9 @@ class myPDF extends FPDF{
                               $this->Ln();
                             
                           }
+                          $this->SetFont("Times","B",11);
+                          
+
                        }
                     
        

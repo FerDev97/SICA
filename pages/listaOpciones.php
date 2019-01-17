@@ -41,26 +41,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script type="text/javascript">
 
 //SWEET ALERTS
-function sweetConfirm(){
-        swal({
-  title: '¿Está seguro que desea continuar?',
-  text: "¡No sera posible revertir esta acción!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Continuar',
-  cancelButtonText:'Cancelar',
-}).then((result) => {
-  if (result.value) {
-    swal(
-      '¡Exito!',
-      'La accion ha sido completada.',
-      'success'
-    )
-  }
-})
-        }
+
 
 
         function sweetGuardo(str){
@@ -86,46 +67,60 @@ function sweetConfirm(){
           document.getElementById('baccion').value=id;
          document.turismo.submit();
         }
-         function confirmar(id)
-        {
-          //alert("entra");
-          if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            alert(id);
-            document.turismo.submit();
-          }else
-          {
-           // alert("No entra");
-          }
-
-        }
+       
+    
         function confirmarAct(id,op)
         {
-          //alert("entra");
-          
           if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
+            sweetConfirm2(id);
 
-            document.turismo.submit();
-          }else
-          {
-            //("No entra");
-          }
           }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
+            sweetConfirm(id);
+
+          }
+        }
+        function sweetConfirm(id){
+        swal({
+  title: '¿Está seguro que desea activar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+     document.getElementById('bandera').value='activar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
+  }
+})
+        }
+        
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+    document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
 
-
+  }
+})
+        }
+        function reporte(){
+          window.open("reporteOA.php",'_blank');
         }
 
 
@@ -159,7 +154,19 @@ function sweetConfirm(){
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista</h3></div>
+                  <div class="panel-heading col-md-12">
+                    
+                         
+                    <h3 class="col-md-4">Lista de Opciones Activas</h3> 
+                     <span class="col-md-6"></span>
+                     <div class="col-md-2">
+                     <a class="btn btn-outline btn-default" >
+                     <span onclick="reporte();" title="Opciones Activas"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                     </a>
+                    </div>
+                                                                           
+                                                                        
+           </div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
