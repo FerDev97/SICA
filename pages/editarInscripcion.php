@@ -23,7 +23,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   if ($result) {
     while ($fila = $result->fetch_object()) {
         $idAlumnoR        = $fila->eid_alumno;
-        $codigoAR         = $fila->ccodigo;
+        $codigoAR           = $fila->ccodigo;
         $nieR             = $fila->cnie;
         $nombreAR         = $fila->cnombre;
         $apellidoAR       = $fila->capellido;
@@ -253,7 +253,7 @@ function go(){
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>"disabled>
+     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>" disabled>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
