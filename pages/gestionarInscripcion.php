@@ -38,7 +38,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gestionar Inscripción | SICA</title>
+  <title>Gestión de periodo | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -155,13 +155,13 @@ error_reporting(E_ALL & ~E_NOTICE);
      function confirmar(id)
         {
           swal({
-  title: '¿Está seguro que desea activar este perido?',
-  text: "¡Esto provacara que el periodo actual se desactive!",
+  title: '¿Está seguro que desea activar el periodo de inscripción?',
+  text: "¡Esto habilitará el modulo de inscripción a los usuarios!",
   type: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: '¡Si, activar!',
+  confirmButtonText: '¡Si, habilitar!',
   cancelButtonText: '¡Cancelar!'
 }).then((result) => {
   if (result.value) {
@@ -171,6 +171,33 @@ error_reporting(E_ALL & ~E_NOTICE);
       'success'
     )
     document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+  }
+})
+
+
+         
+        }
+        function confirmar2(id)
+        {
+          swal({
+  title: '¿Está seguro que desea deshabilitar el periodo de inscripción?',
+  text: "¡Esto deshabilitará el modulo de inscripción a los usuarios!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: '¡Si, deshabilitar!',
+  cancelButtonText: '¡Cancelar!'
+}).then((result) => {
+  if (result.value) {
+    swal(
+      'Activado!',
+      'El periodo fue activado exitosamente.',
+      'success'
+    )
+    document.getElementById('bandera').value='desactivar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
   }
@@ -231,9 +258,9 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Inscripción</h3>
+                         <h3 class="animated fadeInLeft">Gestión de Periodos</h3>
                         <p class="animated fadeInDown">
-                          Periodo <span class="fa-angle-right fa"></span> de Inscripción.
+                          Periodo <span class="fa-angle-right fa"></span>control de periodo activo.
                         </p>
                     </div>
                   </div>
@@ -249,21 +276,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <!-- Inicio Tabla Año -->
                         
                          
-                           <div class="col-md-9">
+                           <div class="col-md-6">
                    <div class="col-md-12">
                    <div class="panel">
                   
-                     <div class="panel-heading"><h3>Gestionar Proceso de Inscripción</h3>
+                     <div class="panel-heading"><h3>Gestiónar periodo de inscripción.</h3>
                        <?php
                        include "../config/conexion.php";
-                       $result = $conexion->query("select * from tperiodos");
+                       $result = $conexion->query("select * from estadoinscrip");
                        if($result->num_rows<1){
                          ?>
 
                        <button type="button" class="btn-flip btn btn-gradient btn-primary" data-toggle='modal' data-target='#myModal'>
                              <div class="flip">
                                <div class="side">
-                                 Habilitar<span class="fa fa-edit"></span>
+                                 Agregar Nuevo <span class="fa fa-edit"></span>
                                </div>
                                <div class="side back">
                                  Continuar?
@@ -275,11 +302,48 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <?php
                             }
                              ?>
-                            
                           </div>
                      <div class="panel-body">
                        <div class="responsive-table">
-           
+                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0" >
+                       <thead>
+                         <tr>
+                             
+                            <th >Estado</th>
+                            <th style="width:30px;">Activar/Desactivar</th>
+
+
+                         </tr>
+                       </thead>
+                       <tbody>
+                       <?php
+ include "../config/conexion.php";
+ $result = $conexion->query("select * from estadoinscrip");
+ if ($result) {
+     while ($fila = $result->fetch_object()) {
+         echo "<tr>";
+         
+        
+         if ($fila->estado==1) {
+                      echo "<td>Habilitado</td>";
+                     
+                      echo "<td style='text-align:center;'><button title='Desactivar la inscripción.' align='center' type='button' class='btn btn-default' onclick=confirmar2(1);><i class='fa fa-close'></i>
+                         </button></td>";
+                   }else
+                    if ($fila->estado==0) {
+
+                      echo "<td>Deshabilitado</td>";
+                     
+                      echo "<td style='text-align:center;'><button title='Activar la inscripción.' align='center' type='button' class='btn btn-default' onclick=confirmar(1);><i class='fa fa-check'></i>
+                         </button></td>";
+                   }
+         echo "</tr>";
+
+     }
+ }
+ ?>
+                       </tbody>
+                         </table>
                        </div>
                    </div>
                  </div>
@@ -709,55 +773,25 @@ if ($bandera == "add") {
       msgError("Los datos que desea ingresar ya existen");
   }
 }
-if ($bandera == "desactivar") {
-  $result2 = $conexion->query("select * from tanio");
-  if ($result2) {
-    while ($fila = $result2->fetch_object()) {
-      $idanio=$fila->idanio;
-      $consulta1 = "update tanio set iestado='1' where eid_anio=".$idanio;
-      $resultado = $conexion->query($consulta1);
-    }
-  }
-  $consulta4 = "update tanio set iestado='0' WHERE eid_anio='".$baccion."'";
-    $resultado = $conexion->query($consulta4);
-    if ($resultado) {
-        //msg("Exito");
-        echo "<script type='text/javascript'>";
-        echo "alert('Exito');";
-        echo "document.location.href='fanio.php';";
-        echo "</script>";
-    } else {
-        msg("No Exito");
-    }
-}
+
 
 
 if ($bandera == "activar") {
-  $result2 = $conexion->query("select * from tperiodos");
+    $consultaDesac = "update estadoinscrip set estado='1' where estado='0'";
+  $result2 = $conexion->query($consultaDesac);
   if ($result2) {
-    while ($fila = $result2->fetch_object()) {
-      $idanio=$fila->idanio;
-//CONSULTA PARA DESACTIVAR CUALQUIER AÑO
-$result3 = $conexion->query("select * from tperiodos where eid_periodo=".$baccion);
-
-  $consultaDesac = "update tperiodos set estado='0' where estado='1'";
-
-$resultadoDesac = $conexion->query($consultaDesac);
-
-      // $consulta = "update tanio set iestado='1' where eid_anio=".$idanio;
-      // $resultado = $conexion->query($consulta);
-    }
+    msgAdd("Se habilitó la inscripción.");
   }
-  $consulta2 = "update tperiodos set estado='1' where eid_periodo=".$baccion;
-    $resultado = $conexion->query($consulta2);
-    if ($resultado) {
-      echo "<script type='text/javascript'>";
-     // echo "alert('Exito');";
-      echo "document.location.href='fperiodo.php';";
-      echo "</script>";
-    } else { 
-        msg("No Exito");
-    }
+ 
+
+}
+if ($bandera == "desactivar") {
+    $consultaDesac = "update estadoinscrip set estado='0' where estado='1'";
+  $result2 = $conexion->query($consultaDesac);
+  if ($result2) {
+    msgAdd("Se deshabilitó la inscripción.");
+  }
+ 
 
 }
 
@@ -774,7 +808,7 @@ function msgAdd($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
-    echo "document.location.href='fanio.php';";
+    echo "document.location.href='gestionarInscripcion.php';";
     echo "</script>";
 }
 function msgError($texto)
