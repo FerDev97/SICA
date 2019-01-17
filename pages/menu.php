@@ -8,6 +8,13 @@ if($result)
     $clausurado=$fila->eclausura;
   }
 }
+$result2 = $conexion->query("select * from estadoinscrip where estado=1");
+if($result2)
+{
+  while ($fila1=$result2->fetch_object()) {
+    $estadoins=$fila1->estado;
+  }
+}
  ?>
 <!-- start:Left Menu -->
             <div id="left-menu">
@@ -38,7 +45,7 @@ if($result)
                   <ul class="nav nav-list tree">
                       <li><a href="gestionarInscripcion.php">Gestionar proceso</a></li>
                       <?php 
-                      if($clausurado==0){
+                      if($clausurado==0&&$estadoins==1){
                       ?>
                       <li><a href="ingresoAlumno.php">Realizar inscripción</a></li>
                       <?php 
