@@ -52,7 +52,7 @@ $fila=$result->fetch_row();
 if($result->num_rows != 0){
        
     IB:: insertar($_SESSION["id"],"Actualizó las notas");
-    $mensaje="1/".$idMateria;
+    $mensaje="1";
           
         
 }else{
