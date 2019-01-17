@@ -22,13 +22,19 @@ $grado=array();
 $datosBach=array();
 $datosSeccion=array();
 $datosGrado=array();
-
+$idanioActivo;
+$anioActivo;
 
 if($_SESSION["logueado"] == TRUE) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
   $id  = $_SESSION["id"];
 
+        $response = $conexion->query("SELECT * FROM tanio WHERE iestado=1");
+        $vector=$response->fetch_row();
+
+        $idanioActivo = $vector[0]; //id del año activo
+        $anioActivo = $vector[1]; // año
         
         if($tipo == 0){ // si es un usuario tipo docente hara las siguientes consultas
 
@@ -282,7 +288,9 @@ if($_SESSION["logueado"] == TRUE) {
 
                   </div>
                     <div class="panel-heading col-md-12">
-                       
+                            <!--Anio activo-->
+                            <input id="idAnio" type="hidden" value="<?php echo $idanioActivo;?>">
+
                            <h5 class="col-md-2">Grado: <br>
                                   <select id="grado" class="form-control">  
                                     <option value="0" selected hidden>Seleccione</option>
@@ -1194,9 +1202,9 @@ if($_SESSION["logueado"] == TRUE) {
 
            var idMateria = $("#materia").val();
            var periodoAct = $("#periodo").val();
-
-          
-           $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct);
+           var anio = $("#idAnio").val();
+            
+           $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct+"&anio="+anio);
            
 
       });
@@ -1212,6 +1220,7 @@ if($_SESSION["logueado"] == TRUE) {
           var rec=$("#rec").val();
           var pro=$("#pro").val();
           var periodoAct = $("#periodo").val();
+          var anio = $("#idAnio").val();
 
           if(nota1 == ""){
               return false;
@@ -1258,7 +1267,7 @@ if($_SESSION["logueado"] == TRUE) {
 
                                             $("#modalito").modal('hide');
 
-                                          $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct);
+                                          $(".tabla_ajax").load("tablaNotas.php?idMateria="+idMateria+"&periodo="+periodoAct+"&anio="+anio);
                                             sweetGuardo("Notas actualizadas correctamente");
                                           }else{
                                             sweetError("Error al actualizar las notas");

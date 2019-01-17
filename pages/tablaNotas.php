@@ -4,6 +4,7 @@
                             
 $idMateria;
 $periodoActivo;
+$anio;
 
 if(empty($_REQUEST)){
    
@@ -11,6 +12,7 @@ if(empty($_REQUEST)){
 
     $idMateria=$_REQUEST["idMateria"];
     $periodoActivo = $_REQUEST["periodo"];
+    $anio = $_REQUEST["anio"];
     $aux="";
 
     $consulta="SELECT
@@ -49,7 +51,7 @@ if(empty($_REQUEST)){
     INNER JOIN tmaterias ON talum_mat_not.efk_idmateria = tmaterias.eid_materia
     INNER JOIN tnotas ON talum_mat_not.efk_idnota = tnotas.eid_notas
     INNER JOIN tanio ON talum_mat_not.efk_anio = tanio.eid_anio
-    WHERE tmaterias.eid_materia = $idMateria";
+    WHERE tmaterias.eid_materia = $idMateria AND talum_mat_not.efk_anio = $anio";
 
     $result = $conexion->query($consulta);
 
