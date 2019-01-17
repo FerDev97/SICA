@@ -594,7 +594,6 @@ function msgError($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetError('$texto');";
-    echo "document.location.href='fagregaropcion.php';";
     echo "</script>";
 }
 
@@ -604,13 +603,21 @@ $bandera      = $_REQUEST["bandera"];
 $baccion      = $_REQUEST["baccion"];
 
 if ($bandera == "desactivar") {
-  $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-       msgGuar("Registro desactivado");
-    } else {
-      msgError("No se desactivo el registro");
-    }
+ 
+         $result1 = $conexion->query("SELECT * FROM tmaterias where efk_idopcion=".$baccion);
+        if ($result1->num_rows == 0) {
+        $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
+            $resultado = $conexion->query($consulta);
+            if ($resultado) {
+               msgGuar("Registro desactivado");
+            } else {
+              msgError("No se desactivo el registro");
+            }
+  }else{
+    msgError("Imposible desactivar el registro porque ya tiene materias asignadas");
+  }
+
+  
 }else if ($bandera == "activar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '1' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);

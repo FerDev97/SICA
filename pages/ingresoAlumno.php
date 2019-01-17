@@ -197,10 +197,7 @@ function go(){
         sweetError("Cuidado.! Es necesario el registro del DUI de almenos un encargado");
         return 0;
       }
-     if(document.getElementById("direccionp").value==""){
-        sweetError("Cuidado.! La direccion es obligatoria");
-        return 0;
-      }if(document.getElementById("estadop").value=="Seleccione"){
+    if(document.getElementById("estadop").value=="Seleccione"){
         sweetError("Cuidado.! El estado civil de los padres es obligatorio");
         return 0;
       }if(document.getElementById("convivea").value=="Seleccione"){
@@ -375,7 +372,6 @@ function go(){
             if ($result1->num_rows >0) {
               echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
               }
-       
          }
       }
       ?>

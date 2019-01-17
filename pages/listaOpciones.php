@@ -374,30 +374,35 @@ $baccion = $_REQUEST["baccion"];
 
 
 if ($bandera == "desactivar") {
+  $result1 = $conexion->query("SELECT * FROM tmaterias where efk_idopcion=".$baccion);
+  if ($result1->num_rows == 0) {
   $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Dato Activado");
+      msgGuar("Registro desactivado");
     } else {
-        msg("No se desactivo el registro");
+      msgError("No se desactivo el registro");
     }
+}else{
+msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
+}
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Dato activado");
+      msgGuar("Registro Activado");
     } else {
-      msg("No se activo el registro");
+      msgError("No se activo el registro");
     }
 }
 if ($bandera == "desaparecer") {
     $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-        msg("Exito");
+     msgGuar("Registro Activado");
     } else {
-      sweetError("No se activo el registro");
+      msgError("No se activo el registro");
     }
 }
 if ($bandera == 'enviar') {
@@ -406,11 +411,18 @@ if ($bandera == 'enviar') {
     echo "</script>";
     # code...
 }
-function msg($texto)
+
+function msgGuar($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listaOpciones.php';";
+    echo "sweetGuardo('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
     echo "</script>";
 }
 
