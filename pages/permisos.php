@@ -91,6 +91,10 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
           }
 
         }
+        function reporte(id){
+        //  alert(id);
+           window.open("../ayuda/permisot.pdf",'_blank');
+        }
 
       </script>
 </head>
@@ -108,10 +112,17 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Permisos Temporales</h3>
+                        <h3 class="animated fadeInLeft" class="col-md-2">Permisos Temporales</h3>
                         <p class="animated fadeInDown">
                           Tabla <span class="fa-angle-right fa"></span> Tabla de Datos
                         </p>
+                    <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
+                        
                     </div>
                   </div>
               </div>
