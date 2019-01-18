@@ -8,7 +8,10 @@ $idA = $_POST['idA'];
 //Generales
 
 $codigo = $_POST['codigoa'];
+
+
 $nombre  = $_POST['nombrea'];
+$sexo = $_POST['sexo'];
 $depart = $_POST['departamentoa'];
 $direcc = $_POST['direcciona'];
 $llega = $_POST['llegadaa'];
@@ -66,7 +69,7 @@ $religiionm  = $_POST['religiionm'];
 //Adicionales
 //odos llegan con exito 
 $consulta  = "UPDATE talumno SET ccodigo='".$codigo. "', cnie='" .$NIE. "', cnombre='" .$nombre. "',
-    capellido='" .$apellido. "', cdireccion='" .$direcc. "', edepto='" .$depart. "', ffecha_nac='" .$fecha. "',
+    capellido='" .$apellido. "', sexo='" .$sexo. "', cdireccion='" .$direcc. "', edepto='" .$depart. "', ffecha_nac='" .$fecha. "',
     cllegada='" .$llega. "', cbachillerato='" .$bto. "', canterior='" .$anterior. "', cenfermedades='" .$enfer. "',
     calergia='" .$alergia. "', cdistancia='" .$distancia. "', iparvularia='" .$parvu. "', itrabaja='" .$trabaja. "',
     izona='" .$zona. "', irepite='" .$repite. "', ibautizo='" .$bautizo. "', icomunion='" .$comunion. "', iconfirma='" .$confirmacion. "',
@@ -79,15 +82,16 @@ $resultado = $conexion->query($consulta);
           if ($resultado) {
              IB:: insertar($_SESSION["id"],"Se editó la inscripcion del alumno: ");
               $mensaje="Se editaron los datos correctamente";
+              $bandera="1";
           } else {
              $mensaje="Error al editar los datos ";
+             $bandera="0";
           }
-          msg($mensaje);
-function msg($mensaje)
+          msg($mensaje, $bandera);
+function msg($mensaje, $bandera)
 {
     echo "<script type='text/javascript'>";
-    echo "alert('$mensaje');";
-    echo "document.location.href='listaalumnos.php';";
+    echo "document.location.href='listaalumnos.php?banderita=$bandera&mensajito=$mensaje';";
     echo "</script>";
 }
 ?>

@@ -16,7 +16,7 @@ $usuario=$_SESSION["usuario"];
                 <span class="middle"></span>
                 <span class="bottom"></span>
               </div>
-              <b><img src="../asset/img/logo.png" style="width:60px;height=60px"></b>
+              <b><!--<img src="../asset/img/logo.png" style="width:60px;height=60px">--></b>
                 <a href="index.html" class="navbar-brand">
                 </a>
               <ul class="nav navbar-nav navbar-right user-nav">
