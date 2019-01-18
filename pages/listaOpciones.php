@@ -366,7 +366,19 @@ $("#modalito").modal();
 </body>
 </html>
 <?php
-
+function msgGuar($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    echo "document.location.href='listaOpciones.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    echo "</script>";
+}
 include "../config/conexion.php";
 
 $bandera = $_REQUEST["bandera"];
@@ -374,18 +386,30 @@ $baccion = $_REQUEST["baccion"];
 
 
 if ($bandera == "desactivar") {
-  $result1 = $conexion->query("SELECT * FROM tmaterias where efk_idopcion=".$baccion);
-  if ($result1->num_rows == 0) {
-  $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
+  $result1 = $conexion->query("SELECT
+  topciones.inscritos,
+  topciones.eid_opcion
+  FROM
+  topciones
+  where eid_opcion=".$baccion);
+  if ($result1) {
+    while ($fila = $result1->fetch_object()) {
+   $inscri=$fila->inscritos;
+    }
+   if($inscri==0){
+    $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
       msgGuar("Registro desactivado");
     } else {
       msgError("No se desactivo el registro");
     }
+   }else{
+    msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
+   }  
 }else{
-msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
-}
+  msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
+  }
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
@@ -396,36 +420,11 @@ if ($bandera == "activar") {
       msgError("No se activo el registro");
     }
 }
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-     msgGuar("Registro Activado");
-    } else {
-      msgError("No se activo el registro");
-    }
-}
+
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
     echo "document.location.href='editempleado.php?id=" . $baccion . "';";
     echo "</script>";
     # code...
 }
-
-function msgGuar($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "sweetGuardo('$texto');";
-    echo "document.location.href='fagregaropcion.php';";
-    echo "</script>";
-}
-function msgError($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "sweetError('$texto');";
-    echo "</script>";
-}
-
-  
-
 ?>
