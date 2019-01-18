@@ -132,6 +132,10 @@ function sweetConfirm(){
           $("#ide").val(id);
           document.form.submit();
         }
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/bitacora.pdf",'_blank');
+        }
 
       </script>
 </head>
@@ -149,10 +153,16 @@ function sweetConfirm(){
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Bitácora</h3>
+                        <h3 class="animated fadeInLeft" class="col-md-2">Bitácora</h3>
                         <p class="animated fadeInDown">
                           tablas <span class="fa-angle-right fa"></span>Tabla
                         </p>
+                    <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
               </div>

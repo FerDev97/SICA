@@ -260,6 +260,10 @@ function go(){
             document.turismo.submit();
           }
         }
+        function reporte(id){
+        //  alert(id);
+           window.open("../ayuda/fingresoa.pdf",'_blank');
+        }
       </script>
 </head>
 
@@ -282,10 +286,16 @@ function go(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Realizar Inscripcion</h3>
+                         <h3 class="animated fadeInLeft" class="col-md-2">Realizar Inscripcion</h3>
                         <p class="animated fadeInDown">
                           Ficha de inscripcion.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
                 </div>

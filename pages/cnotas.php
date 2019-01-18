@@ -203,6 +203,8 @@ if($_SESSION["logueado"] == TRUE) {
   header("Location:inicio.php");
 }
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -234,6 +236,10 @@ if($_SESSION["logueado"] == TRUE) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+       function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/registron.pdf",'_blank');
+        }
 
          
       </script>
@@ -260,10 +266,16 @@ if($_SESSION["logueado"] == TRUE) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Registro de Notas</h3>
+                        <h3 class="animated fadeInLeft" class="col-md-2">Registro de Notas</h3>
                         <p class="animated fadeInDown">
                           Notas <span class="fa-angle-right fa"></span> Complejo Educativo Catolico "La Santa Familia"
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
               </div>
