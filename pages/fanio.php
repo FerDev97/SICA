@@ -283,6 +283,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                             <br><b></b>
                             <?php 
                             $res = $conexion->query("select enum from tperiodos where estado=1");
+                            
   if ($res) {
     while ($f = $res->fetch_object()) {
         if ($f->enum==4) {

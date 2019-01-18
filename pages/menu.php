@@ -17,6 +17,49 @@ if($result2)
 }
  ?>
 <!-- start:Left Menu -->
+<script>
+function backup(){
+  var op="Hola";
+   $.ajax(
+            {
+                data:op,
+                url:'myphp-backup.php',
+                type:'post',
+                beforeSend:function(){
+                   let timerInterval
+Swal({
+  title: '¡Respaldando Base de datos!',
+  html: 'Por favor espere <strong></strong>.',
+  timer: 2000,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      Swal.getContent().querySelector('strong')
+        .textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  onClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  if (
+    // Read more about handling dismissals
+    result.dismiss === Swal.DismissReason.timer
+  ) {
+    console.log('I was closed by the timer')
+  }
+})
+                },
+                success:function(response) {
+                    // alert(response);
+                    sweetGuardo("Se hizo un respaldo de la BD exitosamente.");
+                }
+            }
+
+        );
+                         
+}
+</script>
             <div id="left-menu">
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
@@ -181,7 +224,8 @@ if($result2)
                       </a>
                       <ul class="nav nav-list tree">
                         <li><a href="bitacora.php">Bitácora</a></li>
-                        <li><a href="lugar.php">Backup</a></li>
+                        <li><a onclick="backup();">Backup</a></li>
+                        <li><a href="restaurar.php">Backup</a></li>
                         
                       </ul>
                     </li>
