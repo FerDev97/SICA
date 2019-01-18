@@ -254,17 +254,10 @@ if ($result) {
         echo "<td>" . $fila->cusuario . "</td>";
         echo "<td>" . $fila->cnombre . "</td>";
         echo "<td>" . $fila->capellido . "</td>";
-<<<<<<< HEAD
         // echo format_date_Y_mm_dd($fecha1);
        
         $newf=date('d/m/Y', strtotime($fila->dtfecha));
         echo "<td>" .$newf. "</td>";
-=======
-        $originalDate = $fila->dtfecha;
-$newDate = date("dd/mm/YYYY", strtotime($originalDate));
-
-        echo "<td>" . $originalDate . "</td>";
->>>>>>> bb6766060bc69eecf45bd28e5b8d96d3aa2587e3
         echo "<td>" . $fila->cdescripcion . "</td>";
        
            //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";
