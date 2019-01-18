@@ -225,7 +225,7 @@ Swal({
                       <ul class="nav nav-list tree">
                         <li><a href="bitacora.php">Bitácora</a></li>
                         <li><a onclick="backup();">Backup</a></li>
-                        <li><a href="restaurar.php">Backup</a></li>
+                        <li><a href="restaurar.php">Restaurar</a></li>
                         
                       </ul>
                     </li>
