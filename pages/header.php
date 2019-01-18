@@ -25,14 +25,13 @@ $usuario=$_SESSION["usuario"];
                    <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                    <ul class="dropdown-menu user-dropdown">
                      <li><a data-toggle="modal" href="#modalTipo"><span class="fa fa-user"></span> Mi Perfil</a></li>
-                     <li><a href="#"><span class="fa fa-book"></span> Acerca de</a></li>
+                   
                      <li role="separator" class="divider"></li>
                      <li class="more">
                       <ul>
                       
-                        <li><a href=""><span class="fa fa-cogs"></span></a></li>
-                        <li><a href=""><span class="fa fa-lock"></span></a></li>
-                        <li><a href="logout.php"><span class="fa fa-power-off "></span></a></li>
+                        
+                        <li><a title="Cerrar sesion" href="logout.php"><span class="fa fa-power-off "></span></a></li>
                       </ul>
                     </li>
                   </ul>
