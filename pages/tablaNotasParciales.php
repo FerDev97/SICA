@@ -107,7 +107,7 @@ if(empty($_REQUEST)){
             echo "<td style='text-align:center;'>$promedio</td>";
             echo "<td style='text-align:center;'>
             <a class='btn btn-outline btn-default' >
-                    <span onclick='reporte();' title='Personal Activo'><i class='fa fa-print fa-lg'></i><br>Boleta</span>
+                    <span onclick='reporte(".$fila->idAlumno.");' title='Imprimir Boleta'><i class='fa fa-print fa-lg'></i><br>Boleta</span>
                     </a>
             </td>";
 

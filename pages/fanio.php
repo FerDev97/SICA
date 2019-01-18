@@ -239,11 +239,17 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12" >
-
-                         <h3 class="animated fadeInLeft">Año Escolar Activo</h3>
-                        <p class="animated fadeInDown">
+                    <h3 class="animated fadeInLeft" class="col-md-2">Año Escolar Activo</h3>
+                    <p class="animated fadeInDown">
                           Año <span class="fa-angle-right fa"></span>Datos del Año Escolar.
                         </p>
+                    <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
+                        
                     </div>
                   </div>
                 </div>
