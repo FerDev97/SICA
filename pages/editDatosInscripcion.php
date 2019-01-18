@@ -8,7 +8,6 @@ $idA = $_POST['idA'];
 //Generales
 
 $codigo = $_POST['codigoa'];
-
 $nombre  = $_POST['nombrea'];
 $depart = $_POST['departamentoa'];
 $direcc = $_POST['direcciona'];
@@ -63,6 +62,7 @@ $telefonotm  = $_POST['telefonotm'];
 $celularm  = $_POST['celularm'];
 $miembrosm  = $_POST['miembrosm'];
 $religiionm  = $_POST['religiionm'];
+
 //Adicionales
 //odos llegan con exito 
 $consulta  = "UPDATE talumno SET ccodigo='".$codigo. "', cnie='" .$NIE. "', cnombre='" .$nombre. "',
