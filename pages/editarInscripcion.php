@@ -15,7 +15,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 
   include "../config/conexion.php";
 
-  $result = $conexion->query("select eid_alumno,ccodigo ,cnie,cnombre,capellido,cdireccion,edepto,ffecha_nac, 
+  $result = $conexion->query("select eid_alumno, ccodigo ,cnie,cnombre,capellido, sexo,cdireccion,edepto,ffecha_nac, 
   cllegada, cbachillerato, canterior, cenfermedades, calergia, cdistancia, iparvularia, itrabaja, izona, irepite, ibautizo, icomunion, iconfirma,
   cnombrep, clugar_trabajop, cduip, ctelefonocp, ctelefonotp, ccelularp, cdireccionp, cestadocivilp, cconvive, cnombrem, clugar_trabajom,
   cprofesionm, cduim, ctelefonocm, ctelefonotm, ccelularm, cmiembros, creligion, anio from talumno where eid_alumno = ".$idAlumno);
@@ -27,6 +27,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
         $nieR             = $fila->cnie;
         $nombreAR         = $fila->cnombre;
         $apellidoAR       = $fila->capellido;
+        $sexoAR           = $fila->sexo;
         $direccionAR      = $fila->cdireccion;
         $departR          = $fila->edepto;
         $fechaNacR        = $fila->ffecha_nac;
@@ -88,6 +89,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/wizard.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -98,105 +100,78 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <![endif]-->
 
 
-      <!-- SCRIPTS DE SWEET ALERTS -->
-      <script>
-      function DatosIncompletos(){
-        swal({
-  title: '<strong>HTML <u>example</u></strong>',
-  type: 'info',
-  html:
-    'You can use <b>bold text</b>, ' +
-    '<a href="//github.com">links</a> ' +
-    'and other HTML tags',
-  showCloseButton: true,
-  showCancelButton: true,
-  focusConfirm: false,
-  confirmButtonText:
-    '<i class="fa fa-thumbs-up"></i> Great!',
-  confirmButtonAriaLabel: 'Thumbs up, great!',
-  cancelButtonText:
-    '<i class="fa fa-thumbs-down"></i>',
-  cancelButtonAriaLabel: 'Thumbs down',
-})
-return 0;
+   <script type="text/javascript">
 
-      }
-       
-
-     
-      
-      </script>
-      <!-- FIN SCRIPTS DE SWEET ALERTS -->
-      <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
-    <script>
-//Validaciones para registro del alumno
-function go(){
+   function go(){
   document.msform.submit(); 
-}
+  }
+
+      //SWEET ALERTS
+  function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡Se actualizaran los datos!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                go();
+                              }
+                        })
+                      }
 
 
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
 
-    function verificarCamposObligatoriosPersonales(){
-       //alert(document.getElementById("nombrea").value);
-      if(document.getElementById("nombrea").value==""){
-        //alert("Lo sentimos, este campo es obligatorio.");
-        return 0;
-      }else{
-         //alert("nO ESTA VACIO");
-         return 1;
-      }
-    }
-    </script>
-      <!-- fin SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
-      <script type="text/javascript">
-      //Validacion Solo letras
-      function sololetras(e) {
-        key=e.keyCode || e.which;
- 
-        teclado=String.fromCharCode(key).toLowerCase();
- 
-        letras="qwertyuiopasdfghjklñzxcvbnm ";
- 
-        especiales="8-37-38-46-164";
- 
-        teclado_especial=false;
- 
-        for(var i in especiales){
-            if(key==especiales[i]){
-                teclado_especial=true;
-                break;
-            }
-        }
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
 
-        if(letras.indexOf(teclado)==-1 && !teclado_especial){
-            return false;
-        }
-    }
-    //Validacion Telefono
-    var nav4 = window.Event ? true : false;
-      function aceptNum(evt){
-        var key = nav4 ? evt.which : evt.keyCode;
-        return (key <= 13 || (key>= 48 && key <= 57));
-      }
-      //Fin Validacion Telefono
-     //Validacion Solo letras
-        function verificar(){
-          if(document.getElementById('nombreempleado').value=="" ||
-            document.getElementById('apellidoempleado').value=="" ||
-            document.getElementById('duiempleado').value=="" ||
-            document.getElementById('nitempleado').value=="" ||
-            document.getElementById('cargoempleado').value==""){
-            //alert("Complete los campos prueba");
-            
-          }else{
-            document.getElementById("bandera").value="add";
-            document.turismo.submit();
-          }
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
 
-        }
-        
-       
-      </script>
+                  //SWEET ALERTS     
+   
+   
+   
+   </script> 
 </head>
 
 <body id="mimin" class="dashboard">
@@ -253,11 +228,27 @@ function go(){
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>"disabled>
+     <input id="codigoa" type="text" class="form-control" name="codigoa" value="<?php echo $codigoAR;?>" readonly>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" value="<?php echo $nombreAR;?>" >
+     </div>
+
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Sexo</span>
+          
+     <?php
+          if($sexoAR == 1){
+              echo "<label class='radio-inline' style='margin-right:34px;margin-left:80px; font-size: 15px'><input type='radio' name='sexo' value='0' id='sexo'>Masculino</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='sexo' value='1' id='sexo' checked>Femenino</label>";
+          }else{
+            echo "<label class='radio-inline' style='margin-right:34px;margin-left:80px; font-size: 15px'><input type='radio' name='sexo' value='0' id='sexo' checked>Masculino</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='sexo' value='1' id='sexo'>Femenino</label>";
+          }
+     
+     ?>
+     
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
@@ -316,7 +307,7 @@ function go(){
         <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
-      <option value="">Seleccione Opcion</option>
+  
       <?php  
       include "../config/conexion.php";
       $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
@@ -326,7 +317,7 @@ function go(){
             if($bachilleratoR == $fila->eid_opcion){
               echo "<option value=".$fila->eid_opcion." selected >".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
             }else{
-              echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+              //echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
             }
           }
       }
@@ -649,7 +640,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" class="submit action-button" value="Editar" />
+    <input id="editar" type="button"  class=" submit action-button" value="Editar"  />
   </fieldset>
   
 </form> 
@@ -669,8 +660,8 @@ function go(){
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
-
+<script src="../asset/js/sweetalert2.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 <!-- plugins -->
 
@@ -683,14 +674,27 @@ function go(){
 <script src="../asset/js/plugins/select2.full.min.js"></script>
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
-<script src="../asset/js/wizard.js"></script>
-<script src="../asset/js/sweetalert2.js"></script>
+<script src="../asset/js/wizard2.js"></script>
+
 
 
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $("#editar").on('click' function(){
+          
+
+     });
+
+
+
+
+
+
+
+
     $("#formcliente").validate({
       errorElement: "em",
       errorPlacement: function(error, element) {
@@ -893,7 +897,18 @@ function go(){
        "fgColor":"#27C24C",
      }
      );
-  });
+
+     
+
+
+
+
+  });//fin del ready
+
+
+    
+        
+
 </script>
 <!-- end: Javascript -->
 </body>

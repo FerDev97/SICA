@@ -5,7 +5,7 @@ session_start();
 if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
-  $id  = $_REQUEST["id"];
+  $id  = $_SESSION["id"];
 }else {
   header("Location:inicio.php");
 }
@@ -18,6 +18,9 @@ if($result)
     $clausurado=$fila->eclausura;
   }
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +41,7 @@ if($result)
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -88,6 +92,74 @@ if($result)
         
           window.open("reporteOP.php?id="+cont, '_blank');
         }
+
+        function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡Se actualizaran los datos!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                
+                              }
+                        })
+                      }
+
+
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
+
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
+
+                  //SWEET ALERTS  
+
+
+
+           
+
+  
 
       </script>
 </head>
@@ -387,7 +459,7 @@ if ($result2) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -395,6 +467,7 @@ if ($result2) {
 <script src="../asset/js/plugins/jquery.datatables.min.js"></script>
 <script src="../asset/js/plugins/datatables.bootstrap.min.js"></script>
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
+
 
 
 <!-- custom -->
@@ -469,6 +542,25 @@ function msg($texto)
     echo "alert('$texto');";
     echo "document.location.href='editarInscripcion.php';";
     echo "</script>";
+}
+
+if(empty($_REQUEST)){
+
+}else{
+   $bandera = $_REQUEST["banderita"];
+   $mensaje = $_REQUEST["mensajito"];
+
+   if($bandera == "1"){
+      echo "<script type='text/javascript'>";
+      echo "sweetGuardo('Se modificó la inscripción correctamente');";
+      echo "</script>";
+   }else{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('Error al modificar la inscripción');";
+    echo "</script>";
+   }
+
+
 }
   
 
