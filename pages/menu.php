@@ -6,6 +6,7 @@ if($result)
   while ($fila=$result->fetch_object()) {
     $anioActivo=$fila->eid_anio;
     $clausurado=$fila->eclausura;
+    $anio=$fila->canio;
   }
 }
 $result2 = $conexion->query("select * from estadoinscrip where estado=1");
@@ -75,18 +76,45 @@ Swal({
                   </a>
                   <ul class="nav nav-list tree">
                   <li><a href="fanio.php">Año Escolar Activo</a></li>
-                     <li><a href="permisos.php">Permisos Temporales</a></li>
+                  <?php 
+                      if($clausurado==0){
+                      ?>
+                        <li><a href="permisos.php">Permisos Temporales</a></li>
+                      <?php 
+                      }
+                      ?>
+                   
                      <!-- <li><a href="cadministradores.php">Lista de administradores</a></li> -->
                    
               
                  </ul>
                 </li>
                 <li class="active ripple">
-                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción
+                <?php 
+                      if($clausurado==0){
+                      ?>
+                        <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción 
+                        <?php 
+                      }else{
+                      ?>
+                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción <?php echo $anio;?>
+                      <?php
+                       }
+                       ?>
+
+
+                  
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                      <li><a href="gestionarInscripcion.php">Gestionar proceso</a></li>
+                  <?php 
+                      if($clausurado==0){
+                      ?>
+                         <li><a href="gestionarInscripcion.php">Gestionar proceso</a></li>
+                      <?php 
+                      }
+                      ?>
+                     
                       <?php 
                       if($clausurado==0&&$estadoins==1){
                       ?>
@@ -101,16 +129,27 @@ Swal({
                       ?>
                       <li><a href="listacliente.php">Comprobante de inscripción</a></li>
                       <li><a href="nomina.php">Emitir Nomina de alumnos</a></li>
+                     
+                      <li><a href="graficas.php">Estadisticas</a></li>
                       <?php 
                       }
                       ?>
-                      <li><a href="graficas.php">Estadisticas</a></li>
                       
                   </ul>
                 </li>
                 <li class="ripple">
                       <a class="tree-toggle nav-header">
+                      <?php 
+                      if($clausurado==0){
+                      ?>
                         <span class="fa fa-list-alt"></span> Control de Notas
+                        <?php 
+                      }else{
+                      ?>
+                      <span class="fa fa-list-alt"></span> Notas <?php echo $anio;?>
+                      <?php
+                       }
+                       ?>
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
@@ -119,12 +158,20 @@ Swal({
                       ?>
                       <li><a href="fperiodo.php">Gestión de Periodos</a></li>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
-                        <li><a href="notasParciales.php">Notas Parciales</a></li>
-                        <li><a href="listabus.php">Boleta de notas</a></li>
+                        <?php 
+                      }?>
+ <li><a href="notasParciales.php">Notas Parciales</a></li>
+                  
+                      <?php 
+                      if($clausurado==0){
+                      ?>
+                       
+                       
                         <?php 
                       }
                       ?>
-                        <li><a href="listabus.php">Estadisticas</a></li>
+                      
+                     
                       
                       </ul>
                     </li>
@@ -208,9 +255,7 @@ Swal({
                     <li><a href="listaUsuariosInactivos.php">Usuarios Inactivos</a></li>
                     
                   </ul>
-                  <?php 
-                      }
-                      ?>
+                
 
                 </li>
                
@@ -229,6 +274,9 @@ Swal({
                         
                       </ul>
                     </li>
+                    <?php 
+                      }
+                      ?>
                     <!-- <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa-diamond fa"></span> Combos

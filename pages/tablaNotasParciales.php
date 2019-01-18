@@ -1,7 +1,15 @@
 <?php 
  
  include "../config/conexion.php" ; 
-                            
+
+ $result = $conexion->query("select * from tanio where iestado=1 ");
+ if($result)
+ {
+   while ($fila=$result->fetch_object()) {
+     $anioActivo=$fila->eid_anio;   
+   }
+ }
+
 $idMateria;
 $periodoActivo;
 $anio;
@@ -19,7 +27,7 @@ if(empty($_REQUEST)){
     talumno.eid_alumno as idAlumno,
     talumno.cnie as nie,
     talumno.cnombre as nombre,
-    talumno.capellido as apellido,
+    talumno.capellido as apellido,talumno.anio,
     tmaterias.eid_materia,
     tmaterias.cnombre as nombreMat,
     tnotas.eid_notas as idnotas,
@@ -43,7 +51,7 @@ if(empty($_REQUEST)){
     tnotas.dnota3p4,
     tnotas.drecuperacionp4,
     tnotas.dpromediop4,
-    tanio.eid_anio,
+    tanio.eid_anio, tanio.iestado,
     tanio.canio
     FROM
     talum_mat_not
@@ -51,7 +59,7 @@ if(empty($_REQUEST)){
     INNER JOIN tmaterias ON talum_mat_not.efk_idmateria = tmaterias.eid_materia
     INNER JOIN tnotas ON talum_mat_not.efk_idnota = tnotas.eid_notas
     INNER JOIN tanio ON talum_mat_not.efk_anio = tanio.eid_anio
-    WHERE tmaterias.eid_materia = $idMateria AND talum_mat_not.efk_anio = $anio";
+    WHERE tmaterias.eid_materia = $idMateria AND talum_mat_not.efk_anio = $anio AND talumno.anio= $anio";
 
     $result = $conexion->query($consulta);
 
