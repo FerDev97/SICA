@@ -85,7 +85,8 @@ function sweetError(str){
      <div class="container-login100">
      <div class="wrap-login100 p-l-25 p-r-20 p-t-45 p-b-60">
      <span class="login100-form-title p-b-73">
-                         Iniciar Sesion
+                         Iniciar Sesión <br> <br>
+                         <img src="../asset/img/logo.png" style="width:150px;height=150px">
                      </span>
                      <div class="login">
                      <form name="form" method="post" action="chekLogin.php">

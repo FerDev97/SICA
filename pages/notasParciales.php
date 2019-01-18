@@ -24,6 +24,7 @@ $datosSeccion=array();
 $datosGrado=array();
 $idanioActivo;
 $anioActivo;
+$idP="0";
 
 if($_SESSION["logueado"] == TRUE) {
   $nombre=$_SESSION["usuario"];
@@ -56,7 +57,7 @@ if($_SESSION["logueado"] == TRUE) {
               $idPersonalDocente=$aux[2];//se recupera eid_personal asociado al usuario logueado
               $nombre2=$aux[3];
               $apellido2=$aux[4];
-
+              $idP=$idPersonalDocente;
               $nombreCompleto="$nombre2 $apellido2";
               
               //Obteniendo los datos para los combobox del header de la tabla
@@ -294,7 +295,7 @@ if($_SESSION["logueado"] == TRUE) {
                     <div class="panel-heading col-md-12">
                             <!--Anio activo-->
                             <input id="idAnio" type="hidden" value="<?php echo $idanioActivo;?>">
-
+                            <input id="idP" type="hidden" value="<?php echo $idP;?>">
                            <h5 class="col-md-2">Grado: <br>
                                   <select id="grado" class="form-control">  
                                     <option value="0" selected hidden>Seleccione</option>
@@ -1075,6 +1076,7 @@ if($_SESSION["logueado"] == TRUE) {
           var grado   = $("#grado").val();
           var bach    = $("#bach").val();
           var seccion = $("#seccion").val();
+          var idP = $("#idP").val();
 
           if(grado == 0){
             return false;
@@ -1092,7 +1094,7 @@ if($_SESSION["logueado"] == TRUE) {
                   data: {grado:grado, bach:bach, seccion:seccion},
                   success: function(respuesta) {
                       if(respuesta != 0){
-                        $(".mat").load("comboMaterias.php?id="+respuesta);
+                        $(".mat").load("comboMaterias.php?id="+respuesta+"&idP="+idP);
                       }else{
                         alert("Seleccione correctamente los campos");
                       }           
@@ -1111,7 +1113,8 @@ if($_SESSION["logueado"] == TRUE) {
         var grado   = $("#grado").val();
         var bach    = $("#bach").val();
         var seccion = $("#seccion").val();
-          
+        var idP = $("#idP").val();
+
          if(grado == 0){
             return false;
           }
@@ -1129,7 +1132,7 @@ if($_SESSION["logueado"] == TRUE) {
                 data: {grado:grado, bach:bach, seccion:seccion},
                 success: function(respuesta) {
                     if(respuesta != 0){
-                      $(".mat").load("comboMaterias.php?id="+respuesta);
+                      $(".mat").load("comboMaterias.php?id="+respuesta+"&idP="+idP);
                     }else{
                       alert("Seleccione correctamente los campos");
                     }           
@@ -1148,6 +1151,7 @@ if($_SESSION["logueado"] == TRUE) {
         var grado   = $("#grado").val();
         var bach    = $("#bach").val();
         var seccion = $("#seccion").val();
+        var idP = $("#idP").val();
 
           if(grado == 0){
             return false;
@@ -1165,7 +1169,7 @@ if($_SESSION["logueado"] == TRUE) {
                 data: {grado:grado, bach:bach, seccion:seccion},
                 success: function(respuesta) {
                     if(respuesta != 0){
-                      $(".mat").load("comboMaterias.php?id="+respuesta);
+                      $(".mat").load("comboMaterias.php?id="+respuesta+"&idP="+idP);
                     }else{
                       alert("Seleccione correctamente los campos");
                     }           
@@ -1185,7 +1189,11 @@ if($_SESSION["logueado"] == TRUE) {
            var periodoAct = $("#periodo").val();
            var anio = $("#idAnio").val();
             
-           $(".tabla_ajax").load("tablaNotasParciales.php?idMateria="+idMateria+"&periodo="+periodoAct+"&anio="+anio);
+           if(idMateria == "n" || idMateria == "0"){
+            sweetInfo("No hay materias cargadas", "verifique datos de opcion");
+           }else{
+              $(".tabla_ajax").load("tablaNotasParciales.php?idMateria="+idMateria+"&periodo="+periodoAct+"&anio="+anio);
+           }
            
 
       });
