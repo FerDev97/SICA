@@ -391,6 +391,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                         
                      })
                     }
+                    
 
                   //SWEET ALERTS 
 </script>

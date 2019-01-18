@@ -203,7 +203,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
       </div>
       <!--MODAL-->
-      <div class="modal fade" id="modalito">
+      <div class="modal fade" id="modalitor">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -332,7 +332,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                 $("#opcion option[value=0]").prop("selected",true);
                 $("#seccion option[value=0]").prop("selected",true);
                 $("#cupo").val(0);
-                $("#modalito").modal('hide');
+                $("#modalitor").modal('hide');
                 sweetGuardo(respuesta);
                 $(".tabla_ajax").load("tablaOpcCom.php"); 
                 //$('#datatables-example').DataTable();
@@ -357,7 +357,7 @@ $("#cupo").val(cupo);
 //$("#estado option[value="+estado+"]").prop("selected", true);
 //$("#bloque").val(horas);
 $("#id").val(id);
-$("#modalito").modal();
+$("#modalitor").modal();
 
 }
 

@@ -10,12 +10,19 @@ class myPDF extends FPDF{
  
 
                       include '../config/conexion.php';
-                      $result2 = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo and op.eid_opcion=".$id);
+                      $result2 = $conexion->query("SELECT
+                      tpersonal.cnombre,
+                      tusuarios.cusuario,
+                      tusuarios.eid_usuario,
+                      tpersonal.capellido
+                      FROM
+                      tusuarios
+                      INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal where tusuarios.eid_usuario=".$id);
                       if ($result2) {
 
                         while ($fila2 = $result2->fetch_object()) {
                          
-                             $op=$fila2->grado." ° ".$fila2->nombre." seccion ".$fila2->seccion;
+                             $op=$fila2->cusuario." - ".$fila2->cnombre." ".$fila2->cnombre."";
                         
                            }
                       }else{
@@ -38,7 +45,7 @@ class myPDF extends FPDF{
         $this->Cell(195,10,utf8_decode("Correo electrónico: cec.la_santafamilia@hotmail.com"),0,0,"C");
         $this->Ln();
         $this->SetFont("Arial","B",13);
-        $this->Cell(195,5,utf8_decode("Listado de alumnos en el sistema para: ".$op),0,0,"C");
+        $this->Cell(195,5,utf8_decode("Bitacora de Usuario: ".$op),0,0,"C");
         $this->Ln();
     }
     function footer(){
@@ -54,10 +61,11 @@ class myPDF extends FPDF{
     function headerTable(){
         $this->Ln();
         $this->SetFont("Times","B",11);
-        $this->Cell(30,10,"NIE",1,0,"C");
-        $this->Cell(50,10,"Nombre",1,0,"C");
-        $this->Cell(70,10,"Apellido",1,0,"C");
-        $this->Cell(40,10,"Sexo",1,0,"C");
+        $this->Cell(20,10,"Usuario",1,0,"C");
+        $this->Cell(35,10,"Nombre",1,0,"C");
+        $this->Cell(35,10,"Apellido",1,0,"C");
+        $this->Cell(25,10,"Fecha",1,0,"C");
+        $this->Cell(75,10,"Descripcion",1,0,"C");
         
         // $this->Cell(20,10,"Estado",1,0,"C");
         $this->Ln();
@@ -78,20 +86,25 @@ if($result)
  
         $this->SetFont("Times","",11);
                          include '../config/conexion.php';
-                      $result = $conexion->query("select a.cnie as nie,a.cnombre as nombre,a.capellido as apellido,a.sexo as sexo,a.cbachillerato as op FROM talumno as a WHERE  a.anio='".$anioActivo."' and a.cbachillerato=".$id);
+                         if($id==""){
+                            $result = $conexion->query("SELECT tbitacora.efk_idusuario,dtfecha,cdescripcion,tpersonal.cnombre,capellido,tusuarios.cusuario FROM tbitacora INNER JOIN tusuarios ON tbitacora.efk_idusuario = tusuarios.eid_usuario INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal Order by eid_bitacora");
+                         }else{
+                            $result = $conexion->query("SELECT tbitacora.efk_idusuario,dtfecha,cdescripcion,tpersonal.cnombre,capellido,tusuarios.cusuario FROM tbitacora INNER JOIN tusuarios ON tbitacora.efk_idusuario = tusuarios.eid_usuario INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal where tusuarios.eid_usuario='".$id."' Order by eid_bitacora");
+                         }
+                    
                       if ($result) {
                           while ($fila = $result->fetch_object()) {                                          
                               
-                              $this->Cell(30,8,$fila->nie,1,0,"C");
-                              $this->Cell(50,8,$fila->nombre,1,0,"C"); 
-                              $this->Cell(70,8,$fila->apellido,1,0,"C");
-                              if($fila->sexo==0){
-                                $this->Cell(40,8,"Masculino",1,0,"C");
+                              $this->Cell(20,8,$fila->cusuario,1,0,"C");
+                              $this->Cell(35,8,$fila->cnombre,1,0,"C"); 
+                              $this->Cell(35,8,$fila->capellido,1,0,"C");
+                              $newf=date('d/m/Y', strtotime($fila->dtfecha));
+                              $this->Cell(25,8,$newf,1,0,"C");
+                                $this->Cell(75,8,$fila->cdescripcion,1,0,"C");
 
-                              }else{
-                                $this->Cell(40,8,"Femenino",1,0,"C");
+                          
 
-                              }                             
+                                                          
                               //$this->Cell(40,8,$fila->sexo,1,0,"C");
                              
                             //    if ($fila->estado==1) {

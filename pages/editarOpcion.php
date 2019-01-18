@@ -8,7 +8,7 @@ $cupo = $_POST['cupo'];
 $id = $_POST['id'];
 $mensaje = "";
 
-$query = "SELECT efk_bto, efk_grado, efk_seccion FROM topciones WHERE efk_bto like '%".$opcion."%' AND efk_grado like '%".$grado."%'AND ecupo_maximo like'%".$cupo."%' AND efk_seccion like '%".$seccion."';";
+$query = "SELECT efk_bto, efk_grado, efk_seccion FROM topciones WHERE efk_bto like '%".$opcion."%' AND efk_grado like '%".$grado."%' AND efk_seccion like '%".$seccion."';";
 $result = $conexion->query($query);
     if($result->num_rows == 0){
         $consulta  = "UPDATE topciones SET efk_grado='" .$grado. "', efk_bto='" . $opcion . "', efk_seccion='".$seccion."',ecupo_maximo='".$cupo."' WHERE eid_opcion='".$id."'";

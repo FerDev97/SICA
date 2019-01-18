@@ -38,12 +38,12 @@ if ($result) {
              </button></td>";
        }
        
-       $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
-       $aux.="onclick=\"editar('".$fila->eid_opcion."','".$fila->efk_grado."','".$fila->efk_bto."','".$fila->efk_seccion."','".$fila->ecupo_maximo."')\";>";
-       $aux.="Modificar</button>";
-       echo "<td width='90'>";
+    //    $aux= "<button type=\"button\" class=\"btn btn-warning btn-sm btn-round\" ";
+    //    $aux.="onclick=\"editar('".$fila->eid_opcion."','".$fila->efk_grado."','".$fila->efk_bto."','".$fila->efk_seccion."','".$fila->ecupo_maximo."')\";>";
+    //    $aux.="Modificar</button>";
+    //    echo "<td width='90'>";
      
-       echo $aux;
+    //    echo $aux;
                                 
         echo "</tr>";
 

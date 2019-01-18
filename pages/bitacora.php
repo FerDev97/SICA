@@ -136,6 +136,11 @@ function sweetConfirm(){
         //  alert(id);
            window.open("../ayuda/bitacora.pdf",'_blank');
         }
+        function reporte(){
+          var cont = "<?php echo $_GET['ide'];?>"; 
+        
+          window.open("reporteBit.php?id="+cont, '_blank');
+        }
 
       </script>
 </head>

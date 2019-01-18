@@ -192,7 +192,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                           <th>Seccion</th>
                           <th>Estado</th>
                           <th>Alta/Baja</th>
-                          <th>Editar</th>
+                 
                           
                         </tr>
                       </thead>

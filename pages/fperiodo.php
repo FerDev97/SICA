@@ -799,6 +799,8 @@ $resultadoDesac = $conexion->query($consultaDesac);
     if ($resultado) {
       echo "<script type='text/javascript'>";
      // echo "alert('Exito');";
+     include "IB.php";
+     IB:: insertar($_SESSION["id"],"Aperturó periodo");
       echo "document.location.href='fperiodo.php';";
       echo "</script>";
     } else { 

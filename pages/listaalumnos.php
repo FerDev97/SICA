@@ -153,6 +153,7 @@ if($result)
                                   </select>
                                 </h5> 
                                 <span class="col-md-6"></span>
+                                
                     <div class="col-md-2">
                     <a class="btn btn-outline btn-default" >
                     <span onclick="reporte();" title="Estadistico por sexo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
