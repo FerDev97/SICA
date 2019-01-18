@@ -791,6 +791,8 @@ if ($bandera == "activar") {
   $result2 = $conexion->query($consultaDesac);
   if ($result2) {
     msgAdd("Se habilitó la inscripción.");
+    include "IB.php";
+IB:: insertar($_SESSION["id"],"Aperturó periodo de inscripcion");
   }
  
 
@@ -800,6 +802,8 @@ if ($bandera == "desactivar") {
   $result2 = $conexion->query($consultaDesac);
   if ($result2) {
     msgAdd("Se deshabilitó la inscripción.");
+    include "IB.php";
+    IB:: insertar($_SESSION["id"],"Cerró periodo de inscripcion");
   }
  
 
