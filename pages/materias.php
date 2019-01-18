@@ -166,7 +166,10 @@ function sweetError(str){
         function cancel(){
           document.location.href='materias.php';
         }
-        
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/fmateria.pdf",'_blank');
+        }
       </script>
 </head>
 
@@ -184,10 +187,16 @@ function sweetError(str){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Agregar Nueva Materia</h3>
+                         <h3 class="animated fadeInLeft" class="col-md-2">Agregar Nueva Materia</h3>
                         <p class="animated fadeInDown">
                           Materia <span class="fa-angle-right fa"></span>Datos de la materia.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
                 </div>

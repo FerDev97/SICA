@@ -193,6 +193,10 @@ function verificar(){
 
 
         }
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/fusuario.pdf",'_blank');
+        }
       </script>
 </head>
 
@@ -212,8 +216,14 @@ function verificar(){
 
                          <h3 class="animated fadeInLeft">Agregar nuevo Usuario</h3>
                         <p class="animated fadeInDown">
-                          Usuario <span class="fa-angle-right fa"></span>Datos del Usuario.
+                          Usuario <span class="fa-angle-right fa" class="col-md-2"></span>Datos del Usuario.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
                 </div>
