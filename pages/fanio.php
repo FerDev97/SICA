@@ -96,6 +96,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   }
 })
         }
+       
 
 
         function sweetGuardo(str){
@@ -115,7 +116,10 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
 
       //SWEET ALERTS
-
+ function reporte(id){
+        //  alert(id);
+           window.open("../ayuda/fanio.pdf",'_blank');
+        }
      
      
 
