@@ -280,7 +280,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                             sweetGuardo("Se asignó correctamente");
                             $(".tabla_ajax").load("tablaPermisos.php"); 
                             $('#datatables-example').DataTable();
-                              
+                               
                           }
                           if(respuesta==2){
                             
