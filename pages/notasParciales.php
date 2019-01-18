@@ -234,8 +234,9 @@ if($_SESSION["logueado"] == TRUE) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-       function reporte(){
-          window.open("reporteBO.php",'_blank');
+       function reporte(id){
+        //  alert(id);
+           window.open("reporteBO.php?id="+id,'_blank');
         }
 
          

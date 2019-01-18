@@ -23,7 +23,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   if ($result) {
     while ($fila = $result->fetch_object()) {
         $idAlumnoR        = $fila->eid_alumno;
-        $codigoAR         = $fila->ccodigo;
+        $codigoAR           = $fila->ccodigo;
         $nieR             = $fila->cnie;
         $nombreAR         = $fila->cnombre;
         $apellidoAR       = $fila->capellido;

@@ -197,10 +197,7 @@ function go(){
         sweetError("Cuidado.! Es necesario el registro del DUI de almenos un encargado");
         return 0;
       }
-     if(document.getElementById("direccionp").value==""){
-        sweetError("Cuidado.! La direccion es obligatoria");
-        return 0;
-      }if(document.getElementById("estadop").value=="Seleccione"){
+    if(document.getElementById("estadop").value=="Seleccione"){
         sweetError("Cuidado.! El estado civil de los padres es obligatorio");
         return 0;
       }if(document.getElementById("convivea").value=="Seleccione"){
@@ -263,6 +260,10 @@ function go(){
             document.turismo.submit();
           }
         }
+        function reporte(id){
+        //  alert(id);
+           window.open("../ayuda/fingresoa.pdf",'_blank');
+        }
       </script>
 </head>
 
@@ -285,10 +286,16 @@ function go(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Realizar Inscripcion</h3>
+                         <h3 class="animated fadeInLeft" class="col-md-2">Realizar Inscripcion</h3>
                         <p class="animated fadeInDown">
                           Ficha de inscripcion.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -375,7 +382,6 @@ function go(){
             if ($result1->num_rows >0) {
               echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
               }
-       
          }
       }
       ?>

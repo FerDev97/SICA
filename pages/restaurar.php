@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lista opciones | SICA</title>
+  <title>Lista respaldos | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -39,6 +39,47 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
+        
+        function restore(archivo){
+            
+   $.ajax(
+            {
+                data:archivo,
+                url:'myphp-restore.php',
+                type:'post',
+                beforeSend:function(){
+                   let timerInterval
+Swal({
+  title: '¡Restaurando Base de datos!',
+  html: 'Por favor espere <strong></strong>.',
+  timer: 2000,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      Swal.getContent().querySelector('strong')
+        .textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  onClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  if (
+    // Read more about handling dismissals
+    result.dismiss === Swal.DismissReason.timer
+  ) {
+    console.log('Listo')
+  }
+})
+                },
+                success:function(response) {
+                    // alert(response);
+                    sweetGuardo("Se restauró la base de datos exitosamente.");
+                }
+            }
+
+        );
+        }
 
 //SWEET ALERTS
 
@@ -140,9 +181,9 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista de Opciones de Bachillerato</h3>
+                        <h3 class="animated fadeInLeft">Lista de Respaldos realizados</h3>
                         <p class="animated fadeInDown">
-                          tablas <span class="fa-angle-right fa"></span>Tabla
+                          Tabla <span class="fa-angle-right fa"></span>tabla de respaldos
                         </p>
                     </div>
                   </div>
@@ -157,12 +198,10 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                   <div class="panel-heading col-md-12">
                     
                          
-                    <h3 class="col-md-4">Lista de Opciones Activas</h3> 
+                    <h3 class="col-md-4">Lista de Respaldos Realizados</h3> 
                      <span class="col-md-6"></span>
                      <div class="col-md-2">
-                     <a class="btn btn-outline btn-default" >
-                     <span onclick="reporte();" title="Opciones Activas"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
-                     </a>
+                     
                     </div>
                                                                            
                                                                         
@@ -173,20 +212,37 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                       <thead>
                         <tr>
                           
-                          <th>Codigo</th>
-                          <th>Grado</th>
-                          <th>Nombre</th>
-                          <th>Tipo</th>
-                          <th>Seccion</th>
-                          <th>Estado</th>
-                          <th>Alta/Baja</th>
-                          <th>Editar</th>
+                          <th>Respaldo</th>
+                          
+                          <th>Restaurar</th>
                           
                         </tr>
                       </thead>
                       <tbody class="tabla_ajax">
-
-                      <?php include('tablaOpcCom.php') ?>
+                    
+                    <?php
+                    $directorio = opendir("myphp-backup-files"); //ruta actual
+while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+{
+    if (is_dir($archivo))//verificamos si es o no un directorio
+    {
+        // echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
+    }
+    else
+    {
+        echo "<tr>";
+        echo "<td>".$archivo."</td>";
+        echo "<td style='text-align:center;'><button title='Restaurar este respaldo.' align='center' type='button' class='btn btn-default' onclick=restore('". $archivo."');><i class='fa fa-check'></i>
+             </button></td>";
+         echo "</tr>";
+    }
+}
+                    
+                    
+                    ?>
+                    
+                   
+                      <!-- <?php include('tablaOpcCom.php') ?> -->
                       </tbody>
                         </table>
                       </div>
@@ -203,7 +259,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 
       </div>
       <!--MODAL-->
-      <div class="modal fade" id="modalitor">
+      <div class="modal fade" id="modalito">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -332,7 +388,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                 $("#opcion option[value=0]").prop("selected",true);
                 $("#seccion option[value=0]").prop("selected",true);
                 $("#cupo").val(0);
-                $("#modalitor").modal('hide');
+                $("#modalito").modal('hide');
                 sweetGuardo(respuesta);
                 $(".tabla_ajax").load("tablaOpcCom.php"); 
                 //$('#datatables-example').DataTable();
@@ -357,7 +413,7 @@ $("#cupo").val(cupo);
 //$("#estado option[value="+estado+"]").prop("selected", true);
 //$("#bloque").val(horas);
 $("#id").val(id);
-$("#modalitor").modal();
+$("#modalito").modal();
 
 }
 
@@ -366,19 +422,7 @@ $("#modalitor").modal();
 </body>
 </html>
 <?php
-function msgGuar($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "sweetGuardo('$texto');";
-    echo "document.location.href='listaOpciones.php';";
-    echo "</script>";
-}
-function msgError($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "sweetError('$texto');";
-    echo "</script>";
-}
+
 include "../config/conexion.php";
 
 $bandera = $_REQUEST["bandera"];
@@ -386,30 +430,18 @@ $baccion = $_REQUEST["baccion"];
 
 
 if ($bandera == "desactivar") {
-  $result1 = $conexion->query("SELECT
-  topciones.inscritos,
-  topciones.eid_opcion
-  FROM
-  topciones
-  where eid_opcion=".$baccion);
-  if ($result1) {
-    while ($fila = $result1->fetch_object()) {
-   $inscri=$fila->inscritos;
-    }
-   if($inscri==0){
-    $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
+  $result1 = $conexion->query("SELECT * FROM tmaterias where efk_idopcion=".$baccion);
+  if ($result1->num_rows == 0) {
+  $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
       msgGuar("Registro desactivado");
     } else {
       msgError("No se desactivo el registro");
     }
-   }else{
-    msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
-   }  
 }else{
-  msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
-  }
+msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
+}
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
@@ -420,11 +452,36 @@ if ($bandera == "activar") {
       msgError("No se activo el registro");
     }
 }
-
+if ($bandera == "desaparecer") {
+    $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
+    $resultado = $conexion->query($consulta);
+    if ($resultado) {
+     msgGuar("Registro Activado");
+    } else {
+      msgError("No se activo el registro");
+    }
+}
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
     echo "document.location.href='editempleado.php?id=" . $baccion . "';";
     echo "</script>";
     # code...
 }
+
+function msgGuar($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    echo "document.location.href='fagregaropcion.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    echo "</script>";
+}
+
+  
+
 ?>

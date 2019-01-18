@@ -65,6 +65,7 @@ $telefonotm  = $_POST['telefonotm'];
 $celularm  = $_POST['celularm'];
 $miembrosm  = $_POST['miembrosm'];
 $religiionm  = $_POST['religiionm'];
+
 //Adicionales
 //odos llegan con exito 
 $consulta  = "UPDATE talumno SET ccodigo='".$codigo. "', cnie='" .$NIE. "', cnombre='" .$nombre. "',

@@ -192,7 +192,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
                           <th>Seccion</th>
                           <th>Estado</th>
                           <th>Alta/Baja</th>
-                          <th>Editar</th>
+                 
                           
                         </tr>
                       </thead>
@@ -377,46 +377,44 @@ $("#modalito").modal();
 </body>
 </html>
 <?php
-
+function msgGuar($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    echo "document.location.href='listaOpciones.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    echo "</script>";
+}
 include "../config/conexion.php";
 
 $bandera = $_REQUEST["bandera"];
 $baccion = $_REQUEST["baccion"];
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listaOpciones.php';";
-    echo "</script>";
-}
+
 
 if ($bandera == "desactivar") {
   $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-     msg("Dato Activado");
+      msgGuar("Registro desactivado");
     } else {
-        msg("No se desactivo el registro");
+      msgError("No se desactivo el registro");
     }
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-    msg("Dato activado");
+      msgGuar("Registro Activado");
     } else {
-      msg("No se activo el registro");
+      msgError("No se activo el registro");
     }
 }
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-      sweetError("No se activo el registro");
-    }
-}
+
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
     echo "document.location.href='editempleado.php?id=" . $baccion . "';";
