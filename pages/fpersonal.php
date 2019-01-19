@@ -782,7 +782,7 @@ if ($bandera == "add") {
     if($cargo==2){
       $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
   $result = $conexion->query($query);
-  msg($cargo);
+  
   if($result->num_rows < 1 ){
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
     $resultado = $conexion->query($consulta);
@@ -800,7 +800,7 @@ if ($bandera == "add") {
      
     $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
     $result = $conexion->query($query);
-    msg($cargo);
+   
     if($result->num_rows < 2){
       $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
       $resultado = $conexion->query($consulta);
