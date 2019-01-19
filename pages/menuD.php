@@ -76,7 +76,7 @@ if($result2)
                       ?>
                         <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
                       <li><a href="busquedafamiliar.php">Búsqueda de Alumno por Familiar</a></li>
-                      <li><a href="listacliente.php">Comprobante de inscripción</a></li>
+               
                       <li><a href="nomina.php">Emitir Nomina de alumnos</a></li>
                      
                       

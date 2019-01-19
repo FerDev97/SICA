@@ -374,9 +374,9 @@ if($_SESSION["logueado"] == TRUE) {
                         <tr>
                             <th width='10'>CODIGO</th>
                             <th>NOMBRE DEL ALUMNO</th>
-                            <th>35%</th>
-                            <th>35%</th>
-                            <th>30%</th>
+                            <th>Nota 1</th>
+                            <th>Nota 2</th>
+                            <th>Nota 3</th>
                             <th>Rec.</th>
                             <th>Prom.</th>
                             <th>Accion</th>  
@@ -1039,9 +1039,9 @@ if($_SESSION["logueado"] == TRUE) {
                                                             <tr><th scope="col" colspan="6"><p id="titulo1"></p></th></tr>
                                                             <tr>
                                                               <th scope="col" width="140" >PERIODO</th>
-                                                              <th scope="col" width="107">Nota 1: 35%</th>
-                                                              <th scope="col" width="107">Nota 2: 35%</th>
-                                                              <th scope="col" width="107">Nota 3: 30%</th>
+                                                              <th scope="col" width="107">Nota 1:</th>
+                                                              <th scope="col" width="107">Nota 2:</th>
+                                                              <th scope="col" width="107">Nota 3:</th>
                                                               <th scope="col" width="107">Recuperación</th>
                                                               <th scope="col" width="107">Promedio</th>
                                                               

@@ -19,7 +19,6 @@ $fila=$result->fetch_row();
           } else {
               $mensaje="2";// Error: Los datos no se agregaron
           }
-        
     }else{
 
         $consulta  = "UPDATE tpermisos SET ep_inscripciones='" .$perIns. "', ep_estadisticas='" . $perEst . "' WHERE efk_idusuario='".$id."'";

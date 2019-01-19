@@ -127,7 +127,7 @@ Swal({
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="listacliente.php">Comprobante de inscripción</a></li>
+                    
                       <li><a href="nomina.php">Emitir Nomina de alumnos</a></li>
                      
                       <li><a href="graficas.php">Estadisticas</a></li>

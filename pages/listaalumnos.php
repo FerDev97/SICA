@@ -296,6 +296,7 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
+    
         $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE  topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
 if ($result2) {
     while ($fila2 = $result2->fetch_object()) {
@@ -556,24 +557,6 @@ function msg($texto)
     echo "</script>";
 }
 
-if(empty($_REQUEST)){
-
-}else{
-   $bandera = $_REQUEST["banderita"];
-   $mensaje = $_REQUEST["mensajito"];
-
-   if($bandera == "1"){
-      echo "<script type='text/javascript'>";
-      echo "sweetGuardo('Se modificó la inscripción correctamente');";
-      echo "</script>";
-   }else{
-    echo "<script type='text/javascript'>";
-    echo "sweetError('Error al modificar la inscripción');";
-    echo "</script>";
-   }
-
-
-}
   
 
 ?>

@@ -22,7 +22,7 @@ class myPDF extends FPDF{
 
                         while ($fila2 = $result2->fetch_object()) {
                          
-                             $op=$fila2->cusuario." - ".$fila2->cnombre." ".$fila2->cnombre."";
+                             $op=$fila2->cusuario." - ".$fila2->cnombre." ".$fila2->capellido."";
                         
                            }
                       }else{
