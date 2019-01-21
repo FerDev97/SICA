@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2019 a las 21:35:23
+-- Tiempo de generación: 21-01-2019 a las 05:06:00
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -463,7 +463,8 @@ INSERT INTO `tbitacora` (`eid_bitacora`, `efk_idusuario`, `dtfecha`, `cdescripci
 (160, 13, '2019-01-18 11:21:03', 'Inscribio un nuevo alumno'),
 (161, 13, '2019-01-18 11:21:03', 'Inscribio un nuevo alumno'),
 (162, 13, '2019-01-18 11:33:00', 'AperturÃ³ periodo'),
-(163, 13, '2019-01-18 11:37:51', 'AperturÃ³ periodo');
+(163, 13, '2019-01-18 11:37:51', 'AperturÃ³ periodo'),
+(164, 13, '2019-01-20 09:28:44', 'IniciÃ³ sesion Administrador');
 
 -- --------------------------------------------------------
 
@@ -1081,7 +1082,7 @@ ALTER TABLE `tbachilleratos`
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
-  MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `eid_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 --
 -- AUTO_INCREMENT de la tabla `tcargos`
 --
