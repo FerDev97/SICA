@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SICA-Bitacora</title>
+  <title>Bitácora  | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -127,7 +127,20 @@ function sweetConfirm(){
 
 
         }
-
+        function filtrar(){
+          id=document.getElementById("op").value;
+          $("#ide").val(id);
+          document.form.submit();
+        }
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/bitacora.pdf",'_blank');
+        }
+        function reporte(){
+          var cont = "<?php echo $_GET['ide'];?>"; 
+        
+          window.open("reporteBit.php?id="+cont, '_blank');
+        }
 
       </script>
 </head>
@@ -145,13 +158,24 @@ function sweetConfirm(){
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Bitacora</h3>
+                        <h3 class="animated fadeInLeft" class="col-md-2">Bitácora</h3>
                         <p class="animated fadeInDown">
                           tablas <span class="fa-angle-right fa"></span>Tabla
                         </p>
+                    <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
               </div>
+              <form id="form" name="form" action="" method="GET">
+<div class="input-group " style="padding-bottom:20px;">
+  <input id="ide" type="hidden" class="form-control" name="ide" placeholder="En que año estudio el grado anterior">
+  </div>
+  </form>
               <form id="turismo" name="turismo" action="" method="post">
               <input type="hidden" name="bandera" id="bandera">
               <input type="hidden" name="baccion" id="baccion">
@@ -159,19 +183,55 @@ function sweetConfirm(){
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Registro</h3></div>
+                    <div class="panel-heading"><h3>Registro de Bitácora</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
-                      <label for="" style="font-size:15px;">Selecciones opcion de filtrado</label>
+                      <label for="" style="font-size:15px;">Filtrado por usuario</label>
                       <form class="form-inline" method="get">
 				              <div class="form-group">
-					                    <select name="filter" class="form-control" onchange="form.submit()">
-					                    	<option value="0">Filtros de datos de empleados</option>
-						                    <?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL);  ?>
-					                    	<option value="1" <?php if($filter == 'Tetap'){ echo 'selected'; } ?>>Usuario</option>
-						                    <option value="2" <?php if($filter == 'Kontrak'){ echo 'selected'; } ?>>Fecha</option>
-                                            <option value="3" <?php if($filter == 'Outsourcing'){ echo 'selected'; } ?>>Tipo de Usuario</option>
-					                    </select>
+                      <div class="col-md-3">
+					                    <select name="op" id="op" class="form-control" onchange="filtrar()">
+					                    	<option value="0" selected hidden>Usuarios</option>
+                                <?php  
+      include "../config/conexion.php";
+      //
+      $result = $conexion->query("SELECT
+      tpersonal.cnombre,
+      tusuarios.cusuario,
+      tusuarios.eid_usuario,
+      tpersonal.capellido
+      FROM
+      tusuarios
+      INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal");
+      if ($result) {
+          while ($fila = $result->fetch_object()) {
+            
+              echo "<option value=".$fila->eid_usuario.">".$fila->cnombre."".$fila->capellido."</option>";
+              
+         }
+      }
+      ?>
+						                    </select>
+                              </div>
+                            
+                          
+                               <div  class="col-md-1"id="botonFiltrar" > 
+                                  
+                                <a class="btn btn-outline btn-default">
+                                      <i class="fa fa-search fa-lg"></i><br>Filtrar
+                                    </a>
+                                 
+                                </div>
+                                <div class="col-md-8">
+                                  
+
+                                  <a class="btn btn-outline btn-default" >
+                                      <span onclick="reporte();"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                                    </a>
+                                    
+                                  
+                               </div>
+                               <br><br>
 			                    	</div>
 		                    	</form>
                               <BR></BR>
@@ -192,7 +252,12 @@ function sweetConfirm(){
 
                       <?php
 include "../config/conexion.php";
+if(!isset($_GET['ide'])){
 $result = $conexion->query("SELECT tbitacora.efk_idusuario,dtfecha,cdescripcion,tpersonal.cnombre,capellido,tusuarios.cusuario FROM tbitacora INNER JOIN tusuarios ON tbitacora.efk_idusuario = tusuarios.eid_usuario INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal Order by eid_bitacora");
+}if(isset($_GET['ide'])){
+  $ide=$_GET['ide'];
+  $result = $conexion->query("SELECT tbitacora.efk_idusuario,dtfecha,cdescripcion,tpersonal.cnombre,capellido,tusuarios.cusuario FROM tbitacora INNER JOIN tusuarios ON tbitacora.efk_idusuario = tusuarios.eid_usuario INNER JOIN tpersonal ON tusuarios.efk_personal = tpersonal.eid_personal where tusuarios.eid_usuario='".$ide."' Order by eid_bitacora");
+}
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
@@ -204,7 +269,10 @@ if ($result) {
         echo "<td>" . $fila->cusuario . "</td>";
         echo "<td>" . $fila->cnombre . "</td>";
         echo "<td>" . $fila->capellido . "</td>";
-        echo "<td>" . $fila->dtfecha . "</td>";
+        // echo format_date_Y_mm_dd($fecha1);
+       
+        $newf=date('d/m/Y', strtotime($fila->dtfecha));
+        echo "<td>" .$newf. "</td>";
         echo "<td>" . $fila->cdescripcion . "</td>";
        
            //echo "<td><img src='imagenes.php?id=" . $fila->idempleados . "&tipo=empleado' width=100 height=180></td>";

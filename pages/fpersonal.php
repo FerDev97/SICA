@@ -31,7 +31,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Agregar nuevo Personal | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -218,7 +218,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Personal</h3>
+                         <h3 class="animated fadeInLeft"> Agregar nuevo Personal</h3>
                         <p class="animated fadeInDown">
                           Personal <span class="fa-angle-right fa"></span>Datos del Personal.
                         </p>
@@ -293,27 +293,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                               </div> 
                               <br>
                               
-                              <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
-     <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
-      <select id="cargo"   class="select2 show-tick" style="width: 495px; font-size: 15px" name="cargo">
-      <option value="">Seleccione Cargo</option>
-      <?php
+                    <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+                          <i  class="fa fa-suitcase"></i><span class="label label-default" style="width: 100px; font-size: 15px">Cargo</span>
+                          <select id="cargo"   class="select2 show-tick" style="width: 495px; font-size: 15px" name="cargo">
+                          <option value="">Seleccione Cargo</option>
+                          <?php
                       include '../config/conexion.php';
-
                       $result = $conexion->query("select eid_cargo as id,ccargo as nombre FROM tcargos");
                       if ($result) {
-
                         while ($fila = $result->fetch_object()) {
                           echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                         
-                        
                            }
                       }
                        ?>
                        </select>
-                              
-      
-      </div>
+                </div>
       
       <br>
       <div class="input-group " style="padding-bottom:25px;">
@@ -788,7 +782,7 @@ if ($bandera == "add") {
     if($cargo==2){
       $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
   $result = $conexion->query($query);
-  msg($cargo);
+  
   if($result->num_rows < 1 ){
     $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
     $resultado = $conexion->query($consulta);
@@ -806,7 +800,7 @@ if ($bandera == "add") {
      
     $query = "select efk_idcargo FROM tpersonal WHERE efk_idcargo like '%".$cargo."%';";
     $result = $conexion->query($query);
-    msg($cargo);
+   
     if($result->num_rows < 2){
       $consulta  = "INSERT INTO tpersonal VALUES('null','" . $dui . "','" . $nombre . "','" . $apellido . "','" . $telefono . "','" . $correo . "','" . $direccion . "','" . $fechanacimiento. "','" . $estado . "','" . $sexo . "','" . $cargo . "')";
       $resultado = $conexion->query($consulta);

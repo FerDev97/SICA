@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SICA-Opciones</title>
+  <title>Lista opciones | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -41,26 +41,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
       <script type="text/javascript">
 
 //SWEET ALERTS
-function sweetConfirm(){
-        swal({
-  title: '¿Está seguro que desea continuar?',
-  text: "¡No sera posible revertir esta acción!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Continuar',
-  cancelButtonText:'Cancelar',
-}).then((result) => {
-  if (result.value) {
-    swal(
-      '¡Exito!',
-      'La accion ha sido completada.',
-      'success'
-    )
-  }
-})
-        }
+
 
 
         function sweetGuardo(str){
@@ -86,46 +67,60 @@ function sweetConfirm(){
           document.getElementById('baccion').value=id;
          document.turismo.submit();
         }
-         function confirmar(id)
-        {
-          //alert("entra");
-          if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            alert(id);
-            document.turismo.submit();
-          }else
-          {
-           // alert("No entra");
-          }
-
-        }
+       
+    
         function confirmarAct(id,op)
         {
-          //alert("entra");
-          
           if (op==1) {
-            if (confirm("!!Advertencia!! Desea Desactivar Este Registro?")) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
+            sweetConfirm2(id);
 
-            document.turismo.submit();
-          }else
-          {
-            //("No entra");
-          }
           }else{
-            if (confirm("!!Advertencia!! Desea Activar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
+            sweetConfirm(id);
+
+          }
+        }
+        function sweetConfirm(id){
+        swal({
+  title: '¿Está seguro que desea activar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+     document.getElementById('bandera').value='activar';
             document.getElementById('baccion').value=id;
             document.turismo.submit();
-          }else
-          {
-            alert("No entra");
-          }
-          }
+  }
+})
+        }
+        
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+    document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
 
-
+  }
+})
+        }
+        function reporte(){
+          window.open("reporteOA.php",'_blank');
         }
 
 
@@ -159,7 +154,19 @@ function sweetConfirm(){
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista</h3></div>
+                  <div class="panel-heading col-md-12">
+                    
+                         
+                    <h3 class="col-md-4">Lista de Opciones Activas</h3> 
+                     <span class="col-md-6"></span>
+                     <div class="col-md-2">
+                     <a class="btn btn-outline btn-default" >
+                     <span onclick="reporte();" title="Opciones Activas"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                     </a>
+                    </div>
+                                                                           
+                                                                        
+           </div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -196,7 +203,7 @@ function sweetConfirm(){
 
       </div>
       <!--MODAL-->
-      <div class="modal fade" id="modalito">
+      <div class="modal fade" id="modalitor">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -325,7 +332,7 @@ function sweetConfirm(){
                 $("#opcion option[value=0]").prop("selected",true);
                 $("#seccion option[value=0]").prop("selected",true);
                 $("#cupo").val(0);
-                $("#modalito").modal('hide');
+                $("#modalitor").modal('hide');
                 sweetGuardo(respuesta);
                 $(".tabla_ajax").load("tablaOpcCom.php"); 
                 //$('#datatables-example').DataTable();
@@ -350,7 +357,7 @@ $("#cupo").val(cupo);
 //$("#estado option[value="+estado+"]").prop("selected", true);
 //$("#bloque").val(horas);
 $("#id").val(id);
-$("#modalito").modal();
+$("#modalitor").modal();
 
 }
 
@@ -359,7 +366,19 @@ $("#modalito").modal();
 </body>
 </html>
 <?php
-
+function msgGuar($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetGuardo('$texto');";
+    echo "document.location.href='listaOpciones.php';";
+    echo "</script>";
+}
+function msgError($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "sweetError('$texto');";
+    echo "</script>";
+}
 include "../config/conexion.php";
 
 $bandera = $_REQUEST["bandera"];
@@ -367,46 +386,45 @@ $baccion = $_REQUEST["baccion"];
 
 
 if ($bandera == "desactivar") {
-  $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
+  $result1 = $conexion->query("SELECT
+  topciones.inscritos,
+  topciones.eid_opcion
+  FROM
+  topciones
+  where eid_opcion=".$baccion);
+  if ($result1) {
+    while ($fila = $result1->fetch_object()) {
+   $inscri=$fila->inscritos;
+    }
+   if($inscri==0){
+    $consulta = "UPDATE topciones SET eestado = '0' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Dato Activado");
+      msgGuar("Registro desactivado");
     } else {
-        msg("No se desactivo el registro");
+      msgError("No se desactivo el registro");
     }
+   }else{
+    msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
+   }  
+}else{
+  msgError("Imposible desactivar el registro porque ya hay alumnos inscritos");
+  }
 }
 if ($bandera == "activar") {
   $consulta = "UPDATE topciones SET eestado = '1' WHERE eid_opcion = '".$baccion."'";
     $resultado = $conexion->query($consulta);
     if ($resultado) {
-      msg("Dato activado");
+      msgGuar("Registro Activado");
     } else {
-      msg("No se activo el registro");
+      msgError("No se activo el registro");
     }
 }
-if ($bandera == "desaparecer") {
-    $consulta  = "DELETE FROM empleado where idempleado='" . $baccion . "'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-        msg("Exito");
-    } else {
-      sweetError("No se activo el registro");
-    }
-}
+
 if ($bandera == 'enviar') {
     echo "<script type='text/javascript'>";
     echo "document.location.href='editempleado.php?id=" . $baccion . "';";
     echo "</script>";
     # code...
 }
-function msg($texto)
-{
-    echo "<script type='text/javascript'>";
-    echo "alert('$texto');";
-    echo "document.location.href='listaOpciones.php';";
-    echo "</script>";
-}
-
-  
-
 ?>

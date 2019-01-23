@@ -19,9 +19,22 @@ if($result)
 {
   while ($fila=$result->fetch_object()) {
     $anioActivo=$fila->eid_anio;
+    $anio=$fila->canio;
   
   }
 }
+$result = $conexion->query("SELECT
+talumno.eid_alumno
+FROM
+talumno ORDER BY eid_alumno asc");
+if($result)
+{
+  while ($fila=$result->fetch_object()) {
+    $ida=$fila->eid_alumno;
+  
+  }
+}
+
  ?>
  <?php
 include '../config/conexion.php';
@@ -43,7 +56,7 @@ include '../config/conexion.php';
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inscripcion</title>
+  <title>Realizar Inscripción | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -116,11 +129,16 @@ function go(){
 }
     function verificarCamposObligatoriosPersonales(){
        //alert(document.getElementById("nombrea").value);
+       var cont = "<?php echo $anio;?>"; 
+   
       if(document.getElementById("nombrea").value==""){
         sweetError("Cuidado.! El Nombre es obligatorio");
         return 0;
       }if(document.getElementById("apellidoa").value==""){
         sweetError("Cuidado.! El Apellido es obligatorio");
+        return 0;
+      }if(document.getElementById("sexo").checked==false && document.getElementById("sex").checked==false){
+        sweetError("Cuidado.! Seleccione Sexo del Alumno");
         return 0;
       }if(document.getElementById("departamentoa").value=="Seleccione Departamento"){
         sweetError("Cuidado.! El Departamento es obligatorio");
@@ -138,7 +156,10 @@ function go(){
         sweetError("Cuidado.! La opción de Bachillerato es Obligatoria");
         return 0;
       }if(document.getElementById("anteriora").value==""){
-        sweetError("Cuidado.! El año anterior cursado es obligatorio");
+        sweetError("Cuidado.! El campo año anterior es obligatorio");
+        return 0;
+      }if(document.getElementById("anteriora").value>=cont || document.getElementById("anteriora").value<2000){
+        sweetError("Cuidado.! ¿ Estas seguro del año anterior cursado?");
         return 0;
       }if(document.getElementById("distanciaa").value==""){
         sweetError("Cuidado.! La distancias es obligatoria");
@@ -169,23 +190,14 @@ function go(){
     }
     function verificarCamposObligatoriosResponsables(){
        
-      if(document.getElementById("nombrep").value==""){
-        sweetError("Cuidado.! Nombre del Padre es obligatorio");
+      if(document.getElementById("nombrep").value=="" && document.getElementById("nombrem").value==""){
+        sweetError("Cuidado.! Es obligatorio el registro de almenos un encargado");
         return 0;
-      }if(document.getElementById("duip").value==""){
-        sweetError("Cuidado.! El DUI del Padre es obligatorio");
-        return 0;
-      }if(document.getElementById("duim").value==""){
-        sweetError("Cuidado.! El DUI de la Madre es obligatorio");
+      }if(document.getElementById("duip").value=="" && document.getElementById("duim").value==""){
+        sweetError("Cuidado.! Es necesario el registro del DUI de almenos un encargado");
         return 0;
       }
-      if(document.getElementById("nombrem").value==""){
-        sweetError("Cuidado.! Nombre de la Madre es obligatorio");
-        return 0;
-      }if(document.getElementById("direccionp").value==""){
-        sweetError("Cuidado.! La direccion es obligatoria");
-        return 0;
-      }if(document.getElementById("estadop").value=="Seleccione"){
+    if(document.getElementById("estadop").value=="Seleccione"){
         sweetError("Cuidado.! El estado civil de los padres es obligatorio");
         return 0;
       }if(document.getElementById("convivea").value=="Seleccione"){
@@ -248,6 +260,10 @@ function go(){
             document.turismo.submit();
           }
         }
+        function reporte(id){
+        //  alert(id);
+           window.open("../ayuda/fingresoa.pdf",'_blank');
+        }
       </script>
 </head>
 
@@ -270,10 +286,16 @@ function go(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Realizar Inscripcion</h3>
+                         <h3 class="animated fadeInLeft" class="col-md-2">Realizar Inscripcion</h3>
                         <p class="animated fadeInDown">
                           Ficha de inscripcion.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -288,6 +310,7 @@ function go(){
   </ul>
   </center>
   <input type="hidden" name="anio" value="<?php echo $anioActivo;?>"/>
+  <input type="hidden" name="ida" value="<?php echo $ida+1;?>"/>
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Datos personales.</h2>
@@ -303,6 +326,11 @@ function go(){
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre*" onkeypress="return sololetras(event)" required>
+     </div>
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Sexo</span>
+     <label class="radio-inline" style="margin-right:34px;margin-left:80px; font-size: 15px"><input type="radio" name="sexo" value="0" id="sexo">Masculino</label>
+     <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="sexo" value="1" id="sex">Femenino</label>
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
@@ -346,10 +374,14 @@ function go(){
       <option value="Seleccione Opcion" selected hidden>Seleccione Opcion</option>
       <?php  
       include "../config/conexion.php";
+      //
       $result = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE topciones.eestado=1 order by tbachilleratos.cnombe");
       if ($result) {
           while ($fila = $result->fetch_object()) {
-           echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+             $result1 = $conexion->query("SELECT * FROM tmaterias where efk_idopcion=".$fila->eid_opcion);
+            if ($result1->num_rows >0) {
+              echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+              }
          }
       }
       ?>
@@ -368,6 +400,7 @@ function go(){
      <label class="radio-inline" style="margin-right:74px;margin-left:110px; font-size: 15px"><input type="radio" name="trabajaa" value="1" id="trabajaa">Si</label>
      <label class="radio-inline" style="width: 0px; font-size: 15px;margin-left:0px"><input type="radio" name="trabajaa" value="0" id="trabaja">No</label>
      </div>
+    
     
       
  
@@ -390,10 +423,11 @@ function go(){
      </div>
 
      <div class="input-group " style="padding-bottom:30px;">
+     <i class="glyphicon glyphicon-map-marker"></i><span class="label label-default" style="width: 100px; font-size: 15px">Fecha de nacimiento: </span>
      <input id="fecha" type="date" class="form-control" name="fecha" min="1950-01-01" max="2005-12-31">
      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
      </div>
-     
+     <br><br>
      <div class="input-group " style="padding-bottom:20px;">
      <input id="distanciaa" type="number" class="form-control" name="distanciaa" placeholder="Distancia en metros desde casa hasta el C.E." min="1" max="100000">
      <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
@@ -809,8 +843,11 @@ function go(){
 <?php
 
 $guardo  = $_REQUEST["guardo"];
+$ida  = $_REQUEST["ida"];
+$idop  = $_REQUEST["idop"];
 if($guardo==1){
 msg("Los datos fueron almacenados con exito");
+redir($ida,$idop);
 }else if($guardo==2){
   msg("EL NIE ya existe");
 }
@@ -819,7 +856,16 @@ function msg($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetGuardo('$texto');";
+    
    // echo "document.location.href='listaempleado.php';";
+    echo "</script>";
+}
+function redir($ida,$idop)
+{
+    echo "<script type='text/javascript'>";
+    // echo "sweetGuardo('$texto');";
+    
+    echo "window.open('reporteComprobanteI.php?id=".$ida."&idop=".$idop."','_blank');";
     echo "</script>";
 }
   

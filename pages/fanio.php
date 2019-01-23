@@ -47,7 +47,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Año</title>
+  <title>Año Activo | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -96,6 +96,7 @@ error_reporting(E_ALL & ~E_NOTICE);
   }
 })
         }
+       
 
 
         function sweetGuardo(str){
@@ -115,7 +116,10 @@ error_reporting(E_ALL & ~E_NOTICE);
         }
 
       //SWEET ALERTS
-
+ function reporte(id){
+        //  alert(id);
+           window.open("../ayuda/fanio.pdf",'_blank');
+        }
      
      
 
@@ -239,11 +243,17 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12" >
-
-                         <h3 class="animated fadeInLeft">Año</h3>
-                        <p class="animated fadeInDown">
+                    <h3 class="animated fadeInLeft" class="col-md-2">Año Escolar Activo</h3>
+                    <p class="animated fadeInDown">
                           Año <span class="fa-angle-right fa"></span>Datos del Año Escolar.
                         </p>
+                    <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
+                        
                     </div>
                   </div>
                 </div>
@@ -256,7 +266,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                 <div class="col-md-12">
                   <div class="col-md-6 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario Año.</h4>
+                      <h4>Ingrese Nuevo Año.</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -281,7 +291,21 @@ error_reporting(E_ALL & ~E_NOTICE);
                           </div>
                             <div class="col-md-3">
                             <br><b></b>
-                            <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />
+                            <?php 
+                            $res = $conexion->query("select enum from tperiodos where estado=1");
+                            
+  if ($res) {
+    while ($f = $res->fetch_object()) {
+        if ($f->enum==4) {
+          echo ' <input type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" title="Aun no es el periodo para clausurar." />';
+        }else{
+           echo ' <input disabled="true" type="button" name="next" onclick="verificar()" class="next action-button btn btn-info btn-sm btn-round" style="font-size:20px;" value="Guardar" />';
+        }
+    }
+  }
+
+                            ?>
+                          
                             </div>
                             <div>
                             <br><b></b>
@@ -297,7 +321,7 @@ error_reporting(E_ALL & ~E_NOTICE);
                            <div class="col-md-6">
                    <div class="col-md-12">
                    <div class="panel">
-                     <div class="panel-heading"><h3>Ciclos Academicos</h3>
+                     <div class="panel-heading"><h3>Años Academicos</h3>
                        <?php
                        include "../config/conexion.php";
                        $result = $conexion->query("select * from tanio");

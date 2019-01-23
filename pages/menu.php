@@ -6,10 +6,61 @@ if($result)
   while ($fila=$result->fetch_object()) {
     $anioActivo=$fila->eid_anio;
     $clausurado=$fila->eclausura;
+    $anio=$fila->canio;
+  }
+}
+$result2 = $conexion->query("select * from estadoinscrip where estado=1");
+if($result2)
+{
+  while ($fila1=$result2->fetch_object()) {
+    $estadoins=$fila1->estado;
   }
 }
  ?>
 <!-- start:Left Menu -->
+<script>
+function backup(){
+  var op="Hola";
+   $.ajax(
+            {
+                data:op,
+                url:'myphp-backup.php',
+                type:'post',
+                beforeSend:function(){
+                   let timerInterval
+Swal({
+  title: '¡Respaldando Base de datos!',
+  html: 'Por favor espere <strong></strong>.',
+  timer: 2000,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      Swal.getContent().querySelector('strong')
+        .textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  onClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  if (
+    // Read more about handling dismissals
+    result.dismiss === Swal.DismissReason.timer
+  ) {
+    console.log('I was closed by the timer')
+  }
+})
+                },
+                success:function(response) {
+                    // alert(response);
+                    sweetGuardo("Se hizo un respaldo de la BD exitosamente.");
+                }
+            }
+
+        );
+                         
+}
+</script>
             <div id="left-menu">
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
@@ -20,27 +71,54 @@ if($result)
                     </li>
                     <li class="ripple">
                   <a class="tree-toggle nav-header">
-                    <span class="fa fa-users"></span> Administracion
+                    <span class="fa fa-users"></span> Administración
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
                   <li><a href="fanio.php">Año Escolar Activo</a></li>
-                     <li><a href="permisos.php">Permisos Temporales</a></li>
-                     <li><a href="cadministradores.php">Lista de administradores</a></li>
+                  <?php 
+                      if($clausurado==0){
+                      ?>
+                        <li><a href="permisos.php">Permisos Temporales</a></li>
+                      <?php 
+                      }
+                      ?>
+                   
+                     <!-- <li><a href="cadministradores.php">Lista de administradores</a></li> -->
                    
               
                  </ul>
                 </li>
                 <li class="active ripple">
-                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción
+                <?php 
+                      if($clausurado==0){
+                      ?>
+                        <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción 
+                        <?php 
+                      }else{
+                      ?>
+                      <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción <?php echo $anio;?>
+                      <?php
+                       }
+                       ?>
+
+
+                  
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                      <li><a href="ingresoAlumno.php">Gestionar proceso</a></li>
-                      <?php 
+                  <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
+                         <li><a href="gestionarInscripcion.php">Gestionar proceso</a></li>
+                      <?php 
+                      }
+                      ?>
+                     
+                      <?php 
+                      if($clausurado==0&&$estadoins==1){
+                      ?>
+                      <li><a href="ingresoAlumno.php">Realizar inscripción</a></li>
                       <?php 
                       }
                       ?>
@@ -49,39 +127,52 @@ if($result)
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
-                      <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                    
+                      <li><a href="nomina.php">Emitir Nomina de alumnos</a></li>
+                     
+                      <li><a href="graficas.php">Estadisticas</a></li>
                       <?php 
                       }
                       ?>
-                      <li><a href="listacliente.php">Estadisticas</a></li>
                       
                   </ul>
                 </li>
                 <li class="ripple">
                       <a class="tree-toggle nav-header">
+                      <?php 
+                      if($clausurado==0){
+                      ?>
                         <span class="fa fa-list-alt"></span> Control de Notas
+                        <?php 
+                      }else{
+                      ?>
+                      <span class="fa fa-list-alt"></span> Notas <?php echo $anio;?>
+                      <?php
+                       }
+                       ?>
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
                       <?php 
                       if($clausurado==0){
                       ?>
-                      <li><a href="listabus.php">Gestion de Periodos</a></li>
+                      <li><a href="fperiodo.php">Gestión de Periodos</a></li>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
-                       
-                        <li><a href="listabus.php">Boleta de notas</a></li>
                         <?php 
-                      }
-                      ?>
-                        <li><a href="listabus.php">Estadisticas</a></li>
-                        <?php 
+                      }?>
+ <li><a href="notasParciales.php">Notas Parciales</a></li>
+                  
+                      <?php 
                       if($clausurado==0){
                       ?>
-                        <li><a href="listabus.php">Cierre de Sistema</a></li>
+                       
+                       
                         <?php 
                       }
                       ?>
+                      
+                     
+                      
                       </ul>
                     </li>
                 
@@ -106,7 +197,7 @@ if($result)
                   </a>
                   <ul class="nav nav-list tree">
                  
-                  <li><a href="fagregaropcion.php">Mantenimiento Opcion</a></li>
+                  <li><a href="fagregaropcion.php">Mantenimiento Opción</a></li>
                     <li><a href="fopciones.php">Gestionar Opciones</a></li>
                     <li><a href="listaOpciones.php">Opciones Activas</a></li>
                     <li><a href="listaOpcionesIna.php">Opciones Inactivas</a></li>
@@ -130,8 +221,8 @@ if($result)
                             <span class="fa-angle-right fa right-arrow text-right"></span>
                           </a>
                           <ul class="nav nav-list sub-tree">
-                            <li><a href="horarioGeneral.php">Agregar horario</a></li>
-                            <li><a href="listaHorarios.php">Lista de horarios</a></li>    
+                            <li><a href="horarioGeneral.php">Agregar Horario</a></li>
+                            <li><a href="listaHorarios.php">Lista de Horarios</a></li>    
                                  
                           </ul>
                     </li>
@@ -164,25 +255,10 @@ if($result)
                     <li><a href="listaUsuariosInactivos.php">Usuarios Inactivos</a></li>
                     
                   </ul>
-                  <?php 
-                      }
-                      ?>
-
-                </li>
-                <li class="ripple">
-                  <a class="tree-toggle nav-header">
                 
-                    <span class="fa-book fa "></span> Estadisticas
-                    <span class="fa-angle-right fa right-arrow text-right"></span>
-                  </a>
-                  <ul class="nav nav-list tree">
-                    <li><a href="fusuario.php">Estadisitcas Generales</a></li>
-                    <li><a href="listaUsuariosActivos.php">Alumnos por Sexo</a></li>
-                    <li><a href="listaUsuariosInactivos.php">Aprobados y Reprobados</a></li>
-                    
-                  </ul>
 
                 </li>
+               
                 
                      
                     <li class="ripple">
@@ -192,11 +268,15 @@ if($result)
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="bitacora.php">Bitacora</a></li>
-                        <li><a href="lugar.php">Backup</a></li>
+                        <li><a href="bitacora.php">Bitácora</a></li>
+                        <li><a onclick="backup();">Backup</a></li>
+                        <li><a href="restaurar.php">Restaurar</a></li>
                         
                       </ul>
                     </li>
+                    <?php 
+                      }
+                      ?>
                     <!-- <li class="ripple">
                       <a class="tree-toggle nav-header">
                         <span class="fa-diamond fa"></span> Combos

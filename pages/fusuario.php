@@ -17,7 +17,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Usuario</title>
+  <title>Agregar nuevo Usuario | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -193,6 +193,10 @@ function verificar(){
 
 
         }
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/fusuario.pdf",'_blank');
+        }
       </script>
 </head>
 
@@ -210,10 +214,16 @@ function verificar(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Usuario</h3>
+                         <h3 class="animated fadeInLeft">Agregar nuevo Usuario</h3>
                         <p class="animated fadeInDown">
-                          Usuario <span class="fa-angle-right fa"></span>Datos del Usuario.
+                          Usuario <span class="fa-angle-right fa" class="col-md-2"></span>Datos del Usuario.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
                 </div>

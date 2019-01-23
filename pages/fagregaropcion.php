@@ -46,7 +46,7 @@ if ($result) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SICA-Opciones</title>
+  <title>Mantenimiento Opciones | SICA</title>
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
@@ -66,29 +66,7 @@ if ($result) {
 <script type="text/javascript">
      
       //SWEET ALERTS
-      function sweetConfirm(str){
-        swal({
-  title: ''+str,
-  text: "¡No sera posible revertir esta acción!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Continuar',
-  cancelButtonText:'Cancelar',
-}).then((result) => {
-  if (result.value) {
-    swal(
-      '¡Exito!',
-      'La accion ha sido completada.',
-      'success'
-    )
-    return true;
-  }
-})
-        }
-
-
+     
         function sweetGuardo(str){
           swal(
   'Exito!',
@@ -128,41 +106,62 @@ if ($result) {
           document.getElementById('nombre').value="";
          document.location.href='fcargo.php?id='+id;
         }
-         function confirmar(id)
-        {
-          if (sweetConfirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='desaparecer';
-            document.getElementById('baccion').value=id;
-            //alert(id);
-            document.turismo.submit();
-          }else
-          {
-            alert("Error al borrar.");
-          }
-        }
+        
         function confirmarAct(id,op)
         {
           if (op==1) {
-            if (confirm("Desactivar")==true) {
-            document.getElementById('bandera').value='desactivar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
-            }else{
-              sweetGuardo("EL archivo no se desactivo");
-            }
-          }else if (op==2){
-            if (confirm("!!Advertencia!! Desea Eliminar Este Registro?")) {
-            document.getElementById('bandera').value='activar';
-            document.getElementById('baccion').value=id;
-            document.turismo.submit();
+            sweetConfirm2(id);
+           
+          
           }else{
-              sweetGuardo("EL archivo no se Activo");
-            }
-          }else
-          {
-            alert("No entra");
+            sweetConfirm(id);
+           
+       
           }
-         
+        }
+        function sweetConfirm(id){
+        swal({
+  title: '¿Está seguro que desea activar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+     document.getElementById('bandera').value='activar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+  }
+})
+        }
+        
+         function sweetConfirm2(id){
+        swal({
+  title: '¿Está seguro que desea desactivar esta Opción de Bachillerato?',
+  text: "¡No sera posible revertir esta acción!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Continuar',
+  cancelButtonText:'Cancelar',
+}).then((result) => {
+  if (result.value) {
+    
+    document.getElementById('bandera').value='desactivar';
+            document.getElementById('baccion').value=id;
+            document.turismo.submit();
+
+  }
+})
+        }
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/fopcion.pdf",'_blank');
         }
        
 
@@ -179,10 +178,16 @@ if ($result) {
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Mantenimiento Opcion</h3>
+                        <h3 class="animated fadeInLeft" class="col-md-2">Mantenimiento Opción</h3>
                         <p class="animated fadeInDown">
-                          SICA <span class="fa-angle-right fa"></span> Datos de Opcion.
+                          SICA <span class="fa-angle-right fa"></span> Datos de Opción.
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
                     </div>
                   </div>
               </div>
@@ -194,7 +199,7 @@ if ($result) {
               <div class="col-md-12">
                   <div class="col-md-5 panel panel-info">
                     <div class="col-md-12 panel-heading">
-                      <h4>Formulario de Opcion</h4>
+                      <h4>Formulario de Opción</h4>
                     </div>
 
                     <div class="col-md-12 panel-body" style="padding-bottom:30px;">
@@ -210,14 +215,14 @@ if ($result) {
                               <br>
                               <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de Opcion">
+                              <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de Opción">
                               </div>
                               <br>
                               <div class="input-group">
                               <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
                              <i  class="fa fa-users"></i><span class="label label-default" style="width: 50px; font-size: 12px">Tipo Bachillerato:</span>
                               <select id="tipob" class="select2 show-tick ajaxtipo" style="width: 200px; font-size: 15px" name="tipob">
-                              <option value="tipo">Tipo</option>
+                              <option value="tipo" selcted hidden>Tipo</option>
 
                                 <?php
                                   include('combotipo.php')?>
@@ -229,7 +234,7 @@ if ($result) {
                                 </div>
                                 <div class="input-group"style="padding-bottom:0px;">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                                    <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descripcion" placeholder="Descripcion" id="descripcion"></textarea>
+                                    <textarea style="width: 500px" rows="3" size="100" value="" class="form-control" name="descripcion" placeholder="Descripción" id="descripcion"></textarea>
                                 </div> 
                         </div>
                                <div class="col-md-12">
@@ -276,6 +281,7 @@ if ($result) {
                       <?php include('tablaOpciones.php') ?>
                       </tbody>
                         </table>
+
                       </div>
                   </div>
                 </div>
@@ -598,7 +604,6 @@ function msgError($texto)
 {
     echo "<script type='text/javascript'>";
     echo "sweetError('$texto');";
-    echo "document.location.href='fagregaropcion.php';";
     echo "</script>";
 }
 
@@ -608,13 +613,21 @@ $bandera      = $_REQUEST["bandera"];
 $baccion      = $_REQUEST["baccion"];
 
 if ($bandera == "desactivar") {
-  $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
-    $resultado = $conexion->query($consulta);
-    if ($resultado) {
-       msgGuar("Registro desactivado");
-    } else {
-      msgError("No se desactivo el registro");
-    }
+ 
+         $result1 = $conexion->query("SELECT * FROM tmaterias where efk_idopcion=".$baccion);
+        if ($result1->num_rows == 0) {
+        $consulta = "UPDATE tbachilleratos SET eestado = '0' WHERE eid_bachillerato = '".$baccion."'";
+            $resultado = $conexion->query($consulta);
+            if ($resultado) {
+               msgGuar("Registro desactivado");
+            } else {
+              msgError("No se desactivo el registro");
+            }
+  }else{
+    msgError("Imposible desactivar el registro porque ya tiene materias asignadas");
+  }
+
+  
 }else if ($bandera == "activar") {
   $consulta = "UPDATE tbachilleratos SET eestado = '1' WHERE eid_bachillerato = '".$baccion."'";
     $resultado = $conexion->query($consulta);

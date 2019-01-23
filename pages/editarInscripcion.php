@@ -15,7 +15,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
 
   include "../config/conexion.php";
 
-  $result = $conexion->query("select eid_alumno,ccodigo ,cnie,cnombre,capellido,cdireccion,edepto,ffecha_nac, 
+  $result = $conexion->query("select eid_alumno, ccodigo ,cnie,cnombre,capellido, sexo,cdireccion,edepto,ffecha_nac, 
   cllegada, cbachillerato, canterior, cenfermedades, calergia, cdistancia, iparvularia, itrabaja, izona, irepite, ibautizo, icomunion, iconfirma,
   cnombrep, clugar_trabajop, cduip, ctelefonocp, ctelefonotp, ccelularp, cdireccionp, cestadocivilp, cconvive, cnombrem, clugar_trabajom,
   cprofesionm, cduim, ctelefonocm, ctelefonotm, ccelularm, cmiembros, creligion, anio from talumno where eid_alumno = ".$idAlumno);
@@ -23,10 +23,11 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   if ($result) {
     while ($fila = $result->fetch_object()) {
         $idAlumnoR        = $fila->eid_alumno;
-        $codigoAR         = $fila->ccodigo;
+        $codigoAR           = $fila->ccodigo;
         $nieR             = $fila->cnie;
         $nombreAR         = $fila->cnombre;
         $apellidoAR       = $fila->capellido;
+        $sexoAR           = $fila->sexo;
         $direccionAR      = $fila->cdireccion;
         $departR          = $fila->edepto;
         $fechaNacR        = $fila->ffecha_nac;
@@ -88,6 +89,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/bootstrap-material-datetimepicker.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/wizard.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -98,117 +100,78 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1 || $_SESSION["permisoI"
       <![endif]-->
 
 
-      <!-- SCRIPTS DE SWEET ALERTS -->
-      <script>
-      function DatosIncompletos(){
-        swal({
-  title: '<strong>HTML <u>example</u></strong>',
-  type: 'info',
-  html:
-    'You can use <b>bold text</b>, ' +
-    '<a href="//github.com">links</a> ' +
-    'and other HTML tags',
-  showCloseButton: true,
-  showCancelButton: true,
-  focusConfirm: false,
-  confirmButtonText:
-    '<i class="fa fa-thumbs-up"></i> Great!',
-  confirmButtonAriaLabel: 'Thumbs up, great!',
-  cancelButtonText:
-    '<i class="fa fa-thumbs-down"></i>',
-  cancelButtonAriaLabel: 'Thumbs down',
-})
-return 1;
-}
-function sweetGuardo(str){
-          swal(
-  ''+str,
-  'Inscripcion SICA',
-  'success'
-)
-        }
-        function sweetError(str){
-         swal({
-  type: 'error',
-  title: ''+str,
-  text: 'inscripcion SICA',
-  footer: 'Revise que todos los campos esten completados.'
-})
-        } 
-       
+   <script type="text/javascript">
 
-     
-      
-      </script>
-      <!-- FIN SCRIPTS DE SWEET ALERTS -->
-      <!-- SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
-    <script>
-//Validaciones para registro del alumno
-function go(){
+   function go(){
   document.msform.submit(); 
-}
+  }
+
+      //SWEET ALERTS
+  function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡Se actualizaran los datos!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                go();
+                              }
+                        })
+                      }
 
 
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
 
-    function verificarCamposObligatoriosPersonales(){
-       
-      if(document.getElementById("nombrea").value==""){
-        alert("Lo sentimos, este campo es obligatorio.");
-        return 0;
-      }else{
-         
-         return 1;
-      }
-    }
-    </script>
-      <!-- fin SCRIPTS DE VALIDACIONES PARA CAMPOS OBLIGATORIOS EN DATOS PERSONALES -->
-      <script type="text/javascript">
-      //Validacion Solo letras
-      function sololetras(e) {
-        key=e.keyCode || e.which;
- 
-        teclado=String.fromCharCode(key).toLowerCase();
- 
-        letras="qwertyuiopasdfghjklñzxcvbnm ";
- 
-        especiales="8-37-38-46-164";
- 
-        teclado_especial=false;
- 
-        for(var i in especiales){
-            if(key==especiales[i]){
-                teclado_especial=true;
-                break;
-            }
-        }
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
 
-        if(letras.indexOf(teclado)==-1 && !teclado_especial){
-            return false;
-        }
-    }
-    //Validacion Telefono
-    var nav4 = window.Event ? true : false;
-      function aceptNum(evt){
-        var key = nav4 ? evt.which : evt.keyCode;
-        return (key <= 13 || (key>= 48 && key <= 57));
-      }
-      //Fin Validacion Telefono
-     //Validacion Solo letras
-        function verificar(){
-          if(document.getElementById('nombreempleado').value=="" ||
-            document.getElementById('apellidoempleado').value=="" ||
-            document.getElementById('duiempleado').value=="" ||
-            document.getElementById('nitempleado').value=="" ||
-            document.getElementById('cargoempleado').value==""){
-            alert("Complete los campos prueba");
-            
-          }else{
-            document.getElementById("bandera").value="add";
-            document.turismo.submit();
-          }
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
 
-        }
-      </script>
+                  //SWEET ALERTS     
+   
+   
+   
+   </script> 
 </head>
 
 <body id="mimin" class="dashboard">
@@ -231,7 +194,7 @@ function go(){
                   <div class="panel-body">
                     <div class="col-md-12" >
 
-                         <h3 class="animated fadeInLeft">Editar Inscripcion</h3>
+                         <h3 class="animated fadeInLeft">Inscripcion</h3>
                         <p class="animated fadeInDown">
                           Ficha de inscripcion.
                         </p>
@@ -240,7 +203,7 @@ function go(){
                 </div>
                <!-- multistep form -->
 <form id="msform" name="msform" method="post" action="editDatosInscripcion.php">
-  <input type="hidden" id="idA" name="idA" value="<?php echo $idAlumno; ?>">
+<input type="hidden" id="idA" name="idA" value="<?php echo $idAlumno; ?>">
   <!-- progressbar -->
   <center>
   <ul id="progressbar">
@@ -249,7 +212,11 @@ function go(){
     <li>Aceptacion de Terminos.</li>
   </ul>
   </center>
-     
+
+    <?php
+
+ 
+    ?>      
 
   <!-- fieldsets -->
   <fieldset>
@@ -261,11 +228,27 @@ function go(){
     <div class="col-md-6">
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="codigoa" type="text" class="form-control" name="codigoa" placeholder="Codigo." value="<?php echo $codigoAR;?>" readonly>
+     <input id="codigoa" type="text" class="form-control" name="codigoa" value="<?php echo $codigoAR;?>" readonly>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" value="<?php echo $nombreAR;?>">
+     <input id="nombrea" type="text" class="form-control" name="nombrea" placeholder="Nombre." onkeypress="return sololetras(event)" value="<?php echo $nombreAR;?>" >
+     </div>
+
+     <div class="input-group " style="padding-bottom:25px;">
+     <i  class="fa fa-briefcase"></i><span class="label label-default" style="width: 400px; font-size: 15px">Sexo</span>
+          
+     <?php
+          if($sexoAR == 1){
+              echo "<label class='radio-inline' style='margin-right:34px;margin-left:80px; font-size: 15px'><input type='radio' name='sexo' value='0' id='sexo'>Masculino</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='sexo' value='1' id='sexo' checked>Femenino</label>";
+          }else{
+            echo "<label class='radio-inline' style='margin-right:34px;margin-left:80px; font-size: 15px'><input type='radio' name='sexo' value='0' id='sexo' checked>Masculino</label>";
+              echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='sexo' value='1' id='sexo'>Femenino</label>";
+          }
+     
+     ?>
+     
      </div>
 
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
@@ -287,28 +270,15 @@ function go(){
       
       ?>
       
-      <!---<option value="">Seleccione Departamento</option>
-      <option value="San Salvador">San Salvador</option>
-      <option value="San Vicente">San Vicente</option>
-      <option value="San Miguel">San Miguel</option>
-      <option value="Santa Ana">Santa Ana</option>
-      <option value="Chalatenango">Chalatenango</option>
-      <option value="Cabañas">Cabañas</option>
-      <option value="Sonsonate">Sonsonate</option>
-      <option value="La Union">La Union</option>
-      <option value="La Libertad">La Libertad</option>
-      <option value="La Paz">La Paz</option>
-      <option value="Morzán">Morazán</option>
-      <option value="Usulutan">Usulutan</option>
-      <option value="Santa Ana">Santa Ana</option>
-      <option value="Ahuachapán">Ahuachapán</option>
-      <option value="Cuscatlan">Cuscatlán</option>--->
+      
       </select>
       </div>
+
       <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direcciona" name="direcciona"><?php echo $direccionAR;?></textarea>
+      <textarea rows="3" size="30"  class="form-control" placeholder="Dirección" id="direcciona" name="direcciona" ><?php echo $direccionAR;?></textarea>
       </div>
+
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="fa fa-bus"></i><span class="label label-default" style="width: 100px; font-size: 15px">Llegada C.E.: </span>
       <select id="llegadaa"  class="select2 show-tick" style="width: 240px; font-size: 15px" name="llegadaa">
@@ -333,34 +303,38 @@ function go(){
       <option value="Otro">Otro</option>-->
       </select>
       </div>
-      <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
+
+        <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-education"></i><span class="label label-default" style="width: 100px; font-size: 15px">Bachillerato: </span>
       <select id="bachilleratoa"  class="select2 show-tick" style="width: 242px; font-size: 15px" name="bachilleratoa">
-      <option value="">Seleccione Opcion</option>
+  
       <?php  
       include "../config/conexion.php";
       $result = $conexion->query("SELECT tgrado.cgrado, tbachilleratos.cnombe, tsecciones.cseccion,tbachilleratos.eestado,topciones.eid_opcion FROM topciones INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE tbachilleratos.eestado=1 order by tbachilleratos.cnombe");
       if ($result) {
-          while ($fila = $result->fetch_object()) {
+          while ($fila = $result->fetch_object()){
 
             if($bachilleratoR == $fila->eid_opcion){
               echo "<option value=".$fila->eid_opcion." selected >".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
             }else{
-              echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
+              //echo "<option value=".$fila->eid_opcion.">".$fila->cgrado."° ".$fila->cnombe." ".$fila->cseccion."</option>";
             }
           }
       }
       ?>
       </select>
       </div>
-      <div class="input-group " style="padding-bottom:20px;">
+
+       <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
      <input id="anteriora" value="<?php echo $anteriorR;?>" type="text" class="form-control" name="anteriora" placeholder="En que año estudio el grado anterior">
      </div>
-     <div class="input-group " style="padding-bottom:20px;">
+
+      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
      <input id="enfermedadesa" value="<?php echo $enfermedadesR;?>" type="text" class="form-control" name="enfermedadesa" placeholder="Enfermedades que padece" onkeypress="return sololetras(event)">
      </div>
+
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
      <input id="alergiaa" value="<?php echo $alergiaR;?>" type="text" class="form-control" name="alergiaa" placeholder="Es alergico a">
@@ -381,7 +355,7 @@ function go(){
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:25px;">
-     <input id="apellidoa" value="<?php echo $apellidoAR;?>" type="text" class="form-control" name="apellidoa" placeholder="Apellido." onkeypress="return sololetras(event)">
+     <input id="apellidoa" value="<?php echo $apellidoAR;?>" type="text" class="form-control" name="apellidoa" placeholder="Apellido." onkeypress="return sololetras(event)" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      </div>
 
@@ -399,11 +373,11 @@ function go(){
      <i  class="fa fa-apple"></i><span class="label label-default" style="width: 100px; font-size: 15px">Estudio Parvularia</span>
      <?php
           if($parvulariaR == 1){
-              echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia' checked >Si</label>";
+              echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia' checked>Si</label>";
               echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia'>No</label>";
           }else{
             echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='1' id='parvularia'>Si</label>";
-            echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia' checked >No</label>";
+            echo "<label class='radio-inline' style='width: 100px; font-size: 15px'><input type='radio' name='parvularia' value='0' id='parvularia' checked>No</label>";
           }
      
      ?>
@@ -416,7 +390,7 @@ function go(){
               echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja' checked >Si</label>";
               echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='trabajaa' value='0' id='trabaja'>No</label>";
           }else{
-            echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja'>Si</label>";
+            echo "<label class='radio-inline' style='margin-right:74px;margin-left:110px; font-size: 15px'><input type='radio' name='trabajaa' value='1' id='trabaja' >Si</label>";
               echo "<label class='radio-inline' style='width: 0px; font-size: 15px;margin-left:0px'><input type='radio' name='trabajaa' value='0' id='trabaja' checked >No</label>";
           }
      
@@ -477,8 +451,7 @@ function go(){
           }
 
      
-     ?>
-     
+     ?>  
      </div>
      </br>
 
@@ -515,19 +488,19 @@ function go(){
      </div>
     <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-     <input id="duip" type="text" class="form-control" name="duip" placeholder="DUI." value="<?php echo $duiPadreR; ?>">
+     <input id="duip" type="text" class="form-control" name="duip" placeholder="DUI." value="<?php echo $duiPadreR; ?>" >
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-     <input id="telefonocp" type="text" class="form-control" name="telefonocp" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telCasaPadre; ?>">
+     <input id="telefonocp" type="text" class="form-control" name="telefonocp" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telCasaPadre; ?>" >
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-     <input id="telefonotp" type="text" class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telTrabPadre; ?>" >
+     <input id="telefonotp" type="text" class="form-control" name="telefonotp" placeholder="Tel. de trabajo"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telTrabPadre; ?>">
      </div>
      <div class="input-group " style="padding-bottom:20px;">
     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-     <input id="celularp" type="text" class="form-control" name="celularp" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $celPadre; ?>">
+     <input id="celularp" type="text" class="form-control" name="celularp" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $celPadre; ?>" >
      </div>
      
      
@@ -536,8 +509,9 @@ function go(){
       
       <div class="input-group"style="padding-bottom:20px;">
       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccionp" name="direccionp"><?php echo $direccionPadre; ?></textarea>
+      <textarea rows="3" size="30" value="" class="form-control" placeholder="Dirección" id="direccionp" name="direccionp" ><?php echo $direccionPadre; ?></textarea>
       </div>
+
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 40px; font-size: 12px">Estado civil de los padres</span>
       <select id="estadop"  class="select2 show-tick" style="width: 190px; font-size: 13px" name="estadop">
@@ -562,6 +536,7 @@ function go(){
       <option value="Viudo/a">Viudo/a</option>-->
       </select>
       </div>
+
       <div class="form-group form-animate-text" style="margin-top:5px !important;margin-bottom:30px !important;">
      <i  class="glyphicon glyphicon-heart"></i><span class="label label-default" style="width: 100px; font-size: 12px">Convive con: </span>
       <select id="convivea"  class="select2 show-tick" style="width: 260px; font-size: 13px" name="convivea">
@@ -593,37 +568,37 @@ function go(){
      <div class="col-md-6">
      <h3 class="fs-subtitle" >* DATOS  DE LA MADRE (Responsable femenino).</h3>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de la madre." onkeypress="return sololetras(event)" value="<?php echo $nombreMadreR; ?>">
+     <input id="nombrem" type="text" class="form-control" name="nombrem" placeholder="Nombre de la madre." onkeypress="return sololetras(event)" value="<?php echo $nombreMadreR; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="lugarm" type="text" class="form-control" name="lugarm" placeholder="Lugar de Trabajo." value="<?php echo $lugarTrabajoMR; ?>">
+     <input id="lugarm" type="text" class="form-control" name="lugarm" placeholder="Lugar de Trabajo." value="<?php echo $lugarTrabajoMR; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="oficiom" type="text" class="form-control" name="oficiom" placeholder="Profesión u oficio." onkeypress="return sololetras(event)" value="<?php echo $profesionM; ?>">
+     <input id="oficiom" type="text" class="form-control" name="oficiom" placeholder="Profesión u oficio." onkeypress="return sololetras(event)" value="<?php echo $profesionM; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="duim" type="text" class="form-control" name="duim" placeholder="DUI" value="<?php echo $duiMadre; ?>">
+     <input id="duim" type="text" class="form-control" name="duim" placeholder="DUI" value="<?php echo $duiMadre; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telCasaMadre ; ?>">
+     <input id="telefonocm" type="text" class="form-control" name="telefonocm" placeholder="Tel. de casa"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telCasaMadre ; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telTrabMadre; ?>">
+     <input id="telefonotm" type="text" class="form-control" name="telefonotm" placeholder="Tel. de trabajo" size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $telTrabMadre; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
      </div>
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="celularm" type="text" class="form-control" name="celularm" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $celMadre ; ?>">
+     <input id="celularm" type="text" class="form-control" name="celularm" placeholder="Celular"  size="8" maxlength="8" onkeypress="return aceptNum(event)" value="<?php echo $celMadre ; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
      </div>
     
      
      <div class="input-group " style="padding-bottom:20px;">
-     <input id="miembrosm" type="number" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)" value="<?php echo $miembrosFamilia; ?>">
+     <input id="miembrosm" type="number" class="form-control" name="miembrosm" placeholder="N° de miembros con los que vive en el hogar" size="2" maxlength="2" onkeypress="return aceptNum(event)" value="<?php echo $miembrosFamilia; ?>" >
      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
      </div>
      </br>
@@ -665,7 +640,7 @@ function go(){
     
     </br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="button" class="submit action-button" value="Editar" />
+    <input id="editar" type="button"  class=" submit action-button" value="Editar"  />
   </fieldset>
   
 </form> 
@@ -685,8 +660,8 @@ function go(){
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
-
+<script src="../asset/js/sweetalert2.js"></script>
+<script src="../asset/js/sweetalert2.js"></script>
 
 <!-- plugins -->
 
@@ -699,14 +674,27 @@ function go(){
 <script src="../asset/js/plugins/select2.full.min.js"></script>
 <script src="../asset/js/plugins/nouislider.min.js"></script>
 <script src="../asset/js/plugins/jquery.validate.min.js"></script>
-<script src="../asset/js/wizard.js"></script>
-<script src="../asset/js/sweetalert2.js"></script>
+<script src="../asset/js/wizard2.js"></script>
+
 
 
 <!-- custom -->
 <script src="../asset/js/main.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $("#editar").on('click' function(){
+          
+
+     });
+
+
+
+
+
+
+
+
     $("#formcliente").validate({
       errorElement: "em",
       errorPlacement: function(error, element) {
@@ -909,7 +897,18 @@ function go(){
        "fgColor":"#27C24C",
      }
      );
-  });
+
+     
+
+
+
+
+  });//fin del ready
+
+
+    
+        
+
 </script>
 <!-- end: Javascript -->
 </body>
@@ -935,6 +934,7 @@ if ($bandera == "add") {
         msg("No Exito");
     }
 }
+
 
 function msg($texto)
 {

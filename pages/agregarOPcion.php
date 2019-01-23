@@ -9,11 +9,12 @@ $cupo   = $_POST['cupo'];
 $opcion   = $_POST['opc'];
 $grado   = $_POST['gradom'];
 $seccion  = $_POST['seccion'];
+$anio  = $_POST['anio'];
 
 $query = "SELECT efk_bto, efk_grado, efk_seccion FROM topciones WHERE efk_bto like '%".$opcion."%' AND efk_grado like '%".$grado."%' AND efk_seccion like '%".$seccion."';";
 $result = $conexion->query($query);
     if($result->num_rows == 0){
-        $consulta  = "INSERT INTO topciones VALUES('null','" . $cupo . "','" .$opcion. "','" .$grado. "','" .$seccion. "','1')";
+        $consulta  = "INSERT INTO topciones VALUES('null','" . $cupo . "','" .$opcion. "','" .$grado. "','" .$seccion. "','1','0','" .$anio. "')";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
              IB:: insertar($_SESSION["id"],"Registró una nueva Opcion de Bachillerato");

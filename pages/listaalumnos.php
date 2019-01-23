@@ -5,7 +5,7 @@ session_start();
 if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   $nombre=$_SESSION["usuario"];
   $tipo  =$_SESSION["tipo"];
-  $id  = $_REQUEST["id"];
+  $id  = $_SESSION["id"];
 }else {
   header("Location:inicio.php");
 }
@@ -18,6 +18,9 @@ if($result)
     $clausurado=$fila->eclausura;
   }
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +31,7 @@ if($result)
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lista de alumnos</title>
+  <title>Alumnos Inscritos | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -38,6 +41,7 @@ if($result)
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
   <link href="../asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../asset/css/sweetalert2.css"/>
   <!-- end: Css -->
 
   <link rel="shortcut icon" href="../asset/img/logomi.png">
@@ -75,6 +79,91 @@ if($result)
           }
 
         }
+        function reporte(){
+          window.open("reporteInsSex.php",'_blank');
+        }
+        function filtrar(){
+          id=document.getElementById("op").value;
+          $("#ide").val(id);
+          document.form.submit();
+        }
+        function reporte1(){
+          var cont = "<?php echo $_GET['ide'];?>"; 
+        
+          window.open("reporteOP.php?id="+cont, '_blank');
+        }
+        function reporte2(id){
+        //  alert(id);
+           window.open("../ayuda/listaalumno.pdf",'_blank');
+        }
+
+        function sweetConfirm(){
+                    swal({
+                      title: '¿Está seguro que desea continuar?',
+                      text: "¡Se actualizaran los datos!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Continuar',
+                      cancelButtonText:'Cancelar',
+                     }).then((result) => {
+                         if (result.value) {
+                                
+                              }
+                        })
+                      }
+
+
+                    function sweetGuardo(str){
+                      swal(
+                        'Exito!',
+                        ''+str,
+                        'success'
+                      )
+                    }
+
+                    function sweetError(str){
+                    swal({
+                        type: 'error',
+                        title: 'Error...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+
+                    function sweetWar(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Revise que todos los campos esten completados.'
+                     })
+                    }
+                    function sweetWar2(str){
+                    swal({
+                        type: 'warning',
+                        title: 'Advertencia...',
+                        text: ''+str,
+                        footer: 'Elija correctamente los datos'
+                     })
+                    }
+                    function sweetInfo(titulo,str){
+                    swal({
+                        type: 'info',
+                        title: ''+titulo,
+                        text: ''+str
+                        
+                     })
+                    }
+
+                  //SWEET ALERTS  
+
+
+
+           
+
+  
 
       </script>
 </head>
@@ -92,13 +181,25 @@ if($result)
                <div class="panel box-shadow-none content-header">
                   <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Lista de Alumnos Inscritos</h3>
+                        <h3 class="animated fadeInLeft" class="col-md-2">Lista de Alumnos Inscritos</h3>
                         <p class="animated fadeInDown">
                           Tabla <span class="fa-angle-right fa"></span> Tabla de Datos
                         </p>
+                        <span class="col-md-10"></span>
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte2();" title="Ayuda"><i class="fa fa-search"></i><br>Ayuda</span>
+                    </a>
+                    </div>
+
                     </div>
                   </div>
               </div>
+              <form id="form" name="form" action="" method="GET">
+<div class="input-group " style="padding-bottom:20px;">
+  <input id="ide" type="hidden" class="form-control" name="ide" placeholder="En que año estudio el grado anterior" value="<?php echo $idnota;?>">
+  </div>
+  </form>
               <form id="turismo" name="turismo" action="" method="post">
               <input type="hidden" name="bandera" id="bandera">
               <input type="hidden" name="baccion" id="baccion">
@@ -106,7 +207,42 @@ if($result)
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista</h3></div>
+                    <div class="panel-heading"><h3>Lista de Alumnos</h3>
+                    <h5 class="col-md-4">Filtrado por Opción: 
+                                  <select id="op" name="op" class="select2-A" onchange="filtrar()">  
+                                   <?php
+                      include '../config/conexion.php';
+                      $result = $conexion->query("select op.eid_opcion as id, gr.cgrado as grado,ba.cnombe as nombre, se.cseccion as seccion from topciones as op, tbachilleratos as ba, tsecciones as se, tgrado as gr, ttipobachillerato as ti where op.efk_bto=ba.eid_bachillerato and op.efk_grado=gr.eid_grado and op.efk_seccion=se.eid_seccion and ti.eid_tipo=ba.efk_tipo ");
+                      if ($result) {
+                        echo "<option value='".$fila->id."'>Seleccione</option>";
+                        while ($fila = $result->fetch_object()) {
+                          echo "<option value='".$fila->id."'>".$fila->grado." ° ".$fila->nombre." seccion ".$fila->seccion."</option>";
+                         
+                        
+                           }
+                      }
+                       ?>
+                                  </select>
+                                </h5> 
+                                <span class="col-md-6"></span>
+                                
+                    <div class="col-md-2">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Estadistico por sexo"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte1();" title="Estadistico por opción"><i class="fa fa-print fa-lg"></i><br>Reporte </span>
+                    </a>
+                    </div>
+    
+  
+<br> <br> <br>  <br>
+                                    
+                             
+                 
+                    
+                  </div>
+
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">
@@ -124,17 +260,21 @@ if($result)
 
                       <?php
 include "../config/conexion.php";
-$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."'  order by codigo");
+if(!isset($_GET['ide'])){
+$result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."' order by codigo");
+}if(isset($_GET['ide'])){
+  $ide=$_GET['ide'];
+  $result = $conexion->query("select talumno.eid_alumno,talumno.ccodigo as codigo,talumno.cnombre as nombre,talumno.capellido as apellido,talumno.cbachillerato as bachillerato from talumno where talumno.anio='".$anioActivo."' and talumno.cbachillerato='".$ide."'  order by codigo");
+}
 if ($result) {
     while ($fila = $result->fetch_object()) {
         echo "<tr>";
-       
         if($clausurado==0){
         echo "<td>
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")';>
             <div>
-              <span>Editar</span>
+              <span>Modificar</span>
             </div>
             </button>
             </div>
@@ -144,7 +284,7 @@ if ($result) {
           <div class='col-md-2' style='margin-top:1px'>
             <button class='btn ripple-infinite btn-round btn-warning' onclick='modify(" . $fila->eid_alumno. ")'; disabled>
             <div>
-              <span>Editar</span>
+              <span>Modificar</span>
             </div>
             </button>
             </div>
@@ -156,10 +296,11 @@ if ($result) {
         echo "<td>" . $fila->codigo . "</td>";
         echo "<td>" . $fila->nombre . "</td>";
         echo "<td>" . $fila->apellido . "</td>";
-        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE topciones.eestado=1 and topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
+    
+        $result2 = $conexion->query("SELECT topciones.eid_opcion,tgrado.cgrado,tbachilleratos.cnombe,tsecciones.cseccion,topciones.efk_seccion,topciones.eestado FROM topciones INNER JOIN tgrado ON topciones.efk_grado = tgrado.eid_grado INNER JOIN tbachilleratos ON topciones.efk_bto = tbachilleratos.eid_bachillerato INNER JOIN tsecciones ON topciones.efk_seccion = tsecciones.eid_seccion WHERE  topciones.eid_opcion='".$fila->bachillerato."' order by tbachilleratos.cnombe");
 if ($result2) {
     while ($fila2 = $result2->fetch_object()) {
-      echo "<td>" . $fila2->cgrado ." ".$fila2->cnombe." ".$fila2->cseccion."</td>";
+      echo "<td>" . $fila2->cgrado ." ° ".$fila2->cnombe." ' ".$fila2->cseccion." '</td>";
     }
   }
         
@@ -331,7 +472,7 @@ if ($result2) {
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
-
+<script src="../asset/js/sweetalert2.js"></script>
 
 
 <!-- plugins -->
@@ -339,6 +480,7 @@ if ($result2) {
 <script src="../asset/js/plugins/jquery.datatables.min.js"></script>
 <script src="../asset/js/plugins/datatables.bootstrap.min.js"></script>
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
+
 
 
 <!-- custom -->
@@ -414,6 +556,7 @@ function msg($texto)
     echo "document.location.href='editarInscripcion.php';";
     echo "</script>";
 }
+
   
 
 ?>

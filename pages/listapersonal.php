@@ -19,7 +19,7 @@ if($_SESSION["logueado"] == TRUE && $_SESSION["tipo"]==1) {
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal</title>
+  <title>Lista Personal | SICA</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
@@ -134,6 +134,12 @@ document.location.href='listapersonal.php';
           }
 
         }
+        function reporte(){
+          window.open("reportePerAct.php",'_blank');
+        }
+        function reporte1(){
+          window.open("reporteCarDo.php",'_blank');
+        }
 
       </script>
 </head>
@@ -165,7 +171,18 @@ document.location.href='listapersonal.php';
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Lista</h3></div>
+                    <div class="panel-heading col-md-12"><h3 class="col-md-4">Lista</h3>
+                    <span class="col-md-6"></span>
+                    <div class="col-md-4">
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte();" title="Personal Activo"><i class="fa fa-print fa-lg"></i><br>Reporte Personal </span>
+                    </a>
+                    <a class="btn btn-outline btn-default" >
+                    <span onclick="reporte1();" title="Docentes"><i class="fa fa-print fa-lg"></i><br>Reporte Docentes </span>
+                    </a>
+                    </div>
+                    
+                  </div>
                     <div class="panel-body">
                       <div class="responsive-table">
                       <table id="datatables-example" style="font-size:16px" class="table table-striped table-bordered" width="100%" cellspacing="0">

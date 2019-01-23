@@ -8,6 +8,13 @@ if($result)
     $clausurado=$fila->eclausura;
   }
 }
+$result2 = $conexion->query("select * from estadoinscrip where estado=1");
+if($result2)
+{
+  while ($fila1=$result2->fetch_object()) {
+    $estadoins=$fila1->estado;
+  }
+}
  ?>
 <!-- start:Left Menu -->
 <div id="left-menu">
@@ -43,36 +50,35 @@ if($result)
                       if($clausurado==0){
                       ?>
                         <li><a href="cnotas.php">Registro de Notas</a></li>
-                        <li><a href="listabus.php">Boleta de notas</a></li>
+                        <li><a href="notasParciales.php">Notas Parciales</a></li>
+                  
                         <?php 
                       }
                       ?>
-                        <li><a href="listabus.php">Estadisticas</a></li>
+            
    
                       </ul>
                     </li>
                     <?php if($_SESSION["permisoI"]==1){ ?>
                      
                     <li class="active ripple">
-                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripcion
+                  <a class="tree-toggle nav-header"><span class="fa fa-edit"></span> Inscripción
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   
                   <ul class="nav nav-list tree">
                   <?php 
-                      if($clausurado==0){
+                      if($clausurado==0&&$estadoins==1){
                       ?>
-                      <li><a href="ingresoAlumno.php">Realizar inscripcion</a></li>
-                      <li><a href="listacliente.php">Comprobante de inscripcion</a></li>
-                      <li><a href="listacliente.php">Emitir Nomina de alumnos</a></li>
+                      <li><a href="ingresoAlumno.php">Realizar inscripción</a></li>
                       <?php 
                       }
                       ?>
-
-                  
-                      <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
+                        <li><a href="listaalumnos.php">Lista de Alumnos Inscritos</a></li>
                       <li><a href="busquedafamiliar.php">Búsqueda de Alumno por Familiar</a></li>
-                      <li><a href="listacliente.php">Estadisticas</a></li>
+               
+                      <li><a href="nomina.php">Emitir Nomina de alumnos</a></li>
+                     
                       
                   </ul>
                 </li>
@@ -83,13 +89,12 @@ if($result)
                 <li class="ripple">
                   <a class="tree-toggle nav-header">
                 
-                    <span class="fa-book fa "></span> Estadisticas
+                    <span class="fa-book fa "></span> Estadísticas
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                   </a>
                   <ul class="nav nav-list tree">
-                    <li><a href="#">Estadisitcas Generales</a></li>
-                    <li><a href="#">Alumnos por Sexo</a></li>
-                    <li><a href="#">Aprobados y Reprobados</a></li>
+                    <li><a href="graficas.php">Estadísticas Generales</a></li>
+             
                     
                   </ul>
 

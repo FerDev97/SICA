@@ -9,7 +9,7 @@
 		  $activo=false;
 		  
 		 
-    $result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tusuarios.cusuario,eid_usuario,cpass,tusuarios.etipo FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal  where cusuario='$loginNombre' AND cpass='$loginPassword'");
+    $result = $conexion->query("SELECT tpersonal.cnombre,capellido,iestado,tusuarios.cusuario, eid_usuario,cpass,tusuarios.etipo FROM tpersonal INNER JOIN tusuarios ON tusuarios.efk_personal = tpersonal.eid_personal  where cusuario='$loginNombre' AND cpass='$loginPassword'");
 	if ($result) {
 		while ($fila = $result->fetch_object()) {
 			$estado=$fila->iestado;
