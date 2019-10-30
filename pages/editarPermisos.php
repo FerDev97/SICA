@@ -24,7 +24,7 @@ $fila=$result->fetch_row();
         $consulta  = "UPDATE tpermisos SET ep_inscripciones='" .$perIns. "', ep_estadisticas='" . $perEst . "' WHERE efk_idusuario='".$id."'";
         $resultado = $conexion->query($consulta);
           if ($resultado) {
-            IB:: insertar($_SESSION["id"],"Modificó un permiso temporal");
+            IB:: insertar($_SESSION["id"],"Modificó un permiso temporal.");
               $mensaje="1";//los datos se agregaronc correctamente
           } else {
               $mensaje="2";//Error al editar los datos
